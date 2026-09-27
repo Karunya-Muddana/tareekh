@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { themeScript } from "@/lib/theme-script";
 import "./globals.css";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], preload: false });
+// Samarkan (Titivillus Foundry): the Indic-style display face, used for the wordmark, Today's weekday and sign-in only.
+const samarkan = localFont({ src: "./fonts/samarkan.woff2", variable: "--font-samarkan", display: "block" });
 const serif = Instrument_Serif({ variable: "--font-instrument-serif", subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
@@ -31,7 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {/* Blocking on purpose: picks light/dark before first paint, so there is no flash. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${geist.variable} ${geistMono.variable} ${serif.variable} font-sans antialiased`}>
+      <body className={`${geist.variable} ${geistMono.variable} ${serif.variable} ${samarkan.variable} font-sans antialiased`}>
         <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>

@@ -175,12 +175,6 @@
     font-optical-sizing: auto;
   }
 }
-@font-face {
-  font-family: "Samarkan";
-  src: local("Samarkan"), local("Samarkan Normal"), url("/fonts/samarkan.woff2") format("woff2");
-  font-display: swap;
-}
-
 /* Craft details (Vercel Web Interface Guidelines + Apple fluid-interface notes) */
 @layer base {
   html { -webkit-tap-highlight-color: transparent; }
@@ -189,30 +183,14 @@
   .tnum { font-variant-numeric: tabular-nums; }
   /* Large titles: tight leading and negative tracking; small text stays near zero */
   .title-xl { font-family: var(--font-instrument-serif); font-weight: 400; letter-spacing: -0.02em; line-height: 1.02; }
-  /* Indic display face, used in only a few places (wordmark, Today's weekday, the sign-in hero).
-     Samarkan is shareware, so it is not in the repo: put a licensed samarkan.woff2 in public/fonts/
-     and it switches on. Without it: Instrument Serif hung from a headline bar at the x-height, like the
-     shirorekha that Devanagari letters hang from. Keep .indic to a single line; the bar is one line wide. */
+  /* Samarkan, the Indic-style display face. Only three places: wordmark, Today's weekday, sign-in hero. */
   .indic {
-    position: relative;
     display: inline-block;
-    font-family: "Samarkan", var(--font-instrument-serif), serif;
+    font-family: var(--font-samarkan), var(--font-instrument-serif), serif;
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.01em;
+    line-height: 1.15;
     white-space: nowrap;
   }
-  html:not(.has-samarkan) .indic::before {
-    content: "";
-    position: absolute;
-    left: -0.03em;
-    right: -0.05em;
-    top: 0.35em;
-    height: max(1.5px, 0.062em);
-    background: currentColor;
-    border-radius: 1px;
-  }
-  html.has-samarkan .indic { letter-spacing: 0; }
   /* Pressed feedback on touch-down, not release */
   .press { transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), background-color 150ms ease, color 150ms ease; }
   .press:active { transform: scale(0.97); }

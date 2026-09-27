@@ -108,13 +108,9 @@ export default function BrandPage() {
             <SectionLabel>The wordmark</SectionLabel>
             <h2 className="title-xl mt-2 text-4xl">English letters, an Indian hand.</h2>
             <p className="text-foreground/80 mt-4 text-[15px] leading-relaxed">
-              The wordmark is set lowercase and hangs from a headline bar at the x-height, the way letters hang from the
-              line in Indian scripts. The tall letters rise above it. The display face appears in three places only: the
-              wordmark, the weekday on Today, and the sign-in screen. Everything else is Geist and Instrument Serif.
-            </p>
-            <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-              With a licensed Samarkan in <code className="font-mono text-xs">public/fonts/</code> the display face switches to
-              it. Without it, Instrument Serif carries the bar.
+              The wordmark is set in Samarkan: Roman letters drawn with the headline bar and strokes of Devanagari. It
+              appears in three places only: the wordmark, the weekday on Today, and the sign-in screen. Everything else is
+              Geist and Instrument Serif, so the interface stays quiet.
             </p>
           </div>
           <div className="bg-card border-border flex flex-col items-center justify-center gap-8 rounded-3xl border p-10 shadow-[var(--shadow-soft)]">

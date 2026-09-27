@@ -18,8 +18,7 @@ npm run dev        # http://localhost:3000
   request is never sent twice at the same time; sidebar links prefetch a chat on hover.
 - `lib/theme.ts`: Light / Dark / Match device, stored per browser, applied before first paint.
 
-## Optional display font
+## Display font
 
-The wordmark, Today's weekday and the sign-in screen use an Indic-style display face. Samarkan is shareware, so it is
-not in the repo: put a licensed `samarkan.woff2` in `public/fonts/` and it switches on. Without it, Instrument Serif
-with a headline bar stands in.
+The wordmark, Today's weekday and the sign-in screen use Samarkan (`app/fonts/samarkan.woff2`, © Titivillus Foundry).
+It is shareware: buy a license before a public or commercial launch.
