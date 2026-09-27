@@ -159,6 +159,8 @@ def _lens(arr, rng):
 def handwritten_pages(entries, date, author, out_base, rng, strike_prob=0.03):
     """entries: list of text blocks. Writes out_base.jpg (and _p2, _p3 ...). Returns [(path, struck_words)]."""
     words = []
+    if author != "Aditya":   # plain notebook, no printed date: the writer puts it on the first line
+        words += [(dt.date.fromisoformat(date).strftime("%d/%m/%y"), False), ("\n", False)]
     for e in entries:
         words += _tokenise(e, rng, strike_prob) + [("\n", False)]
     pages, results, n = [], [], 1

@@ -80,7 +80,16 @@ def confirm(upload_id: str, edits: list[dict]) -> dict:
         _status(upload_id, "review", "No entry has both a case and a date yet.")
         return {"retained": 0, "skipped": len(todo)}
     _status(upload_id, "retaining")
-    items = [memory.build_item(e, upload_id, e["source_file"]) for e in ready]
+    # a multi-page document gives one entry per page for the same case and date; store them as one memory
+    # (Hindsight rejects two items with the same document_id in one batch)
+    merged: dict[tuple, dict] = {}
+    for e in ready:
+        key = (e["case_id"], e["hearing_date"])
+        if key in merged:
+            merged[key] = {**merged[key], "text": merged[key]["text"] + "\n" + e["text"]}
+        else:
+            merged[key] = dict(e)
+    items = [memory.build_item(e, upload_id, e["source_file"]) for e in merged.values()]
     try:
         memory.retain_items(items)
     except Exception as e:  # noqa: BLE001

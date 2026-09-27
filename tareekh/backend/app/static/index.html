@@ -82,7 +82,7 @@ async function refreshStatus() {
   try {
     const s = await api("/memory/status");
     const busy = (s.pending_operations || 0) + (s.pending_consolidation || 0);
-    $("status").textContent = `${s.total_documents ?? 0} notes in memory` + (busy ? ` · still digesting ${busy}` : " · up to date");
+    $("status").textContent = `${s.total_documents ?? 0} memories (one per case per hearing or document)` + (busy ? ` · Hindsight still processing ${busy}` : " · up to date");
   } catch (e) { $("status").innerHTML = `<span class="err">memory offline: ${esc(e.message)}</span>`; }
 }
 async function loadCases() {

@@ -3,6 +3,7 @@
     python scripts/load_backlog.py              # everything in tareekh-data/uploads/manifest.json
     python scripts/load_backlog.py --limit 10   # first 10 uploads only
     python scripts/load_backlog.py --case C3    # only uploads that touch case C3
+    python scripts/load_backlog.py --only IMG_20250507,Sale_Deed   # only uploads whose file name contains one of these
 
 Entries the pipeline is confident about are saved to memory automatically; the rest stay in review (shown at the end).
 """
@@ -23,10 +24,14 @@ def main():
     ap.add_argument("--limit", type=int)
     ap.add_argument("--case")
     ap.add_argument("--workers", type=int, default=5)
+    ap.add_argument("--only", help="comma-separated file-name fragments")
     a = ap.parse_args()
     manifest = json.loads((UPL / "manifest.json").read_text(encoding="utf-8"))
     if a.case:
         manifest = [m for m in manifest if a.case in m["case_ids"]]
+    if a.only:
+        frags = a.only.split(",")
+        manifest = [m for m in manifest if any(fr in f for f in m["files"] for fr in frags)]
     manifest = manifest[:a.limit] if a.limit else manifest
 
     def one(m):
