@@ -15,6 +15,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     db.init()
+    # uploads that were mid-processing when the server stopped will never finish; say so instead of hanging
+    db.execute("UPDATE uploads SET status='error', error='interrupted by a server restart; upload again' "
+               "WHERE status IN ('queued', 'extracting', 'segmenting', 'retaining')")
     yield
 
 

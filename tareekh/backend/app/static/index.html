@@ -163,14 +163,26 @@ $("saveBtn").onclick = async () => {
 $("askBtn").onclick = async () => {
   const question = $("q").value.trim();
   if (!question) return;
-  $("askBtn").disabled = true; $("answer").textContent = "thinking…"; $("cites").innerHTML = "";
+  $("askBtn").disabled = true; $("cites").innerHTML = "";
+  const t0 = Date.now();
+  const tick = setInterval(() => { $("answer").textContent = `searching memory… ${Math.round((Date.now() - t0) / 1000)} s`
+    + ($("quick").checked ? "" : "  (tick 'quick' for a faster single-search answer)"); }, 500);
   try {
     const r = await api("/ask", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question, case_id: $("askCase").value || null, quick: $("quick").checked }) });
-    $("answer").textContent = r.answer || "(no answer)";
-    $("cites").innerHTML = (r.citations || []).map(c =>
-      `<div class="cite"><b>[${c.n}]</b> ${esc(c.case_id)} · ${esc(c.hearing_date)} · ${esc(c.source_file || c.type)}<br>${esc(c.text)}</div>`).join("");
-  } catch (e) { $("answer").innerHTML = `<span class="err">${esc(e.message)}</span>`; }
+    clearInterval(tick);
+    $("answer").textContent = (r.answer || "(no answer)") + `\n\n(${Math.round((Date.now() - t0) / 1000)} s)`;
+    // one source can be stored under several cases (e.g. the sale deed); show it once, listing the cases
+    const bySource = new Map();
+    for (const c of r.citations || []) {
+      const key = `${c.source_file || c.type}|${c.hearing_date}`;
+      const g = bySource.get(key) || { ...c, ns: [], cases: new Set() };
+      g.ns.push(c.n); if (c.case_id) g.cases.add(c.case_id);
+      bySource.set(key, g);
+    }
+    $("cites").innerHTML = [...bySource.values()].map(c =>
+      `<div class="cite"><b>[${c.ns.join(", ")}]</b> ${esc([...c.cases].join(", "))} · ${esc(c.hearing_date)} · ${esc(c.source_file || c.type)}<br>${esc(c.text)}</div>`).join("");
+  } catch (e) { clearInterval(tick); $("answer").innerHTML = `<span class="err">${esc(e.message)}</span>`; }
   $("askBtn").disabled = false;
 };
 $("q").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("askBtn").click(); } });

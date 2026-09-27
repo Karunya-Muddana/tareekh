@@ -1,5 +1,6 @@
 """Everything that talks to Hindsight lives here."""
 import logging
+import threading
 
 from hindsight_client import Hindsight
 
@@ -7,17 +8,18 @@ from . import registry
 from .config import settings
 
 log = logging.getLogger("tareekh.memory")
-_client = None
+_local = threading.local()
 
 
 def client() -> Hindsight:
-    global _client
-    if _client is None:
+    """One client per thread: the client wraps an async session that breaks if two threads share it
+    ("Timeout context manager should be used inside a task")."""
+    if getattr(_local, "client", None) is None:
         kw = {"base_url": settings.hindsight_url}
         if settings.hindsight_api_key:
             kw["api_key"] = settings.hindsight_api_key
-        _client = Hindsight(**kw)
-    return _client
+        _local.client = Hindsight(**kw)
+    return _local.client
 
 
 def _get(obj, key, default=None):
