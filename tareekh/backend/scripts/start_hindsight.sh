@@ -16,7 +16,10 @@ PROVIDER=$(envval HINDSIGHT_LLM_PROVIDER); PROVIDER=${PROVIDER:-vertexai}
 MODEL=$(envval HINDSIGHT_LLM_MODEL)
 mkdir -p "$HOME/.hindsight-docker"
 DATA_WIN=$(cd "$HOME/.hindsight-docker" && (pwd -W 2>/dev/null || pwd))   # Windows path under Git Bash
-ARGS=(-p 8888:8888 -p 9999:9999 -v "$DATA_WIN:/home/hindsight/.pg0")
+ARGS=(-p 8888:8888 -p 9999:9999 -v "$DATA_WIN:/home/hindsight/.pg0"
+      # Stable worker id. The default is the container hostname, which changes when the container is
+      # recreated, and tasks left 'processing' under the old id are never picked up again.
+      -e HINDSIGHT_API_WORKER_ID=tareekh-hindsight)
 
 if [ "$PROVIDER" = "vertexai" ]; then
   PROJECT=$(envval VERTEX_PROJECT); REGION=$(envval VERTEX_LOCATION); REGION=${REGION:-global}
@@ -31,8 +34,12 @@ if [ "$PROVIDER" = "vertexai" ]; then
          -e HINDSIGHT_API_LLM_PROVIDER=vertexai
          -e HINDSIGHT_API_LLM_VERTEXAI_PROJECT_ID="$PROJECT"
          -e HINDSIGHT_API_LLM_VERTEXAI_REGION="$REGION"
-         -e HINDSIGHT_API_LLM_MODEL="${MODEL:-gemini-3-flash-preview}"
-         -e HINDSIGHT_API_LLM_MAX_CONCURRENT=8)
+         -e HINDSIGHT_API_LLM_MODEL="${MODEL:-gemini-3.8-flash}"
+         -e HINDSIGHT_API_LLM_MAX_CONCURRENT=8
+         # Gemini 3.x thinks before answering; Hindsight's defaults (120 s, reflect 30 s) are too short for
+         # consolidation / mental-model prompts and every attempt timed out.
+         -e HINDSIGHT_API_LLM_TIMEOUT=300
+         -e HINDSIGHT_API_REFLECT_LLM_TIMEOUT=120)
 else
   KEY=$(envval GROQ_API_KEY); [ -n "$KEY" ] || { echo "GROQ_API_KEY is empty in backend/.env"; exit 1; }
   ARGS+=(-e HINDSIGHT_API_LLM_PROVIDER=groq

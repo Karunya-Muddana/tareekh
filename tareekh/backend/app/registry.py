@@ -1,4 +1,4 @@
-"""Practice registry: the cases a lawyer has, and every way she might refer to them.
+"""Practice registry: the cases a lawyer has, and every way he might refer to them.
 
 Resolution order for a piece of text: exact case-number match → alias substring → fuzzy alias match.
 """
@@ -13,8 +13,9 @@ _CASE_RE = re.compile(
     r"\b(O\.?\s?S|A\.?\s?S|I\.?\s?A|W\.?\s?P|C\.?\s?R\.?\s?P|C\.?\s?M\.?\s?A)\.?\s*(?:No\.?)?\s*(\d{1,6})\s*(?:of|/)\s*(\d{2,4})\b",
     re.IGNORECASE,
 )
-_GENERIC = {"state", "telangana", "others", "another", "limited", "private", "partition", "appeal", "suit", "refund",
-            "eviction", "contract", "accounts", "permits", "pension", "injunction", "people", "society", "committee"}
+_GENERIC = {"state", "others", "another", "limited", "private", "partition", "appeal", "suit", "refund",
+            "eviction", "contract", "accounts", "permits", "pension", "injunction", "people", "society", "committee", "resorts", "hospitality", "school",
+            "public", "limited"}
 _TITLES = ("sri ", "smt. ", "smt ", "dr. ", "kum. ", "m/s ", "mohd. ", "hon'ble ")
 
 
@@ -31,7 +32,7 @@ def case_keys_in(text: str) -> list[str]:
 def _aliases_for(case: dict) -> set[str]:
     out = {case["short_name"].lower(), case["case_number"].lower()}
     out.update(k.lower() for k in case_keys_in(case["case_number"]))
-    # party surnames/first words, e.g. "tadepalli", "gudivada", "kasoju"
+    # party surnames/first words, e.g. "gorle", "bandaru"
     for party in case["title"].split(" vs "):
         p = party.lower()
         for t in _TITLES:
@@ -42,8 +43,12 @@ def _aliases_for(case: dict) -> set[str]:
             out.add(" ".join(words))
             raw = [w for w in re.split(r"[^a-z]+", p) if len(w) >= 3]
             if len(raw) > 2:
-                out.add(" ".join(raw[:2]))          # "sai balaji residency ..." -> "sai balaji"
+                out.add(" ".join(raw[:2]))          # "seabreeze resorts & ..." -> "seabreeze resorts"
             out.add(words[-1])
+            out.add(words[0])                           # "greenfield", "lakshmi"
+    nick = case["short_name"].lower().split()
+    if len(nick) > 2:
+        out.add(" ".join(nick[:2]))                     # "tiffin centre eviction" -> "tiffin centre"
     for part in re.split(r"[/()]| v | vs ", case["short_name"].lower()):
         if len(part.strip()) > 3:
             out.add(part.strip())
@@ -58,8 +63,13 @@ def load_registry(world: dict) -> dict:
     """Load what a lawyer would type in. Habits/tactics are stripped: those must be learned from notes."""
     db.init()
     with db.tx() as con:
-        for t in ("judges", "counsel", "clients", "cases", "aliases"):
+        for t in ("judges", "counsel", "clients", "cases", "aliases", "practice"):
             con.execute(f"DELETE FROM {t}")
+        adv, asst = world["advocate"], world["advocate"].get("assistant", {})
+        for k, v in {"lawyer": adv["name"], "lawyer_short": adv.get("short") or adv["name"].split()[0],
+                     "assistant": asst.get("name", ""), "assistant_short": asst.get("short", ""),
+                     "city": adv.get("city", ""), "practice": adv.get("practice", "")}.items():
+            con.execute("INSERT INTO practice VALUES (?,?)", (k, v))
         for j in world["judges"]:
             con.execute("INSERT INTO judges VALUES (?,?,?,?,?,?)",
                         (j["id"], j["name"], j.get("short"), j.get("court"), j.get("court_hall"), j.get("level")))
@@ -71,7 +81,7 @@ def load_registry(world: dict) -> dict:
         for c in world["cases"]:
             con.execute("INSERT INTO cases VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                         (c["id"], c["case_number"], c["title"], c["short_name"], c.get("nature"), c["judge_id"],
-                         c["opposing_counsel_id"], c["client_id"], c.get("meera_represents"), c.get("court"),
+                         c["opposing_counsel_id"], c["client_id"], c.get("represents"), c.get("court"),
                          c.get("final_listed_for") or c.get("stage"), c.get("next_date")))
             per_case[c["id"]] = _aliases_for(c)
         # a single word shared by several cases ("association", "constructions") identifies nothing
@@ -91,6 +101,17 @@ def load_registry(world: dict) -> dict:
 
 
 # ------------------------------------------------------------------ lookups
+def practice() -> dict:
+    """Who the practice is: lawyer, assistant, city. Filled at onboarding; neutral placeholders before that."""
+    p = {"lawyer": "the lawyer", "lawyer_short": "the lawyer", "assistant": "the assistant",
+         "assistant_short": "the assistant", "city": "India", "practice": ""}
+    try:
+        p.update({r["key"]: r["value"] for r in db.rows("SELECT key, value FROM practice") if r["value"]})
+    except Exception:  # noqa: BLE001 - table not created yet
+        pass
+    return p
+
+
 def get_case(case_id: str) -> dict | None:
     return db.row("SELECT * FROM cases WHERE id=?", case_id)
 

@@ -1,0 +1,113 @@
+{
+  "id": "C3",
+  "case_number": "O.S. No. 131 of 2025",
+  "judge_id": "J1",
+  "opposing_counsel_id": "OC2",
+  "client_id": "CL1",
+  "title": "Ramesh Gorle vs Seabreeze Resorts & Hospitality Pvt. Ltd.",
+  "short_name": "Seabreeze injunction",
+  "represents": "plaintiff",
+  "nature": "suit for permanent injunction, with I.A. No. 612 of 2025 for temporary injunction",
+  "kind": "suit",
+  "filed_on": "2025-04-21",
+  "summary": "Company workers put up fencing poles on the land on 14.04.2025; Ramesh sued to stop them.",
+  "next_date": "2026-10-05",
+  "hearings": [
+    {
+      "hearing_id": "C3-H01",
+      "date": "2025-04-23",
+      "next_date": "2025-05-07",
+      "order_sheet": "Counsel for petitioner heard. Ad-interim order of status quo as on date regarding the suit schedule property till 07.05.2025. Notice to respondent. Petitioner to comply with O.39 R.3 CPC.",
+      "note": "Seabreeze injunction (OS 131/25) - IA 612. Got status quo till next date. Murthy sir returned our paper book once - index had no page numbers! Fixed it in the corridor in 10 min. Never again. Divya: O.39 R.3 compliance by courier TODAY, keep the postal receipts.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C3-H02",
+      "date": "2025-05-07",
+      "next_date": "2025-05-21",
+      "order_sheet": "Respondent appeared through counsel. Time sought for counter. Two weeks granted, no further time. Status quo to continue till 21.05.2025.",
+      "note": "Seabreeze inj - Harsha Vardhan appeared for company. Asked 4 weeks for counter, judge gave 2 and said 'no further time, counsel, your client is a company not a farmer'. Status quo extended.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C3-H03",
+      "date": "2025-05-21",
+      "next_date": "2025-06-04",
+      "order_sheet": "Counter filed by respondent. Petitioner to file rejoinder, if any. Status quo to continue till 04.06.2025.",
+      "note": "Seabreeze inj - counter filed. Para 6 of counter: 'the respondent has not undertaken any construction activity whatsoever on the schedule land; only a survey was conducted.' Sir says keep this line safe. Sir told court we will file rejoinder in 10 days.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C3-H04",
+      "date": "2025-06-04",
+      "next_date": "2025-06-18",
+      "order_sheet": "Rejoinder filed on 02.06.2025. Arguments of both sides heard in part. Petitioner to produce photographs with dates. Status quo to continue. Call on 18.06.2025.",
+      "note": "Seabreeze inj - rejoinder filed 2 June, on time (diary no. 2291). Part heard. Murthy sir wants photos WITH dates - Ramesh's phone photos of the poles, get the originals + print with EXIF date. Harsha argued 'only survey pegs'.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C3-H05",
+      "date": "2025-06-18",
+      "next_date": "2025-08-06",
+      "order_sheet": "I.A. No. 612 of 2025 allowed. Respondent, its men and agents restrained from making any construction or erecting any fencing in the petition schedule property pending disposal of the suit. Suit posted for written statement on 06.08.2025.",
+      "note": "Seabreeze inj - WON the IA!! Temp injunction till disposal. Judge said the photos dated 14.04.2025 show fencing poles, not survey pegs. Called Ramesh garu, he cried on the phone. Harsha will appeal? Watch for CMA.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C3-H06",
+      "date": "2025-08-06",
+      "next_date": "2025-09-17",
+      "order_sheet": "Written statement filed by defendant. For framing of issues on 17.09.2025.",
+      "note": "Seabreeze inj - WS filed. No CMA against the IA order so far (checked at CMA section). For issues.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C3-H07",
+      "date": "2025-09-17",
+      "next_date": "2025-11-12",
+      "order_sheet": "Issues framed. Plaintiff to file list of witnesses within 15 days. For plaintiff's evidence on 12.11.2025.",
+      "note": "Seabreeze inj - issues framed (4 issues). Our list of witnesses within 15 days - due 2 Oct. Witnesses: Ramesh, VRO Appala Naidu (summons), neighbour Sanyasi Rao.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C3-H08",
+      "date": "2025-11-12",
+      "next_date": "2026-01-21",
+      "order_sheet": "PW1 examined in chief by affidavit. Ex.A1 to A7 marked. For cross-examination of PW1 on 21.01.2026.",
+      "note": "PW1 Ramesh Gorle chief affidavit filed. Marked: Ex.A1 sale deed doc. no. 3417/2011, Ex.A2 1-B ROR extract, Ex.A3 encumbrance certificate, Ex.A4 police petition acknowledgment 15.04.2025, Ex.A5 photos (6) of fencing poles dated 14.04.2025, Ex.A6 letter of understanding 2016, Ex.A7 legal notice of company dated 12.11.2024. Prepare Ramesh for cross: Harsha will suggest he agreed to sell at the Novotel meeting.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C3-H09",
+      "date": "2026-01-21",
+      "next_date": "2026-03-11",
+      "order_sheet": "PW1 cross-examined by counsel for defendant. For PW2 on 11.03.2026.",
+      "note": "Seabreeze inj - PW1 cross. Harsha put it to Ramesh that he agreed to sell at the Novotel meeting in Sept 2024. Ramesh: 'Never. My father is buried in the mango grove on the east side. I will not sell that land for any price.' Held up well. Harsha also suggested the poles were for survey - Ramesh: 'survey people don't dig 2 feet and put cement.'",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C3-H10",
+      "date": "2026-03-11",
+      "next_date": "2026-06-10",
+      "order_sheet": "Memo filed by defendant without serving copy on the other side is not received. Defendant is directed to serve copies before filing any memo. Counsel for plaintiff reports that stones on the boundary were removed; defendant is cautioned to strictly comply with the injunction order. For PW2 on 10.06.2026.",
+      "note": "Seabreeze inj - Harsha tried to file a memo (something about 'survey for revenue purposes') without giving us a copy. Murthy sir threw it back: 'this is not how it is done in my court, serve copy first.' Also told him about boundary stones removed last week (Ramesh's info) - judge cautioned company on record. Good day.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C3-H11",
+      "date": "2026-06-10",
+      "next_date": "2026-08-19",
+      "order_sheet": "PW2 examined and cross-examined. For defendant's evidence on 19.08.2026.",
+      "note": "Seabreeze inj - PW2 VRO Appala Naidu (summoned). Said he inspected the land on 14.04.2025 on Tahsildar's instructions after a complaint; saw about 40 cement fencing poles along the west boundary; workers told him they were Seabreeze people. Cross: Harsha asked if he saw any company board - VRO said 'no board, but a Seabreeze jeep AP 31 CX 4417 was parked there.' Very useful.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C3-H12",
+      "date": "2026-08-19",
+      "next_date": "2026-10-05",
+      "order_sheet": "DW1 examined in chief by affidavit. Ex.B1 to B3 marked. Cross-examination of DW1 in part. For further cross-examination of DW1 on 05.10.2026.",
+      "note": "Seabreeze inj - DW1 Kiran Kumar Sabbavarapu (company site manager). Chief: 'no work at all before permissions.' In cross he admitted 'survey pegs and some poles' were put in April 2025. Also admitted jeep AP 31 CX 4417 is a company vehicle. Continue cross on 5 Oct - confront him with para 3 of the company's own plaint in OS 57/25 (they 'commenced preliminary works in April 2025')! Get certified copy of that plaint - Divya.",
+      "note_by": "Aditya"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "id": "C1",
+  "case_number": "O.S. No. 214 of 2024",
+  "judge_id": "J2",
+  "opposing_counsel_id": "OC1",
+  "client_id": "CL1",
+  "title": "Ramesh Gorle vs Srinivas Bandaru",
+  "short_name": "Gorle partition",
+  "represents": "plaintiff",
+  "nature": "suit for partition and declaration of half share",
+  "kind": "suit",
+  "filed_on": "2024-08-19",
+  "summary": "Ramesh claims half of Ac. 4.20 cents in Sy. No. 112/2, Mangamaripeta village, Bheemunipatnam mandal; Srinivas claims 70% because he says he paid Rs. 21 lakh of the Rs. 30 lakh price.",
+  "next_date": "2026-10-14",
+  "hearings": [
+    {
+      "hearing_id": "C1-H01",
+      "date": "2025-05-14",
+      "next_date": "2025-06-25",
+      "order_sheet": "Counsel for defendant seeks time for written statement. Four weeks granted. For written statement on 25.06.2025.",
+      "note": "Gorle partition (OS 214/24) - Harinath asked time for WS AGAIN (3rd time since filing). Padmavathi madam smiled, gave 4 weeks, 'please file by next date, Mr. Harinath.' No costs. She is too kind.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H02",
+      "date": "2025-06-25",
+      "next_date": "2025-08-13",
+      "order_sheet": "Written statement filed by defendant. For framing of issues on 13.08.2025.",
+      "note": "Gorle partition - Srinivas's WS: claims 70% share - says he paid Rs 21 lakh and Ramesh only Rs 9 lakh in 2011. Says the 2016 letter was 'only for family peace' and not binding. Ramesh says each paid 15 lakh - his SBI Dwaraka Nagar statement of 2011 will show the transfer. Get it.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H03",
+      "date": "2025-08-13",
+      "next_date": "2025-10-08",
+      "order_sheet": "Parties present. The court is of the view that the dispute may be resolved amicably. Referred to the Mediation Centre, District Court, Visakhapatnam. Report by 08.10.2025.",
+      "note": "Gorle partition - madam talked to both parties directly. 'You were school friends, sit together once.' Referred to mediation. Ramesh agreed, Srinivas reluctant.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C1-H04",
+      "date": "2025-10-08",
+      "next_date": "2025-11-26",
+      "order_sheet": "Mediation report received: failed. For framing of issues on 26.11.2025.",
+      "note": "Gorle partition - mediation failed. Mediator's note: 'D wants the entire property sold to a third party; P not willing to sell under any circumstances.' Madam said 'Sad, two old friends. Let us proceed then.'",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C1-H05",
+      "date": "2025-11-26",
+      "next_date": "2026-01-07",
+      "order_sheet": "Issues framed. For plaintiff's evidence on 07.01.2026.",
+      "note": "Gorle partition - issues: (1) is P entitled to half share; (2) did D pay Rs 21 lakh of the price; (3) is the 2016 letter binding. Plaintiff's evidence next.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H06",
+      "date": "2026-01-07",
+      "next_date": "2026-02-18",
+      "order_sheet": "PW1 examined in chief by affidavit. Ex.A1 to A5 marked. For cross-examination of PW1 on 18.02.2026.",
+      "note": "PW1 Ramesh Gorle chief. Ex.A1 sale deed 3417/2011, Ex.A2 1-B ROR extract (2.10 acres each), Ex.A3 letter of understanding 2016, Ex.A4 SBI Dwaraka Nagar statement showing Rs. 15,00,000 transferred to the vendor on 02.03.2011, Ex.A5 encumbrance certificate. Madam asked if the parties still talk. Ramesh: 'only through lawyers now.'",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H07",
+      "date": "2026-02-18",
+      "next_date": "2026-03-25",
+      "order_sheet": "PW1 cross-examined. Plaintiff seeks time to summon PW2. For PW2 on 25.03.2026.",
+      "note": "Gorle partition - PW1 cross by Harinath. Ramesh firm: 'each of us paid 15 lakh, I paid from SBI, he paid in cash to the vendor.' Harinath suggested the cash was 21 lakh - denied. Summons to VRO for next date - Divya to take out summons THIS WEEK.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H08",
+      "date": "2026-03-25",
+      "next_date": "2026-06-03",
+      "order_sheet": "PW2 not present; summons not taken out. Adjourned at the request of plaintiff. For PW2 on 03.06.2026.",
+      "note": "Gorle partition - VRO summons NOT taken out. Divya forgot, I didn't check. Embarrassing. Madam: 'these things happen, but please don't repeat it, Mr. Varma.' No costs. Murthy sir would have closed our evidence. RULE: every Monday check summons list.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H09",
+      "date": "2026-06-03",
+      "next_date": "2026-07-22",
+      "order_sheet": "PW2 examined and cross-examined. Plaintiff's evidence closed. For defendant's evidence on 22.07.2026.",
+      "note": "Gorle partition - PW2 VRO Appala Naidu (same VRO as in Seabreeze injunction). 1-B ROR shows 2.10 acres each in both names since 2012 mutation. Ramesh's family cultivates mango and cashew on the east half; the grave of Ramesh's father is on the east side under the mango trees. Cross: Harinath asked who pays land tax - VRO: 'both, separately, for 2.10 each.'",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C1-H10",
+      "date": "2026-07-22",
+      "next_date": "2026-09-09",
+      "order_sheet": "DW1 examined in chief and cross-examined in part. For further cross-examination of DW1 on 09.09.2026.",
+      "note": "Gorle partition - DW1 Srinivas: 70% claim again. In cross I put his deposition of 13.05.2026 in OS 57/25 (before Murthy sir) - 'Ramesh and I are EQUAL owners, 50-50.' He fumbled: 'that is a different case.' Madam wrote it down carefully. Need CERTIFIED copy of that deposition to mark it - Divya.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C1-H11",
+      "date": "2026-09-09",
+      "next_date": "2026-10-14",
+      "order_sheet": "DW2 absent. Counsel for defendant seeks time. Adjourned as a last chance. For DW2 on 14.10.2026.",
+      "note": "Gorle partition - DW2 (Srinivas's brother-in-law Pothina Venkat, receipt witness) absent. Harinath sought time. Madam: 'last chance' but no costs. Next 14 Oct.",
+      "note_by": "Divya"
+    }
+  ]
+}

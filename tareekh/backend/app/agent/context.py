@@ -35,11 +35,12 @@ def build(question: str, active_case_id: str | None = None, max_cases: int = 2) 
 
 
 def render(ctx: dict) -> str:
+    who = registry.practice()["lawyer_short"]
     parts = [f"TODAY: {ctx['today']}"]
     if ctx["cases"]:
         parts.append("CASES THIS QUESTION IS PROBABLY ABOUT (from the registry):")
         for c in ctx["cases"]:
-            parts.append(f"- {c['id']}: {c['case_number']} \"{c['short_name']}\" | {c['title']} | Meera for {c['represents']} | "
+            parts.append(f"- {c['id']}: {c['case_number']} \"{c['short_name']}\" | {c['title']} | {who} for {c['represents']} | "
                          f"{c['court_hall']} ({c['judge_name']}, judge_id {c['judge_id']}) | opposing counsel {c['counsel_name']} "
                          f"(counsel_id {c['opposing_counsel_id']}) | client {c['client_name']} | stage: {c['stage']}")
     else:
@@ -49,5 +50,5 @@ def render(ctx: dict) -> str:
     if ctx["commitments"]:
         parts.append(f"<open_commitments>\n{ctx['commitments']}\n</open_commitments>")
     if ctx["style"]:
-        parts.append(f"<how_meera_works>\n{ctx['style']}\n</how_meera_works>")
+        parts.append(f"<working_style of=\"{who}\">\n{ctx['style']}\n</working_style>")
     return "\n".join(parts)

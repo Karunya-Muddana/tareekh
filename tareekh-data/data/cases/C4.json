@@ -1,0 +1,65 @@
+{
+  "id": "C4",
+  "case_number": "O.S. No. 302 of 2025",
+  "judge_id": "J2",
+  "opposing_counsel_id": "OC3",
+  "client_id": "CL2",
+  "title": "Lakshmi Kantham Peddinti vs Nagaraju Kotla",
+  "short_name": "Tiffin centre eviction",
+  "represents": "plaintiff",
+  "nature": "suit for eviction and arrears of rent",
+  "kind": "suit",
+  "filed_on": "2025-06-09",
+  "summary": "Tenant running 'Sri Durga Tiffins' in the ground-floor shop at Dwaraka Nagar owes 11 months' rent (Rs. 1,98,000).",
+  "next_date": null,
+  "hearings": [
+    {
+      "hearing_id": "C4-H01",
+      "date": "2025-07-02",
+      "next_date": "2025-08-20",
+      "order_sheet": "Defendant appeared through counsel. Time for written statement. For written statement on 20.08.2025.",
+      "note": "Tiffin centre (OS 302/25) - Sundari madam for tenant Nagaraju. Time for WS.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C4-H02",
+      "date": "2025-08-20",
+      "next_date": "2025-10-29",
+      "order_sheet": "Written statement filed. Defendant directed to deposit the admitted arrears within eight weeks. For deposit on 29.10.2025.",
+      "note": "Tiffin centre - WS: tenant says landlady refused to accept rent after March 2024, will deposit. Padmavathi madam directed deposit of arrears in 8 weeks. Lakshmi garu upset it's not immediate eviction - explained.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C4-H03",
+      "date": "2025-10-29",
+      "next_date": "2026-01-28",
+      "order_sheet": "Defendant deposited Rs. 60,000. Further time of six weeks granted to deposit the balance. For deposit on 28.01.2026.",
+      "note": "Tiffin centre - only Rs 60,000 deposited of 1,98,000. Madam gave 6 more weeks, gently. Lakshmi garu called twice after court.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C4-H04",
+      "date": "2026-01-28",
+      "next_date": "2026-03-18",
+      "order_sheet": "Defendant deposited a further sum of Rs. 50,000. Parties are advised to explore settlement. For report on 18.03.2026.",
+      "note": "Tiffin centre - another 50k deposited (total 1,10,000). Madam suggested both sides settle - tenant wants time to shift the tiffin centre.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C4-H05",
+      "date": "2026-03-18",
+      "next_date": "2026-05-06",
+      "order_sheet": "Counsel on both sides report that settlement talks are in progress. For compromise on 06.05.2026.",
+      "note": "Tiffin centre - Nagaraju wants 8 months to vacate, Lakshmi garu wants 3. Middle: vacate by 30.11.2026, balance 88,000 in instalments of 15,000 by the 10th of each month.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C4-H06",
+      "date": "2026-05-06",
+      "next_date": null,
+      "order_sheet": "Joint compromise memo filed and recorded. Defendant to vacate the plaint schedule premises on or before 30.11.2026 and pay the balance arrears of Rs. 88,000 in monthly instalments of Rs. 15,000 on or before the 10th of every month from June 2026. Suit decreed in terms of the compromise. No costs.",
+      "note": "Compromise recorded. Tenant to vacate by 30.11.2026. Balance Rs 88,000 in instalments of Rs 15,000 by the 10th of each month from June 2026 (6 instalments, last one Rs 13,000 in Nov). If any instalment is missed we can execute the decree for eviction at once - clause 4 of the memo.",
+      "note_by": "Aditya"
+    }
+  ]
+}

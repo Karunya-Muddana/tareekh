@@ -10,13 +10,17 @@ note, a case note, or a certified copy of a court order sheet) plus the lawyer's
 Split the text into entries: one entry per (case, hearing date).
 - A diary page or day note covering several matters -> one entry per matter.
 - An order sheet with several dated rows -> one entry per dated row.
-- Resolve every entry to a case_id from the registry. Lawyers use nicknames ("Tadepalli"), party surnames,
-  or short numbers ("OS 318/22"). If you cannot tell, use null. Never invent a case_id.
+- Resolve every entry to a case_id from the registry. Lawyers use nicknames ("beach land"), party surnames
+  ("Gorle"), or short numbers ("OS 214/24"). If you cannot tell, use null. Never invent a case_id.
 - hearing_date: the date the hearing happened (YYYY-MM-DD). Diary pages print it at the top; order sheets use
   dd.mm.yyyy. Dates like "next date 5 Oct" are NOT the hearing date. If unknown, use null.
 - text: the entry's text, copied faithfully (fix obvious OCR noise only). Do not summarise.
-- author: "Meera", "Sai Kiran", "court" (for order sheets) or null.
-- doc_type: one of handwritten_note, typed_note, order_sheet, other.
+- author: "{lawyer_short}", "{assistant_short}", "court" (order sheets, court or government documents), "other" (letters, agreements, notices from parties) or null.
+- doc_type: one of handwritten_note, typed_note, order_sheet, document, other.
+- Documents that are not a record of a hearing (agreements, deeds, government records like 1-B / EC, police
+  receipts, legal notices, letters, chat exports, mediation reports): doc_type "document", ONE entry per case the
+  document concerns (same full text in each), hearing_date = the document's own date (execution, issue or latest
+  message date). Parties' disputes over the same land often span several cases; include each.
 - confidence: 0-1, how sure you are about BOTH case_id and hearing_date.
 
 Reply with JSON: {"entries": [{"case_id", "hearing_date", "author", "doc_type", "text", "confidence", "reason"}]}"""
@@ -49,7 +53,7 @@ def _doc_type(llm_value: str | None, source_file: str) -> str:
     """The file type is ground truth for handwritten vs typed; the LLM only tells order sheets apart."""
     from .extract import kind_of
     v = llm_value or "other"
-    if v == "order_sheet":
+    if v in ("order_sheet", "document"):
         return v
     if kind_of(source_file) == "image":
         return "handwritten_note"
@@ -97,5 +101,7 @@ def segment(raw_text: str, source_file: str, hints: dict) -> list[dict]:
     known = {c["id"] for c in registry.db.rows("SELECT id FROM cases")}
     user = (f"UPLOAD FILE NAME: {source_file}\nUSER HINTS: {hints}\n\nCASE REGISTRY (id | number | nickname | parties | judge):\n"
             f"{registry.compact_listing()}\n\nEXTRACTED TEXT:\n{raw_text}")
-    result = llm.chat_json(SYSTEM, user)
+    p = registry.practice()
+    system = SYSTEM.replace("{lawyer_short}", p["lawyer_short"]).replace("{assistant_short}", p["assistant_short"])
+    result = llm.chat_json(system, user)
     return repair(result.get("entries", []), source_file, hints, known)

@@ -31,7 +31,7 @@ It remembers. It does not give legal advice.
 | Step | Module | What happens |
 |---|---|---|
 | Extract | `ingest/extract.py` | `.txt`/pasted text as-is · `.docx` via python-docx · `.pdf` text layer, else page images → OCR · images → vision LLM ("transcribe exactly, skip struck-out words") |
-| Segment + resolve | `ingest/segment.py` | one LLM call with the raw text **and a compact case registry**. Returns `[{case_id, hearing_date, author, doc_type, text, confidence}]`. A diary page with 3 matters gives 3 entries; an order-sheet scan with 3 dated rows gives 3 entries. "Tadepalli" → C07. |
+| Segment + resolve | `ingest/segment.py` | one LLM call with the raw text **and a compact case registry**. Returns `[{case_id, hearing_date, author, doc_type, text, confidence}]`. A diary page with 3 matters gives 3 entries; an order-sheet scan with 3 dated rows gives 3 entries. "Greenfield" → C5. |
 | Repair | `ingest/segment.py` | case ids are checked against the registry (fuzzy fallback). Missing dates fall back to the filename (`IMG_20260812_…`, `court_notes_2026-08-12`) or a user hint |
 | Review | `routers/uploads.py` | entries are shown to the user to fix. High-confidence entries auto-confirm so bulk backlog uploads need no clicks |
 | Retain | `memory.py` | one Hindsight item per entry (below) |
@@ -40,18 +40,18 @@ What each retained item looks like:
 
 ```python
 {
-  "content":  "[2026-08-12] W.P. No. 14872 of 2025 (Sai Balaji GHMC WP) before Hon'ble Smt. Justice ...; "
-              "opposing counsel Smt. Hemalatha Ravuri. Source: handwritten diary note by Meera.\n<entry text>",
+  "content":  "[2025-06-18] O.S. No. 131 of 2025 (Seabreeze injunction) before Sri P. Suryanarayana Murthy; "
+              "opposing counsel Sri V. Harsha Vardhan. Source: handwritten diary note by Aditya.\n<entry text>",
   "context":  "hearing note",
-  "timestamp": "2026-08-12T10:30:00+05:30",      # the HEARING date, never the upload time
-  "tags":     ["case:C23", "judge:J3", "counsel:OC2", "client:CL4", "type:note", "author:meera"],
-  "metadata": {"source_file": "IMG_20260812_171906.jpg", "upload_id": "...", "doc_type": "handwritten_note",
-               "case_id": "C23", "hearing_date": "2026-08-12", "author": "Meera"},
-  "document_id": "<upload_id>:C23:2026-08-12",   # re-uploading the same file replaces rather than duplicates
+  "timestamp": "2025-06-18T10:30:00+05:30",      # the HEARING date, never the upload time
+  "tags":     ["case:C3", "judge:J1", "counsel:OC2", "client:CL1", "type:note", "author:aditya"],
+  "metadata": {"source_file": "IMG_20250618_164210.jpg", "upload_id": "...", "doc_type": "handwritten_note",
+               "case_id": "C3", "hearing_date": "2025-06-18", "author": "Aditya"},
+  "document_id": "<upload_id>:C3:2025-06-18",    # re-uploading the same file replaces rather than duplicates
 }
 ```
 
-Each item also sets `observation_scopes: [["judge:J3"], ["counsel:OC2"], ["case:C23"]]`. With the default scope,
+Each item also sets `observation_scopes: [["judge:J1"], ["counsel:OC2"], ["case:C3"]]`. With the default scope,
 Hindsight consolidates observations over the item's *full* tag set, which is effectively one scope per case, so the
 cross-case judge pattern would never form. Explicit scopes make it consolidate per judge, per counsel and per case.
 
@@ -64,7 +64,7 @@ but it comes back with every recalled fact, and that's what the UI shows as a so
 |---|---|---|---|
 | **A. Registry** | SQLite + a one-time retain of case stubs | case numbers, nicknames, parties, court, judge, opposing counsel, client | onboarding (what the lawyer would type in) |
 | **B. Bank config** | Hindsight `retain_mission`, `observations_mission`, directives | what to extract; which patterns to track; hard rules (cite sources, no legal advice, "I don't know" when there's no source, order sheet ≠ personal note) | `bank_setup.py` |
-| **C. Mental models** | Hindsight, `refresh_after_consolidation` | one per **judge**, one per **opposing counsel**, **Open commitments**, **How Meera works** | **learned** from uploads |
+| **C. Mental models** | Hindsight, `refresh_after_consolidation` | one per **judge**, one per **opposing counsel**, **Open commitments**, **How the lawyer works** | **learned** from uploads |
 
 Judge habits and counsel tactics are **not** seeded at onboarding. They have to show up in layer C from the notes;
 that's the "learns over time" claim. Onboarding deliberately drops those fields from `world.json`.
@@ -102,19 +102,18 @@ question (+ active case / court from the UI)
 
 ## 5. Build order
 
-1. **Registry + onboarding + bank config** ← scaffolded
-2. **Ingest for text/txt/docx/pdf → retain** ← scaffolded (image OCR is wired but untested until you have keys)
-3. **`/ask` with recall + citations** ← scaffolded. `START_HERE/level1` should pass here.
-4. Image OCR quality pass on diary photos → levels 1–2
-5. Mental models + reflect tuning → level 3
-6. Cause list → brief, teach, SSE → level 4 + the demo flow
+1. **Registry + onboarding + bank config** ← working
+2. **Ingest for text/txt/docx/pdf/images → retain** ← working
+3. **`/ask` with recall + citations** ← working
+4. Mental models + reflect tuning for cross-case patterns (Murthy sir's costs rule, Srinivas's two stories)
+5. Cause list → morning brief, teach, SSE
 
 ## 6. Decisions and why
 
 | Decision | Why |
 |---|---|
-| One bank per lawyer, scoped by tags | cross-case patterns (the J2 costs rule) need every case in one bank |
-| Registry in SQLite, not only in Hindsight | resolving "Tadepalli" and parsing a cause list need exact, deterministic lookups |
+| One bank per lawyer, scoped by tags | cross-case patterns (Murthy sir's costs rule) need every case in one bank |
+| Registry in SQLite, not only in Hindsight | resolving "Greenfield" and parsing a cause list need exact, deterministic lookups |
 | Event-date timestamps | "last time" must mean the last hearing, not the last upload |
 | Human review before retain | an OCR'd wrong date becomes a confidently wrong memory |
 | OpenAI-compatible LLM client | Vertex (default) or any OpenAI-compatible provider via env vars, with a separate OCR model |

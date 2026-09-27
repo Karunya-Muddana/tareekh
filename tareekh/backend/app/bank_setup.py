@@ -1,15 +1,16 @@
 """Layer B (bank config + directives) and layer C (mental models). Run once at onboarding; safe to re-run."""
 import logging
 
-from . import db, memory
+from . import db, memory, registry
 from .config import settings
 
 log = logging.getLogger("tareekh.bank")
 
-MISSION = ("I am the practice memory of Adv. Meera Rao, a civil litigator in Hyderabad (City Civil Court and the "
-           "High Court for the State of Telangana). I remember what happened at every hearing of her cases, what she "
-           "promised, what the other side did, and how each judge and opposing counsel behave. I remember; I do not "
-           "give legal advice.")
+def mission() -> str:
+    p = registry.practice()
+    return (f"I am the practice memory of Adv. {p['lawyer']}, a civil litigator in {p['city']}, and his junior "
+            f"{p['assistant']}. I remember what happened at every hearing of his cases, what he promised, what the "
+            f"other side did, and how each judge and opposing counsel behave. I remember; I do not give legal advice.")
 
 RETAIN_MISSION = (
     "Each item is one hearing of one court case, from the lawyer's own note or the court's order sheet. Extract: "
@@ -23,7 +24,7 @@ RETAIN_MISSION = (
 OBSERVATIONS_MISSION = (
     "Build durable knowledge about recurring behaviour: how each judge conducts hearings (what they ask for first, "
     "how they treat repeated adjournments, costs, undertakings, synopses, mediation); how each opposing counsel "
-    "operates (reasons they give for adjournments, how often, which tactics); and what the lawyer herself routinely "
+    "operates (reasons they give for adjournments, how often, which tactics); and what the lawyer himself routinely "
     "does. Count occurrences and name the cases and dates behind each pattern. Ignore one-off events.")
 
 DIRECTIVES = [
@@ -39,9 +40,9 @@ DIRECTIVES = [
 
 def configure_bank() -> dict:
     c = memory.client()
-    c.create_bank(bank_id=settings.bank_id, name="Meera Rao - chamber memory", mission=MISSION)
+    c.create_bank(bank_id=settings.bank_id, name=f"{registry.practice()['lawyer']} - chamber memory", mission=mission())
     c.update_bank_config(settings.bank_id, retain_mission=RETAIN_MISSION, enable_observations=True,
-                         observations_mission=OBSERVATIONS_MISSION, reflect_mission=MISSION,
+                         observations_mission=OBSERVATIONS_MISSION, reflect_mission=mission(),
                          disposition_skepticism=4, disposition_literalism=4, disposition_empathy=2)
     existing = {getattr(d, "name", None) or (d.get("name") if isinstance(d, dict) else None)
                 for d in (memory._get(c.list_directives(bank_id=settings.bank_id), "items") or [])}
@@ -72,9 +73,10 @@ def mental_model_specs() -> list[dict]:
                   "source_query": "What undertakings to the court, pending tasks, filing deadlines and promises to clients "
                                   "are still open as of the latest notes? For each: case, what, owner, due date, and whether overdue.",
                   "trigger": trig, "max_tokens": 900})
-    specs.append({"id": "working-style", "name": "How Meera works", "tags": None,
-                  "source_query": "What are Meera's recurring working habits, preferences and self-reminders across cases "
-                                  "(what she prepares for which judge, how she handles clients, rules she set for herself)?",
+    who = registry.practice()["lawyer_short"]
+    specs.append({"id": "working-style", "name": f"How {who} works", "tags": None,
+                  "source_query": f"What are {who}'s recurring working habits, preferences and self-reminders across cases "
+                                  f"(what he prepares for which judge, how he handles clients, rules he set for himself)?",
                   "trigger": trig, "max_tokens": 600})
     return specs
 
@@ -99,7 +101,7 @@ def retain_case_stubs() -> dict:
                         LEFT JOIN judges j ON j.id=c.judge_id LEFT JOIN counsel o ON o.id=c.opposing_counsel_id
                         LEFT JOIN clients cl ON cl.id=c.client_id"""):
         items.append({
-            "content": (f"Case {c['case_number']} ({c['short_name']}): {c['title']}. Nature: {c['nature']}. Meera represents "
+            "content": (f"Case {c['case_number']} ({c['short_name']}): {c['title']}. Nature: {c['nature']}. {registry.practice()['lawyer_short']} represents "
                         f"the {c['represents']}; client {c['client_name']}. Court: {c['court']}, before {c['judge_name']}. "
                         f"Opposing counsel: {c['counsel_name']}."),
             "context": "case registry",

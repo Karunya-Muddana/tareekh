@@ -12,7 +12,7 @@ from app import db, memory, registry  # noqa: E402
 from app.ingest import extract, segment  # noqa: E402
 
 WORLD = Path(__file__).resolve().parents[3] / "tareekh-data" / "data" / "world.json"
-START = Path(__file__).resolve().parents[3] / "tareekh-data" / "uploads" / "START_HERE"
+BACKLOG = Path(__file__).resolve().parents[3] / "tareekh-data" / "uploads" / "backlog"
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -22,20 +22,20 @@ def loaded():
 
 
 def test_onboarding_strips_learned_fields(loaded):
-    assert loaded["cases"] == 40
+    assert loaded["cases"] == 5
+    assert registry.practice()["lawyer_short"] == "Aditya" and registry.practice()["assistant_short"] == "Divya"
     cols = {r["name"] for r in db.rows("PRAGMA table_info(judges)")}
     assert not cols & {"habits", "temperament"}
 
 
 @pytest.mark.parametrize("text,expected", [
-    ("OS 318/22 Tadepalli - Achary sought time", "C07"),
-    ("O.S. No. 318 of 2022", "C07"),
-    ("Tadepalli matter adjourned", "C07"),
-    ("Gudivada v Kasoju - PW1 chief today", "C31"),
-    ("Sai Balaji GHMC WP (WP 14872/25). R3 counter", "C23"),
-    ("Lakshmi Ganapathi - Achary unwell", "C12"),
-    ("Kamala Devi wall - Jadhav", "C19"),
-    ("Sunitha injunction - IA 402 dismissed", "C35"),
+    ("OS 214/24 - Harinath sought time", "C1"),
+    ("O.S. No. 57 of 2025", "C2"),
+    ("Seabreeze injunction - DW1 cross", "C3"),
+    ("Gorle partition - mediation failed", "C1"),
+    ("Tiffin centre - instalment not paid", "C4"),
+    ("Greenfield - Bhaskar unwell again", "C5"),
+    ("Seabreeze SP suit - IA 1187 amendment", "C2"),
 ])
 def test_find_case(text, expected):
     hits = registry.find_cases(text)
@@ -43,7 +43,7 @@ def test_find_case(text, expected):
 
 
 def test_case_keys():
-    assert registry.case_keys_in("see W.P.No.14872/2025 and OS 318 of 2022") == ["WP-14872-25", "OS-318-22"]
+    assert registry.case_keys_in("see O.S.No.131/2025 and OS 214 of 2024") == ["OS-131-25", "OS-214-24"]
 
 
 def test_date_from_filename():
@@ -53,47 +53,47 @@ def test_date_from_filename():
 
 
 def test_repair_fills_and_validates():
-    known = {"C07", "C23"}
+    known = {"C5", "C3"}
     out = segment.repair([
-        {"case_id": "C99", "hearing_date": None, "text": "Tadepalli - not reached", "confidence": 0.9},
-        {"case_id": "C23", "hearing_date": "2026-09-04", "text": "reply filed", "confidence": 0.95},
+        {"case_id": "C99", "hearing_date": None, "text": "Greenfield school - not reached", "confidence": 0.9},
+        {"case_id": "C3", "hearing_date": "2026-09-04", "text": "DW1 cross", "confidence": 0.95},
         {"case_id": None, "hearing_date": None, "text": "   "},
     ], "IMG_20260916_101010.jpg", {}, known)
     assert len(out) == 2
-    assert out[0]["case_id"] == "C07" and out[0]["hearing_date"] == "2026-09-16" and out[0]["confidence"] <= 0.75
+    assert out[0]["case_id"] == "C5" and out[0]["hearing_date"] == "2026-09-16" and out[0]["confidence"] <= 0.75
     assert out[1]["confidence"] == 0.95
 
 
 def test_extract_text_and_docx():
-    txt = next((START / "level1_one_case").glob("*.txt"))
+    txt = next(BACKLOG.rglob("court_notes_2025-05-21.txt"))
     text, method = extract.extract(txt)
-    assert method == "text" and "4471" in text
-    docx = next((Path(__file__).resolve().parents[3] / "tareekh-data" / "uploads" / "backlog").rglob("*.docx"))
+    assert method == "text" and "construction activity whatsoever" in text
+    docx = next(BACKLOG.rglob("*.docx"))
     text, method = extract.extract(docx)
     assert method == "docx" and len(text) > 20
 
 
 def test_build_item_shape():
-    item = memory.build_item({"case_id": "C23", "hearing_date": "2026-09-04", "text": "Reply filed, diary no. 4471",
-                              "author": "Meera", "doc_type": "typed_note"}, "up1", "court_notes_2026-09-04.txt")
-    assert item["timestamp"].startswith("2026-09-04")
-    assert {"case:C23", "judge:J3", "counsel:OC2", "client:CL4"} <= set(item["tags"])
-    assert item["metadata"]["source_file"] == "court_notes_2026-09-04.txt"
-    assert ["judge:J3"] in item["observation_scopes"]
-    assert "W.P. No. 14872 of 2025" in item["content"]
+    item = memory.build_item({"case_id": "C3", "hearing_date": "2025-06-04", "text": "Rejoinder filed, diary no. 2291",
+                              "author": "Aditya", "doc_type": "typed_note"}, "up1", "court_notes_2025-06-04.txt")
+    assert item["timestamp"].startswith("2025-06-04")
+    assert {"case:C3", "judge:J1", "counsel:OC2", "client:CL1"} <= set(item["tags"])
+    assert item["metadata"]["source_file"] == "court_notes_2025-06-04.txt"
+    assert ["judge:J1"] in item["observation_scopes"]
+    assert "O.S. No. 131 of 2025" in item["content"]
 
 
-def test_two_word_alias_matches_both_sai_balaji_cases():
-    ids = {h["case_id"] for h in registry.find_cases("Did I file the reply in the Sai Balaji case?")}
-    assert "C23" in ids
+def test_company_name_matches_both_seabreeze_cases():
+    ids = {h["case_id"] for h in registry.find_cases("What did Seabreeze Resorts say about the poles?")}
+    assert {"C2", "C3"} <= ids
 
 
 def test_doc_type_follows_file_kind():
-    out = segment.repair([{"case_id": "C23", "hearing_date": "2026-09-04", "text": "x", "doc_type": "handwritten_note"}],
-                         "court_notes_2026-09-04.txt", {}, {"C23"})
+    out = segment.repair([{"case_id": "C3", "hearing_date": "2026-09-04", "text": "x", "doc_type": "handwritten_note"}],
+                         "court_notes_2026-09-04.txt", {}, {"C3"})
     assert out[0]["doc_type"] == "typed_note"
-    out = segment.repair([{"case_id": "C23", "hearing_date": "2026-08-12", "text": "x", "doc_type": "order_sheet"}],
-                         "CC_WP_14872-25.jpg", {}, {"C23"})
+    out = segment.repair([{"case_id": "C3", "hearing_date": "2026-08-12", "text": "x", "doc_type": "order_sheet"}],
+                         "CC_OS_131-2025.jpg", {}, {"C3"})
     assert out[0]["doc_type"] == "order_sheet"
 
 

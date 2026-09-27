@@ -1,0 +1,105 @@
+{
+  "id": "C2",
+  "case_number": "O.S. No. 57 of 2025",
+  "judge_id": "J1",
+  "opposing_counsel_id": "OC2",
+  "client_id": "CL1",
+  "title": "Seabreeze Resorts & Hospitality Pvt. Ltd. vs Srinivas Bandaru & Ramesh Gorle",
+  "short_name": "Seabreeze SP suit",
+  "represents": "defendant 2",
+  "nature": "suit for specific performance of agreement of sale dated 18.09.2024",
+  "kind": "suit",
+  "filed_on": "2025-01-20",
+  "summary": "Company sues on an agreement Srinivas alone signed for the whole 4.20 acres; Ramesh never signed.",
+  "next_date": "2026-10-05",
+  "hearings": [
+    {
+      "hearing_id": "C2-H01",
+      "date": "2025-04-09",
+      "next_date": "2025-06-11",
+      "order_sheet": "D1 and D2 appeared through counsel. Time sought for written statements. For written statements of D1 and D2 on 11.06.2025.",
+      "note": "Seabreeze SP suit (OS 57/25) - first date. Company served us the agreement copy today (18.09.2024 agreement - Srinivas signed for 'himself and as agent of Ramesh'. Ramesh's signature column is BLANK). Harinath for Srinivas. Time for WS.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H02",
+      "date": "2025-06-11",
+      "next_date": "2025-07-09",
+      "order_sheet": "Written statement of D1 filed. D2 seeks time for written statement. Time granted as a last opportunity. For written statement of D2 on 09.07.2025.",
+      "note": "Seabreeze SP - Srinivas's WS filed: he SUPPORTS the company. Says he and Ramesh are 'equal co-owners' and that Ramesh 'orally agreed' at the Novotel meeting in Sept 2024. EQUAL co-owners - note this. Our WS not ready (my fault, Ramesh came late with papers). Murthy sir: 'last opportunity, counsel.'",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H03",
+      "date": "2025-07-09",
+      "next_date": "2025-09-03",
+      "order_sheet": "Written statement of D2 filed. Plaintiff filed 14 documents without a list and without serving copies; the documents are not received. Costs of Rs. 2,000 imposed on plaintiff payable to D2. Plaintiff to file the documents with a proper list after serving copies. For documents on 03.09.2025.",
+      "note": "Seabreeze SP - our WS filed (denies agreement, no GPA ever given, 2016 letter of understanding). Harsha dumped 14 documents on the table without a list - Murthy sir refused to receive them and put Rs 2,000 costs on the company, payable to Ramesh! 'File properly, with an index, and serve copies.'",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H04",
+      "date": "2025-09-03",
+      "next_date": "2025-10-15",
+      "order_sheet": "Documents filed with list, copies served. For framing of issues on 15.10.2025.",
+      "note": "Seabreeze SP - company refiled documents properly with list. Costs Rs 2,000 paid to us by DD (handed over to Ramesh garu). For issues.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C2-H05",
+      "date": "2025-10-15",
+      "next_date": "2025-12-10",
+      "order_sheet": "Issues framed. For plaintiff's evidence on 10.12.2025.",
+      "note": "Seabreeze SP - issues framed. Issue 3: 'Whether D1 had authority to agree to sell the share of D2?' Sir happy with this issue.",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C2-H06",
+      "date": "2025-12-10",
+      "next_date": "2026-02-04",
+      "order_sheet": "PW1 examined in chief by affidavit. Ex.A1 to A9 marked. For cross-examination of PW1 on 04.02.2026.",
+      "note": "PW1 Rohan Mehta, director of Seabreeze. Ex.A1 agreement of sale dt. 18.09.2024 marked. Plaint para 3 and his affidavit: the company 'paid advance of Rs. 25,00,000 to D1 and commenced preliminary works on the site in April 2025'. COMPARE: counter in OS 131/25 para 6 says 'no construction activity whatsoever; only a survey'. Use this in both cases.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H07",
+      "date": "2026-02-04",
+      "next_date": "2026-04-08",
+      "order_sheet": "PW1 cross-examined by counsel for D1 and D2. For PW2 on 08.04.2026.",
+      "note": "Seabreeze SP - PW1 cross. Admitted: (1) Ramesh did not sign Ex.A1; (2) company knew from the 1-B that land stood in both names; (3) no GPA from Ramesh was ever shown to them; (4) the Rs 25 lakh cheque went only to Srinivas's account. When asked why they started 'preliminary works' before a sale deed - 'on legal advice.' Ha.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H08",
+      "date": "2026-04-08",
+      "next_date": "2026-05-13",
+      "order_sheet": "Counsel for plaintiff reported to be held up in another court. Adjourned as a last chance. For PW2 on 13.05.2026.",
+      "note": "Seabreeze SP - Harsha's junior said sir is held up in High Court at Amaravati. Murthy sir very annoyed: 'Last chance. Next time I will close the evidence.'",
+      "note_by": "Divya"
+    },
+    {
+      "hearing_id": "C2-H09",
+      "date": "2026-05-13",
+      "next_date": "2026-07-15",
+      "order_sheet": "Plaintiff's evidence closed. DW1 (D1) examined in chief. For cross-examination of DW1 on 15.07.2026.",
+      "note": "Seabreeze SP - company closed evidence. Srinivas (D1) as DW1: 'Ramesh and I are EQUAL owners, 50-50, each 2.10 acres.' Divya pls check - in OS 214/24 before Padmavathi madam his WS says he owns 70%!! Get certified copy of this deposition for use in OS 214.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H10",
+      "date": "2026-07-15",
+      "next_date": "2026-09-02",
+      "order_sheet": "DW1 cross-examined by counsel for D2. For D2's evidence on 02.09.2026.",
+      "note": "Seabreeze SP - DW1 cross. Confronted Srinivas with the 2016 letter (Ex.B3) - admitted his signature. The letter says neither will sell without the other's written consent. He said 'that was a friendly letter.' Also admitted he kept the Rs 25 lakh.",
+      "note_by": "Aditya"
+    },
+    {
+      "hearing_id": "C2-H11",
+      "date": "2026-09-02",
+      "next_date": "2026-10-05",
+      "order_sheet": "Plaintiff filed I.A. No. 1187 of 2026 under O.6 R.17 CPC for amendment of plaint. Counsel for D2 undertakes to file objections by 30.09.2026. For objections and hearing on the I.A. on 05.10.2026.",
+      "note": "Seabreeze SP - company wants to AMEND plaint to ask for Srinivas's half only (alternative relief). Means they know they'll lose on Ramesh's half. I undertook to file objections by 30 Sept. Divya: draft objections by 20 Sept, need certified copy of EC and 1-B again (latest). Ramesh garu - explain on phone, he'll panic.",
+      "note_by": "Aditya"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-"""Onboard Meera's practice from the synthetic data's world.json.
+"""Onboard the demo practice from the synthetic data's world.json.
 
     python scripts/onboard_demo.py                 # registry + Hindsight bank setup
     python scripts/onboard_demo.py --offline       # registry only (no keys needed)

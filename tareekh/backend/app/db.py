@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS cases (
     judge_id TEXT, opposing_counsel_id TEXT, client_id TEXT, represents TEXT,
     court TEXT, stage TEXT, next_date TEXT
 );
+CREATE TABLE IF NOT EXISTS practice (key TEXT PRIMARY KEY, value TEXT);   -- lawyer, assistant, city
 CREATE TABLE IF NOT EXISTS aliases (alias TEXT, case_id TEXT, PRIMARY KEY (alias, case_id));
 CREATE TABLE IF NOT EXISTS uploads (
     id TEXT PRIMARY KEY, created_at TEXT, status TEXT, error TEXT,

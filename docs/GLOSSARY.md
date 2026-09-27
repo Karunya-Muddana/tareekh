@@ -11,18 +11,16 @@ ticket usually just gets a new due date ("tareekh pe tareekh"). Occasionally som
 | Petitioner / Respondent | same roles in the High Court (writs, revisions) |
 | Appellant | the side that lost and appealed |
 | Counsel / Advocate | lawyer. "Counsel for plaintiff" = plaintiff's lawyer |
-| Junior | young lawyer working under a senior (Sai Kiran, in our data) |
+| Junior | young lawyer working under a senior (Divya, in our data) |
 | Senior Counsel | very senior lawyer, often sends juniors instead |
-| Standing Counsel | a government body's regular lawyer (GHMC's lawyer in C23) |
 | garu / amma | Telugu honorifics ("Gopal garu" ≈ "Mr. Gopal"; amma for an older woman) |
 
 ## Courts
 
 | Term | Meaning |
 |---|---|
-| City Civil Court, Hyderabad | lower court where suits start. Courtrooms are numbered: IV Additional Chief Judge (IV ACJ), etc. |
+| Senior Civil Judge, Visakhapatnam | district court where these suits are tried: Principal Senior Civil Judge (Murthy) and II Additional Senior Civil Judge (Padmavathi) |
 | Junior Civil Judge | smaller-value cases (C35) |
-| High Court for the State of Telangana | appeals and writs (cases against the government). Rooms are "Court Hall 7/12"; judges are "Justice X", written "X J" |
 
 ## Case numbers: `<type> No. <serial> of <year>`
 

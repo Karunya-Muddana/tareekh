@@ -40,7 +40,7 @@ def build_item(entry: dict, upload_id: str, source_file: str) -> dict:
               f"Source: {entry.get('doc_type', 'note').replace('_', ' ')} by {author}.")
     return {
         "content": header + "\n" + entry["text"],
-        "context": "court order sheet" if entry.get("doc_type") == "order_sheet" else "lawyer's hearing note",
+        "context": {"order_sheet": "court order sheet", "document": "case document"}.get(entry.get("doc_type"), "lawyer's hearing note"),
         "timestamp": f"{date}T10:30:00+05:30",
         "tags": registry.case_tags(cid) + [f"type:{entry.get('doc_type', 'other')}", f"author:{author.lower().replace(' ', '_')}"],
         "metadata": {"source_file": source_file, "upload_id": upload_id, "doc_type": entry.get("doc_type", "other"),

@@ -9,8 +9,8 @@ from . import context as ctxmod
 log = logging.getLogger("tareekh.agent")
 MAX_STEPS = 5
 
-SYSTEM = """You are Tareekh, the practice memory of Adv. Meera Rao, a civil litigator in Hyderabad.
-You answer from her memory bank only. You remember; you never give legal advice.
+SYSTEM = """You are Tareekh, the practice memory of Adv. {lawyer}, a civil litigator in {city}.
+You answer from his memory bank only. You remember; you never give legal advice.
 
 How to work:
 - The context below tells you which case(s) the question is probably about and what has been LEARNED about the
@@ -19,9 +19,14 @@ How to work:
   case_timeline = everything on one case in date order. find_case = resolve a nickname or number.
 - Filter by case_id for case questions; by judge_id or counsel_id for behaviour across cases.
 - Every fact you state must carry a citation marker like [3] that refers to the numbered facts returned by tools.
-- Say plainly when memory has nothing. Distinguish what the court's order recorded from what only Meera's own notes say.
-- Be brief. She may be standing in court. Lead with the answer, then 1-4 supporting lines. Dates as '12 Aug 2026'.
+- Say plainly when memory has nothing. Distinguish what the court's order recorded from what only {lawyer_short}'s or {assistant_short}'s notes say.
+- Be brief. He may be standing in court. Lead with the answer, then 1-4 supporting lines. Dates as '12 Aug 2026'.
 """
+
+
+def system_prompt() -> str:
+    return SYSTEM.format(**registry.practice())
+
 
 TOOLS = [
     {"type": "function", "function": {
@@ -104,7 +109,7 @@ def ask(question: str, active_case_id: str | None = None, quick: bool = False) -
     if quick:
         return _fixed_path(question, ctx, mode="quick")
     book, trace = FactBook(), []
-    messages = [{"role": "system", "content": SYSTEM + "\n\n" + ctxmod.render(ctx)},
+    messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)},
                 {"role": "user", "content": question}]
     try:
         for _ in range(MAX_STEPS):
@@ -134,7 +139,7 @@ def _fixed_path(question: str, ctx: dict, mode: str, error: str | None = None) -
     book = FactBook()
     cid = ctx["case_ids"][0] if ctx["case_ids"] else None
     facts_txt = book.render(memory.recall(question, case_id=cid, max_tokens=2000, budget="low" if mode == "quick" else "mid"))
-    messages = [{"role": "system", "content": SYSTEM + "\n\n" + ctxmod.render(ctx)},
+    messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)},
                 {"role": "user", "content": f"QUESTION: {question}\n\nFACTS FROM MEMORY:\n{facts_txt}\n\n"
                                             "Answer using only these facts, with [n] citations."}]
     answer = llm.chat(messages).content or ""

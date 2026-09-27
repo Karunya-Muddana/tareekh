@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tareekh</title>
+<style>
+  :root { --bg:#faf8f4; --card:#fff; --ink:#1d1b18; --mute:#6b655c; --line:#e3ddd2; --acc:#7a3b12; --ok:#2f6b3a; --bad:#a3261b; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, sans-serif; }
+  main { max-width:860px; margin:0 auto; padding:16px; }
+  header { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; }
+  h1 { margin:8px 0; font-size:24px; color:var(--acc); }
+  h2 { font-size:16px; margin:0 0 10px; }
+  #status { font-size:13px; color:var(--mute); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; margin:16px 0; }
+  textarea, input, select { width:100%; font:inherit; padding:8px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+  textarea { min-height:80px; resize:vertical; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:8px; }
+  .row > * { flex:1 1 160px; }
+  button { font:inherit; padding:8px 16px; border:0; border-radius:6px; background:var(--acc); color:#fff; cursor:pointer; flex:0 0 auto; }
+  button:disabled { opacity:.5; cursor:default; }
+  label.chk { display:flex; gap:6px; align-items:center; flex:0 0 auto; color:var(--mute); }
+  label.chk input { width:auto; }
+  .entry { border-top:1px solid var(--line); padding:10px 0; }
+  .entry pre { white-space:pre-wrap; margin:6px 0 0; font:13px/1.45 ui-monospace, monospace; color:var(--mute); max-height:120px; overflow:auto; }
+  .entry .row > input { flex:0 1 140px; }
+  .msg { font-size:13px; color:var(--mute); margin-top:8px; }
+  .err { color:var(--bad); }
+  .ok { color:var(--ok); }
+  #answer { white-space:pre-wrap; margin-top:12px; }
+  .cite { font-size:13px; border-left:3px solid var(--line); padding:4px 10px; margin:6px 0; color:var(--mute); }
+  .cite b { color:var(--ink); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Tareekh</h1>
+    <span id="status">checking memory…</span>
+  </header>
+
+  <section>
+    <h2>1. Add notes</h2>
+    <input type="file" id="files" multiple accept=".jpg,.jpeg,.png,.pdf,.docx,.txt">
+    <div class="row"><textarea id="text" placeholder="…or paste a note here"></textarea></div>
+    <div class="row">
+      <select id="upCase"><option value="">Case: let Tareekh work it out</option></select>
+      <button id="upBtn">Upload</button>
+    </div>
+    <div id="upMsg" class="msg"></div>
+    <div id="entries"></div>
+    <div class="row" id="saveRow" hidden><span></span><button id="saveBtn">Save to memory</button></div>
+  </section>
+
+  <section>
+    <h2>2. Ask</h2>
+    <textarea id="q" placeholder="e.g. what did Srinivas say about his share? / has the fencing stopped?" style="min-height:50px"></textarea>
+    <div class="row">
+      <select id="askCase"><option value="">Any case</option></select>
+      <label class="chk"><input type="checkbox" id="quick"> quick (in court)</label>
+      <button id="askBtn">Ask</button>
+    </div>
+    <div id="answer"></div>
+    <div id="cites"></div>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function api(path, opts = {}) {
+  const r = await fetch(path, opts);
+  const body = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(body.detail || `HTTP ${r.status}`);
+  return body;
+}
+
+// ---- status + case list
+async function refreshStatus() {
+  try {
+    const s = await api("/memory/status");
+    const busy = (s.pending_operations || 0) + (s.pending_consolidation || 0);
+    $("status").textContent = `${s.total_documents ?? 0} notes in memory` + (busy ? ` · still digesting ${busy}` : " · up to date");
+  } catch (e) { $("status").innerHTML = `<span class="err">memory offline: ${esc(e.message)}</span>`; }
+}
+async function loadCases() {
+  try {
+    const cases = await api("/cases");
+    for (const sel of [$("upCase"), $("askCase")])
+      for (const c of cases) sel.add(new Option(`${c.id} · ${c.short_name || c.title}`, c.id));
+    if (!cases.length) $("status").textContent = "no cases loaded, run start.ps1";
+  } catch (e) { /* status line already shows the problem */ }
+}
+
+// ---- upload → review → save
+let currentUpload = null;
+$("upBtn").onclick = async () => {
+  const fd = new FormData();
+  for (const f of $("files").files) fd.append("files", f);
+  if ($("text").value.trim()) fd.append("text", $("text").value.trim());
+  if ($("upCase").value) fd.append("case_id", $("upCase").value);
+  if (!fd.has("files") && !fd.has("text")) { $("upMsg").textContent = "Pick a file or paste a note first."; return; }
+  $("upBtn").disabled = true; $("entries").innerHTML = ""; $("saveRow").hidden = true;
+  try {
+    const { upload_id } = await api("/uploads", { method: "POST", body: fd });
+    currentUpload = upload_id;
+    await pollUpload(upload_id);
+  } catch (e) { $("upMsg").innerHTML = `<span class="err">${esc(e.message)}</span>`; }
+  $("upBtn").disabled = false;
+};
+
+async function pollUpload(id) {
+  for (;;) {
+    const up = await api(`/uploads/${id}`);
+    if (["queued", "extracting", "segmenting", "retaining"].includes(up.status)) {
+      $("upMsg").textContent = `${up.status}… (photos take ~30 s a page)`;
+      await new Promise(r => setTimeout(r, 2000));
+      continue;
+    }
+    if (up.status === "error") { $("upMsg").innerHTML = `<span class="err">${esc(up.error)}</span>`; return; }
+    renderEntries(up);
+    return;
+  }
+}
+
+function renderEntries(up) {
+  const pending = up.entries.filter(e => e.status !== "retained" && e.status !== "rejected");
+  $("upMsg").innerHTML = up.status === "done"
+    ? `<span class="ok">Saved ${up.entries.filter(e => e.status === "retained").length} entries to memory.</span>`
+    : `Found ${up.entries.length} entries. Check the case and date, then save.` + (up.error ? ` <span class="err">${esc(up.error)}</span>` : "");
+  $("entries").innerHTML = up.entries.map(e => `
+    <div class="entry" data-id="${e.id}">
+      <div class="row">
+        <input class="case" value="${esc(e.case_id)}" placeholder="case id" ${e.status === "retained" ? "disabled" : ""}>
+        <input class="date" value="${esc(e.hearing_date)}" placeholder="YYYY-MM-DD" ${e.status === "retained" ? "disabled" : ""}>
+        <span class="msg">${esc(e.source_file)} · ${e.status} · conf ${e.confidence ?? "?"}</span>
+        ${e.status === "retained" ? "" : '<label class="chk"><input type="checkbox" class="reject"> skip</label>'}
+      </div>
+      <pre>${esc(e.text)}</pre>
+    </div>`).join("");
+  $("saveRow").hidden = !pending.length;
+}
+
+$("saveBtn").onclick = async () => {
+  const edits = [...document.querySelectorAll(".entry")].filter(d => d.querySelector(".case:not([disabled])")).map(d => ({
+    id: d.dataset.id,
+    case_id: d.querySelector(".case").value.trim() || null,
+    hearing_date: d.querySelector(".date").value.trim() || null,
+    reject: d.querySelector(".reject")?.checked || false,
+  }));
+  $("saveBtn").disabled = true;
+  try {
+    await api(`/uploads/${currentUpload}/confirm`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ edits }) });
+    renderEntries(await api(`/uploads/${currentUpload}`));
+    refreshStatus();
+  } catch (e) { $("upMsg").innerHTML = `<span class="err">${esc(e.message)}</span>`; }
+  $("saveBtn").disabled = false;
+};
+
+// ---- ask
+$("askBtn").onclick = async () => {
+  const question = $("q").value.trim();
+  if (!question) return;
+  $("askBtn").disabled = true; $("answer").textContent = "thinking…"; $("cites").innerHTML = "";
+  try {
+    const r = await api("/ask", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, case_id: $("askCase").value || null, quick: $("quick").checked }) });
+    $("answer").textContent = r.answer || "(no answer)";
+    $("cites").innerHTML = (r.citations || []).map(c =>
+      `<div class="cite"><b>[${c.n}]</b> ${esc(c.case_id)} · ${esc(c.hearing_date)} · ${esc(c.source_file || c.type)}<br>${esc(c.text)}</div>`).join("");
+  } catch (e) { $("answer").innerHTML = `<span class="err">${esc(e.message)}</span>`; }
+  $("askBtn").disabled = false;
+};
+$("q").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("askBtn").click(); } });
+
+loadCases(); refreshStatus(); setInterval(refreshStatus, 15000);
+</script>
+</body>
+</html>

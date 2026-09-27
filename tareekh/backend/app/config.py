@@ -12,7 +12,7 @@ load_dotenv(BACKEND_DIR / ".env")
 class Settings:
     hindsight_url: str = os.getenv("HINDSIGHT_URL", "https://api.hindsight.vectorize.io")
     hindsight_api_key: str | None = os.getenv("HINDSIGHT_API_KEY")
-    bank_id: str = os.getenv("HINDSIGHT_BANK_ID", "meera-rao-chamber")
+    bank_id: str = os.getenv("HINDSIGHT_BANK_ID", "chamber-memory")
 
     # "vertex" = Gemini on Vertex AI via gcloud ADC (base URLs/keys below are ignored);
     # "openai" = any OpenAI-compatible endpoint (Groq, etc.) using the URL/key below.

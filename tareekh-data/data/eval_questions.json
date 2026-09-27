@@ -1,94 +1,60 @@
 [
   {
-    "question": "Did I undertake to file the rejoinder in the Sai Balaji WP? Was it filed?",
-    "expected": "Yes. Undertaken on 12.08.2026 (within three weeks, recorded in the order). Filed 03.09.2026, diary no. 4471, one day after the 02.09 due date. GHMC standing counsel acknowledged receipt in court on 04.09.2026.",
+    "question": "How much of the beach land does Srinivas say he owns?",
+    "expected": "It depends where he is saying it. In O.S. 214/2024 (WS 25.06.2025, and as DW1 on 22.07.2026) he claims 70%. In O.S. 57/2025 (WS 11.06.2025, DW1 on 13.05.2026) he says 'equal owners, 50-50'. The 2016 letter and the 1-B also say 2.10 acres each.",
     "cases": [
-      "C23"
+      "C1",
+      "C2"
     ]
   },
   {
-    "question": "rejoinder?  (asked on 05.10.2026 while in Court Hall 12)",
-    "expected": "Same as above; the app should resolve 'rejoinder' to C23 because it is the matter being called in Court Hall 12.",
+    "question": "Did Seabreeze do any work on the land before the injunction?",
+    "expected": "Their counter in O.S. 131/2025 (21.05.2025) says 'no construction activity whatsoever; only a survey'. But their plaint and PW1 in O.S. 57/2025 (10.12.2025) say they 'commenced preliminary works in April 2025'. VRO saw ~40 cement poles on 14.04.2025; DW1 admitted 'survey pegs and some poles' on 19.08.2026.",
     "cases": [
-      "C23"
+      "C2",
+      "C3"
     ]
   },
   {
-    "question": "How many adjournments has the other side taken in Tadepalli and what did the judge say last time?",
-    "expected": "Two, both citing counsel's illness (19.06.2026, 18.08.2026). On 18.08.2026 the order said 'last opportunity'.",
+    "question": "What should I expect from Murthy sir if the other side asks for time again?",
+    "expected": "He says 'last opportunity' on the second request and imposes costs on the third (Greenfield: Rs 3,000 on 22.06.2026, cross closed). He also refuses irregular filings (Seabreeze SP 09.07.2025: Rs 2,000 costs; memo without copy rejected 11.03.2026).",
     "cases": [
-      "C07"
+      "C2",
+      "C3",
+      "C5"
     ]
   },
   {
-    "question": "Has IV ACJ imposed costs for a third adjournment before?",
-    "expected": "Yes: C12 on 11.02.2026 (Rs. 3,000 on defendant, OC3) and C19 on 22.04.2026 (Rs. 5,000 on plaintiff, OC5, with the oral remark 'Third time is not a request, it is a strategy').",
+    "question": "Is Padmavathi madam strict about adjournments?",
+    "expected": "No. She granted repeated time to Harinath without costs (14.05.2025), forgave our own missed summons on 25.03.2026, referred the friends' case to mediation, and gave the tenant extra time to deposit.",
     "cases": [
-      "C12",
-      "C19"
+      "C1",
+      "C4"
     ]
   },
   {
-    "question": "How many times has Venugopal Achary sought time citing illness, across all my matters?",
-    "expected": "See ground_truth.OC3_illness_adjournments_all_cases (count and dates).",
+    "question": "What is pending from our side?",
+    "expected": "Objections to I.A. 1187/2026 in the Seabreeze SP suit, undertaken to be filed by 30.09.2026: draft only 60% on 24.09 and waiting for EC, so overdue on 5 Oct. Continue the DW1 cross in the injunction suit on 5 Oct using the plaint para 3 (certified copy to be got by Divya). Written arguments in Greenfield. Tiffin centre: September instalment unpaid, letter first, then execution petition if unpaid by 25th.",
     "cases": [
-      "C07",
-      "C12",
-      "C14",
-      "C27",
-      "C30",
-      "C37"
+      "C2",
+      "C3",
+      "C4",
+      "C5"
     ]
   },
   {
-    "question": "What did PW1 say about possession in Gudivada v Kasoju?",
-    "expected": "In chief (19.11.2025): March 2016, on the sale deed day. In cross (15.07.2026): after Sankranti, January 2017, when tenant Mallesh vacated.",
+    "question": "Who is the VRO and what did he say?",
+    "expected": "Appala Naidu. In the injunction suit (10.06.2026): saw about 40 cement poles on 14.04.2025, and Seabreeze jeep AP 31 CX 4417. In the partition suit (03.06.2026): 1-B shows 2.10 acres each, Ramesh's family cultivates the east half where his father's grave is.",
     "cases": [
-      "C31"
+      "C1",
+      "C3"
     ]
   },
   {
-    "question": "Did we file the appeal for Sunitha?",
-    "expected": "No. I.A. 402/2025 dismissed 08.09.2026; certified copy applied 10.09, received 24.09; limitation computation and C.M.A. draft pending with Sai Kiran (overdue since 25.09). Conservative last date 22.10.2026, verify.",
+    "question": "Did Ramesh ever sign the Seabreeze agreement?",
+    "expected": "No. His signature column is blank; the company director admitted it in cross (04.02.2026). The EC shows no GPA registered. His WhatsApp on 10.09.2024 says 'Don't sign anything for me.'",
     "cases": [
-      "C35"
-    ]
-  },
-  {
-    "question": "What does Pinnamaneni J usually want?",
-    "expected": "Synopsis when paper book exceeds 200 pages; records undertakings verbatim and checks compliance; interim orders only for fixed periods; short written submissions.",
-    "cases": [
-      "C23",
-      "C10",
-      "C15"
-    ]
-  },
-  {
-    "question": "What should I carry for Somayajulu J matters?",
-    "expected": "A one-page list of dates and an answer on limitation/delay; he asks about delay first.",
-    "cases": [
-      "C11",
-      "C29",
-      "C40"
-    ]
-  },
-  {
-    "question": "What is pending from my side before 5 Oct?",
-    "expected": "Pending action items across cases, e.g. C07 press for costs, C19 PW1 cross prep, C31 arguments note on contradiction, C35 C.M.A. (overdue).",
-    "cases": []
-  },
-  {
-    "question": "What did I tell Gopal garu last time?",
-    "expected": "On 18.08.2026: that we will press for costs if a third adjournment is sought.",
-    "cases": [
-      "C07"
-    ]
-  },
-  {
-    "question": "Where is the setback point in the Sai Balaji WP?",
-    "expected": "R3 alleges 1.2 m setback violation on the east side; approved plan shows 1.5 m left; approved plan flagged at page 64.",
-    "cases": [
-      "C23"
+      "C2"
     ]
   }
 ]

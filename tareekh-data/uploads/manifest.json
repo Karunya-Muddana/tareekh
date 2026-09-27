@@ -1,5350 +1,964 @@
 [
   {
     "files": [
-      "backlog/2025-03/court_notes_2025-03-03.txt"
+      "backlog/2025-02/Greenfield_purchase_order_04-04-2023.jpg"
     ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-03-03",
+    "type": "document_scan",
+    "author": "other",
+    "date": "2025-02-20",
     "case_ids": [
-      "C01"
+      "C5"
     ],
-    "hearing_ids": [
-      "C01-H01"
-    ],
-    "source_text": "03 Mar 2025, Mon - court notes\n\nGollapudi partition (OS 1180/21) - Issues framed - 5 issues plus relief. Draft PW1 chief affidavit now. Madam suggested mediation centre - client not keen.\n"
+    "source_text": "GREENFIELD PUBLIC SCHOOL (CBSE), PENDURTHI, VISAKHAPATNAM\nDate: 04.04.2023\nTo: M/s. Vijaya Offset Printers, Old Gajuwaka, Visakhapatnam.\nPURCHASE ORDER No. GPS/PO/2023/19\nPlease print and supply the following for academic year 2023-24 as per approved samples: (1) Class 1-10 workbooks, 2,400 copies; (2) Class 6-8 mathematics practice books, 900 copies; (3) long notebooks with school logo, 6,000 nos. Delivery before 31.05.2023.\nPayment: within 60 days of delivery against invoice.\nEstimated value: Rs. 6,80,000/- (approx.)."
   },
   {
     "files": [
-      "backlog/2025-03/court_notes_2025-03-10.txt"
+      "backlog/2025-04/Agreement_of_Sale_Seabreeze_18-09-2024.jpg",
+      "backlog/2025-04/Agreement_of_Sale_Seabreeze_18-09-2024_p2.jpg"
     ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-03-10",
-    "case_ids": [
-      "C35"
-    ],
-    "hearing_ids": [
-      "C35-H01"
-    ],
-    "source_text": "10 Mar 2025, Mon - court notes\n\nSunitha injunction (OS 145/25) - Tummala madam checked service and vakalat before anything else, as usual. Siddiqui appeared for the builder (D1). D2 (landowner) absent.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-03/IMG_20250312_130925.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-03-12",
-    "case_ids": [
-      "C07",
-      "C16"
-    ],
-    "hearing_ids": [
-      "C07-H01",
-      "C16-H01"
-    ],
-    "source_text": "OS 318/22 Tadepalli. PW1 (Gopal garu himself) cross by Achary for about 40 min. Mostly on why balance consideration was not tendered before the agreement date. He held up ok. Achary kept asking about the bank statement - make sure Ex.A7 original is in the file next time.\n\nRevathi partition (OS 214/23) - Not reached."
-  },
-  {
-    "files": [
-      "backlog/2025-03/IMG_20250313_120233.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-03-13",
-    "case_ids": [
-      "C20"
-    ],
-    "hearing_ids": [
-      "C20-H01"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - Sarma filed vakalat for the other side. They will take time for WS, obviously. Madam suggested mediation centre - client not keen."
-  },
-  {
-    "files": [
-      "backlog/2025-03/court_notes_2025-03-13.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-03-13",
-    "case_ids": [
-      "C03"
-    ],
-    "hearing_ids": [
-      "C03-H01"
-    ],
-    "source_text": "13 Mar 2025, Thu - court notes\n\nKasoju pronote (OS 655/23) - Our PW1 affidavit filed and documents marked. IV ACJ started 10.30 sharp, called the list twice before lunch.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-03/sai_court_notes_2025-03-13.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-03-13",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H01"
-    ],
-    "source_text": "13 Mar 2025, Thu - court notes (Sai)\n\nKandregula contract (OS 509/22) - Not reached. Nothing new.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-03/IMG_20250317_115747.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-03-17",
-    "case_ids": [
-      "C13"
-    ],
-    "hearing_ids": [
-      "C13-H01"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - No court today, judge on leave. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-03/court_notes_2025-03-17.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-03-17",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H01"
-    ],
-    "source_text": "17 Mar 2025, Mon - court notes\n\nRevathi refund (OS 1066/24) - Siddiqui filed vakalat for the other side. They will take time for WS, obviously. Madam suggested mediation centre - client not keen. Told Revathi amma the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-03/IMG_20250319_172928.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-03-19",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H01"
-    ],
-    "source_text": "Lakshmi Ganapathi (OS 1043/21) - DW1 is their accountant, not the proprietor. Admitted 17 of 23 invoices bear their shop stamp. Denied the other 6. Need the delivery challans for those 6 - ask Srinivas garu."
-  },
-  {
-    "files": [
-      "backlog/2025-03/sai_court_notes_2025-03-20.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-03-20",
-    "case_ids": [
-      "C31"
-    ],
-    "hearing_ids": [
-      "C31-H01"
-    ],
-    "source_text": "20 Mar 2025, Thu - court notes (Sai)\n\nGudivada v Kasoju - not reached (item 44).\n"
-  },
-  {
-    "files": [
-      "backlog/2025-03/court_notes_2025-03-26.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-03-26",
-    "case_ids": [
-      "C19"
-    ],
-    "hearing_ids": [
-      "C19-H01"
-    ],
-    "source_text": "26 Mar 2025, Wed - court notes\n\nKamala Devi wall (OS 227/24) - issues framed, 4 issues. Main one: whether the wall encroaches 3 ft into plaintiff's plot. We should push for an advocate commissioner with a surveyor - our survey sketch from 2019 is strong.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-04/IMG_20250401_122544.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-04-01",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H01"
-    ],
-    "source_text": "Rasheed Khan (tenant) (OS 1302/24) - Not reached. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2025-04/OS_1180-21_2025-04-04.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-04-04",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H02"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. Parvathamma amma asked how long this will go on. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2025-04/WP_18342-24_2025-04-04.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2025-04-04",
-    "case_ids": [
-      "C10"
-    ],
-    "hearing_ids": [
-      "C10-H01"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - Judge on leave. Sare."
-  },
-  {
-    "files": [
-      "backlog/2025-04/IMG_20250409_174049.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "type": "document_scan",
+    "author": "other",
     "date": "2025-04-09",
     "case_ids": [
-      "C09"
+      "C2",
+      "C3"
     ],
-    "hearing_ids": [
-      "C09-H01"
-    ],
-    "source_text": "Agarwal / Hanuman Textiles (OS 842/21) - Judge on leave. Wasted morning."
+    "source_text": "AGREEMENT OF SALE\nThis Agreement of Sale is made and executed at Visakhapatnam on this the 18th day of September, 2024 BETWEEN:\n1. Sri Srinivas Bandaru, S/o late Appa Rao, aged about 51 years, R/o Flat 402, Sai Towers, MVP Colony, Visakhapatnam, for himself and as agent of Sri Ramesh Gorle, S/o late Suryanarayana, R/o Mangamaripeta village (hereinafter called the VENDORS)\nAND\nM/s. Seabreeze Resorts & Hospitality Pvt. Ltd., a company incorporated under the Companies Act, 2013, having its registered office at 3rd Floor, Dolphin Plaza, Siripuram, Visakhapatnam, represented by its Director Sri Rohan Mehta (hereinafter called the PURCHASER).\nWHEREAS the Vendors are the absolute owners and possessors of agricultural land admeasuring Ac. 4.20 cents in Sy. No. 112/2, Mangamaripeta village, Bheemunipatnam mandal, Visakhapatnam district, having purchased the same under registered sale deed Doc. No. 3417/2011 dated 02.03.2011 of SRO Bheemunipatnam, more fully described in the Schedule hereunder.\nNOW THIS AGREEMENT WITNESSETH AS FOLLOWS:\n1. The total sale consideration is fixed at Rs. 4,20,00,000/- (Rupees Four Crores Twenty Lakhs only) at the rate of Rs. 1,00,00,000/- per acre.\n2. The Purchaser has this day paid a sum of Rs. 25,00,000/- (Rupees Twenty Five Lakhs only) by cheque No. 118804 dated 18.09.2024 drawn on HDFC Bank, Siripuram branch, in favour of Sri Srinivas Bandaru, the receipt of which the Vendors hereby acknowledge.\n3. The balance of Rs. 3,95,00,000/- shall be paid at the time of registration of the sale deed, within six months from this date, subject to the Vendors producing clear title and obtaining conversion of land use (NALA).\n4. The Vendors shall permit the Purchaser to conduct survey and soil tests on the schedule land pending registration. No construction shall be made before registration.\n5. If the Vendors fail to execute the sale deed, the Purchaser shall be entitled to enforce specific performance of this agreement through a court of law.\nSCHEDULE\nAll that agricultural land admeasuring Ac. 4.20 cents in Sy. No. 112/2, Mangamaripeta village, Bheemunipatnam mandal. Boundaries: East - Sy. No. 113 (Pydi Appala Raju), West - panchayat road, North - Sy. No. 111, South - beach access road.\nNote: Sri Ramesh Gorle to sign on his return from Srikakulam."
   },
   {
     "files": [
-      "backlog/2025-04/sai_court_notes_2025-04-11.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-04-11",
-    "case_ids": [
-      "C16"
-    ],
-    "hearing_ids": [
-      "C16-H02"
-    ],
-    "source_text": "11 Apr 2025, Fri - court notes (Sai)\n\nRevathi partition (OS 214/23) - No court today, judge on leave.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-04/court_notes_2025-04-15.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-04-15",
-    "case_ids": [
-      "C27"
-    ],
-    "hearing_ids": [
-      "C27-H01"
-    ],
-    "source_text": "15 Apr 2025, Tue - court notes\n\nVaishnavi v Manikanta (OS 733/23) - Achary sought time - counsel unwell, memo filed by junior. the client's office was not happy.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-04/court_notes_2025-04-16.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-04-16",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H02"
-    ],
-    "source_text": "16 Apr 2025, Wed - court notes\n\nTadepalli - PW1 cross over, finally. Achary tried the 'readiness and willingness' line again, Gopal garu answered well, said he had the loan sanction letter ready from Jan 2021. Need to summon the attesting witness Narsing Rao as PW2. Sai to prepare summons batta.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-04/IMG_20250421_114702.jpg"
+      "backlog/2025-04/IMG_20250409_175535.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
+    "date": "2025-04-09",
+    "case_ids": [
+      "C2"
+    ],
+    "source_text": "Seabreeze SP suit (OS 57/25) - first date. Company served us the agreement copy today (18.09.2024 agreement - Srinivas signed for 'himself and as agent of Ramesh'. Ramesh's signature column is BLANK). Harinath for Srinivas. Time for WS."
+  },
+  {
+    "files": [
+      "backlog/2025-04/IMG_20250421_195420.jpg"
+    ],
+    "type": "handwritten_note_photo",
+    "author": "Aditya",
     "date": "2025-04-21",
     "case_ids": [
-      "C15"
+      "C3"
     ],
-    "hearing_ids": [
-      "C15-H01"
-    ],
-    "source_text": "Uppal temple WP (WP 3310/25) - Admitted, notice ordered."
+    "source_text": "Ramesh Gorle came with Divya at 8 am. Company men put cement poles on the west side of the land yesterday (14th) - 40 poles approx. Ramesh gave police petition at Bheemunipatnam PS on 15th, only acknowledgment given, no FIR. Filing suit for injunction today + IA. Ramesh: 'nanna's grave is there sir, they will bulldoze it.'"
   },
   {
     "files": [
-      "backlog/2025-04/OS_1043-21_2025-04-23.docx"
+      "backlog/2025-04/Legal_notice_Seabreeze_12-11-2024.jpg"
     ],
-    "type": "typed_note_docx",
-    "author": "Meera",
+    "type": "document_scan",
+    "author": "other",
+    "date": "2025-04-21",
+    "case_ids": [
+      "C2",
+      "C3"
+    ],
+    "source_text": "VARDHAN LEGAL LLP, Advocates, Siripuram, Visakhapatnam\nDate: 12.11.2024\nREGD. POST WITH ACK. DUE\nTo: Sri Ramesh Gorle, S/o late Suryanarayana, Mangamaripeta village, Bheemunipatnam mandal.\nLEGAL NOTICE\nUnder instructions from my client M/s. Seabreeze Resorts & Hospitality Pvt. Ltd., I hereby give you notice as follows:\n1. You and Sri Srinivas Bandaru agreed to sell land of Ac. 4.20 cents in Sy. No. 112/2, Mangamaripeta, to my client at a meeting held at Hotel Novotel, Visakhapatnam on 10.09.2024, and pursuant thereto an Agreement of Sale dated 18.09.2024 was executed, under which my client paid an advance of Rs. 25,00,000/-.\n2. You have since failed to sign the agreement and have informed third parties that you will not sell.\n3. You are hereby called upon to come forward and execute the registered sale deed within 15 days of receipt of this notice, failing which my client will initiate appropriate legal proceedings, including a suit for specific performance, at your risk as to costs."
+  },
+  {
+    "files": [
+      "backlog/2025-04/Letter_of_understanding_2016.jpg"
+    ],
+    "type": "handwritten_letter_photo",
+    "author": "other",
+    "date": "2025-04-21",
+    "case_ids": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "source_text": "Visakhapatnam, 10-01-2016\n\nLetter of understanding between friends\n\nWe, Ramesh Gorle and Srinivas Bandaru, jointly own Ac. 4.20 cents in Sy. No. 112/2 Mangamaripeta, bought in 2011. We both own it EQUALLY, 2.10 acres each. Ramesh's father late Suryanarayana garu is buried in the mango grove on the east side and that portion will always be with Ramesh.\n\nNeither of us will sell, mortgage or agree to sell the land or any part of it without the written consent of the other.\n\nWe write this so that our children also know.\n\nSd/- Ramesh Gorle          Sd/- Srinivas Bandaru\nWitness: Dr. K. Prasad (classmate), Sd/-"
+  },
+  {
+    "files": [
+      "backlog/2025-04/Police_petition_acknowledgment_15-04-2025.jpg"
+    ],
+    "type": "document_photo",
+    "author": "other",
+    "date": "2025-04-21",
+    "case_ids": [
+      "C3"
+    ],
+    "source_text": "ANDHRA PRADESH POLICE\nPETITION RECEIPT / ACKNOWLEDGMENT\nPetition No.: 211/2025      Date & Time of receipt: 15.04.2025, 11:20 hrs\nName of petitioner: Ramesh Gorle, S/o late Suryanarayana, Mangamaripeta.\nGist of petition: Unknown persons claiming to be from Seabreeze Resorts entered the petitioner's land in Sy. No. 112/2 on 14.04.2025 and erected about 40 cement poles along the west boundary without consent. Requests action.\nAction taken: Received. Enquiry to be made. Civil nature; petitioner advised to approach the competent civil court."
+  },
+  {
+    "files": [
+      "backlog/2025-04/Sale_Deed_3417-2011_first_pages.jpg",
+      "backlog/2025-04/Sale_Deed_3417-2011_first_pages_p2.jpg"
+    ],
+    "type": "document_scan",
+    "author": "other",
+    "date": "2025-04-21",
+    "case_ids": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "source_text": "SALE DEED\nThis Sale Deed is made and executed at Bheemunipatnam on this the 2nd day of March, 2011, by Sri Kakarla Bhaskara Rao, S/o Narasimha Murthy, aged 64 years, agriculturist, R/o Mangamaripeta (hereinafter called the VENDOR),\nIN FAVOUR OF (1) Sri Ramesh Gorle, S/o Suryanarayana, aged 37 years, and (2) Sri Srinivas Bandaru, S/o Appa Rao, aged 36 years, both R/o Visakhapatnam (hereinafter jointly called the VENDEES).\nWHEREAS the Vendor is the absolute owner of agricultural land admeasuring Ac. 4.20 cents in Sy. No. 112/2 of Mangamaripeta village, having inherited the same from his father, and has agreed to sell the same to the Vendees for a total consideration of Rs. 30,00,000/- (Rupees Thirty Lakhs only).\nNOW THIS DEED WITNESSETH that in pursuance of the said agreement and in consideration of Rs. 30,00,000/- paid by the Vendees to the Vendor, as follows: Rs. 15,00,000/- by Vendee 1 through RTGS from State Bank of India, Dwaraka Nagar branch, on 02.03.2011, and Rs. 15,00,000/- by Vendee 2 in cash on this day, the receipt of which the Vendor hereby acknowledges, the Vendor hereby conveys the schedule property to the Vendees jointly, in equal shares, absolutely and forever.\nThe Vendor has this day delivered vacant possession of the schedule property to the Vendees.\nSCHEDULE\nAgricultural land admeasuring Ac. 4.20 cents in Sy. No. 112/2, Mangamaripeta village, Bheemunipatnam mandal, Visakhapatnam district, with mango and cashew trees thereon."
+  },
+  {
+    "files": [
+      "backlog/2025-04/WhatsApp Chat with Srinivas.txt"
+    ],
+    "type": "whatsapp_export",
+    "author": "other",
+    "date": "2025-04-21",
+    "case_ids": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "source_text": "[12/08/24, 7:41 PM] Srinivas: Ramesh, Seabreeze people called again. 1 crore per acre ra. 4.2 crores. We will never get this price\n[12/08/24, 7:55 PM] Ramesh: No Srinu. I told you already. Nanna is there\n[12/08/24, 7:56 PM] Srinivas: We can shift the samadhi respectfully, they said they will pay for everything\n[12/08/24, 8:20 PM] Ramesh: Don't talk like that\n[03/09/24, 10:02 AM] Srinivas: Meeting at Novotel on 10th with their director Rohan Mehta. Please come once, just listen\n[03/09/24, 10:40 AM] Ramesh: I will come only to tell them no\n[10/09/24, 9:15 PM] Srinivas: You didn't say no clearly in the meeting. They are preparing agreement\n[10/09/24, 9:18 PM] Ramesh: I said clearly I won't sell. You heard it\n[10/09/24, 9:18 PM] Ramesh: Don't sign anything for me\n[19/09/24, 6:30 AM] Srinivas: I signed for my half only. Don't worry\n[19/09/24, 6:31 AM] Srinivas: They gave advance\n[19/09/24, 7:02 AM] Ramesh: For your half only? Send me the copy\n[19/09/24, 7:02 AM] Ramesh: Srinu send the copy\n[25/09/24, 11:11 PM] Ramesh: 6 days. Still no copy\n[14/11/24, 5:47 PM] Ramesh: I got a lawyer notice from Seabreeze saying I agreed to sell. What did you sign Srinu?\n[14/11/24, 5:47 PM] Ramesh: 30 years of friendship\n[14/11/24, 9:12 PM] Srinivas: Talk to my lawyer"
+  },
+  {
+    "files": [
+      "backlog/2025-04/IMG_20250423_171611.jpg"
+    ],
+    "type": "handwritten_note_photo",
+    "author": "Aditya",
     "date": "2025-04-23",
     "case_ids": [
-      "C12"
+      "C3"
     ],
-    "hearing_ids": [
-      "C12-H02"
-    ],
-    "source_text": "Lakshmi Ganapathi - DW1 done. Confronted with the 6 challans, he said 'I cannot say'. Good enough. Their evidence closed. Now arguments. Prepare a table of invoice / challan / exhibit numbers for the judge."
+    "source_text": "Seabreeze injunction (OS 131/25) - IA 612. Got status quo till next date. Murthy sir returned our paper book once - index had no page numbers! Fixed it in the corridor in 10 min. Never again. Divya: O.39 R.3 compliance by courier TODAY, keep the postal receipts."
   },
   {
     "files": [
-      "backlog/2025-04/CC_OS_1043-21_2025-04-23.jpg"
+      "backlog/2025-04/CC_OS_131-2025_2025-04-23.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
-    "date": "2025-04-25",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H01",
-      "C12-H02"
-    ],
-    "source_text": "19.03.2025: DW1 present. Partly cross-examined by counsel for plaintiff. Call on 23.04.2025.\n23.04.2025: DW1 further cross-examined and discharged. Defendants' evidence closed. For arguments, call on 16.07.2025."
-  },
-  {
-    "files": [
-      "backlog/2025-04/sai_court_notes_2025-04-28.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
     "date": "2025-04-28",
     "case_ids": [
-      "C11"
+      "C3"
     ],
-    "hearing_ids": [
-      "C11-H01"
-    ],
-    "source_text": "28 Apr 2025, Mon - court notes (Sai)\n\nBedi permits WP (WP 9921/25) - No court today, judge on leave. Same old story.\n"
+    "source_text": "23.04.2025: Counsel for petitioner heard. Ad-interim order of status quo as on date regarding the suit schedule property till 07.05.2025. Notice to respondent. Petitioner to comply with O.39 R.3 CPC."
   },
   {
     "files": [
-      "backlog/2025-06/IMG_20250609_114741.jpg"
+      "backlog/2025-05/1B_ROR_extract_Sy112-2_Mangamaripeta.jpg"
+    ],
+    "type": "document_scan",
+    "author": "other",
+    "date": "2025-05-02",
+    "case_ids": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "source_text": "GOVERNMENT OF ANDHRA PRADESH - REVENUE DEPARTMENT\nRECORD OF RIGHTS (1-B) - EXTRACT\nDistrict: Visakhapatnam    Mandal: Bheemunipatnam    Village: Mangamaripeta    Khata No.: 1142\nSl. 1 | Sy. No. 112/2 | Pattadar: GORLE RAMESH, S/o Suryanarayana | Extent: Ac. 2.10 | Classification: Dry (Mango/Cashew) | Mutation: Proc. No. B/408/2012 dt. 11.06.2012\nSl. 2 | Sy. No. 112/2 | Pattadar: BANDARU SRINIVAS, S/o Appa Rao | Extent: Ac. 2.10 | Classification: Dry | Mutation: Proc. No. B/408/2012 dt. 11.06.2012\nTotal extent: Ac. 4.20. Enjoyment: Pattadar 1 in possession of the eastern portion with mango trees and a samadhi; Pattadar 2 portion (western) is fallow.\nCertified extract issued on application No. MEE/2025/77812 dated 28.04.2025. Issued on 02.05.2025. Fee paid Rs. 25/-."
+  },
+  {
+    "files": [
+      "backlog/2025-05/Encumbrance_Certificate_2011-2025.jpg"
+    ],
+    "type": "document_scan",
+    "author": "other",
+    "date": "2025-05-02",
+    "case_ids": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "source_text": "REGISTRATION AND STAMPS DEPARTMENT, GOVERNMENT OF ANDHRA PRADESH\nENCUMBRANCE CERTIFICATE (FORM 15)\nEC Application No.: 8812/2025   Period searched: 01.01.2011 to 30.04.2025   Property: Sy. No. 112/2, Mangamaripeta village, Ac. 4.20\n1. Doc. No. 3417/2011, date of registration 02.03.2011, Nature: Sale. Executant: Kakarla Bhaskara Rao. Claimants: (1) Ramesh Gorle (2) Srinivas Bandaru. Consideration Rs. 30,00,000. Extent Ac. 4.20.\nNo other transaction (sale, mortgage, agreement of sale, general power of attorney) is found registered in respect of the above property during the period searched.\nThis certificate is issued on the basis of the index registers; unregistered documents are not reflected. Date of issue: 02.05.2025."
+  },
+  {
+    "files": [
+      "backlog/2025-05/IMG_20250507_133241.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-06-09",
+    "author": "Divya",
+    "date": "2025-05-07",
     "case_ids": [
-      "C01",
-      "C05",
-      "C09"
+      "C3"
     ],
-    "hearing_ids": [
-      "C01-H03",
-      "C05-H01",
-      "C09-H02"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - Our PW1 affidavit filed and documents marked.\n\nDr. Anuradha flat (OS 377/22) - WS filed by Siddiqui. Mostly bare denials. Para 9 takes a new plea we must answer in evidence.\n\nAgarwal / Hanuman Textiles (OS 842/21) - Not reached. Item 63, no chance. Tension ledu."
+    "source_text": "Seabreeze inj - Harsha Vardhan appeared for company. Asked 4 weeks for counter, judge gave 2 and said 'no further time, counsel, your client is a company not a farmer'. Status quo extended."
   },
   {
     "files": [
-      "backlog/2025-06/IMG_20250609_135009.jpg"
+      "backlog/2025-05/IMG_20250514_150443.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-06-09",
+    "author": "Aditya",
+    "date": "2025-05-14",
     "case_ids": [
-      "C10",
-      "C13",
-      "C16"
+      "C1"
     ],
-    "hearing_ids": [
-      "C10-H02",
-      "C13-H02",
-      "C16-H03"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - Judge on leave. Tension ledu.\n\nVadlamani appeal (AS 58/24) - Jadhav sought time - sought time as witness is out of station. Same old story.\n\nRevathi partition (OS 214/23) - Siddiqui sought time - parties are talking settlement, sought time."
+    "source_text": "Gorle partition (OS 214/24) - Harinath asked time for WS AGAIN (3rd time since filing). Padmavathi madam smiled, gave 4 weeks, 'please file by next date, Mr. Harinath.' No costs. She is too kind."
   },
   {
     "files": [
-      "backlog/2025-06/IMG_20250609_145306.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C32",
-      "C34",
-      "C37"
-    ],
-    "hearing_ids": [
-      "C32-H02",
-      "C34-H01",
-      "C37-H01"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - WS filed by Siddiqui. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Doddapaneni madam asked whether parties tried mediation. Again.\n\nAgarwal v Balaji Fabrics (OS 610/25) - No court today, judge on leave. Same old story.\n\nFresh Dairy suit (OS 288/25) - Achary filed vakalat for the other side. They will take time for WS, obviously."
-  },
-  {
-    "files": [
-      "backlog/2025-06/IMG_20250609_145856.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C08",
-      "C33"
-    ],
-    "hearing_ids": [
-      "C08-H01",
-      "C33-H01"
-    ],
-    "source_text": "Pinto society (OS 1127/23) - No court today, judge on leave. Chalo.\n\nPinto pension WP (WP 27730/24) - Baig sought time - consent adjournment, both sides needed time. Bas."
-  },
-  {
-    "files": [
-      "backlog/2025-06/IMG_20250609_152511.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C20",
-      "C29",
-      "C30"
-    ],
-    "hearing_ids": [
-      "C20-H02",
-      "C29-H01",
-      "C30-H01"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - Not reached, long list. Chalo.\n\nSai Balaji DISCOM WP (WP 12577/25) - Admitted, notice ordered. Somayajulu J first asked why we came after 5 months - explained, he accepted. Told the association secretary the next date.\n\nKamala Devi outhouse (OS 95/24) - Achary filed vakalat for the other side. They will take time for WS, obviously."
-  },
-  {
-    "files": [
-      "backlog/2025-06/OS_1415-24_2025-06-09.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C06"
-    ],
-    "hearing_ids": [
-      "C06-H01"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - Not reached, long list. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-06/OS_1650-22_2025-06-09.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C26"
-    ],
-    "hearing_ids": [
-      "C26-H01"
-    ],
-    "source_text": "Balaraju title suit (OS 1650/22) - Issues framed - 4 issues plus relief. Draft PW1 chief affidavit now. Quadri sir took it only after lunch. Told Balaraju garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-06/OS_509-22_2025-06-09.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H02"
-    ],
-    "source_text": "Kandregula contract (OS 509/22) - Not reached. Sare."
-  },
-  {
-    "files": [
-      "backlog/2025-06/court_notes_2025-06-09.txt"
+      "backlog/2025-05/court_notes_2025-05-21.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-06-09",
+    "author": "Divya",
+    "date": "2025-05-21",
     "case_ids": [
-      "C02",
-      "C03"
+      "C3"
     ],
-    "hearing_ids": [
-      "C02-H01",
-      "C03-H02"
-    ],
-    "source_text": "09 Jun 2025, Mon - court notes\n\nKhaja Moinuddin (OS 902/24) - No court today, judge on leave. Sare.\n\nKasoju pronote (OS 655/23) - Bar association boycott, no work. Adjourned. Ayyo.\n"
+    "source_text": "21 May 2025, Wed - court notes (Divya)\n\nSeabreeze inj - counter filed. Para 6 of counter: 'the respondent has not undertaken any construction activity whatsoever on the schedule land; only a survey was conducted.' Sir says keep this line safe. Sir told court we will file rejoinder in 10 days.\n"
   },
   {
     "files": [
-      "backlog/2025-06/sai_court_notes_2025-06-09.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-06-09",
-    "case_ids": [
-      "C17",
-      "C22",
-      "C24"
-    ],
-    "hearing_ids": [
-      "C17-H02",
-      "C22-H01",
-      "C24-H01"
-    ],
-    "source_text": "09 Jun 2025, Mon - court notes (Sai)\n\nRasheed Khan (tenant) (OS 1302/24) - Jadhav sought time - their witness not ready. Ayyo.\n\nFarzana partition (OS 1011/22) - Bar association boycott, no work. Adjourned. Sare.\n\nDeccan Polymers v Arun (OS 488/25) - Not reached. Chalo.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-06/IMG_20250611_133641.jpg"
+      "backlog/2025-06/IMG_20250604_114544.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
+    "date": "2025-06-04",
+    "case_ids": [
+      "C3"
+    ],
+    "source_text": "Seabreeze inj - rejoinder filed 2 June, on time (diary no. 2291). Part heard. Murthy sir wants photos WITH dates - Ramesh's phone photos of the poles, get the originals + print with EXIF date. Harsha argued 'only survey pegs'."
+  },
+  {
+    "files": [
+      "backlog/2025-06/Rental_agreement_Sri_Durga_Tiffins_2021.jpg"
+    ],
+    "type": "document_photo",
+    "author": "other",
+    "date": "2025-06-09",
+    "case_ids": [
+      "C4"
+    ],
+    "source_text": "RENTAL AGREEMENT\nThis rental agreement is made on 01.06.2021 at Visakhapatnam between Smt. Lakshmi Kantham Peddinti, W/o late P. Satyanarayana, D.No. 50-81-9, Dwaraka Nagar (OWNER) and Sri Nagaraju Kotla, S/o K. Appanna (TENANT).\n1. The owner lets out the ground floor shop of D.No. 50-81-9, Dwaraka Nagar, measuring about 220 sq. ft., for running a tiffin centre, for a period of 11 months from 01.06.2021, renewable by mutual consent.\n2. Monthly rent Rs. 18,000/- payable on or before the 5th of every month. Advance Rs. 1,00,000/- paid, refundable on vacating after adjusting dues.\n3. The tenant shall not sublet and shall vacate on one month's notice."
+  },
+  {
+    "files": [
+      "backlog/2025-06/IMG_20250611_103645.jpg"
+    ],
+    "type": "handwritten_note_photo",
+    "author": "Aditya",
     "date": "2025-06-11",
     "case_ids": [
-      "C35"
+      "C2"
     ],
-    "hearing_ids": [
-      "C35-H02"
-    ],
-    "source_text": "Sunitha - builder filed counter + WS. Says 4th floor has GHMC permission dated 2024. Our point: permission is for G+3 only, the 4th floor is over the common staircase. Sunitha garu sent photos - construction still going on."
+    "source_text": "Seabreeze SP - Srinivas's WS filed: he SUPPORTS the company. Says he and Ramesh are 'equal co-owners' and that Ramesh 'orally agreed' at the Novotel meeting in Sept 2024. EQUAL co-owners - note this. Our WS not ready (my fault, Ramesh came late with papers). Murthy sir: 'last opportunity, counsel.'"
   },
   {
     "files": [
-      "backlog/2025-06/WP_14872-25_2025-06-12.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-06-12",
-    "case_ids": [
-      "C23"
-    ],
-    "hearing_ids": [
-      "C23-H01"
-    ],
-    "source_text": "Sai Balaji GHMC WP - admitted, interim suspension for 8 weeks (Pinnamaneni J never gives open-ended interim). Ravi Shankar garu (secretary) very relieved. Must keep extending the interim on every date."
-  },
-  {
-    "files": [
-      "backlog/2025-06/CC_OS_377-22_2025-06-09.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2025-06-13",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H01"
-    ],
-    "source_text": "09.06.2025: Written statement filed on behalf of the defendants. Copy served. For framing of issues, call on 14.07.2025."
-  },
-  {
-    "files": [
-      "backlog/2025-06/CRP_2211-25_2025-06-13.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2025-06-13",
-    "case_ids": [
-      "C04"
-    ],
-    "hearing_ids": [
-      "C04-H01"
-    ],
-    "source_text": "Deccan Polymers CRP (CRP 2211/25) - Not reached - court busy with a part-heard matter. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-06/CC_WP_14872-25_2025-06-12.jpg"
+      "backlog/2025-06/CC_OS_57-2025_2025-06-11.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
     "date": "2025-06-16",
     "case_ids": [
-      "C23"
+      "C2"
     ],
-    "hearing_ids": [
-      "C23-H01"
-    ],
-    "source_text": "12.06.2025: Heard learned counsel for the petitioner. Admit. Notice. Pending further orders, there shall be interim suspension of the impugned notice dated 22.04.2025 for a period of eight weeks. List on 07.08.2025."
+    "source_text": "09.04.2025: D1 and D2 appeared through counsel. Time sought for written statements. For written statements of D1 and D2 on 11.06.2025.\n11.06.2025: Written statement of D1 filed. D2 seeks time for written statement. Time granted as a last opportunity. For written statement of D2 on 09.07.2025."
   },
   {
     "files": [
-      "backlog/2025-06/CMA_640-25_2025-06-16.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-06-16",
-    "case_ids": [
-      "C14"
-    ],
-    "hearing_ids": [
-      "C14-H01"
-    ],
-    "source_text": "Fresh Dairy CMA (CMA 640/25) - We sought time - counsel part-heard in another court."
-  },
-  {
-    "files": [
-      "backlog/2025-06/OS_733-23_2025-06-16.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-06-16",
-    "case_ids": [
-      "C27"
-    ],
-    "hearing_ids": [
-      "C27-H02"
-    ],
-    "source_text": "Vaishnavi v Manikanta (OS 733/23) - Not reached. Nothing new. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2025-06/IMG_20250619_143342.jpg"
+      "backlog/2025-06/IMG_20250616_100444.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-06-19",
+    "author": "Divya",
+    "date": "2025-06-16",
     "case_ids": [
-      "C21"
+      "C5"
     ],
-    "hearing_ids": [
-      "C21-H01"
-    ],
-    "source_text": "Balaraju CRP (CRP 1874/25) - Not reached. Item 48, no chance. Bas."
+    "source_text": "Greenfield school (OS 88/25) - Bhaskar for school. Time for WS."
   },
   {
     "files": [
-      "backlog/2025-06/OS_1198-23_2025-06-23.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-06-23",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H01"
-    ],
-    "source_text": "Bedi accounts (OS 1198/23) - Not reached, long list."
-  },
-  {
-    "files": [
-      "backlog/2025-06/court_notes_2025-06-23.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-06-23",
-    "case_ids": [
-      "C39"
-    ],
-    "hearing_ids": [
-      "C39-H01"
-    ],
-    "source_text": "23 Jun 2025, Mon - court notes\n\nUppal temple land (OS 1433/23) - Not reached. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-06/IMG_20250625_122652.jpg"
+      "backlog/2025-06/IMG_20250618_120123.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
+    "author": "Aditya",
+    "date": "2025-06-18",
+    "case_ids": [
+      "C3"
+    ],
+    "source_text": "Seabreeze inj - WON the IA!! Temp injunction till disposal. Judge said the photos dated 14.04.2025 show fencing poles, not survey pegs. Called Ramesh garu, he cried on the phone. Harsha will appeal? Watch for CMA."
+  },
+  {
+    "files": [
+      "backlog/2025-06/CC_OS_131-2025_2025-06-18.jpg"
+    ],
+    "type": "certified_order_sheet_scan",
+    "author": "court",
+    "date": "2025-06-20",
+    "case_ids": [
+      "C3"
+    ],
+    "source_text": "07.05.2025: Respondent appeared through counsel. Time sought for counter. Two weeks granted, no further time. Status quo to continue till 21.05.2025.\n21.05.2025: Counter filed by respondent. Petitioner to file rejoinder, if any. Status quo to continue till 04.06.2025.\n04.06.2025: Rejoinder filed on 02.06.2025. Arguments of both sides heard in part. Petitioner to produce photographs with dates. Status quo to continue. Call on 18.06.2025.\n18.06.2025: I.A. No. 612 of 2025 allowed. Respondent, its men and agents restrained from making any construction or erecting any fencing in the petition schedule property pending disposal of the suit. Suit posted for written statement on 06.08.2025."
+  },
+  {
+    "files": [
+      "backlog/2025-06/IMG_20250625_123448.jpg"
+    ],
+    "type": "handwritten_note_photo",
+    "author": "Aditya",
     "date": "2025-06-25",
     "case_ids": [
-      "C07"
+      "C1"
     ],
-    "hearing_ids": [
-      "C07-H03"
-    ],
-    "source_text": "Tadepalli - not reached. PW2 Narsing Rao came and waited till 4.30, poor man. Paid his auto fare. Told him we will call a day before next date."
+    "source_text": "Gorle partition - Srinivas's WS: claims 70% share - says he paid Rs 21 lakh and Ramesh only Rs 9 lakh in 2011. Says the 2016 letter was 'only for family peace' and not binding. Ramesh says each paid 15 lakh - his SBI Dwaraka Nagar statement of 2011 will show the transfer. Get it."
   },
   {
     "files": [
-      "backlog/2025-06/sai_court_notes_2025-06-30.txt"
+      "backlog/2025-06/CC_OS_214-2024_2025-06-25.jpg"
     ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-06-30",
+    "type": "certified_order_sheet_scan",
+    "author": "court",
+    "date": "2025-06-26",
     "case_ids": [
-      "C11"
+      "C1"
     ],
-    "hearing_ids": [
-      "C11-H02"
-    ],
-    "source_text": "30 Jun 2025, Mon - court notes (Sai)\n\nBedi permits WP (WP 9921/25) - Ravuri sought time - sought time to file written submissions on maintainability.\n"
+    "source_text": "14.05.2025: Counsel for defendant seeks time for written statement. Four weeks granted. For written statement on 25.06.2025.\n25.06.2025: Written statement filed by defendant. For framing of issues on 13.08.2025."
   },
   {
     "files": [
-      "backlog/2025-07/IMG_20250702_173432.jpg"
+      "backlog/2025-07/IMG_20250702_194659.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-07-02",
     "case_ids": [
-      "C19"
+      "C4"
     ],
-    "hearing_ids": [
-      "C19-H02"
-    ],
-    "source_text": "Kamala Devi - filed our commissioner IA. Jadhav sought time for PW1 affidavit - 'client out of station'. 1st time from their side. Harsha (son) drove Kamala amma here, she sat in the corridor 3 hours. Must tell them she need not come unless I call."
+    "source_text": "Tiffin centre (OS 302/25) - Sundari madam for tenant Nagaraju. Time for WS."
   },
   {
     "files": [
-      "backlog/2025-07/AS_112-25_2025-07-07.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2025-07-07",
-    "case_ids": [
-      "C36"
-    ],
-    "hearing_ids": [
-      "C36-H01"
-    ],
-    "source_text": "Farzana eviction appeal (AS 112/25) - Not reached. Nothing new. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250707_142513.jpg"
+      "backlog/2025-07/IMG_20250709_192051.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-07",
-    "case_ids": [
-      "C34"
-    ],
-    "hearing_ids": [
-      "C34-H02"
-    ],
-    "source_text": "Agarwal v Balaji Fabrics (OS 610/25) - Gundlapalli sought time - filed a fresh I.A. yesterday and wants time to argue it. Prakash garu asked how long this will go on. Sare."
-  },
-  {
-    "files": [
-      "backlog/2025-07/court_notes_2025-07-07.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-07-07",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H03"
-    ],
-    "source_text": "07 Jul 2025, Mon - court notes\n\nRasheed Khan (tenant) (OS 1302/24) - Jadhav filed vakalat for the other side. They will take time for WS, obviously.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/sai_court_notes_2025-07-09.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
+    "author": "Aditya",
     "date": "2025-07-09",
     "case_ids": [
-      "C03"
+      "C2"
     ],
-    "hearing_ids": [
-      "C03-H03"
-    ],
-    "source_text": "09 Jul 2025, Wed - court notes (Sai)\n\nKasoju pronote (OS 655/23) - Bar association boycott, no work. Adjourned.\n"
+    "source_text": "Seabreeze SP - our WS filed (denies agreement, no GPA ever given, 2016 letter of understanding). Harsha dumped 14 documents on the table without a list - Murthy sir refused to receive them and put Rs 2,000 costs on the company, payable to Ramesh! 'File properly, with an index, and serve copies.'"
   },
   {
     "files": [
-      "backlog/2025-07/IMG_20250710_175645.jpg"
+      "backlog/2025-07/IMG_20250728_154647.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-10",
-    "case_ids": [
-      "C20"
-    ],
-    "hearing_ids": [
-      "C20-H03"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - WS filed by Sarma. Mostly bare denials. Para 9 takes a new plea we must answer in evidence."
-  },
-  {
-    "files": [
-      "backlog/2025-07/sai_court_notes_2025-07-10.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-07-10",
-    "case_ids": [
-      "C15"
-    ],
-    "hearing_ids": [
-      "C15-H02"
-    ],
-    "source_text": "10 Jul 2025, Thu - court notes (Sai)\n\nUppal temple WP (WP 3310/25) - We sought time - client unwell.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/AS_58-24_2025-07-11.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-07-11",
-    "case_ids": [
-      "C13"
-    ],
-    "hearing_ids": [
-      "C13-H03"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - Jadhav sought time - their witness not ready."
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250711_131739.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-11",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H02"
-    ],
-    "source_text": "Kamala Devi outhouse (OS 95/24) - Not reached. Item 47, no chance. Sare."
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250714_154114.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-14",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H03"
-    ],
-    "source_text": "Agarwal / Hanuman Textiles (OS 842/21) - Bar association boycott, no work. Adjourned. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2025-07/court_notes_2025-07-14.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-07-14",
-    "case_ids": [
-      "C05",
-      "C18"
-    ],
-    "hearing_ids": [
-      "C05-H02",
-      "C18-H03"
-    ],
-    "source_text": "14 Jul 2025, Mon - court notes\n\nDr. Anuradha flat (OS 377/22) - Bar association boycott, no work. Adjourned.\n\nKandregula contract (OS 509/22) - Baig filed vakalat for the other side. They will take time for WS, obviously. IV ACJ started 10.30 sharp, called the list twice before lunch.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250715_164703.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-15",
-    "case_ids": [
-      "C06"
-    ],
-    "hearing_ids": [
-      "C06-H02"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - Kolluru filed vakalat for the other side. They will take time for WS, obviously. Doddapaneni madam asked whether parties tried mediation. Again."
-  },
-  {
-    "files": [
-      "backlog/2025-07/court_notes_2025-07-16.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-07-16",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H03"
-    ],
-    "source_text": "16 Jul 2025, Wed - court notes\n\nLakshmi Ganapathi - Achary 'unwell', memo through junior. First time in this case. Srinivas garu's accountant had come all the way from Siddipet.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250717_163214.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-17",
-    "case_ids": [
-      "C31"
-    ],
-    "hearing_ids": [
-      "C31-H02"
-    ],
-    "source_text": "Gudivada v Kasoju (OS 764/20) - Jadhav sought time for PW1 affidavit. Kasoju garu says the plaintiff has been telling people in the colony that he 'got possession only after the old tenant left' - remember this."
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250722_124013.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-22",
-    "case_ids": [
-      "C16",
-      "C33"
-    ],
-    "hearing_ids": [
-      "C16-H04",
-      "C33-H02"
-    ],
-    "source_text": "Revathi partition (OS 214/23) - Siddiqui sought time - parties are talking settlement, sought time.\n\nPinto pension WP (WP 27730/24) - We sought time - client unwell. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-07/court_notes_2025-07-22.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-07-22",
-    "case_ids": [
-      "C10"
-    ],
-    "hearing_ids": [
-      "C10-H03"
-    ],
-    "source_text": "22 Jul 2025, Tue - court notes\n\nGreenfield park WP (WP 18342/24) - Admitted, notice ordered. Told the association secretary the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250723_145953.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-23",
-    "case_ids": [
-      "C22"
-    ],
-    "hearing_ids": [
-      "C22-H02"
-    ],
-    "source_text": "Farzana partition (OS 1011/22) - Kolluru filed vakalat for the other side. They will take time for WS, obviously. Told Farzana amma the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-07/sai_court_notes_2025-07-23.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-07-23",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H02"
-    ],
-    "source_text": "23 Jul 2025, Wed - court notes (Sai)\n\nFresh Dairy suit (OS 288/25) - No court today, judge on leave.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/sai_court_notes_2025-07-25.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-07-25",
-    "case_ids": [
-      "C08"
-    ],
-    "hearing_ids": [
-      "C08-H02"
-    ],
-    "source_text": "25 Jul 2025, Fri - court notes (Sai)\n\nPinto society (OS 1127/23) - Not reached. Item 30, no chance.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250728_134324.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-07-28",
     "case_ids": [
-      "C02",
-      "C04"
+      "C5"
     ],
-    "hearing_ids": [
-      "C02-H02",
-      "C04-H02"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - Not reached - court busy with a part-heard matter. Sare.\n\nDeccan Polymers CRP (CRP 2211/25) - Not reached. Item 55, no chance."
+    "source_text": "Greenfield - WS not filed. Bhaskar's junior said sir is unwell. Murthy sir: 'positively by next date.'"
   },
   {
     "files": [
-      "backlog/2025-07/OS_1433-23_2025-07-28.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2025-07-28",
-    "case_ids": [
-      "C39"
-    ],
-    "hearing_ids": [
-      "C39-H02"
-    ],
-    "source_text": "Uppal temple land (OS 1433/23) - Not reached. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-07/IMG_20250730_150126.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-07-30",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H03"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Not reached, long list."
-  },
-  {
-    "files": [
-      "backlog/2025-07/OS_318-22_2025-07-30.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-07-30",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H04"
-    ],
-    "source_text": "Tadepalli - PW2 done, judge recorded it the same day even though it went till 5.15. Achary's cross of PW2 was short, only asked if he read the agreement before signing. Plaintiff evidence closed. Now DW1 chief affidavit has to come from their side. Told Gopal garu it will still take some months."
-  },
-  {
-    "files": [
-      "backlog/2025-07/CC_OS_318-22_2025-07-30.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2025-08-04",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H01",
-      "C07-H02",
-      "C07-H03",
-      "C07-H04"
-    ],
-    "source_text": "12.03.2025: PW1 present. Partly cross-examined by counsel for defendants. For further cross-examination, call on 16.04.2025.\n16.04.2025: PW1 further cross-examined and discharged. Plaintiff to take steps for PW2. Call on 25.06.2025.\n25.06.2025: Not reached. Call on 30.07.2025.\n30.07.2025: PW2 examined in chief. Cross-examined by counsel for defendants. Discharged. Plaintiff's evidence closed. For defendants' evidence, call on 10.09.2025."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250804_124950.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-08-04",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H02"
-    ],
-    "source_text": "Deccan Polymers v Arun (OS 488/25) - Siddiqui filed vakalat for the other side. They will take time for WS, obviously."
-  },
-  {
-    "files": [
-      "backlog/2025-08/court_notes_2025-08-04.txt"
+      "backlog/2025-08/court_notes_2025-08-06.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-08-04",
+    "author": "Divya",
+    "date": "2025-08-06",
     "case_ids": [
-      "C27"
+      "C3"
     ],
-    "hearing_ids": [
-      "C27-H03"
-    ],
-    "source_text": "04 Aug 2025, Mon - court notes\n\nVaishnavi v Manikanta (OS 733/23) - Our PW1 affidavit filed and documents marked. Told the client's office the next date.\n"
+    "source_text": "06 Aug 2025, Wed - court notes (Divya)\n\nSeabreeze inj - WS filed. No CMA against the IA order so far (checked at CMA section). For issues.\n"
   },
   {
     "files": [
-      "backlog/2025-08/OS_1180-21_2025-08-05.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-08-05",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H04"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - Ravuri cross-examined our PW1 for 40 min. Client held up mostly, one wobble on dates. Doddapaneni madam asked whether parties tried mediation. Again. Told Parvathamma amma the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250807_150848.jpg"
+      "backlog/2025-08/IMG_20250813_141510.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-08-07",
-    "case_ids": [
-      "C23"
-    ],
-    "hearing_ids": [
-      "C23-H02"
-    ],
-    "source_text": "Sai Balaji WP - GHMC SC (Hemalatha Ravuri) sought time for counter. Interim extended 8 weeks. Fine."
-  },
-  {
-    "files": [
-      "backlog/2025-08/sai_court_notes_2025-08-11.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-08-11",
-    "case_ids": [
-      "C26",
-      "C36"
-    ],
-    "hearing_ids": [
-      "C26-H02",
-      "C36-H02"
-    ],
-    "source_text": "11 Aug 2025, Mon - court notes (Sai)\n\nBalaraju title suit (OS 1650/22) - Siddiqui sought time - parties are talking settlement, sought time. Balaraju garu was not happy. Chalo.\n\nFarzana eviction appeal (AS 112/25) - Jadhav sought time - sought time as witness is out of station. Farzana amma wanted to know if we can object. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-08/court_notes_2025-08-13.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-08-13",
     "case_ids": [
-      "C35"
+      "C1"
     ],
-    "hearing_ids": [
-      "C35-H03"
-    ],
-    "source_text": "13 Aug 2025, Wed - court notes\n\nSunitha - argued IA for 30 min. Madam asked for the sanctioned plan - builder's counsel said he will produce.\n"
+    "source_text": "Gorle partition - madam talked to both parties directly. 'You were school friends, sit together once.' Referred to mediation. Ramesh agreed, Srinivas reluctant."
   },
   {
     "files": [
-      "backlog/2025-08/IMG_20250818_124155.jpg"
+      "backlog/2025-08/IMG_20250820_153644.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-08-18",
-    "case_ids": [
-      "C05",
-      "C13",
-      "C29"
-    ],
-    "hearing_ids": [
-      "C05-H03",
-      "C13-H04",
-      "C29-H02"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Judge on leave.\n\nVadlamani appeal (AS 58/24) - Admitted, notice ordered.\n\nSai Balaji DISCOM WP (WP 12577/25) - We sought time - client unwell. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250818_125435.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-08-18",
-    "case_ids": [
-      "C21"
-    ],
-    "hearing_ids": [
-      "C21-H02"
-    ],
-    "source_text": "Balaraju CRP (CRP 1874/25) - Bar association boycott, no work. Adjourned. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250818_134619.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-08-18",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H03"
-    ],
-    "source_text": "Kamala Devi outhouse (OS 95/24) - WS filed by Achary. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Quadri sir wanted exact exhibit numbers, not descriptions. Told Kamala amma the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-08/sai_court_notes_2025-08-18.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-08-18",
-    "case_ids": [
-      "C34"
-    ],
-    "hearing_ids": [
-      "C34-H03"
-    ],
-    "source_text": "18 Aug 2025, Mon - court notes (Sai)\n\nAgarwal v Balaji Fabrics (OS 610/25) - No court today, judge on leave. Sare.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-08/OS_227-24_2025-08-20.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2025-08-20",
     "case_ids": [
-      "C19"
+      "C4"
     ],
-    "hearing_ids": [
-      "C19-H03"
-    ],
-    "source_text": "Kamala Devi - commissioner IA allowed!! Anand Kumar appointed with surveyor. Jadhav objected loudly but judge said 'measurement will help both sides'. Coordinate with Anand Kumar for site visit date."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250821_170856.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-08-21",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H04"
-    ],
-    "source_text": "Rasheed Khan (tenant) (OS 1302/24) - Jadhav sought time - sought time as witness is out of station. Sare."
-  },
-  {
-    "files": [
-      "backlog/2025-08/CC_OS_95-24_2025-08-18.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2025-08-22",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H01",
-      "C30-H02",
-      "C30-H03"
-    ],
-    "source_text": "09.06.2025: Defendants served. Vakalat filed for defendants by Sri/Smt. Achary. For written statement, call on 11.07.2025.\n11.07.2025: Not reached. Call on 18.08.2025.\n18.08.2025: Written statement filed on behalf of the defendants. Copy served. For framing of issues, call on 06.10.2025."
-  },
-  {
-    "files": [
-      "backlog/2025-08/OS_509-22_2025-08-22.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-08-22",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H04"
-    ],
-    "source_text": "Kandregula contract (OS 509/22) - WS filed by Baig. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Told Suresh garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-08/CC_OS_227-24_2025-08-20.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C19"
-    ],
-    "hearing_ids": [
-      "C19-H01",
-      "C19-H02",
-      "C19-H03"
-    ],
-    "source_text": "26.03.2025: Issues framed. For plaintiff's evidence, call on 02.07.2025.\n02.07.2025: I.A. No. 1320 of 2025 filed by defendant for appointment of advocate commissioner. Notice. Counsel for plaintiff seeks time to file chief-examination affidavit of PW1. Granted. Call on 20.08.2025.\n20.08.2025: I.A. No. 1320 of 2025 allowed. Sri K. Anand Kumar, Advocate, appointed as Advocate Commissioner to measure the boundary with the help of a licensed surveyor and file report. Plaintiff's evidence after report. Call on 29.10.2025."
-  },
-  {
-    "files": [
-      "backlog/2025-08/CMA_1181-25_2025-08-25.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C38"
-    ],
-    "hearing_ids": [
-      "C38-H01"
-    ],
-    "source_text": "Yarlagadda CMA (CMA 1181/25) - Admitted, notice ordered. Pinnamaneni J extended interim only till next date, never 'until further orders'."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250825_141105.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C15"
-    ],
-    "hearing_ids": [
-      "C15-H03"
-    ],
-    "source_text": "Uppal temple WP (WP 3310/25) - Sarma sought time - senior counsel busy in another court."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250825_161734.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H02"
-    ],
-    "source_text": "Bedi accounts (OS 1198/23) - Kolluru filed vakalat for the other side. They will take time for WS, obviously. Told Harpreet garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-08/OS_902-24_2025-08-25.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C02"
-    ],
-    "hearing_ids": [
-      "C02-H03"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - Not reached - court busy with a part-heard matter."
-  },
-  {
-    "files": [
-      "backlog/2025-08/court_notes_2025-08-25.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C03",
-      "C22"
-    ],
-    "hearing_ids": [
-      "C03-H04",
-      "C22-H03"
-    ],
-    "source_text": "25 Aug 2025, Mon - court notes\n\nKasoju pronote (OS 655/23) - Gundlapalli sought time - filed a fresh I.A. yesterday and wants time to argue it. Same old story.\n\nFarzana partition (OS 1011/22) - WS filed by Kolluru. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Told Farzana amma the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-08/sai_court_notes_2025-08-25.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-08-25",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H03"
-    ],
-    "source_text": "25 Aug 2025, Mon - court notes (Sai)\n\nFresh Dairy suit (OS 288/25) - Bar association boycott, no work. Adjourned. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-08/WP_18342-24_2025-08-26.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-08-26",
-    "case_ids": [
-      "C10"
-    ],
-    "hearing_ids": [
-      "C10-H04"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - Not reached. Nothing new."
-  },
-  {
-    "files": [
-      "backlog/2025-08/IMG_20250828_134607.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-08-28",
-    "case_ids": [
-      "C11"
-    ],
-    "hearing_ids": [
-      "C11-H03"
-    ],
-    "source_text": "Bedi permits WP (WP 9921/25) - Not reached. Nothing new. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250901_175841.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-09-01",
-    "case_ids": [
-      "C20",
-      "C39"
-    ],
-    "hearing_ids": [
-      "C20-H04",
-      "C39-H03"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - Judge on leave. Wasted morning. Same old story.\n\nUppal temple land (OS 1433/23) - Gundlapalli filed vakalat for the other side. They will take time for WS, obviously."
+    "source_text": "Tiffin centre - WS: tenant says landlady refused to accept rent after March 2024, will deposit. Padmavathi madam directed deposit of arrears in 8 weeks. Lakshmi garu upset it's not immediate eviction - explained."
   },
   {
     "files": [
       "backlog/2025-09/court_notes_2025-09-03.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-09-03",
     "case_ids": [
-      "C14"
+      "C2"
     ],
-    "hearing_ids": [
-      "C14-H02"
-    ],
-    "source_text": "03 Sep 2025, Wed - court notes\n\nFresh Dairy CMA (CMA 640/25) - Judge on leave.\n"
+    "source_text": "03 Sep 2025, Wed - court notes (Divya)\n\nSeabreeze SP - company refiled documents properly with list. Costs Rs 2,000 paid to us by DD (handed over to Ramesh garu). For issues.\n"
   },
   {
     "files": [
-      "backlog/2025-09/sai_court_notes_2025-09-03.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-09-03",
-    "case_ids": [
-      "C27"
-    ],
-    "hearing_ids": [
-      "C27-H04"
-    ],
-    "source_text": "03 Sep 2025, Wed - court notes (Sai)\n\nVaishnavi v Manikanta (OS 733/23) - Achary sought time - counsel held up in High Court.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-09/OS_1066-24_2025-09-04.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-09-04",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H04"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Siddiqui sought time - parties are talking settlement, sought time. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250908_110511.jpg"
+      "backlog/2025-09/IMG_20250908_103520.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
+    "author": "Aditya",
     "date": "2025-09-08",
     "case_ids": [
-      "C09"
+      "C5"
     ],
-    "hearing_ids": [
-      "C09-H04"
-    ],
-    "source_text": "Agarwal / Hanuman Textiles (OS 842/21) - Gundlapalli sought time - filed a fresh I.A. yesterday and wants time to argue it."
+    "source_text": "Greenfield - WS filed late with delay petition; Murthy sir condoned delay but Rs 1,000 costs to us. WS says books had 'printing defects', but they never returned a single book!"
   },
   {
     "files": [
-      "backlog/2025-09/IMG_20250908_143719.jpg"
+      "backlog/2025-09/CC_OS_88-2025_2025-09-08.jpg"
     ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-09-08",
-    "case_ids": [
-      "C16",
-      "C25"
-    ],
-    "hearing_ids": [
-      "C16-H05",
-      "C25-H01"
-    ],
-    "source_text": "Revathi partition (OS 214/23) - Siddiqui filed vakalat for the other side. They will take time for WS, obviously. Quadri sir wanted exact exhibit numbers, not descriptions.\n\nVijaya Durga SRO WP (WP 22019/25) - Not reached. Nothing new. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250909_153848.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
+    "type": "certified_order_sheet_scan",
+    "author": "court",
     "date": "2025-09-09",
     "case_ids": [
-      "C08"
+      "C5"
     ],
-    "hearing_ids": [
-      "C08-H03"
-    ],
-    "source_text": "Pinto society (OS 1127/23) - Not reached, long list. Bas."
+    "source_text": "16.06.2025: Defendant appeared through counsel. Time for written statement. For written statement on 28.07.2025.\n28.07.2025: Written statement not filed. Time sought. Adjourned with a direction to file the written statement positively by the next date. For written statement on 08.09.2025.\n08.09.2025: Written statement filed with a petition to condone delay. Delay condoned subject to costs of Rs. 1,000 payable to plaintiff. For framing of issues on 03.11.2025."
   },
   {
     "files": [
-      "backlog/2025-09/sai_court_notes_2025-09-10.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-09-10",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H05"
-    ],
-    "source_text": "10 Sep 2025, Wed - court notes (Sai)\n\nTadepalli - judge on leave. Nothing.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250911_134402.jpg"
+      "backlog/2025-09/IMG_20250917_143935.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-09-11",
-    "case_ids": [
-      "C06"
-    ],
-    "hearing_ids": [
-      "C06-H03"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - Not reached. Nothing new. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-09/OS_1650-22_2025-09-15.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-09-15",
-    "case_ids": [
-      "C26"
-    ],
-    "hearing_ids": [
-      "C26-H03"
-    ],
-    "source_text": "Balaraju title suit (OS 1650/22) - Siddiqui sought time - parties are talking settlement, sought time."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250917_132920.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-09-17",
     "case_ids": [
-      "C04"
+      "C3"
     ],
-    "hearing_ids": [
-      "C04-H03"
-    ],
-    "source_text": "Deccan Polymers CRP (CRP 2211/25) - We sought time - counsel part-heard in another court."
+    "source_text": "Seabreeze inj - issues framed (4 issues). Our list of witnesses within 15 days - due 2 Oct. Witnesses: Ramesh, VRO Appala Naidu (summons), neighbour Sanyasi Rao."
   },
   {
     "files": [
-      "backlog/2025-09/IMG_20250922_132116.jpg"
+      "backlog/2025-10/Mediation_failure_report_OS214-2024.jpg"
     ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-09-22",
-    "case_ids": [
-      "C29"
-    ],
-    "hearing_ids": [
-      "C29-H03"
-    ],
-    "source_text": "Sai Balaji DISCOM WP (WP 12577/25) - Not reached - court busy with a part-heard matter. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-09/OS_610-25_2025-09-22.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-09-22",
-    "case_ids": [
-      "C34"
-    ],
-    "hearing_ids": [
-      "C34-H04"
-    ],
-    "source_text": "Agarwal v Balaji Fabrics (OS 610/25) - Gundlapalli filed vakalat for the other side. They will take time for WS, obviously. Told Prakash garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250923_114539.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-09-23",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H04"
-    ],
-    "source_text": "Fresh Dairy suit (OS 288/25) - Not reached. Nothing new."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250924_145538.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-09-24",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H04"
-    ],
-    "source_text": "Lakshmi Ganapathi - not reached."
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250924_152013.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-09-24",
-    "case_ids": [
-      "C22"
-    ],
-    "hearing_ids": [
-      "C22-H04"
-    ],
-    "source_text": "Farzana partition (OS 1011/22) - No court today, judge on leave. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2025-09/sai_court_notes_2025-09-24.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-09-24",
-    "case_ids": [
-      "C33"
-    ],
-    "hearing_ids": [
-      "C33-H03"
-    ],
-    "source_text": "24 Sep 2025, Wed - court notes (Sai)\n\nPinto pension WP (WP 27730/24) - Bar association boycott, no work. Adjourned. Sare.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-09/IMG_20250926_170413.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-09-26",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H03"
-    ],
-    "source_text": "Deccan Polymers v Arun (OS 488/25) - Not reached. Nothing new. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251006_110015.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-10-06",
-    "case_ids": [
-      "C01",
-      "C13",
-      "C30"
-    ],
-    "hearing_ids": [
-      "C01-H05",
-      "C13-H05",
-      "C30-H04"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. Parvathamma amma wanted to know if we can object. Ayyo.\n\nVadlamani appeal (AS 58/24) - Not reached - court busy with a part-heard matter. Ayyo.\n\nKamala Devi outhouse (OS 95/24) - Achary sought time - counsel unwell, memo filed by junior. Kamala amma was not happy. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251006_123937.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-10-06",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H05"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - We sought time - counsel part-heard in another court."
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251006_134025.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-10-06",
-    "case_ids": [
-      "C02"
-    ],
-    "hearing_ids": [
-      "C02-H04"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - Not reached. Nothing new."
-  },
-  {
-    "files": [
-      "backlog/2025-10/OS_377-22_2025-10-06.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-10-06",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H04"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Issues framed - 3 issues plus relief. Draft PW1 chief affidavit now. Quadri sir wanted exact exhibit numbers, not descriptions."
-  },
-  {
-    "files": [
-      "backlog/2025-10/sai_court_notes_2025-10-06.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-10-06",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H03"
-    ],
-    "source_text": "06 Oct 2025, Mon - court notes (Sai)\n\nBedi accounts (OS 1198/23) - Not reached. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-10/sai_court_notes_2025-10-08.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
+    "type": "document_scan",
+    "author": "other",
     "date": "2025-10-08",
     "case_ids": [
-      "C23"
+      "C1"
     ],
-    "hearing_ids": [
-      "C23-H03"
-    ],
-    "source_text": "08 Oct 2025, Wed - court notes (Sai)\n\nSai Balaji WP - still no counter. Interim extended. Pinnamaneni J told SC 'this is the last time without counter'.\n"
+    "source_text": "MEDIATION CENTRE, DISTRICT COURT, VISAKHAPATNAM\nREPORT OF THE MEDIATOR\nCase: O.S. No. 214 of 2024 on the file of the II Additional Senior Civil Judge, Visakhapatnam. Ramesh Gorle vs Srinivas Bandaru.\nReferred on: 13.08.2025. Sessions held: 26.08.2025, 09.09.2025, 23.09.2025. Both parties attended with counsel.\nResult: FAILED. The defendant insists that the entire property be sold to a third party and proceeds divided. The plaintiff is not willing to sell any part of the property under any circumstances. The parties could not agree even on a division by metes and bounds.\nThe matter is returned to the referral court for adjudication."
   },
   {
     "files": [
-      "backlog/2025-10/court_notes_2025-10-13.txt"
+      "backlog/2025-10/court_notes_2025-10-08.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-10-13",
+    "author": "Divya",
+    "date": "2025-10-08",
     "case_ids": [
-      "C36"
+      "C1"
     ],
-    "hearing_ids": [
-      "C36-H03"
-    ],
-    "source_text": "13 Oct 2025, Mon - court notes\n\nFarzana eviction appeal (AS 112/25) - Not reached. Item 40, no chance.\n"
+    "source_text": "08 Oct 2025, Wed - court notes (Divya)\n\nGorle partition - mediation failed. Mediator's note: 'D wants the entire property sold to a third party; P not willing to sell under any circumstances.' Madam said 'Sad, two old friends. Let us proceed then.'\n"
   },
   {
     "files": [
-      "backlog/2025-10/court_notes_2025-10-14.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-10-14",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H05"
-    ],
-    "source_text": "14 Oct 2025, Tue - court notes\n\nRasheed Khan (tenant) (OS 1302/24) - Our WS filed today, copy served on Jadhav in court. Tummala madam checked vakalat and service first, as usual.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251015_135125.jpg"
+      "backlog/2025-10/IMG_20251015_152328.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-10-15",
     "case_ids": [
-      "C18",
-      "C35"
+      "C2"
     ],
-    "hearing_ids": [
-      "C18-H05",
-      "C35-H04"
-    ],
-    "source_text": "Kandregula contract (OS 509/22) - Bar association boycott, no work. Adjourned. Chalo.\n\nSunitha - our additional documents returned because index page numbers didn't match (Tummala madam is strict on this). My fault, Sai fix it. Builder still hasn't produced the plan."
+    "source_text": "Seabreeze SP - issues framed. Issue 3: 'Whether D1 had authority to agree to sell the share of D2?' Sir happy with this issue."
   },
   {
     "files": [
-      "backlog/2025-10/IMG_20251021_171825.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-10-21",
-    "case_ids": [
-      "C03"
-    ],
-    "hearing_ids": [
-      "C03-H05"
-    ],
-    "source_text": "Kasoju pronote (OS 655/23) - Gundlapalli cross-examined our PW1 for 40 min. Client held up mostly, one wobble on dates."
-  },
-  {
-    "files": [
-      "backlog/2025-10/court_notes_2025-10-21.txt"
+      "backlog/2025-10/court_notes_2025-10-29.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-10-21",
-    "case_ids": [
-      "C10",
-      "C14"
-    ],
-    "hearing_ids": [
-      "C10-H05",
-      "C14-H03"
-    ],
-    "source_text": "21 Oct 2025, Tue - court notes\n\nGreenfield park WP (WP 18342/24) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. the association secretary was not happy. Ayyo.\n\nFresh Dairy CMA (CMA 640/25) - Achary sought time - counsel unwell, memo filed by junior. Bas.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251022_165747.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-10-22",
-    "case_ids": [
-      "C06"
-    ],
-    "hearing_ids": [
-      "C06-H04"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - WS filed by Kolluru. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Madam suggested mediation centre - client not keen."
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251024_113806.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-10-24",
-    "case_ids": [
-      "C38"
-    ],
-    "hearing_ids": [
-      "C38-H02"
-    ],
-    "source_text": "Yarlagadda CMA (CMA 1181/25) - We sought time - counsel part-heard in another court."
-  },
-  {
-    "files": [
-      "backlog/2025-10/OS_288-25_2025-10-24.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2025-10-24",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H05"
-    ],
-    "source_text": "Fresh Dairy suit (OS 288/25) - Achary sought time - counsel unwell, memo filed by junior. the client's office asked how long this will go on. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2025-10/OS_733-23_2025-10-27.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-10-27",
-    "case_ids": [
-      "C27"
-    ],
-    "hearing_ids": [
-      "C27-H05"
-    ],
-    "source_text": "Vaishnavi v Manikanta (OS 733/23) - Achary sought time - counsel unwell, memo filed by junior. Bas."
-  },
-  {
-    "files": [
-      "backlog/2025-10/WP_12577-25_2025-10-27.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-10-27",
-    "case_ids": [
-      "C29"
-    ],
-    "hearing_ids": [
-      "C29-H04"
-    ],
-    "source_text": "Sai Balaji DISCOM WP (WP 12577/25) - Baig sought time - sought one week for instructions, fair enough. the association secretary was not happy. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-10/sai_court_notes_2025-10-27.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-10-27",
-    "case_ids": [
-      "C16"
-    ],
-    "hearing_ids": [
-      "C16-H06"
-    ],
-    "source_text": "27 Oct 2025, Mon - court notes (Sai)\n\nRevathi partition (OS 214/23) - Not reached. Item 46, no chance. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-10/court_notes_2025-10-28.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-10-28",
-    "case_ids": [
-      "C22",
-      "C39"
-    ],
-    "hearing_ids": [
-      "C22-H05",
-      "C39-H04"
-    ],
-    "source_text": "28 Oct 2025, Tue - court notes\n\nFarzana partition (OS 1011/22) - Issues framed - 4 issues plus relief. Draft PW1 chief affidavit now. Quadri sir took it only after lunch.\n\nUppal temple land (OS 1433/23) - WS filed by Gundlapalli. Mostly bare denials. Para 9 takes a new plea we must answer in evidence.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-10/IMG_20251029_154407.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-10-29",
     "case_ids": [
-      "C19",
-      "C21"
+      "C4"
     ],
-    "hearing_ids": [
-      "C19-H04",
-      "C21-H03"
-    ],
-    "source_text": "Kamala Devi - commissioner report filed. Wall is within our boundary except a 4 inch deviation at the rear corner. That is huge for us - plaintiff claimed 3 FEET. Jadhav will file objections.\n\nBalaraju CRP (CRP 1874/25) - Gundlapalli sought time - sought time to file objections to marking of documents. Balaraju garu wanted to know if we can object. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2025-10/court_notes_2025-10-30.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-10-30",
-    "case_ids": [
-      "C04"
-    ],
-    "hearing_ids": [
-      "C04-H04"
-    ],
-    "source_text": "30 Oct 2025, Thu - court notes\n\nDeccan Polymers CRP (CRP 2211/25) - Judge on leave. Wasted morning. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251103_123345.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-11-03",
-    "case_ids": [
-      "C26"
-    ],
-    "hearing_ids": [
-      "C26-H04"
-    ],
-    "source_text": "Balaraju title suit (OS 1650/22) - Not reached. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-11/OS_1127-23_2025-11-03.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-03",
-    "case_ids": [
-      "C08"
-    ],
-    "hearing_ids": [
-      "C08-H04"
-    ],
-    "source_text": "Pinto society (OS 1127/23) - Baig filed vakalat for the other side. They will take time for WS, obviously."
-  },
-  {
-    "files": [
-      "backlog/2025-11/OS_1198-23_2025-11-03.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-03",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H04"
-    ],
-    "source_text": "Bedi accounts (OS 1198/23) - Not reached - court busy with a part-heard matter. Sare."
-  },
-  {
-    "files": [
-      "backlog/2025-11/OS_1520-23_2025-11-03.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-03",
-    "case_ids": [
-      "C20"
-    ],
-    "hearing_ids": [
-      "C20-H05"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - Issues framed - 3 issues plus relief. Draft PW1 chief affidavit now."
+    "source_text": "29 Oct 2025, Wed - court notes (Divya)\n\nTiffin centre - only Rs 60,000 deposited of 1,98,000. Madam gave 6 more weeks, gently. Lakshmi garu called twice after court.\n"
   },
   {
     "files": [
       "backlog/2025-11/court_notes_2025-11-03.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2025-11-03",
     "case_ids": [
-      "C25"
+      "C5"
     ],
-    "hearing_ids": [
-      "C25-H02"
-    ],
-    "source_text": "03 Nov 2025, Mon - court notes\n\nVijaya Durga SRO WP (WP 22019/25) - Not reached. Nothing new. Tension ledu.\n"
+    "source_text": "03 Nov 2025, Mon - court notes (Divya)\n\nGreenfield - issues framed. Murali garu's chief affidavit to be ready - invoices, delivery challans signed by school clerk, 3 reminder letters.\n"
   },
   {
     "files": [
-      "backlog/2025-11/IMG_20251104_144929.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-11-04",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H05"
-    ],
-    "source_text": "Agarwal / Hanuman Textiles (OS 842/21) - Our PW1 affidavit filed and documents marked."
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251110_135911.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-11-10",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H05"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Siddiqui sought time - sought time saying client is considering Lok Adalat. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-11/OS_610-25_2025-11-10.docx"
+      "backlog/2025-11/OS_131-2025_2025-11-12.docx"
     ],
     "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-10",
-    "case_ids": [
-      "C34"
-    ],
-    "hearing_ids": [
-      "C34-H05"
-    ],
-    "source_text": "Agarwal v Balaji Fabrics (OS 610/25) - WS filed by Gundlapalli. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Madam returned a document for page-numbering defect."
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251111_120825.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-11-11",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H04"
-    ],
-    "source_text": "Deccan Polymers v Arun (OS 488/25) - Not reached. Item 62, no chance."
-  },
-  {
-    "files": [
-      "backlog/2025-11/court_notes_2025-11-11.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-11-11",
-    "case_ids": [
-      "C02",
-      "C15"
-    ],
-    "hearing_ids": [
-      "C02-H05",
-      "C15-H04"
-    ],
-    "source_text": "11 Nov 2025, Tue - court notes\n\nKhaja Moinuddin (OS 902/24) - Kolluru filed vakalat for the other side. They will take time for WS, obviously.\n\nUppal temple WP (WP 3310/25) - Counter filed by Sarma. Our reply to be filed.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251112_115537.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2025-11-12",
     "case_ids": [
-      "C07"
+      "C3"
     ],
-    "hearing_ids": [
-      "C07-H06"
-    ],
-    "source_text": "Tadepalli - DW1 affidavit (Anwar Hussain) filed and B1-B4 marked. B3 is a so-called 'cancellation notice' dated 2021 which we never received - need to check the postal cover in our file. Prepare cross. Key point: he admits receipt of 18 lakh in para 6 of his own affidavit."
+    "source_text": "PW1 Ramesh Gorle chief affidavit filed. Marked: Ex.A1 sale deed doc. no. 3417/2011, Ex.A2 1-B ROR extract, Ex.A3 encumbrance certificate, Ex.A4 police petition acknowledgment 15.04.2025, Ex.A5 photos (6) of fencing poles dated 14.04.2025, Ex.A6 letter of understanding 2016, Ex.A7 legal notice of company dated 12.11.2024. Prepare Ramesh for cross: Harsha will suggest he agreed to sell at the Novotel meeting."
   },
   {
     "files": [
-      "backlog/2025-11/IMG_20251117_131630.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-11-17",
-    "case_ids": [
-      "C32",
-      "C40"
-    ],
-    "hearing_ids": [
-      "C32-H06",
-      "C40-H01"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Judge on leave. Ayyo.\n\nDr. Anuradha CRP (CRP 3065/25) - Siddiqui sought time - parties are talking settlement, sought time. Anuradha garu was not happy."
-  },
-  {
-    "files": [
-      "backlog/2025-11/WP_9921-25_2025-11-17.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-17",
-    "case_ids": [
-      "C11"
-    ],
-    "hearing_ids": [
-      "C11-H04"
-    ],
-    "source_text": "Bedi permits WP (WP 9921/25) - Admitted, notice ordered. Somayajulu J first asked why we came after 5 months - explained, he accepted."
-  },
-  {
-    "files": [
-      "backlog/2025-11/court_notes_2025-11-17.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-11-17",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H06"
-    ],
-    "source_text": "17 Nov 2025, Mon - court notes\n\nGollapudi partition (OS 1180/21) - PW2 done. Short cross. Told Parvathamma amma the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251119_144239.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-11-19",
-    "case_ids": [
-      "C12",
-      "C31"
-    ],
-    "hearing_ids": [
-      "C12-H05",
-      "C31-H03"
-    ],
-    "source_text": "Lakshmi Ganapathi - this time Achary 'held up in HC'. 2nd adjournment from their side before IV ACJ. Judge looked at his register and said 'second time, counsel, please note'. I argued our part for 20 min anyway so the invoice table is on record.\n\nGudivada v Kasoju - PW1 (Lakshmana Rao Gudivada) chief today. In his additional chief he said clearly: he was put in possession in MARCH 2016, on the day of the sale deed (A1, dt 03.03.2016), and has been in possession since. Wrote it down exactly. A6 = property tax receipts from 2018 only. No receipts for 2016-17!"
-  },
-  {
-    "files": [
-      "backlog/2025-11/CC_OS_1180-21_2025-11-17.jpg"
+      "backlog/2025-11/CC_OS_131-2025_2025-11-12.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
-    "date": "2025-11-20",
+    "date": "2025-11-14",
     "case_ids": [
-      "C01"
+      "C3"
     ],
-    "hearing_ids": [
-      "C01-H03",
-      "C01-H04",
-      "C01-H05",
-      "C01-H06"
-    ],
-    "source_text": "09.06.2025: Chief-examination affidavit of PW1 filed. Exs. A1 to A14 marked. For cross-examination of PW1, call on 05.08.2025.\n05.08.2025: PW1 cross-examined by counsel for defendant and discharged. Call on 06.10.2025.\n06.10.2025: Counsel for the defendant seeks time. Granted. Call on 17.11.2025.\n17.11.2025: PW2 examined in chief and cross-examined. Discharged. Call on 15.12.2025."
+    "source_text": "06.08.2025: Written statement filed by defendant. For framing of issues on 17.09.2025.\n17.09.2025: Issues framed. Plaintiff to file list of witnesses within 15 days. For plaintiff's evidence on 12.11.2025.\n12.11.2025: PW1 examined in chief by affidavit. Ex.A1 to A7 marked. For cross-examination of PW1 on 21.01.2026."
   },
   {
     "files": [
-      "backlog/2025-11/CC_OS_764-20_2025-11-19.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2025-11-24",
-    "case_ids": [
-      "C31"
-    ],
-    "hearing_ids": [
-      "C31-H01",
-      "C31-H02",
-      "C31-H03"
-    ],
-    "source_text": "20.03.2025: Not reached. Call on 17.07.2025.\n17.07.2025: Counsel for plaintiff seeks time to file chief-examination affidavit. Granted. Call on 19.11.2025.\n19.11.2025: PW1 examined in chief. Exs. A1 to A9 marked. For cross-examination of PW1, call on 12.02.2026."
-  },
-  {
-    "files": [
-      "backlog/2025-11/OS_655-23_2025-11-24.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-24",
-    "case_ids": [
-      "C03"
-    ],
-    "hearing_ids": [
-      "C03-H06"
-    ],
-    "source_text": "Kasoju pronote (OS 655/23) - PW2 done. Short cross. IV ACJ started 10.30 sharp, called the list twice before lunch."
-  },
-  {
-    "files": [
-      "backlog/2025-11/court_notes_2025-11-24.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-11-24",
-    "case_ids": [
-      "C13"
-    ],
-    "hearing_ids": [
-      "C13-H06"
-    ],
-    "source_text": "24 Nov 2025, Mon - court notes\n\nVadlamani appeal (AS 58/24) - Judge on leave. Wasted morning. Bas.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251126_141103.jpg"
+      "backlog/2025-11/IMG_20251126_131833.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2025-11-26",
     "case_ids": [
-      "C06"
+      "C1"
     ],
-    "hearing_ids": [
-      "C06-H05"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - Judge on leave. Wasted morning. Bas."
+    "source_text": "Gorle partition - issues: (1) is P entitled to half share; (2) did D pay Rs 21 lakh of the price; (3) is the 2016 letter binding. Plaintiff's evidence next."
   },
   {
     "files": [
-      "backlog/2025-11/OS_288-25_2025-11-26.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-11-26",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H06"
-    ],
-    "source_text": "Fresh Dairy suit (OS 288/25) - WS filed by Achary. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Madam suggested mediation centre - client not keen."
-  },
-  {
-    "files": [
-      "backlog/2025-11/court_notes_2025-11-26.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-11-26",
-    "case_ids": [
-      "C36"
-    ],
-    "hearing_ids": [
-      "C36-H04"
-    ],
-    "source_text": "26 Nov 2025, Wed - court notes\n\nFarzana eviction appeal (AS 112/25) - Bar association boycott, no work. Adjourned. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-11/IMG_20251127_151629.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-11-27",
-    "case_ids": [
-      "C10"
-    ],
-    "hearing_ids": [
-      "C10-H06"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - Counter filed by Ravuri. Our reply to be filed. She asked for short written submissions after arguments."
-  },
-  {
-    "files": [
-      "backlog/2025-11/CC_WP_18342-24_2025-11-27.jpg"
+      "backlog/2025-11/CC_OS_214-2024_2025-11-26.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
     "date": "2025-11-28",
     "case_ids": [
-      "C10"
+      "C1"
     ],
-    "hearing_ids": [
-      "C10-H03",
-      "C10-H04",
-      "C10-H05",
-      "C10-H06"
-    ],
-    "source_text": "22.07.2025: Heard. Admit. Notice to respondents. List on 26.08.2025.\n26.08.2025: Not reached. List on 21.10.2025.\n21.10.2025: Learned counsel for the respondents seeks time. List on 27.11.2025.\n27.11.2025: Counter-affidavit filed on behalf of the respondents. List on 04.02.2026."
+    "source_text": "13.08.2025: Parties present. The court is of the view that the dispute may be resolved amicably. Referred to the Mediation Centre, District Court, Visakhapatnam. Report by 08.10.2025.\n08.10.2025: Mediation report received: failed. For framing of issues on 26.11.2025.\n26.11.2025: Issues framed. For plaintiff's evidence on 07.01.2026."
   },
   {
     "files": [
-      "backlog/2025-12/court_notes_2025-12-04.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-12-04",
-    "case_ids": [
-      "C22",
-      "C30",
-      "C33"
-    ],
-    "hearing_ids": [
-      "C22-H06",
-      "C30-H05",
-      "C33-H04"
-    ],
-    "source_text": "04 Dec 2025, Thu - court notes\n\nFarzana partition (OS 1011/22) - Our PW1 affidavit filed and documents marked.\n\nKamala Devi outhouse (OS 95/24) - Issues framed - 3 issues plus relief. Draft PW1 chief affidavit now. Told Kamala amma the next date.\n\nPinto pension WP (WP 27730/24) - Admitted, notice ordered.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-12/CC_OS_95-24_2025-12-04.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2025-12-08",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H04",
-      "C30-H05"
-    ],
-    "source_text": "06.10.2025: Counsel for the other side absent. Memo filed that counsel is unwell. Adjourned. Call on 04.12.2025.\n04.12.2025: Issues framed. For plaintiff's evidence, call on 22.01.2026."
-  },
-  {
-    "files": [
-      "backlog/2025-12/WP_12577-25_2025-12-08.docx"
+      "backlog/2025-12/OS_57-2025_2025-12-10.docx"
     ],
     "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-12-08",
-    "case_ids": [
-      "C29"
-    ],
-    "hearing_ids": [
-      "C29-H05"
-    ],
-    "source_text": "Sai Balaji DISCOM WP (WP 12577/25) - Counter filed by Baig. Our reply to be filed. Told the association secretary the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-12/IMG_20251209_175822.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-12-09",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H06"
-    ],
-    "source_text": "Rasheed Khan (tenant) (OS 1302/24) - Issues framed - 3 issues plus relief. Draft PW1 chief affidavit now. Madam returned a document for page-numbering defect."
-  },
-  {
-    "files": [
-      "backlog/2025-12/OS_377-22_2025-12-10.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
+    "author": "Aditya",
     "date": "2025-12-10",
     "case_ids": [
-      "C05"
+      "C2"
     ],
-    "hearing_ids": [
-      "C05-H06"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - We sought time - counsel part-heard in another court. Ayyo."
+    "source_text": "PW1 Rohan Mehta, director of Seabreeze. Ex.A1 agreement of sale dt. 18.09.2024 marked. Plaint para 3 and his affidavit: the company 'paid advance of Rs. 25,00,000 to D1 and commenced preliminary works on the site in April 2025'. COMPARE: counter in OS 131/25 para 6 says 'no construction activity whatsoever; only a survey'. Use this in both cases."
   },
   {
     "files": [
-      "backlog/2025-12/court_notes_2025-12-10.txt"
+      "backlog/2025-12/CC_OS_57-2025_2025-12-10.jpg"
     ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-12-10",
-    "case_ids": [
-      "C19"
-    ],
-    "hearing_ids": [
-      "C19-H05"
-    ],
-    "source_text": "10 Dec 2025, Wed - court notes\n\nKamala Devi - Jadhav again sought time, 'objections to commissioner report under preparation'. This is their 2nd adjournment before IV ACJ. Judge made a note. I said nothing, no need.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-12/OS_488-25_2025-12-11.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-12-11",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H05"
-    ],
-    "source_text": "Deccan Polymers v Arun (OS 488/25) - Not reached. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2025-12/OS_509-22_2025-12-12.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2025-12-12",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H06"
-    ],
-    "source_text": "Kandregula contract (OS 509/22) - Issues framed - 4 issues plus relief. Draft PW1 chief affidavit now. IV ACJ started 10.30 sharp, called the list twice before lunch. Told Suresh garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2025-12/sai_court_notes_2025-12-12.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2025-12-12",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H06"
-    ],
-    "source_text": "12 Dec 2025, Fri - court notes (Sai)\n\nAgarwal / Hanuman Textiles (OS 842/21) - Not reached - court busy with a part-heard matter. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-12/IMG_20251215_112416.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
+    "type": "certified_order_sheet_scan",
+    "author": "court",
     "date": "2025-12-15",
     "case_ids": [
-      "C01"
+      "C2"
     ],
-    "hearing_ids": [
-      "C01-H07"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - We sought time - counsel part-heard in another court. Same old story."
+    "source_text": "09.07.2025: Written statement of D2 filed. Plaintiff filed 14 documents without a list and without serving copies; the documents are not received. Costs of Rs. 2,000 imposed on plaintiff payable to D2. Plaintiff to file the documents with a proper list after serving copies. For documents on 03.09.2025.\n03.09.2025: Documents filed with list, copies served. For framing of issues on 15.10.2025.\n15.10.2025: Issues framed. For plaintiff's evidence on 10.12.2025.\n10.12.2025: PW1 examined in chief by affidavit. Ex.A1 to A9 marked. For cross-examination of PW1 on 04.02.2026."
   },
   {
     "files": [
-      "backlog/2025-12/court_notes_2025-12-15.txt"
+      "backlog/2026-01/OS_214-2024_2026-01-07.docx"
     ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-12-15",
+    "type": "typed_note_docx",
+    "author": "Aditya",
+    "date": "2026-01-07",
     "case_ids": [
-      "C39"
+      "C1"
     ],
-    "hearing_ids": [
-      "C39-H05"
-    ],
-    "source_text": "15 Dec 2025, Mon - court notes\n\nUppal temple land (OS 1433/23) - Issues framed - 5 issues plus relief. Draft PW1 chief affidavit now. Quadri sir wanted exact exhibit numbers, not descriptions.\n"
+    "source_text": "PW1 Ramesh Gorle chief. Ex.A1 sale deed 3417/2011, Ex.A2 1-B ROR extract (2.10 acres each), Ex.A3 letter of understanding 2016, Ex.A4 SBI Dwaraka Nagar statement showing Rs. 15,00,000 transferred to the vendor on 02.03.2011, Ex.A5 encumbrance certificate. Madam asked if the parties still talk. Ramesh: 'only through lawyers now.'"
   },
   {
     "files": [
-      "backlog/2025-12/court_notes_2025-12-16.txt"
+      "backlog/2026-01/OS_88-2025_2026-01-12.docx"
     ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-12-16",
+    "type": "typed_note_docx",
+    "author": "Aditya",
+    "date": "2026-01-12",
     "case_ids": [
-      "C26"
+      "C5"
     ],
-    "hearing_ids": [
-      "C26-H05"
-    ],
-    "source_text": "16 Dec 2025, Tue - court notes\n\nBalaraju title suit (OS 1650/22) - Our PW1 affidavit filed and documents marked.\n"
+    "source_text": "PW1 Murali Krishna Pydi chief. Ex.A1-A14 invoices (total Rs. 6,84,500), Ex.A15-A17 delivery challans signed by school office, Ex.A18-A20 reminder letters. Purchase order dt. 04.04.2023 is Ex.A1 annexure."
   },
   {
     "files": [
-      "backlog/2025-12/IMG_20251217_122520.jpg"
+      "backlog/2026-01/IMG_20260121_102450.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2025-12-17",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H05"
-    ],
-    "source_text": "Bedi accounts (OS 1198/23) - We sought time - documents awaited from client. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2025-12/court_notes_2025-12-17.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-12-17",
-    "case_ids": [
-      "C07",
-      "C25"
-    ],
-    "hearing_ids": [
-      "C07-H07",
-      "C25-H03"
-    ],
-    "source_text": "17 Dec 2025, Wed - court notes\n\nTadepalli - I could not reach, stuck in HC part-heard (Bedi WP). Sai sought time on our behalf. That is one adjournment on OUR side before this judge, remember he counts.\n\nVijaya Durga SRO WP (WP 22019/25) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. Vijaya amma was not happy.\n"
-  },
-  {
-    "files": [
-      "backlog/2025-12/IMG_20251222_134925.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2025-12-22",
-    "case_ids": [
-      "C20"
-    ],
-    "hearing_ids": [
-      "C20-H06"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - Not reached. Item 67, no chance. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2025-12/court_notes_2025-12-22.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2025-12-22",
-    "case_ids": [
-      "C38"
-    ],
-    "hearing_ids": [
-      "C38-H03"
-    ],
-    "source_text": "22 Dec 2025, Mon - court notes\n\nYarlagadda CMA (CMA 1181/25) - Not reached. Item 46, no chance.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/IMG_20260102_160753.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-01-02",
-    "case_ids": [
-      "C08",
-      "C11"
-    ],
-    "hearing_ids": [
-      "C08-H05",
-      "C11-H05"
-    ],
-    "source_text": "Pinto society (OS 1127/23) - Baig sought time - sought one week for instructions, fair enough.\n\nBedi permits WP (WP 9921/25) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2026-01/OS_902-24_2026-01-02.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-01-02",
-    "case_ids": [
-      "C02"
-    ],
-    "hearing_ids": [
-      "C02-H06"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - No court today, judge on leave. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2026-01/court_notes_2026-01-02.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-01-02",
-    "case_ids": [
-      "C16",
-      "C27",
-      "C34"
-    ],
-    "hearing_ids": [
-      "C16-H07",
-      "C27-H06",
-      "C34-H06"
-    ],
-    "source_text": "02 Jan 2026, Fri - court notes\n\nRevathi partition (OS 214/23) - No court today, judge on leave. Sare.\n\nVaishnavi v Manikanta (OS 733/23) - Achary cross-examined our PW1 for an hour. Client held up mostly, one wobble on dates.\n\nAgarwal v Balaji Fabrics (OS 610/25) - Not reached. Item 49, no chance. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/court_notes_2026-01-08.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-01-08",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H06"
-    ],
-    "source_text": "08 Jan 2026, Thu - court notes\n\nDeccan Polymers v Arun (OS 488/25) - Not reached. Item 34, no chance.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/AS_58-24_2026-01-19.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-01-19",
-    "case_ids": [
-      "C13"
-    ],
-    "hearing_ids": [
-      "C13-H07"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - Lower court records received. Doddapaneni madam asked whether parties tried mediation. Again."
-  },
-  {
-    "files": [
-      "backlog/2026-01/IMG_20260119_114232.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-01-19",
-    "case_ids": [
-      "C14",
-      "C40"
-    ],
-    "hearing_ids": [
-      "C14-H04",
-      "C40-H02"
-    ],
-    "source_text": "Fresh Dairy CMA (CMA 640/25) - Bar association boycott, no work. Adjourned. Sare.\n\nDr. Anuradha CRP (CRP 3065/25) - Not reached. Nothing new. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2026-01/OS_1302-24_2026-01-19.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-01-19",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H07"
-    ],
-    "source_text": "Rasheed Khan (tenant) (OS 1302/24) - Bar association boycott, no work. Adjourned. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2026-01/OS_842-21_2026-01-19.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-01-19",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H07"
-    ],
-    "source_text": "Agarwal / Hanuman Textiles (OS 842/21) - Gundlapalli cross-examined our PW1 for an hour. Client held up mostly, one wobble on dates."
-  },
-  {
-    "files": [
-      "backlog/2026-01/court_notes_2026-01-19.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-01-19",
-    "case_ids": [
-      "C03",
-      "C28",
-      "C32",
-      "C33"
-    ],
-    "hearing_ids": [
-      "C03-H07",
-      "C28-H06",
-      "C32-H07",
-      "C33-H05"
-    ],
-    "source_text": "19 Jan 2026, Mon - court notes\n\nKasoju pronote (OS 655/23) - Gundlapalli sought time - sought time to file objections to marking of documents. Tension ledu.\n\nBedi accounts (OS 1198/23) - Kolluru sought time - claimed she was not served with our copy. Ayyo.\n\nRevathi refund (OS 1066/24) - Siddiqui sought time - sought time saying client is considering Lok Adalat.\n\nPinto pension WP (WP 27730/24) - Counter filed by Baig. Our reply to be filed. She asked for short written submissions after arguments.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/sai_court_notes_2026-01-19.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-01-19",
-    "case_ids": [
-      "C04"
-    ],
-    "hearing_ids": [
-      "C04-H05"
-    ],
-    "source_text": "19 Jan 2026, Mon - court notes (Sai)\n\nDeccan Polymers CRP (CRP 2211/25) - Not reached - court busy with a part-heard matter.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/CC_OS_842-21_2026-01-19.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-01-20",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H04",
-      "C09-H05",
-      "C09-H06",
-      "C09-H07"
-    ],
-    "source_text": "08.09.2025: Counsel for the defendant seeks time. Granted. Call on 04.11.2025.\n04.11.2025: Chief-examination affidavit of PW1 filed. Exs. A1 to A6 marked. For cross-examination of PW1, call on 12.12.2025.\n12.12.2025: Not reached. Call on 19.01.2026.\n19.01.2026: PW1 cross-examined by counsel for defendant and discharged. Call on 27.02.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-01/OS_1011-22_2026-01-20.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2026-01-20",
-    "case_ids": [
-      "C22"
-    ],
-    "hearing_ids": [
-      "C22-H07"
-    ],
-    "source_text": "Farzana partition (OS 1011/22) - Not reached. Nothing new. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2026-01/court_notes_2026-01-21.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-01-21",
     "case_ids": [
-      "C06",
-      "C36"
+      "C3"
     ],
-    "hearing_ids": [
-      "C06-H06",
-      "C36-H05"
-    ],
-    "source_text": "21 Jan 2026, Wed - court notes\n\nPasupuleti eviction (OS 1415/24) - Issues framed - 3 issues plus relief. Draft PW1 chief affidavit now.\n\nFarzana eviction appeal (AS 112/25) - Not reached. Item 50, no chance. Chalo.\n"
+    "source_text": "Seabreeze inj - PW1 cross. Harsha put it to Ramesh that he agreed to sell at the Novotel meeting in Sept 2024. Ramesh: 'Never. My father is buried in the mango grove on the east side. I will not sell that land for any price.' Held up well. Harsha also suggested the poles were for survey - Ramesh: 'survey people don't dig 2 feet and put cement.'"
   },
   {
     "files": [
-      "backlog/2026-01/sai_court_notes_2026-01-21.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-01-21",
-    "case_ids": [
-      "C26"
-    ],
-    "hearing_ids": [
-      "C26-H06"
-    ],
-    "source_text": "21 Jan 2026, Wed - court notes (Sai)\n\nBalaraju title suit (OS 1650/22) - Not reached - court busy with a part-heard matter.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/court_notes_2026-01-22.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-01-22",
-    "case_ids": [
-      "C21",
-      "C30"
-    ],
-    "hearing_ids": [
-      "C21-H04",
-      "C30-H06"
-    ],
-    "source_text": "22 Jan 2026, Thu - court notes\n\nBalaraju CRP (CRP 1874/25) - Admitted, notice ordered. Told Balaraju garu the next date.\n\nKamala Devi outhouse (OS 95/24) - Bar association boycott, no work. Adjourned. Bas.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-01/IMG_20260127_112537.jpg"
+      "backlog/2026-01/IMG_20260128_120717.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-01-27",
+    "author": "Divya",
+    "date": "2026-01-28",
     "case_ids": [
-      "C25",
-      "C37"
+      "C4"
     ],
-    "hearing_ids": [
-      "C25-H04",
-      "C37-H07"
-    ],
-    "source_text": "Vijaya Durga SRO WP (WP 22019/25) - Admitted, notice ordered. Somayajulu J first asked why we came after 5 months - explained, he accepted.\n\nFresh Dairy suit (OS 288/25) - Not reached. Item 46, no chance. Sare."
+    "source_text": "Tiffin centre - another 50k deposited (total 1,10,000). Madam suggested both sides settle - tenant wants time to shift the tiffin centre."
   },
   {
     "files": [
-      "backlog/2026-02/IMG_20260204_135044.jpg"
+      "backlog/2026-02/IMG_20260204_103148.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-02-04",
     "case_ids": [
-      "C07",
-      "C10",
-      "C15"
+      "C2"
     ],
-    "hearing_ids": [
-      "C07-H08",
-      "C10-H07",
-      "C15-H05"
-    ],
-    "source_text": "Tadepalli - not reached, judge spent the whole day on the Lakshmi Ganapathi arguments (our own matter, funny). Nothing new.\n\nGreenfield park WP (WP 18342/24) - Judge on leave. Ayyo.\n\nUppal temple WP (WP 3310/25) - Our reply filed. Now final hearing. She asked for short written submissions after arguments."
+    "source_text": "Seabreeze SP - PW1 cross. Admitted: (1) Ramesh did not sign Ex.A1; (2) company knew from the 1-B that land stood in both names; (3) no GPA from Ramesh was ever shown to them; (4) the Rs 25 lakh cheque went only to Srinivas's account. When asked why they started 'preliminary works' before a sale deed - 'on legal advice.' Ha."
   },
   {
     "files": [
-      "backlog/2026-02/OS_1043-21_2026-02-04.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-04",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H06"
-    ],
-    "source_text": "Lakshmi Ganapathi - argued for almost the full day (this is why Tadepalli was not reached). Judge engaged a lot on the limitation of the 2019 invoices - I showed the acknowledgement letter Ex.A24 dated 12.08.2021 which extends limitation under S.18. He seemed satisfied. Our arguments nearly done."
-  },
-  {
-    "files": [
-      "backlog/2026-02/OS_733-23_2026-02-05.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-05",
-    "case_ids": [
-      "C27"
-    ],
-    "hearing_ids": [
-      "C27-H07"
-    ],
-    "source_text": "Vaishnavi v Manikanta (OS 733/23) - Achary sought time - counsel unwell, memo filed by junior. the client's office was not happy."
-  },
-  {
-    "files": [
-      "backlog/2026-02/court_notes_2026-02-05.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-02-05",
-    "case_ids": [
-      "C05",
-      "C20"
-    ],
-    "hearing_ids": [
-      "C05-H07",
-      "C20-H07"
-    ],
-    "source_text": "05 Feb 2026, Thu - court notes\n\nDr. Anuradha flat (OS 377/22) - Our PW1 affidavit filed and documents marked. Told Anuradha garu the next date.\n\nVijaya Durga gift deed (OS 1520/23) - Not reached, long list.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-02/IMG_20260206_172007.jpg"
+      "backlog/2026-02/IMG_20260218_122233.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-02-06",
-    "case_ids": [
-      "C39"
-    ],
-    "hearing_ids": [
-      "C39-H06"
-    ],
-    "source_text": "Uppal temple land (OS 1433/23) - Judge on leave. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2026-02/OS_145-25_2026-02-09.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-09",
-    "case_ids": [
-      "C35"
-    ],
-    "hearing_ids": [
-      "C35-H05"
-    ],
-    "source_text": "Sunitha - IA arguments done, orders reserved. Builder produced a plan only today, and it shows 'G+3 + headroom'. Our point is strong but she reserves everything, may take months."
-  },
-  {
-    "files": [
-      "backlog/2026-02/court_notes_2026-02-09.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-02-09",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H08"
-    ],
-    "source_text": "09 Feb 2026, Mon - court notes\n\nGollapudi partition (OS 1180/21) - Not reached - court busy with a part-heard matter.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-02/court_notes_2026-02-10.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-02-10",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H07"
-    ],
-    "source_text": "10 Feb 2026, Tue - court notes\n\nKandregula contract (OS 509/22) - Our PW1 affidavit filed and documents marked.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-02/IMG_20260211_115642.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-02-11",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H07"
-    ],
-    "source_text": "Lakshmi Ganapathi - Achary illness memo AGAIN, third time for their side. IV ACJ granted it but imposed Rs 3000 costs payable to our client before next date. Judge said 'the court's register shows this is the third request'. So he really does count. Remember this for Tadepalli."
-  },
-  {
-    "files": [
-      "backlog/2026-02/sai_court_notes_2026-02-12.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-02-12",
-    "case_ids": [
-      "C31"
-    ],
-    "hearing_ids": [
-      "C31-H04"
-    ],
-    "source_text": "12 Feb 2026, Thu - court notes (Sai)\n\nGudivada v Kasoju - not reached.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-02/CC_OS_1043-21_2026-02-11.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-02-16",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H04",
-      "C12-H05",
-      "C12-H06",
-      "C12-H07"
-    ],
-    "source_text": "24.09.2025: Not reached. Call on 19.11.2025.\n19.11.2025: Counsel for defendant represents that he is held up in the High Court. Adjourned to 04.02.2026.\n04.02.2026: Arguments of counsel for plaintiff heard in part. Part-heard. Call on 11.02.2026.\n11.02.2026: Counsel for defendant absent. Memo filed that counsel is unwell. This is the third adjournment sought on behalf of the defendant. Adjournment granted subject to payment of costs of Rs. 3,000/- to the plaintiff before the next date. Call on 25.03.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-02/WP_12577-25_2026-02-16.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-16",
-    "case_ids": [
-      "C29"
-    ],
-    "hearing_ids": [
-      "C29-H06"
-    ],
-    "source_text": "Sai Balaji DISCOM WP (WP 12577/25) - Baig sought time - sought one week for instructions, fair enough."
-  },
-  {
-    "files": [
-      "backlog/2026-02/court_notes_2026-02-16.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-02-16",
-    "case_ids": [
-      "C24",
-      "C34"
-    ],
-    "hearing_ids": [
-      "C24-H07",
-      "C34-H07"
-    ],
-    "source_text": "16 Feb 2026, Mon - court notes\n\nDeccan Polymers v Arun (OS 488/25) - Not reached.\n\nAgarwal v Balaji Fabrics (OS 610/25) - We sought time - client unwell. Sare.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-02/CMA_1181-25_2026-02-17.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-17",
-    "case_ids": [
-      "C38"
-    ],
-    "hearing_ids": [
-      "C38-H04"
-    ],
-    "source_text": "Yarlagadda CMA (CMA 1181/25) - Service complete. Ready for hearing."
-  },
-  {
-    "files": [
-      "backlog/2026-02/IMG_20260218_111118.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
+    "author": "Aditya",
     "date": "2026-02-18",
     "case_ids": [
-      "C19"
+      "C1"
     ],
-    "hearing_ids": [
-      "C19-H06"
-    ],
-    "source_text": "Kamala Devi - not reached."
+    "source_text": "Gorle partition - PW1 cross by Harinath. Ramesh firm: 'each of us paid 15 lakh, I paid from SBI, he paid in cash to the vendor.' Harinath suggested the cash was 21 lakh - denied. Summons to VRO for next date - Divya to take out summons THIS WEEK."
   },
   {
     "files": [
-      "backlog/2026-02/OS_902-24_2026-02-18.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-18",
-    "case_ids": [
-      "C02"
-    ],
-    "hearing_ids": [
-      "C02-H07"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - Not reached."
-  },
-  {
-    "files": [
-      "backlog/2026-02/IMG_20260219_112813.jpg"
+      "backlog/2026-02/IMG_20260223_155323.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-02-19",
+    "author": "Divya",
+    "date": "2026-02-23",
     "case_ids": [
-      "C16"
+      "C5"
     ],
-    "hearing_ids": [
-      "C16-H08"
-    ],
-    "source_text": "Revathi partition (OS 214/23) - WS filed by Siddiqui. Mostly bare denials. Para 9 takes a new plea we must answer in evidence."
+    "source_text": "Greenfield - Bhaskar absent (1st adjournment for cross). Junior asked time. Granted. Murali garu lost a day of work again."
   },
   {
     "files": [
-      "backlog/2026-02/IMG_20260226_133448.jpg"
+      "backlog/2026-03/IMG_20260311_134228.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-02-26",
-    "case_ids": [
-      "C23"
-    ],
-    "hearing_ids": [
-      "C23-H04"
-    ],
-    "source_text": "Sai Balaji WP - GHMC counter filed, huge, with building plans - 230+ pages with ours. Judge wants synopsis from both sides (her standard >200 pages rule). Draft 3-page synopsis."
-  },
-  {
-    "files": [
-      "backlog/2026-02/OS_1066-24_2026-02-26.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-02-26",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H08"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Not reached, long list. Sare."
-  },
-  {
-    "files": [
-      "backlog/2026-02/IMG_20260227_143438.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-02-27",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H08"
-    ],
-    "source_text": "Agarwal / Hanuman Textiles (OS 842/21) - Bar association boycott, no work. Adjourned. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260302_171046.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-03-02",
-    "case_ids": [
-      "C08",
-      "C40"
-    ],
-    "hearing_ids": [
-      "C08-H06",
-      "C40-H03"
-    ],
-    "source_text": "Pinto society (OS 1127/23) - Not reached - court busy with a part-heard matter.\n\nDr. Anuradha CRP (CRP 3065/25) - Not reached. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260303_144235.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-03-03",
-    "case_ids": [
-      "C36"
-    ],
-    "hearing_ids": [
-      "C36-H06"
-    ],
-    "source_text": "Farzana eviction appeal (AS 112/25) - Admitted, notice ordered. IV ACJ started 10.30 sharp, called the list twice before lunch."
-  },
-  {
-    "files": [
-      "backlog/2026-03/court_notes_2026-03-03.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-03-03",
-    "case_ids": [
-      "C03"
-    ],
-    "hearing_ids": [
-      "C03-H08"
-    ],
-    "source_text": "03 Mar 2026, Tue - court notes\n\nKasoju pronote (OS 655/23) - Gundlapalli's DW1 affidavit filed. Need to prepare cross. Told Raghavendra garu the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260305_121059.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-03-05",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H07"
-    ],
-    "source_text": "Kamala Devi outhouse (OS 95/24) - Achary sought time - counsel unwell, memo filed by junior. Kamala amma was not happy."
-  },
-  {
-    "files": [
-      "backlog/2026-03/OS_1433-23_2026-03-09.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-03-09",
-    "case_ids": [
-      "C39"
-    ],
-    "hearing_ids": [
-      "C39-H07"
-    ],
-    "source_text": "Uppal temple land (OS 1433/23) - Not reached, long list."
-  },
-  {
-    "files": [
-      "backlog/2026-03/OS_377-22_2026-03-10.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2026-03-10",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H08"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Not reached."
-  },
-  {
-    "files": [
-      "backlog/2026-03/court_notes_2026-03-10.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-03-10",
-    "case_ids": [
-      "C14"
-    ],
-    "hearing_ids": [
-      "C14-H05"
-    ],
-    "source_text": "10 Mar 2026, Tue - court notes\n\nFresh Dairy CMA (CMA 640/25) - Admitted, notice ordered. Somayajulu J first asked why we came after 5 months - explained, he accepted. Told the client's office the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-03/AS_58-24_2026-03-11.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
+    "author": "Aditya",
     "date": "2026-03-11",
     "case_ids": [
-      "C13"
+      "C3"
     ],
-    "hearing_ids": [
-      "C13-H08"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - Bar association boycott, no work. Adjourned."
+    "source_text": "Seabreeze inj - Harsha tried to file a memo (something about 'survey for revenue purposes') without giving us a copy. Murthy sir threw it back: 'this is not how it is done in my court, serve copy first.' Also told him about boundary stones removed last week (Ramesh's info) - judge cautioned company on record. Good day."
   },
   {
     "files": [
-      "backlog/2026-03/court_notes_2026-03-11.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-03-11",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H08"
-    ],
-    "source_text": "11 Mar 2026, Wed - court notes\n\nRasheed Khan (tenant) (OS 1302/24) - Not reached. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260312_163147.jpg"
+      "backlog/2026-03/IMG_20260318_185956.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-03-12",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H08"
-    ],
-    "source_text": "Fresh Dairy suit (OS 288/25) - Not reached - court busy with a part-heard matter. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2026-03/court_notes_2026-03-12.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-03-12",
-    "case_ids": [
-      "C20",
-      "C22"
-    ],
-    "hearing_ids": [
-      "C20-H08",
-      "C22-H08"
-    ],
-    "source_text": "12 Mar 2026, Thu - court notes\n\nVijaya Durga gift deed (OS 1520/23) - Our PW1 affidavit filed and documents marked. Doddapaneni madam asked whether parties tried mediation. Again.\n\nFarzana partition (OS 1011/22) - Bar association boycott, no work. Adjourned. Chalo.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-03/CC_CMA_640-25_2026-03-10.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-03-16",
-    "case_ids": [
-      "C14"
-    ],
-    "hearing_ids": [
-      "C14-H02",
-      "C14-H03",
-      "C14-H04",
-      "C14-H05"
-    ],
-    "source_text": "03.09.2025: The Court is not sitting today. Adjourned. List on 21.10.2025.\n21.10.2025: Learned counsel for the respondents seeks time. List on 19.01.2026.\n19.01.2026: Advocates abstained from work on the call of the Bar Association. List on 10.03.2026.\n10.03.2026: Heard. Admit. Notice to respondents. List on 15.04.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260316_154448.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-03-16",
-    "case_ids": [
-      "C06",
-      "C11"
-    ],
-    "hearing_ids": [
-      "C06-H07",
-      "C11-H06"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - Our PW1 affidavit filed and documents marked. Doddapaneni madam asked whether parties tried mediation. Again.\n\nBedi permits WP (WP 9921/25) - Bar association boycott, no work. Adjourned."
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260318_141944.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-03-18",
     "case_ids": [
-      "C25"
+      "C4"
     ],
-    "hearing_ids": [
-      "C25-H05"
-    ],
-    "source_text": "Vijaya Durga SRO WP (WP 22019/25) - Ravuri sought time - sought time to file written submissions on maintainability. Sare."
+    "source_text": "Tiffin centre - Nagaraju wants 8 months to vacate, Lakshmi garu wants 3. Middle: vacate by 30.11.2026, balance 88,000 in instalments of 15,000 by the 10th of each month."
   },
   {
     "files": [
-      "backlog/2026-03/OS_318-22_2026-03-18.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-03-18",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H09"
-    ],
-    "source_text": "Tadepalli - cross of DW1 started. Got him to admit he received 18 lakh in 3 instalments and that he never returned it. He said the cancellation notice was sent by 'ordinary post' - no proof. Still to cover: the encumbrance he created in 2023 (mortgage to Andhra Bank). Continue next date."
-  },
-  {
-    "files": [
-      "backlog/2026-03/CC_OS_318-22_2026-03-18.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-03-19",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H06",
-      "C07-H07",
-      "C07-H08",
-      "C07-H09"
-    ],
-    "source_text": "12.11.2025: Chief-examination affidavit of DW1 (1st defendant) filed. Exs. B1 to B4 marked. For cross-examination of DW1, call on 17.12.2025.\n17.12.2025: Counsel for plaintiff seeks time as she is part-heard in the High Court. Granted. Call on 04.02.2026.\n04.02.2026: Part-heard trial in O.S. 1043/2021 in progress. This matter not reached. Call on 18.03.2026.\n18.03.2026: DW1 present. Partly cross-examined by counsel for plaintiff. For further cross-examination, call on 29.04.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-03/OS_1650-22_2026-03-19.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-03-19",
-    "case_ids": [
-      "C26"
-    ],
-    "hearing_ids": [
-      "C26-H07"
-    ],
-    "source_text": "Balaraju title suit (OS 1650/22) - Siddiqui cross-examined our PW1 for nearly 2 hours. Client held up mostly, one wobble on dates. Quadri sir wanted exact exhibit numbers, not descriptions."
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260323_172957.jpg"
+      "backlog/2026-03/IMG_20260325_113209.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-03-23",
-    "case_ids": [
-      "C04"
-    ],
-    "hearing_ids": [
-      "C04-H06"
-    ],
-    "source_text": "Deccan Polymers CRP (CRP 2211/25) - Admitted, notice ordered. Somayajulu J first asked why we came after 5 months - explained, he accepted."
-  },
-  {
-    "files": [
-      "backlog/2026-03/court_notes_2026-03-23.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-03-23",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H07"
-    ],
-    "source_text": "23 Mar 2026, Mon - court notes\n\nBedi accounts (OS 1198/23) - Kolluru sought time - claimed our documents were served late, sought time. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260324_120104.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-03-24",
-    "case_ids": [
-      "C29"
-    ],
-    "hearing_ids": [
-      "C29-H07"
-    ],
-    "source_text": "Sai Balaji DISCOM WP (WP 12577/25) - Our reply filed. Now final hearing. He dictated the order in open court immediately."
-  },
-  {
-    "files": [
-      "backlog/2026-03/CC_WP_12577-25_2026-03-24.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
+    "author": "Aditya",
     "date": "2026-03-25",
     "case_ids": [
-      "C29"
+      "C1"
     ],
-    "hearing_ids": [
-      "C29-H04",
-      "C29-H05",
-      "C29-H06",
-      "C29-H07"
-    ],
-    "source_text": "27.10.2025: Learned counsel for the respondents seeks time. List on 08.12.2025.\n08.12.2025: Counter-affidavit filed on behalf of the respondents. List on 16.02.2026.\n16.02.2026: Learned counsel for the respondents seeks time. List on 24.03.2026.\n24.03.2026: Reply affidavit filed on behalf of the petitioner. List for hearing on 08.06.2026."
+    "source_text": "Gorle partition - VRO summons NOT taken out. Divya forgot, I didn't check. Embarrassing. Madam: 'these things happen, but please don't repeat it, Mr. Varma.' No costs. Murthy sir would have closed our evidence. RULE: every Monday check summons list."
   },
   {
     "files": [
-      "backlog/2026-03/court_notes_2026-03-25.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-03-25",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H08"
-    ],
-    "source_text": "25 Mar 2026, Wed - court notes\n\nLakshmi Ganapathi - costs of 3000 paid by DD in court. Achary argued for 45 min, mostly that the 6 invoices are fabricated. Nothing new. He asked to continue next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-03/IMG_20260331_130803.jpg"
+      "backlog/2026-04/IMG_20260408_102334.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-03-31",
-    "case_ids": [
-      "C33"
-    ],
-    "hearing_ids": [
-      "C33-H06"
-    ],
-    "source_text": "Pinto pension WP (WP 27730/24) - Baig sought time - sought one week for instructions, fair enough."
-  },
-  {
-    "files": [
-      "backlog/2026-03/OS_1066-24_2026-03-31.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-03-31",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H09"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Siddiqui sought time - sought time saying client is considering Lok Adalat. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2026-04/OS_488-25_2026-04-01.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-04-01",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H08"
-    ],
-    "source_text": "Deccan Polymers v Arun (OS 488/25) - Siddiqui sought time - sought time saying client is considering Lok Adalat."
-  },
-  {
-    "files": [
-      "backlog/2026-04/IMG_20260406_172321.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-04-06",
-    "case_ids": [
-      "C02",
-      "C09",
-      "C34"
-    ],
-    "hearing_ids": [
-      "C02-H08",
-      "C09-H09",
-      "C34-H08"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - Not reached. Item 30, no chance. Sare.\n\nAgarwal / Hanuman Textiles (OS 842/21) - Not reached - court busy with a part-heard matter. Same old story.\n\nAgarwal v Balaji Fabrics (OS 610/25) - No court today, judge on leave. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-04/IMG_20260406_174835.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-04-06",
-    "case_ids": [
-      "C27"
-    ],
-    "hearing_ids": [
-      "C27-H08"
-    ],
-    "source_text": "Vaishnavi v Manikanta (OS 733/23) - Bar association boycott, no work. Adjourned. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2026-04/OS_214-23_2026-04-06.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2026-04-06",
-    "case_ids": [
-      "C16"
-    ],
-    "hearing_ids": [
-      "C16-H09"
-    ],
-    "source_text": "Revathi partition (OS 214/23) - Not reached. Nothing new. Sare."
-  },
-  {
-    "files": [
-      "backlog/2026-04/IMG_20260407_164135.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-04-07",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H09"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2026-04/court_notes_2026-04-08.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2026-04-08",
     "case_ids": [
-      "C31"
+      "C2"
     ],
-    "hearing_ids": [
-      "C31-H05"
-    ],
-    "source_text": "08 Apr 2026, Wed - court notes\n\nGudivada v Kasoju - started cross of PW1, only 30 min after lunch (Quadri sir takes evidence only post lunch). Covered A1 and the tax receipts. Kept the possession question for next time, want him relaxed.\n"
+    "source_text": "Seabreeze SP - Harsha's junior said sir is held up in High Court at Amaravati. Murthy sir very annoyed: 'Last chance. Next time I will close the evidence.'"
   },
   {
     "files": [
-      "backlog/2026-04/CRP_1874-25_2026-04-13.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-04-13",
-    "case_ids": [
-      "C21"
-    ],
-    "hearing_ids": [
-      "C21-H05"
-    ],
-    "source_text": "Balaraju CRP (CRP 1874/25) - Service complete. Ready for hearing. Told Balaraju garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2026-04/OS_1302-24_2026-04-13.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-04-13",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H09"
-    ],
-    "source_text": "Rasheed Khan (tenant) (OS 1302/24) - Not reached. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-04/sai_court_notes_2026-04-13.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-04-13",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H08"
-    ],
-    "source_text": "13 Apr 2026, Mon - court notes (Sai)\n\nKandregula contract (OS 509/22) - No court today, judge on leave.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-04/CC_CRP_1874-25_2026-04-13.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-04-15",
-    "case_ids": [
-      "C21"
-    ],
-    "hearing_ids": [
-      "C21-H02",
-      "C21-H03",
-      "C21-H04",
-      "C21-H05"
-    ],
-    "source_text": "18.08.2025: Advocates abstained from work on the call of the Bar Association. List on 29.10.2025.\n29.10.2025: Learned counsel for the respondents seeks time. List on 22.01.2026.\n22.01.2026: Heard. Admit. Notice to respondents. List on 13.04.2026.\n13.04.2026: Service of notice on respondents complete. List on 22.06.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-04/CMA_640-25_2026-04-15.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-04-15",
-    "case_ids": [
-      "C14"
-    ],
-    "hearing_ids": [
-      "C14-H06"
-    ],
-    "source_text": "Fresh Dairy CMA (CMA 640/25) - Not reached. Nothing new. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2026-04/IMG_20260417_115423.jpg"
+      "backlog/2026-04/IMG_20260420_191757.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-04-17",
-    "case_ids": [
-      "C10",
-      "C30"
-    ],
-    "hearing_ids": [
-      "C10-H08",
-      "C30-H08"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - Our reply filed. Now final hearing.\n\nKamala Devi outhouse (OS 95/24) - Not reached. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2026-04/court_notes_2026-04-17.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-04-17",
-    "case_ids": [
-      "C15"
-    ],
-    "hearing_ids": [
-      "C15-H06"
-    ],
-    "source_text": "17 Apr 2026, Fri - court notes\n\nUppal temple WP (WP 3310/25) - Sarma sought time - junior sought pass-over saying senior is in High Court, never returned. the temple committee wanted to know if we can object. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-04/court_notes_2026-04-20.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-04-20",
     "case_ids": [
-      "C08",
-      "C28",
-      "C36"
+      "C5"
     ],
-    "hearing_ids": [
-      "C08-H07",
-      "C28-H08",
-      "C36-H07"
-    ],
-    "source_text": "20 Apr 2026, Mon - court notes\n\nPinto society (OS 1127/23) - Baig sought time - sought one week for instructions, fair enough.\n\nBedi accounts (OS 1198/23) - Not reached. Item 60, no chance. Same old story.\n\nFarzana eviction appeal (AS 112/25) - Lower court records received. IV ACJ started 10.30 sharp, called the list twice before lunch.\n"
+    "source_text": "Greenfield - Bhaskar 'unwell' (2nd time). Murthy sir: 'LAST opportunity.' Saw Bhaskar in the bar association canteen at 1.30 pm the same day. Noting it."
   },
   {
     "files": [
-      "backlog/2026-04/IMG_20260422_173515.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-04-22",
-    "case_ids": [
-      "C19"
-    ],
-    "hearing_ids": [
-      "C19-H07"
-    ],
-    "source_text": "Kamala Devi wall - Jadhav asked for time a 3rd time, said PW1 is travelling. IV ACJ imposed Rs 5000 costs, payable to Kamala amma. And he said orally, looking straight at Jadhav: \"Third time is not a request, it is a strategy.\" Not in the order, only oral. Whole court went quiet. Harsha was thrilled."
-  },
-  {
-    "files": [
-      "backlog/2026-04/OS_655-23_2026-04-22.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-04-22",
-    "case_ids": [
-      "C03"
-    ],
-    "hearing_ids": [
-      "C03-H09"
-    ],
-    "source_text": "Kasoju pronote (OS 655/23) - Not reached - court busy with a part-heard matter. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2026-04/CC_OS_227-24_2026-04-22.jpg"
+      "backlog/2026-04/CC_OS_88-2025_2026-04-20.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
-    "date": "2026-04-23",
+    "date": "2026-04-22",
     "case_ids": [
-      "C19"
+      "C5"
     ],
-    "hearing_ids": [
-      "C19-H04",
-      "C19-H05",
-      "C19-H06",
-      "C19-H07"
-    ],
-    "source_text": "29.10.2025: Report of Advocate Commissioner filed. Copies to both sides. Objections, if any, in two weeks. For plaintiff's evidence, call on 10.12.2025.\n10.12.2025: Counsel for plaintiff seeks time to file chief-examination affidavit of PW1 and objections to the report. Granted. Call on 18.02.2026.\n18.02.2026: Not reached. Call on 22.04.2026.\n22.04.2026: Counsel for plaintiff again seeks time to file chief-examination affidavit of PW1. This is the third request on behalf of the plaintiff. Granted subject to costs of Rs. 5,000/- payable to the defendant. Call on 24.06.2026."
+    "source_text": "03.11.2025: Issues framed. For plaintiff's evidence on 12.01.2026.\n12.01.2026: PW1 examined in chief by affidavit. Ex.A1 to A20 marked. For cross-examination of PW1 on 23.02.2026.\n23.02.2026: Counsel for defendant absent. Junior counsel seeks time for cross-examination of PW1. Adjourned. For cross-examination of PW1 on 20.04.2026.\n20.04.2026: Counsel for defendant reported to be unwell. Adjourned as a last opportunity for cross-examination of PW1. For cross-examination of PW1 on 22.06.2026."
   },
   {
     "files": [
-      "backlog/2026-04/IMG_20260427_125613.jpg"
+      "backlog/2026-05/OS_302-2025_2026-05-06.docx"
     ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-04-27",
+    "type": "typed_note_docx",
+    "author": "Aditya",
+    "date": "2026-05-06",
     "case_ids": [
-      "C05"
+      "C4"
     ],
-    "hearing_ids": [
-      "C05-H09"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Siddiqui cross-examined our PW1 for nearly 2 hours. Client held up mostly, one wobble on dates. Told Anuradha garu the next date."
+    "source_text": "Compromise recorded. Tenant to vacate by 30.11.2026. Balance Rs 88,000 in instalments of Rs 15,000 by the 10th of each month from June 2026 (6 instalments, last one Rs 13,000 in Nov). If any instalment is missed we can execute the decree for eviction at once - clause 4 of the memo."
   },
   {
     "files": [
-      "backlog/2026-04/sai_court_notes_2026-04-27.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-04-27",
-    "case_ids": [
-      "C22"
-    ],
-    "hearing_ids": [
-      "C22-H09"
-    ],
-    "source_text": "27 Apr 2026, Mon - court notes (Sai)\n\nFarzana partition (OS 1011/22) - We sought time - counsel part-heard in another court. Same old story.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-04/CC_OS_377-22_2026-04-27.jpg"
+      "backlog/2026-05/CC_OS_302-2025_2026-05-06.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
-    "date": "2026-04-29",
+    "date": "2026-05-08",
     "case_ids": [
-      "C05"
+      "C4"
     ],
-    "hearing_ids": [
-      "C05-H06",
-      "C05-H07",
-      "C05-H08",
-      "C05-H09"
-    ],
-    "source_text": "10.12.2025: Counsel for the plaintiff seeks time. Granted. Call on 05.02.2026.\n05.02.2026: Chief-examination affidavit of PW1 filed. Exs. A1 to A11 marked. For cross-examination of PW1, call on 10.03.2026.\n10.03.2026: Not reached. Call on 27.04.2026.\n27.04.2026: PW1 cross-examined by counsel for defendant and discharged. Call on 08.06.2026."
+    "source_text": "29.10.2025: Defendant deposited Rs. 60,000. Further time of six weeks granted to deposit the balance. For deposit on 28.01.2026.\n28.01.2026: Defendant deposited a further sum of Rs. 50,000. Parties are advised to explore settlement. For report on 18.03.2026.\n18.03.2026: Counsel on both sides report that settlement talks are in progress. For compromise on 06.05.2026.\n06.05.2026: Joint compromise memo filed and recorded. Defendant to vacate the plaint schedule premises on or before 30.11.2026 and pay the balance arrears of Rs. 88,000 in monthly instalments of Rs. 15,000 on or before the 10th of every month from June 2026. Suit decreed in terms of the compromise. No costs."
   },
   {
     "files": [
-      "backlog/2026-04/sai_court_notes_2026-04-29.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-04-29",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H10"
-    ],
-    "source_text": "29 Apr 2026, Wed - court notes (Sai)\n\nTadepalli - not reached. Board had 60+ items.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-04/IMG_20260430_171327.jpg"
+      "backlog/2026-05/IMG_20260513_150925.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-04-30",
+    "author": "Aditya",
+    "date": "2026-05-13",
     "case_ids": [
-      "C13"
+      "C2"
     ],
-    "hearing_ids": [
-      "C13-H09"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - Bar association boycott, no work. Adjourned. Bas."
+    "source_text": "Seabreeze SP - company closed evidence. Srinivas (D1) as DW1: 'Ramesh and I are EQUAL owners, 50-50, each 2.10 acres.' Divya pls check - in OS 214/24 before Padmavathi madam his WS says he owns 70%!! Get certified copy of this deposition for use in OS 214."
   },
   {
     "files": [
-      "backlog/2026-04/court_notes_2026-04-30.txt"
+      "backlog/2026-05/CC_OS_57-2025_2026-05-13.jpg"
+    ],
+    "type": "certified_order_sheet_scan",
+    "author": "court",
+    "date": "2026-05-14",
+    "case_ids": [
+      "C2"
+    ],
+    "source_text": "04.02.2026: PW1 cross-examined by counsel for D1 and D2. For PW2 on 08.04.2026.\n08.04.2026: Counsel for plaintiff reported to be held up in another court. Adjourned as a last chance. For PW2 on 13.05.2026.\n13.05.2026: Plaintiff's evidence closed. DW1 (D1) examined in chief. For cross-examination of DW1 on 15.07.2026."
+  },
+  {
+    "files": [
+      "backlog/2026-06/court_notes_2026-06-03.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-04-30",
+    "author": "Divya",
+    "date": "2026-06-03",
     "case_ids": [
-      "C38"
+      "C1"
     ],
-    "hearing_ids": [
-      "C38-H05"
-    ],
-    "source_text": "30 Apr 2026, Thu - court notes\n\nYarlagadda CMA (CMA 1181/25) - Not reached. Nothing new. Tension ledu.\n"
+    "source_text": "03 Jun 2026, Wed - court notes (Divya)\n\nGorle partition - PW2 VRO Appala Naidu (same VRO as in Seabreeze injunction). 1-B ROR shows 2.10 acres each in both names since 2012 mutation. Ramesh's family cultivates mango and cashew on the east half; the grave of Ramesh's father is on the east side under the mango trees. Cross: Harinath asked who pays land tax - VRO: 'both, separately, for 2.10 each.'\n"
   },
   {
     "files": [
-      "backlog/2026-06/CMA_640-25_2026-06-08.docx"
+      "backlog/2026-06/CC_OS_214-2024_2026-06-03.jpg"
     ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-06-08",
+    "type": "certified_order_sheet_scan",
+    "author": "court",
+    "date": "2026-06-05",
     "case_ids": [
-      "C14"
+      "C1"
     ],
-    "hearing_ids": [
-      "C14-H07"
-    ],
-    "source_text": "Fresh Dairy CMA (CMA 640/25) - Not reached. Nothing new."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260608_135940.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C32",
-      "C33",
-      "C40"
-    ],
-    "hearing_ids": [
-      "C32-H10",
-      "C33-H07",
-      "C40-H04"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Not reached, long list.\n\nPinto pension WP (WP 27730/24) - Not reached.\n\nDr. Anuradha CRP (CRP 3065/25) - Admitted, notice ordered. Somayajulu J first asked why we came after 5 months - explained, he accepted."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260608_160624.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C05",
-      "C11",
-      "C29"
-    ],
-    "hearing_ids": [
-      "C05-H10",
-      "C11-H07",
-      "C29-H08"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Siddiqui sought time - sought time saying client is considering Lok Adalat. Tension ledu.\n\nBedi permits WP (WP 9921/25) - Bar association boycott, no work. Adjourned.\n\nSai Balaji DISCOM WP (WP 12577/25) - Judge on leave. Wasted morning. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260608_173409.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H09"
-    ],
-    "source_text": "Kamala Devi outhouse (OS 95/24) - Not reached. Item 50, no chance. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-06/OS_1180-21_2026-06-08.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H10"
-    ],
-    "source_text": "Gollapudi partition (OS 1180/21) - Ravuri sought time - sought time to file written submissions on maintainability. Parvathamma amma was not happy. Chalo."
-  },
-  {
-    "files": [
-      "backlog/2026-06/OS_1520-23_2026-06-08.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C20"
-    ],
-    "hearing_ids": [
-      "C20-H09"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - We sought time - client unwell."
-  },
-  {
-    "files": [
-      "backlog/2026-06/WP_22019-25_2026-06-08.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C25"
-    ],
-    "hearing_ids": [
-      "C25-H06"
-    ],
-    "source_text": "Vijaya Durga SRO WP (WP 22019/25) - Ravuri sought time - sought time to file written submissions on maintainability. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-06/court_notes_2026-06-08.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C02",
-      "C04",
-      "C06",
-      "C09",
-      "C16",
-      "C17",
-      "C18",
-      "C26",
-      "C27",
-      "C36",
-      "C37"
-    ],
-    "hearing_ids": [
-      "C02-H09",
-      "C04-H07",
-      "C06-H08",
-      "C09-H10",
-      "C16-H10",
-      "C17-H10",
-      "C18-H09",
-      "C26-H08",
-      "C27-H09",
-      "C36-H08",
-      "C37-H09"
-    ],
-    "source_text": "08 Jun 2026, Mon - court notes\n\nKhaja Moinuddin (OS 902/24) - Not reached - court busy with a part-heard matter.\n\nDeccan Polymers CRP (CRP 2211/25) - Not reached.\n\nPasupuleti eviction (OS 1415/24) - Not reached. Item 56, no chance.\n\nAgarwal / Hanuman Textiles (OS 842/21) - PW2 done. Witness was nervous but ok.\n\nRevathi partition (OS 214/23) - Not reached.\n\nRasheed Khan (tenant) (OS 1302/24) - Jadhav sought time - their witness not ready. Abdul garu asked how long this will go on. Bas.\n\nKandregula contract (OS 509/22) - Not reached - court busy with a part-heard matter. Same old story.\n\nBalaraju title suit (OS 1650/22) - Bar association boycott, no work. Adjourned. Same old story.\n\nVaishnavi v Manikanta (OS 733/23) - PW2 done. Witness was nervous but ok. Doddapaneni madam asked whether parties tried mediation. Again.\n\nFarzana eviction appeal (AS 112/25) - Not reached - court busy with a part-heard matter.\n\nFresh Dairy suit (OS 288/25) - Not reached - court busy with a part-heard matter. Bas.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-06/sai_court_notes_2026-06-08.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-06-08",
-    "case_ids": [
-      "C24",
-      "C34",
-      "C39"
-    ],
-    "hearing_ids": [
-      "C24-H09",
-      "C34-H09",
-      "C39-H08"
-    ],
-    "source_text": "08 Jun 2026, Mon - court notes (Sai)\n\nDeccan Polymers v Arun (OS 488/25) - Not reached, long list. Tension ledu.\n\nAgarwal v Balaji Fabrics (OS 610/25) - Not reached, long list. Chalo.\n\nUppal temple land (OS 1433/23) - We sought time - counsel part-heard in another court.\n"
+    "source_text": "07.01.2026: PW1 examined in chief by affidavit. Ex.A1 to A5 marked. For cross-examination of PW1 on 18.02.2026.\n18.02.2026: PW1 cross-examined. Plaintiff seeks time to summon PW2. For PW2 on 25.03.2026.\n25.03.2026: PW2 not present; summons not taken out. Adjourned at the request of plaintiff. For PW2 on 03.06.2026.\n03.06.2026: PW2 examined and cross-examined. Plaintiff's evidence closed. For defendant's evidence on 22.07.2026."
   },
   {
     "files": [
       "backlog/2026-06/court_notes_2026-06-10.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2026-06-10",
     "case_ids": [
-      "C08"
+      "C3"
     ],
-    "hearing_ids": [
-      "C08-H08"
-    ],
-    "source_text": "10 Jun 2026, Wed - court notes\n\nPinto society (OS 1127/23) - Not reached - court busy with a part-heard matter. Tension ledu.\n"
+    "source_text": "10 Jun 2026, Wed - court notes (Divya)\n\nSeabreeze inj - PW2 VRO Appala Naidu (summoned). Said he inspected the land on 14.04.2025 on Tahsildar's instructions after a complaint; saw about 40 cement fencing poles along the west boundary; workers told him they were Seabreeze people. Cross: Harsha asked if he saw any company board - VRO said 'no board, but a Seabreeze jeep AP 31 CX 4417 was parked there.' Very useful.\n"
   },
   {
     "files": [
-      "backlog/2026-06/CC_OS_842-21_2026-06-08.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-06-11",
-    "case_ids": [
-      "C09"
-    ],
-    "hearing_ids": [
-      "C09-H08",
-      "C09-H09",
-      "C09-H10"
-    ],
-    "source_text": "27.02.2026: Advocates abstained from work on the call of the Bar Association. Call on 06.04.2026.\n06.04.2026: Not reached. Call on 08.06.2026.\n08.06.2026: PW2 examined in chief and cross-examined. Discharged. Call on 03.08.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260617_122854.jpg"
+      "backlog/2026-06/IMG_20260622_194424.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-06-17",
-    "case_ids": [
-      "C03"
-    ],
-    "hearing_ids": [
-      "C03-H10"
-    ],
-    "source_text": "Kasoju pronote (OS 655/23) - No court today, judge on leave."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260619_112659.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-06-19",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H11"
-    ],
-    "source_text": "Tadepalli - Achary's junior came with a memo, 'counsel unwell, viral fever'. Judge granted without fuss, first one from their side. DW1 was not even present, so they were not going to go ahead anyway. Gopal garu upset, said he has been coming for 4 years."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260619_145919.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-06-19",
-    "case_ids": [
-      "C22"
-    ],
-    "hearing_ids": [
-      "C22-H10"
-    ],
-    "source_text": "Farzana partition (OS 1011/22) - We sought time - counsel part-heard in another court."
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260622_134412.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
+    "author": "Aditya",
     "date": "2026-06-22",
     "case_ids": [
-      "C21"
+      "C5"
     ],
-    "hearing_ids": [
-      "C21-H06"
-    ],
-    "source_text": "Balaraju CRP (CRP 1874/25) - Not reached. Item 47, no chance."
+    "source_text": "Greenfield - 3rd adjournment request. Murthy sir REJECTED it, cross of PW1 closed as nil, Rs 3,000 costs. Said: 'If counsel is unwell every alternate hearing, the client should engage another counsel.' Same as he did in Seabreeze (Rs 2,000 costs for irregular filing). His pattern: 2nd time 'last opportunity', 3rd time costs."
   },
   {
     "files": [
-      "backlog/2026-06/IMG_20260622_154504.jpg"
+      "backlog/2026-07/IMG_20260715_191354.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-06-22",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H09"
-    ],
-    "source_text": "Bedi accounts (OS 1198/23) - Bar association boycott, no work. Adjourned. Ayyo."
-  },
-  {
-    "files": [
-      "backlog/2026-06/AS_58-24_2026-06-23.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-06-23",
-    "case_ids": [
-      "C13"
-    ],
-    "hearing_ids": [
-      "C13-H10"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - We sought time - counsel part-heard in another court."
-  },
-  {
-    "files": [
-      "backlog/2026-06/OS_227-24_2026-06-24.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-06-24",
-    "case_ids": [
-      "C19"
-    ],
-    "hearing_ids": [
-      "C19-H08"
-    ],
-    "source_text": "Kamala Devi - costs 5000 paid by cash receipt, given to Harsha. PW1 affidavit filed finally. His own sale deed (A1) gives the plot as 30 ft x 45 ft - commissioner measured 30 ft x 44 ft 8 in. So the 3 ft claim is nonsense. Prepare cross around A1 dimensions + commissioner report."
-  },
-  {
-    "files": [
-      "backlog/2026-06/court_notes_2026-06-24.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-06-24",
-    "case_ids": [
-      "C15"
-    ],
-    "hearing_ids": [
-      "C15-H07"
-    ],
-    "source_text": "24 Jun 2026, Wed - court notes\n\nUppal temple WP (WP 3310/25) - Not reached. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-06/IMG_20260626_112730.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-06-26",
-    "case_ids": [
-      "C10"
-    ],
-    "hearing_ids": [
-      "C10-H09"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - Ravuri sought time - wants to raise jurisdiction as preliminary issue, sought time. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2026-06/court_notes_2026-06-26.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-06-26",
-    "case_ids": [
-      "C38"
-    ],
-    "hearing_ids": [
-      "C38-H06"
-    ],
-    "source_text": "26 Jun 2026, Fri - court notes\n\nYarlagadda CMA (CMA 1181/25) - We sought time - client unwell. Sare.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-01.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-01",
-    "case_ids": [
-      "C23"
-    ],
-    "hearing_ids": [
-      "C23-H05"
-    ],
-    "source_text": "01 Jul 2026, Wed - court notes\n\nSai Balaji WP - filed our synopsis. R3 (Town Planning) counter still not filed. Interim extended.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/sai_court_notes_2026-07-07.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-07-07",
-    "case_ids": [
-      "C06"
-    ],
-    "hearing_ids": [
-      "C06-H09"
-    ],
-    "source_text": "07 Jul 2026, Tue - court notes (Sai)\n\nPasupuleti eviction (OS 1415/24) - Judge on leave. Wasted morning. Tension ledu.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/sai_court_notes_2026-07-08.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-07-08",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H09"
-    ],
-    "source_text": "08 Jul 2026, Wed - court notes (Sai)\n\nLakshmi Ganapathi - not reached.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260709_110510.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-07-09",
-    "case_ids": [
-      "C16",
-      "C20"
-    ],
-    "hearing_ids": [
-      "C16-H11",
-      "C20-H10"
-    ],
-    "source_text": "Revathi partition (OS 214/23) - Not reached, long list. Sare.\n\nVijaya Durga gift deed (OS 1520/23) - Not reached - court busy with a part-heard matter. Sare."
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-10.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-10",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H10"
-    ],
-    "source_text": "10 Jul 2026, Fri - court notes\n\nKamala Devi outhouse (OS 95/24) - Our PW1 affidavit filed and documents marked.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/CC_OS_95-24_2026-07-10.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-07-13",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H07",
-      "C30-H08",
-      "C30-H09",
-      "C30-H10"
-    ],
-    "source_text": "05.03.2026: Counsel for the other side absent. Memo filed that counsel is unwell. Adjourned. Call on 17.04.2026.\n17.04.2026: Not reached. Call on 08.06.2026.\n08.06.2026: Not reached. Call on 10.07.2026.\n10.07.2026: Chief-examination affidavit of PW1 filed. Exs. A1 to A14 marked. For cross-examination of PW1, call on 19.08.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260714_115407.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-07-14",
-    "case_ids": [
-      "C18"
-    ],
-    "hearing_ids": [
-      "C18-H10"
-    ],
-    "source_text": "Kandregula contract (OS 509/22) - Not reached. Item 59, no chance."
-  },
-  {
-    "files": [
-      "backlog/2026-07/sai_court_notes_2026-07-14.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-07-14",
-    "case_ids": [
-      "C26"
-    ],
-    "hearing_ids": [
-      "C26-H09"
-    ],
-    "source_text": "14 Jul 2026, Tue - court notes (Sai)\n\nBalaraju title suit (OS 1650/22) - Siddiqui sought time - parties are talking settlement, sought time. Balaraju garu asked how long this will go on. Sare.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260715_154434.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-07-15",
     "case_ids": [
-      "C31"
+      "C2"
     ],
-    "hearing_ids": [
-      "C31-H06"
-    ],
-    "source_text": "Gudivada v Kasoju - BIG. In cross PW1 said possession was handed over 'after Sankranti, January 2017, when the old tenant Mallesh vacated'. In chief (19 Nov 2025) he said March 2016 on the sale deed day! 10 months difference - and our case is that Kasoju was in possession through 2016. Order sheet only says 'PW1 cross-examined'. Get certified copy of deposition."
+    "source_text": "Seabreeze SP - DW1 cross. Confronted Srinivas with the 2016 letter (Ex.B3) - admitted his signature. The letter says neither will sell without the other's written consent. He said 'that was a friendly letter.' Also admitted he kept the Rs 25 lakh."
   },
   {
     "files": [
-      "backlog/2026-07/court_notes_2026-07-16.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-16",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H10"
-    ],
-    "source_text": "16 Jul 2026, Thu - court notes\n\nDeccan Polymers v Arun (OS 488/25) - Bar association boycott, no work. Adjourned.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/AS_112-25_2026-07-20.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-07-20",
-    "case_ids": [
-      "C36"
-    ],
-    "hearing_ids": [
-      "C36-H09"
-    ],
-    "source_text": "Farzana eviction appeal (AS 112/25) - Not reached. Nothing new."
-  },
-  {
-    "files": [
-      "backlog/2026-07/CRP_2211-25_2026-07-20.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-07-20",
-    "case_ids": [
-      "C04"
-    ],
-    "hearing_ids": [
-      "C04-H08"
-    ],
-    "source_text": "Deccan Polymers CRP (CRP 2211/25) - Judge on leave. Tension ledu."
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260720_155904.jpg"
+      "backlog/2026-07/IMG_20260722_155634.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-07-20",
-    "case_ids": [
-      "C11"
-    ],
-    "hearing_ids": [
-      "C11-H08"
-    ],
-    "source_text": "Bedi permits WP (WP 9921/25) - Counter filed by Ravuri. Our reply to be filed."
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-20.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-20",
-    "case_ids": [
-      "C34"
-    ],
-    "hearing_ids": [
-      "C34-H10"
-    ],
-    "source_text": "20 Jul 2026, Mon - court notes\n\nAgarwal v Balaji Fabrics (OS 610/25) - Not reached - court busy with a part-heard matter. Bas.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/OS_1011-22_2026-07-22.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-07-22",
     "case_ids": [
-      "C22"
+      "C1"
     ],
-    "hearing_ids": [
-      "C22-H11"
-    ],
-    "source_text": "Farzana partition (OS 1011/22) - Kolluru sought time - claimed our documents were served late, sought time."
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-22.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-22",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H12"
-    ],
-    "source_text": "22 Jul 2026, Wed - court notes\n\nTadepalli - good day. Confronted DW1 with the 2023 mortgage CC. He admitted mortgaging the plot AFTER the suit was filed and during the pendency. That goes to his conduct and also lis pendens. Need one more short session, maybe 30 min, on the valuation point. Then their DW2.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/CC_WP_9921-25_2026-07-20.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-07-23",
-    "case_ids": [
-      "C11"
-    ],
-    "hearing_ids": [
-      "C11-H05",
-      "C11-H06",
-      "C11-H07",
-      "C11-H08"
-    ],
-    "source_text": "02.01.2026: Learned counsel for the respondents seeks time. List on 16.03.2026.\n16.03.2026: Advocates abstained from work on the call of the Bar Association. List on 08.06.2026.\n08.06.2026: Advocates abstained from work on the call of the Bar Association. List on 20.07.2026.\n20.07.2026: Counter-affidavit filed on behalf of the respondents. List on 27.08.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-24.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-24",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H11"
-    ],
-    "source_text": "24 Jul 2026, Fri - court notes\n\nGollapudi partition (OS 1180/21) - Ravuri's DW1 affidavit filed. Need to prepare cross.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260727_154127.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-07-27",
-    "case_ids": [
-      "C39"
-    ],
-    "hearing_ids": [
-      "C39-H09"
-    ],
-    "source_text": "Uppal temple land (OS 1433/23) - Gundlapalli sought time - filed a fresh I.A. yesterday and wants time to argue it. the temple committee was not happy."
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-27.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-27",
-    "case_ids": [
-      "C08",
-      "C27"
-    ],
-    "hearing_ids": [
-      "C08-H09",
-      "C27-H10"
-    ],
-    "source_text": "27 Jul 2026, Mon - court notes\n\nPinto society (OS 1127/23) - WS filed by Baig. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Tummala madam checked vakalat and service first, as usual.\n\nVaishnavi v Manikanta (OS 733/23) - Achary's DW1 affidavit filed. Need to prepare cross.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260728_152001.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-07-28",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H11"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - PW2 done. Witness was nervous but ok."
-  },
-  {
-    "files": [
-      "backlog/2026-07/CC_OS_377-22_2026-07-28.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-07-29",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H10",
-      "C05-H11"
-    ],
-    "source_text": "08.06.2026: Counsel for the defendant seeks time. Granted. Call on 28.07.2026.\n28.07.2026: PW2 examined in chief and cross-examined. Discharged. Call on 23.09.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-07/IMG_20260729_122302.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-07-29",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H11"
-    ],
-    "source_text": "Revathi refund (OS 1066/24) - Not reached. Nothing new. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-07/court_notes_2026-07-29.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-07-29",
-    "case_ids": [
-      "C02",
-      "C33"
-    ],
-    "hearing_ids": [
-      "C02-H10",
-      "C33-H08"
-    ],
-    "source_text": "29 Jul 2026, Wed - court notes\n\nKhaja Moinuddin (OS 902/24) - Kolluru sought time - claimed our documents were served late, sought time. Mohd. garu wanted to know if we can object. Same old story.\n\nPinto pension WP (WP 27730/24) - Not reached. Item 69, no chance.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260803_115128.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-03",
-    "case_ids": [
-      "C03",
-      "C09"
-    ],
-    "hearing_ids": [
-      "C03-H11",
-      "C09-H11"
-    ],
-    "source_text": "Kasoju pronote (OS 655/23) - Cross of DW1 done. Evidence closed, arguments next.\n\nAgarwal / Hanuman Textiles (OS 842/21) - Gundlapalli's DW1 affidavit filed. Need to prepare cross. Quadri sir took it only after lunch. Told Prakash garu the next date."
+    "source_text": "Gorle partition - DW1 Srinivas: 70% claim again. In cross I put his deposition of 13.05.2026 in OS 57/25 (before Murthy sir) - 'Ramesh and I are EQUAL owners, 50-50.' He fumbled: 'that is a different case.' Madam wrote it down carefully. Need CERTIFIED copy of that deposition to mark it - Divya."
   },
   {
     "files": [
       "backlog/2026-08/court_notes_2026-08-03.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Meera",
+    "author": "Divya",
     "date": "2026-08-03",
     "case_ids": [
-      "C17",
-      "C28"
+      "C5"
     ],
-    "hearing_ids": [
-      "C17-H11",
-      "C28-H10"
-    ],
-    "source_text": "03 Aug 2026, Mon - court notes\n\nRasheed Khan (tenant) (OS 1302/24) - Jadhav sought time - sought time as witness is out of station. Abdul garu was not happy.\n\nBedi accounts (OS 1198/23) - Not reached - court busy with a part-heard matter. Ayyo.\n"
+    "source_text": "03 Aug 2026, Mon - court notes (Divya)\n\nGreenfield - DW1 school correspondent K. Jagan Mohan. Chief: printing defects, pages missing in class 7 maths books.\n"
   },
   {
     "files": [
-      "backlog/2026-08/sai_court_notes_2026-08-05.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-08-05",
-    "case_ids": [
-      "C19"
-    ],
-    "hearing_ids": [
-      "C19-H09"
-    ],
-    "source_text": "05 Aug 2026, Wed - court notes (Sai)\n\nKamala Devi - judge on leave.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260806_163602.jpg"
+      "backlog/2026-08/IMG_20260819_111302.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-08-06",
+    "author": "Aditya",
+    "date": "2026-08-19",
     "case_ids": [
-      "C25"
+      "C3"
     ],
-    "hearing_ids": [
-      "C25-H07"
-    ],
-    "source_text": "Vijaya Durga SRO WP (WP 22019/25) - Not reached. Item 35, no chance. Bas."
+    "source_text": "Seabreeze inj - DW1 Kiran Kumar Sabbavarapu (company site manager). Chief: 'no work at all before permissions.' In cross he admitted 'survey pegs and some poles' were put in April 2025. Also admitted jeep AP 31 CX 4417 is a company vehicle. Continue cross on 5 Oct - confront him with para 3 of the company's own plaint in OS 57/25 (they 'commenced preliminary works in April 2025')! Get certified copy of that plaint - Divya."
   },
   {
     "files": [
-      "backlog/2026-08/IMG_20260810_131942.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-08-10",
-    "case_ids": [
-      "C37"
-    ],
-    "hearing_ids": [
-      "C37-H10"
-    ],
-    "source_text": "Fresh Dairy suit (OS 288/25) - Not reached. Item 30, no chance."
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260810_154439.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-10",
-    "case_ids": [
-      "C13"
-    ],
-    "hearing_ids": [
-      "C13-H11"
-    ],
-    "source_text": "Vadlamani appeal (AS 58/24) - Not reached."
-  },
-  {
-    "files": [
-      "backlog/2026-08/court_notes_2026-08-11.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-08-11",
-    "case_ids": [
-      "C16"
-    ],
-    "hearing_ids": [
-      "C16-H12"
-    ],
-    "source_text": "11 Aug 2026, Tue - court notes\n\nRevathi partition (OS 214/23) - Siddiqui sought time - sought time saying client is considering Lok Adalat. Ayyo.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260812_171906.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-12",
-    "case_ids": [
-      "C21",
-      "C23"
-    ],
-    "hearing_ids": [
-      "C21-H07",
-      "C23-H06"
-    ],
-    "source_text": "Balaraju CRP (CRP 1874/25) - Not reached.\n\nSai Balaji GHMC WP (WP 14872/25). R3 counter served in court today. I undertook to file our reply/rejoinder within 3 WEEKS - judge recorded it word for word in the order (her habit). So due by 2 Sept. R3 says the setback violation is 1.2 m on the east side - our approved plan says 1.5 m setback was left. Need the approved plan copy from Ravi Shankar garu + the 2014 occupancy certificate."
-  },
-  {
-    "files": [
-      "backlog/2026-08/CC_WP_14872-25_2026-08-12.jpg"
+      "backlog/2026-08/CC_OS_131-2025_2026-08-19.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
-    "date": "2026-08-17",
+    "date": "2026-08-21",
     "case_ids": [
-      "C23"
+      "C3"
     ],
-    "hearing_ids": [
-      "C23-H03",
-      "C23-H04",
-      "C23-H05",
-      "C23-H06"
-    ],
-    "source_text": "08.10.2025: Counter-affidavit not filed. Interim order extended till the next date. List on 26.02.2026.\n26.02.2026: Counter-affidavit of respondent No. 2 filed. Paper book exceeds 200 pages; both sides to file synopsis. Interim order extended till the next date. List on 01.07.2026.\n01.07.2026: Synopsis filed on behalf of the petitioner. Counter-affidavit of respondent No. 3 awaited. Interim order extended till the next date. List on 12.08.2026.\n12.08.2026: Counter-affidavit of respondent No. 3 filed and served in court. Learned counsel for the petitioner undertakes to file reply affidavit within three weeks. Interim order extended till the next date. List on 04.09.2026."
+    "source_text": "21.01.2026: PW1 cross-examined by counsel for defendant. For PW2 on 11.03.2026.\n11.03.2026: Memo filed by defendant without serving copy on the other side is not received. Defendant is directed to serve copies before filing any memo. Counsel for plaintiff reports that stones on the boundary were removed; defendant is cautioned to strictly comply with the injunction order. For PW2 on 10.06.2026.\n10.06.2026: PW2 examined and cross-examined. For defendant's evidence on 19.08.2026.\n19.08.2026: DW1 examined in chief by affidavit. Ex.B1 to B3 marked. Cross-examination of DW1 in part. For further cross-examination of DW1 on 05.10.2026."
   },
   {
     "files": [
-      "backlog/2026-08/IMG_20260818_142011.jpg"
+      "backlog/2026-09/IMG_20260902_142937.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-08-18",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [],
-    "source_text": "18/8 - 2.35 pm, HC CH-12 corridor. Saw Achary sir arguing a matter in Court Hall 12 (not ours). Looked perfectly fine. This is the same day his junior filed 'counsel indisposed' memo in Tadepalli at 10.40 am. Told Meera madam."
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260818_162936.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-18",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H13"
-    ],
-    "source_text": "Tadepalli - AGAIN Achary unwell, memo filed at 10.40 by his junior. 2nd time on their side in this case. Judge wrote 'last opportunity' and said orally 'next time I will not be so kind, counsel'. Gopal garu asked me in the corridor whether we can ask for costs - he has taken leave 6 times. Told him yes, if they seek time again we will press for costs and the judge has done it before."
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260819_171404.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-19",
-    "case_ids": [
-      "C10"
-    ],
-    "hearing_ids": [
-      "C10-H10"
-    ],
-    "source_text": "Greenfield park WP (WP 18342/24) - We sought time - client unwell."
-  },
-  {
-    "files": [
-      "backlog/2026-08/OS_764-20_2026-08-19.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-08-19",
-    "case_ids": [
-      "C31"
-    ],
-    "hearing_ids": [
-      "C31-H07"
-    ],
-    "source_text": "Gudivada v Kasoju - Kasoju garu (DW1) deposed, held up well under Jadhav's 1.5 hr cross. Evidence closed both sides. Arguments 5 Oct. Quadri sir likes exact exhibit numbers - make a list: A1 sale deed, A6 tax receipts, B2 electricity bills in Kasoju's name 2015-2017."
-  },
-  {
-    "files": [
-      "backlog/2026-08/court_notes_2026-08-19.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-08-19",
-    "case_ids": [
-      "C29"
-    ],
-    "hearing_ids": [
-      "C29-H09"
-    ],
-    "source_text": "19 Aug 2026, Wed - court notes\n\nSai Balaji DISCOM WP (WP 12577/25) - Baig sought time - sought one week for instructions, fair enough.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/sai_court_notes_2026-08-19.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-08-19",
-    "case_ids": [
-      "C30"
-    ],
-    "hearing_ids": [
-      "C30-H11"
-    ],
-    "source_text": "19 Aug 2026, Wed - court notes (Sai)\n\nKamala Devi outhouse (OS 95/24) - Not reached - court busy with a part-heard matter. Sare.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260824_123417.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-24",
-    "case_ids": [
-      "C14"
-    ],
-    "hearing_ids": [
-      "C14-H08"
-    ],
-    "source_text": "Fresh Dairy CMA (CMA 640/25) - Service complete. Ready for hearing."
-  },
-  {
-    "files": [
-      "backlog/2026-08/sai_court_notes_2026-08-24.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-08-24",
-    "case_ids": [
-      "C01"
-    ],
-    "hearing_ids": [
-      "C01-H12"
-    ],
-    "source_text": "24 Aug 2026, Mon - court notes (Sai)\n\nGollapudi partition (OS 1180/21) - Ravuri sought time - sought time to file written submissions on maintainability. Parvathamma amma asked how long this will go on.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/court_notes_2026-08-25.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-08-25",
-    "case_ids": [
-      "C24"
-    ],
-    "hearing_ids": [
-      "C24-H11"
-    ],
-    "source_text": "25 Aug 2026, Tue - court notes\n\nDeccan Polymers v Arun (OS 488/25) - Siddiqui sought time - parties are talking settlement, sought time. Same old story.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260826_133230.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-26",
-    "case_ids": [
-      "C12"
-    ],
-    "hearing_ids": [
-      "C12-H10"
-    ],
-    "source_text": "Lakshmi Ganapathi - Achary finished. Our reply next date - short, 15 min, just the S.18 acknowledgement and the 6 challans. After that, judgment. Told Srinivas garu judgment may come by Diwali."
-  },
-  {
-    "files": [
-      "backlog/2026-08/OS_902-24_2026-08-26.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-08-26",
-    "case_ids": [
-      "C02"
-    ],
-    "hearing_ids": [
-      "C02-H11"
-    ],
-    "source_text": "Khaja Moinuddin (OS 902/24) - WS filed by Kolluru. Mostly bare denials. Para 9 takes a new plea we must answer in evidence. Madam returned a document for page-numbering defect."
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260827_112326.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-27",
-    "case_ids": [
-      "C20"
-    ],
-    "hearing_ids": [
-      "C20-H11"
-    ],
-    "source_text": "Vijaya Durga gift deed (OS 1520/23) - Sarma cross-examined our PW1 for 40 min. Client held up mostly, one wobble on dates. Madam suggested mediation centre - client not keen."
-  },
-  {
-    "files": [
-      "backlog/2026-08/WP_9921-25_2026-08-27.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-08-27",
-    "case_ids": [
-      "C11"
-    ],
-    "hearing_ids": [
-      "C11-H09"
-    ],
-    "source_text": "Bedi permits WP (WP 9921/25) - Our reply filed. Now final hearing."
-  },
-  {
-    "files": [
-      "backlog/2026-08/court_notes_2026-08-27.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-08-27",
-    "case_ids": [
-      "C40"
-    ],
-    "hearing_ids": [
-      "C40-H05"
-    ],
-    "source_text": "27 Aug 2026, Thu - court notes\n\nDr. Anuradha CRP (CRP 3065/25) - Service complete. Ready for hearing. Told Anuradha garu the next date.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-08/CC_CRP_3065-25_2026-08-27.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-08-28",
-    "case_ids": [
-      "C40"
-    ],
-    "hearing_ids": [
-      "C40-H02",
-      "C40-H03",
-      "C40-H04",
-      "C40-H05"
-    ],
-    "source_text": "19.01.2026: Not reached. List on 02.03.2026.\n02.03.2026: Not reached. List on 08.06.2026.\n08.06.2026: Heard. Admit. Notice to respondents. List on 27.08.2026.\n27.08.2026: Service of notice on respondents complete. List on 05.10.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-08/CC_WP_9921-25_2026-08-27.jpg"
-    ],
-    "type": "certified_order_sheet_scan",
-    "author": "court",
-    "date": "2026-08-31",
-    "case_ids": [
-      "C11"
-    ],
-    "hearing_ids": [
-      "C11-H09"
-    ],
-    "source_text": "27.08.2026: Reply affidavit filed on behalf of the petitioner. List for hearing on 05.10.2026."
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260831_130152.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-08-31",
-    "case_ids": [
-      "C36"
-    ],
-    "hearing_ids": [
-      "C36-H10"
-    ],
-    "source_text": "Farzana eviction appeal (AS 112/25) - Judge on leave. Wasted morning."
-  },
-  {
-    "files": [
-      "backlog/2026-08/IMG_20260831_171556.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-08-31",
-    "case_ids": [
-      "C06"
-    ],
-    "hearing_ids": [
-      "C06-H10"
-    ],
-    "source_text": "Pasupuleti eviction (OS 1415/24) - Kolluru sought time - claimed she was not served with our copy. Bas."
-  },
-  {
-    "files": [
-      "backlog/2026-08/court_notes_2026-08-31.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-08-31",
-    "case_ids": [
-      "C18",
-      "C34"
-    ],
-    "hearing_ids": [
-      "C18-H11",
-      "C34-H11"
-    ],
-    "source_text": "31 Aug 2026, Mon - court notes\n\nKandregula contract (OS 509/22) - Not reached - court busy with a part-heard matter. Same old story.\n\nAgarwal v Balaji Fabrics (OS 610/25) - Gundlapalli sought time - filed a fresh I.A. yesterday and wants time to argue it. Prakash garu asked how long this will go on. Bas.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-09/IMG_20260902_161942.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
+    "author": "Aditya",
     "date": "2026-09-02",
     "case_ids": [
-      "C03"
+      "C2"
     ],
-    "hearing_ids": [
-      "C03-H12"
-    ],
-    "source_text": "Kasoju pronote (OS 655/23) - Not reached - court busy with a part-heard matter. Ayyo."
+    "source_text": "Seabreeze SP - company wants to AMEND plaint to ask for Srinivas's half only (alternative relief). Means they know they'll lose on Ramesh's half. I undertook to file objections by 30 Sept. Divya: draft objections by 20 Sept, need certified copy of EC and 1-B again (latest). Ramesh garu - explain on phone, he'll panic."
   },
   {
     "files": [
-      "backlog/2026-09/OS_1127-23_2026-09-04.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Meera",
-    "date": "2026-09-04",
-    "case_ids": [
-      "C08"
-    ],
-    "hearing_ids": [
-      "C08-H10"
-    ],
-    "source_text": "Pinto society (OS 1127/23) - Issues framed - 3 issues plus relief. Draft PW1 chief affidavit now. Tummala madam checked vakalat and service first, as usual. Told Joseph garu the next date."
-  },
-  {
-    "files": [
-      "backlog/2026-09/OS_1302-24_2026-09-04.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2026-09-04",
-    "case_ids": [
-      "C17"
-    ],
-    "hearing_ids": [
-      "C17-H12"
-    ],
-    "source_text": "Rasheed Khan (tenant) (OS 1302/24) - Not reached - court busy with a part-heard matter."
-  },
-  {
-    "files": [
-      "backlog/2026-09/court_notes_2026-09-04.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-09-04",
-    "case_ids": [
-      "C23"
-    ],
-    "hearing_ids": [
-      "C23-H07"
-    ],
-    "source_text": "04 Sep 2026, Fri - court notes\n\nSai Balaji WP - our reply was filed yesterday 3 Sept (diary no. 4471) - ONE DAY late on the undertaking, judge did not comment. Hemalatha Ravuri (GHMC SC) acknowledged receipt of the reply copy in court today, 4 Sept, signed on our copy. Listed for final hearing 5 Oct. Keep the approved plan flagged at page 64.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-09/CC_OS_1127-23_2026-09-04.jpg"
+      "backlog/2026-09/CC_OS_57-2025_2026-09-02.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
     "date": "2026-09-07",
     "case_ids": [
-      "C08"
+      "C2"
     ],
-    "hearing_ids": [
-      "C08-H07",
-      "C08-H08",
-      "C08-H09",
-      "C08-H10"
-    ],
-    "source_text": "20.04.2026: Counsel for the defendant seeks time. Granted. Call on 10.06.2026.\n10.06.2026: Not reached. Call on 27.07.2026.\n27.07.2026: Written statement filed on behalf of the defendants. Copy served. For framing of issues, call on 04.09.2026.\n04.09.2026: Issues framed. For plaintiff's evidence, call on 26.10.2026."
+    "source_text": "15.07.2026: DW1 cross-examined by counsel for D2. For D2's evidence on 02.09.2026.\n02.09.2026: Plaintiff filed I.A. No. 1187 of 2026 under O.6 R.17 CPC for amendment of plaint. Counsel for D2 undertakes to file objections by 30.09.2026. For objections and hearing on the I.A. on 05.10.2026."
   },
   {
     "files": [
-      "backlog/2026-09/IMG_20260907_123351.jpg"
+      "backlog/2026-09/IMG_20260909_115724.jpg"
     ],
     "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-09-07",
+    "author": "Divya",
+    "date": "2026-09-09",
     "case_ids": [
-      "C39"
+      "C1"
     ],
-    "hearing_ids": [
-      "C39-H10"
-    ],
-    "source_text": "Uppal temple land (OS 1433/23) - Gundlapalli sought time - filed a fresh I.A. yesterday and wants time to argue it. the temple committee wanted to know if we can object. Ayyo."
+    "source_text": "Gorle partition - DW2 (Srinivas's brother-in-law Pothina Venkat, receipt witness) absent. Harinath sought time. Madam: 'last chance' but no costs. Next 14 Oct."
   },
   {
     "files": [
-      "backlog/2026-09/sai_court_notes_2026-09-07.txt"
+      "backlog/2026-09/IMG_20260914_135903.jpg"
+    ],
+    "type": "handwritten_note_photo",
+    "author": "Aditya",
+    "date": "2026-09-14",
+    "case_ids": [
+      "C5"
+    ],
+    "source_text": "Greenfield - DW1 cross. Admitted: all books were distributed to students in June 2023; not one returned; no written complaint ever sent to the printer. For arguments on 5 Oct - written arguments ready by 1 Oct (Divya drafts, I finalise)."
+  },
+  {
+    "files": [
+      "backlog/2026-09/notes_2026-09-15.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-09-07",
+    "author": "Divya",
+    "date": "2026-09-15",
     "case_ids": [
-      "C22"
+      "C4"
     ],
-    "hearing_ids": [
-      "C22-H12"
-    ],
-    "source_text": "07 Sep 2026, Mon - court notes (Sai)\n\nFarzana partition (OS 1011/22) - Kolluru sought time - claimed she was not served with our copy.\n"
+    "source_text": "Tiffin centre - Lakshmi garu called. September instalment (Rs 15,000, due 10th) NOT paid. August one came late on 14th. Clause 4 of compromise memo: we can file execution for eviction at once. Asked sir - he said send a letter to Sundari madam first, then EP if not paid by 25th."
   },
   {
     "files": [
-      "backlog/2026-09/IMG_20260908_111437.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Meera",
-    "date": "2026-09-08",
-    "case_ids": [
-      "C35"
-    ],
-    "hearing_ids": [
-      "C35-H06"
-    ],
-    "source_text": "Sunitha injunction - IA 402 DISMISSED. Madam held the 'headroom' is not a floor and no prima facie case of violation. Bad. Told Sunitha garu we will file the appeal (CMA) well in time, not to worry. Sai - apply for certified copy tomorrow itself and compute limitation for CMA before Chief Judge. Construction will go faster now."
-  },
-  {
-    "files": [
-      "backlog/2026-09/CC_OS_145-25_2026-09-08.jpg"
+      "backlog/2026-09/CC_OS_88-2025_2026-09-14.jpg"
     ],
     "type": "certified_order_sheet_scan",
     "author": "court",
-    "date": "2026-09-11",
+    "date": "2026-09-17",
     "case_ids": [
-      "C35"
+      "C5"
     ],
-    "hearing_ids": [
-      "C35-H03",
-      "C35-H04",
-      "C35-H05",
-      "C35-H06"
-    ],
-    "source_text": "13.08.2025: I.A. heard in part. Call on 15.10.2025.\n15.10.2025: Sanctioned plan not produced by D1. Documents filed by plaintiff returned for want of proper index. Call on 09.02.2026.\n09.02.2026: Arguments on I.A. No. 402 of 2025 heard. Orders reserved. Call on 08.09.2026.\n08.09.2026: Orders pronounced in I.A. No. 402 of 2025. For the reasons recorded separately, the I.A. is dismissed. No costs. For plaintiff's evidence, call on 09.11.2026."
+    "source_text": "22.06.2026: Counsel for defendant again seeks adjournment. Request rejected. Cross-examination of PW1 treated as nil. Costs of Rs. 3,000 imposed on defendant payable to plaintiff. For defendant's evidence on 03.08.2026.\n03.08.2026: DW1 examined in chief by affidavit. For cross-examination of DW1 on 14.09.2026.\n14.09.2026: DW1 cross-examined. Evidence on both sides closed. For arguments on 05.10.2026."
   },
   {
     "files": [
-      "backlog/2026-09/sai_court_notes_2026-09-16.txt"
+      "backlog/2026-09/notes_2026-09-24.txt"
     ],
     "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-09-16",
-    "case_ids": [
-      "C07"
-    ],
-    "hearing_ids": [
-      "C07-H14"
-    ],
-    "source_text": "16 Sep 2026, Wed - court notes (Sai)\n\nTadepalli - not reached, long list. Achary's junior was present this time (!). Next date 5 Oct.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-09/IMG_20260921_144607.jpg"
-    ],
-    "type": "handwritten_note_photo",
-    "author": "Sai Kiran",
-    "date": "2026-09-21",
-    "case_ids": [
-      "C33"
-    ],
-    "hearing_ids": [
-      "C33-H09"
-    ],
-    "source_text": "Pinto pension WP (WP 27730/24) - Not reached. Nothing new. Same old story."
-  },
-  {
-    "files": [
-      "backlog/2026-09/court_notes_2026-09-21.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-09-21",
-    "case_ids": [
-      "C04"
-    ],
-    "hearing_ids": [
-      "C04-H09"
-    ],
-    "source_text": "21 Sep 2026, Mon - court notes\n\nDeccan Polymers CRP (CRP 2211/25) - Service complete. Ready for hearing.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-09/OS_377-22_2026-09-23.docx"
-    ],
-    "type": "typed_note_docx",
-    "author": "Sai Kiran",
-    "date": "2026-09-23",
-    "case_ids": [
-      "C05"
-    ],
-    "hearing_ids": [
-      "C05-H12"
-    ],
-    "source_text": "Dr. Anuradha flat (OS 377/22) - Not reached - court busy with a part-heard matter."
-  },
-  {
-    "files": [
-      "backlog/2026-09/court_notes_2026-09-23.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-09-23",
-    "case_ids": [
-      "C27",
-      "C30"
-    ],
-    "hearing_ids": [
-      "C27-H11",
-      "C30-H12"
-    ],
-    "source_text": "23 Sep 2026, Wed - court notes\n\nVaishnavi v Manikanta (OS 733/23) - Achary sought time - counsel unwell, memo filed by junior. Sare.\n\nKamala Devi outhouse (OS 95/24) - We sought time - client unwell.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-09/sai_misc_2026-09-24.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
+    "author": "Divya",
     "date": "2026-09-24",
     "case_ids": [
-      "C35"
+      "C2"
     ],
-    "hearing_ids": [],
-    "source_text": "Sunitha OS 145/25 - certified copy of order in IA 402/2025 received today 24.09.2026 (applied 10.09.2026, CA no. 3907/2026). Will do limitation calculation and CMA draft. -Sai"
-  },
-  {
-    "files": [
-      "backlog/2026-09/court_notes_2026-09-28.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Meera",
-    "date": "2026-09-28",
-    "case_ids": [
-      "C28"
-    ],
-    "hearing_ids": [
-      "C28-H11"
-    ],
-    "source_text": "28 Sep 2026, Mon - court notes\n\nBedi accounts (OS 1198/23) - WS filed by Kolluru. Mostly bare denials. Para 9 takes a new plea we must answer in evidence.\n"
-  },
-  {
-    "files": [
-      "backlog/2026-09/sai_court_notes_2026-09-29.txt"
-    ],
-    "type": "typed_note_txt",
-    "author": "Sai Kiran",
-    "date": "2026-09-29",
-    "case_ids": [
-      "C32"
-    ],
-    "hearing_ids": [
-      "C32-H12"
-    ],
-    "source_text": "29 Sep 2026, Tue - court notes (Sai)\n\nRevathi refund (OS 1066/24) - Siddiqui sought time - sought time saying client is considering Lok Adalat.\n"
+    "source_text": "Seabreeze SP - objections to IA 1187/2026 (amendment): draft 60% done. Waiting for fresh EC from SRO Bheemunipatnam (applied 16 Sept, not given yet). Due to file by 30 Sept as per sir's undertaking. Will tell sir tomorrow."
   }
 ]
