@@ -6,7 +6,9 @@ import type { UIMessage } from "ai";
 import { TopBar } from "@/components/app-shell";
 import { ChatView, toUIMessages } from "@/components/tareekh-chat";
 import { Skeleton } from "@/components/ui/skeleton";
-import { api, type CaseRow } from "@/lib/api";
+import { chatKey, loadChat, useCases } from "@/lib/api";
+import { forget } from "@/lib/cache";
+import { useSession } from "@/lib/session";
 import { cn } from "@/lib/utils";
 
 const MODE_KEY = "tareekh:quick";
@@ -16,8 +18,9 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   const q = useSearchParams().get("q");
   const [chat, setChat] = useState<{ title: string; case_id: string | null; initial: UIMessage[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [cases, setCases] = useState<Record<string, CaseRow>>({});
-  const [lawyer, setLawyer] = useState<string>();
+  const { data: caseList } = useCases();
+  const user = useSession();
+  const lawyer = user?.name.replace(/^adv\.?\s+/i, "").split(" ")[0];
   const [quick, setQuick] = useState(true);
 
   useEffect(() => {
@@ -25,16 +28,17 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
       const v = localStorage.getItem(MODE_KEY);
       if (v != null) setQuick(v === "1");
     } catch {}
-    api.cases().then((cs) => setCases(Object.fromEntries(cs.map((c) => [c.id, c])))).catch(() => {});
-    api.health().then((h) => setLawyer(h.practice.lawyer_short)).catch(() => {});
   }, []);
 
   useEffect(() => {
     setChat(null);
-    api
-      .chat(id)
+    setError(null);
+    // Usually already in the cache from hovering the sidebar link, so this resolves at once.
+    loadChat(id)
       .then((c) => setChat({ title: c.title, case_id: c.case_id, initial: toUIMessages(c.messages) }))
       .catch((e) => setError(e.message));
+    // Messages change while you talk here; don't reopen this chat from a stale copy.
+    return () => forget(chatKey(id));
   }, [id]);
 
   const setMode = (v: boolean) => {
@@ -44,7 +48,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
     } catch {}
   };
 
-  const scoped = chat?.case_id ? cases[chat.case_id] : undefined;
+  const scoped = chat?.case_id ? caseList?.find((c) => c.id === chat.case_id) : undefined;
 
   return (
     <div className="flex h-dvh flex-col">

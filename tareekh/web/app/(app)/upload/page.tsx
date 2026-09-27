@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Camera, Check, FileUp, Loader2, X } from "lucide-react";
 import { TopBar, toast } from "@/components/app-shell";
-import { api, type CaseRow, type Upload } from "@/lib/api";
+import { api, useCases, type Upload } from "@/lib/api";
+import { invalidate } from "@/lib/cache";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
@@ -16,7 +17,6 @@ const STEPS = [
 export default function UploadPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [text, setText] = useState("");
-  const [cases, setCases] = useState<CaseRow[]>([]);
   const [caseHint, setCaseHint] = useState("");
   const [over, setOver] = useState(false);
   const [up, setUp] = useState<Upload | null>(null);
@@ -25,9 +25,7 @@ export default function UploadPage() {
   const input = useRef<HTMLInputElement>(null);
   const camera = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    api.cases().then(setCases).catch(() => {});
-  }, []);
+  const cases = useCases().data ?? [];
 
   const start = async () => {
     if (!files.length && !text.trim()) return toast("Add a photo, a file or a note first");
@@ -56,6 +54,9 @@ export default function UploadPage() {
     setRunning(true);
     try {
       await api.confirm(up.id, Object.entries(edits).map(([id, e]) => ({ id, ...e })));
+      // new notes change Today's "previous hearing" lines and the calendar
+      invalidate("today");
+      invalidate("calendar:");
       const u = await api.getUpload(up.id);
       setUp(u);
       if (u.status === "done") {

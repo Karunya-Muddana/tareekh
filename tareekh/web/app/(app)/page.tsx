@@ -5,20 +5,34 @@ import { useRouter } from "next/navigation";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Gavel, MessageSquareQuote, Sparkles } from "lucide-react";
 import { TopBar, toast } from "@/components/app-shell";
 import { Skeleton } from "@/components/ui/skeleton";
-import { api, chatsChanged, fmtDate, type CalendarEvent, type ChatMemory, type Hearing, type Today } from "@/lib/api";
+import { Prose } from "@/components/prose";
+import {
+  api,
+  chatsChanged,
+  fmtDate,
+  useCalendar,
+  useChatMemories,
+  useInsights,
+  useToday,
+  type CalendarEvent,
+  type ChatMemory,
+  type Hearing,
+} from "@/lib/api";
+import { mutate } from "@/lib/cache";
+import { useSession } from "@/lib/session";
 import { cn } from "@/lib/utils";
 
 export default function TodayPage() {
   const router = useRouter();
-  const [data, setData] = useState<Today | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [memories, setMemories] = useState<ChatMemory[]>([]);
+  const { data, error: todayError } = useToday();
+  const { data: insights, loading: insightsLoading } = useInsights();
+  const { data: memoryList } = useChatMemories();
+  const user = useSession();
+  const [hidden, setHidden] = useState<string[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
-
-  useEffect(() => {
-    api.today().then(setData).catch((e) => setError(e.message));
-    api.chatMemories().then(setMemories).catch(() => {});
-  }, []);
+  const error = todayError?.message;
+  const memories = (memoryList ?? []).filter((m) => !hidden.includes(m.id));
+  const judges = insights?.judges ?? data?.judges ?? {};
 
   const brief = async (h: Hearing, question?: string) => {
     setBusy(h.case_id);
@@ -37,11 +51,14 @@ export default function TodayPage() {
   };
 
   const forget = (m: ChatMemory) => {
-    setMemories((xs) => xs.filter((x) => x.id !== m.id));
-    const timer = setTimeout(() => api.forgetMemory(m.id).catch(() => {}), 5000);
+    setHidden((xs) => [...xs, m.id]);
+    const timer = setTimeout(() => {
+      api.forgetMemory(m.id).catch(() => {});
+      mutate<ChatMemory[]>("chat-memories", (xs) => (xs ?? []).filter((x) => x.id !== m.id), true);
+    }, 5000);
     toast("Forgotten", "Undo", () => {
       clearTimeout(timer);
-      setMemories((xs) => [m, ...xs]);
+      setHidden((xs) => xs.filter((x) => x !== m.id));
     });
   };
 
@@ -50,18 +67,20 @@ export default function TodayPage() {
   return (
     <div className="min-h-dvh">
       <title>Today · Tareekh</title>
-      <TopBar title={<span className="text-muted-foreground font-normal">{data?.practice.lawyer ? `Adv. ${data.practice.lawyer}` : ""}</span>} />
+      <TopBar title={<span className="text-muted-foreground font-normal">{user?.name ?? ""}</span>} />
 
       <main className="mx-auto w-full max-w-6xl px-5 pt-2 pb-[calc(env(safe-area-inset-bottom)+48px)] md:px-8">
         {/* Large title */}
         <header className="pt-4 pb-8 md:pt-8">
           {day ? (
             <>
-              <p className="text-muted-foreground text-sm tnum">{day.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
-              <h1 className="title-xl mt-1 text-[52px] md:text-7xl">{day.toLocaleDateString("en-IN", { weekday: "long" })}</h1>
+              <p className="text-muted-foreground text-sm tnum">
+                {greeting(user?.name)} · {day.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
+              </p>
+              <h1 className="indic mt-3 text-[56px] md:text-[80px]">{day.toLocaleDateString("en-IN", { weekday: "long" }).toLowerCase()}</h1>
               <p className="text-muted-foreground mt-3 text-[15px]">
                 {data!.hearings.length === 0
-                  ? "No matters listed today."
+                  ? "Nothing on today’s cause list."
                   : `${data!.hearings.length} ${data!.hearings.length === 1 ? "matter" : "matters"} listed${
                       data!.hearings[0].court_hall ? `, starting in ${data!.hearings[0].court_hall.split(",")[0]}` : ""
                     }.`}
@@ -85,7 +104,7 @@ export default function TodayPage() {
           <div className="flex min-w-0 flex-col gap-12">
             {/* Today's hearings */}
             <section aria-labelledby="h-today">
-              <SectionTitle id="h-today">In court today</SectionTitle>
+              <SectionTitle id="h-today">Today’s cause list</SectionTitle>
               {!data ? (
                 <HearingSkeleton />
               ) : data.hearings.length === 0 ? (
@@ -108,7 +127,7 @@ export default function TodayPage() {
                         <blockquote className="border-border text-foreground/80 mt-3 border-l-2 pl-3 text-[14px] leading-relaxed">
                           <span className="line-clamp-3">{h.last.text}</span>
                           <footer className="text-muted-foreground mt-1 text-xs tnum">
-                            Last time, {fmtDate(h.last.date)} · {h.last.by}’s note
+                            Previous hearing, {fmtDate(h.last.date)} · {h.last.by}’s note
                           </footer>
                         </blockquote>
                       )}
@@ -136,9 +155,15 @@ export default function TodayPage() {
 
             {/* Commitments */}
             <section aria-labelledby="h-commit">
-              <SectionTitle id="h-commit">Open commitments</SectionTitle>
-              {data?.commitments ? (
-                <div className="text-foreground/85 max-w-prose text-[15px] leading-relaxed whitespace-pre-line">{data.commitments}</div>
+              <SectionTitle id="h-commit">Pending from our side</SectionTitle>
+              {insights?.commitments ? (
+                <Commitments text={insights.commitments} />
+              ) : insightsLoading && !insights ? (
+                <div className="flex flex-col gap-2 py-1" role="status" aria-label="Loading commitments">
+                  <Skeleton className="h-4 w-11/12" />
+                  <Skeleton className="h-4 w-4/5" />
+                  <Skeleton className="h-4 w-3/5" />
+                </div>
               ) : (
                 <div className="text-muted-foreground flex flex-wrap items-center gap-3 text-sm">
                   <span>Tareekh is still learning these from the notes.</span>
@@ -157,7 +182,7 @@ export default function TodayPage() {
             {/* Up next */}
             {data && data.upcoming.length > 0 && (
               <section aria-labelledby="h-next">
-                <SectionTitle id="h-next">Coming up</SectionTitle>
+                <SectionTitle id="h-next">Next dates</SectionTitle>
                 <ul className="divide-border divide-y">
                   {data.upcoming.map((h) => (
                     <li key={h.case_id} className="flex items-baseline justify-between gap-4 py-3">
@@ -207,20 +232,24 @@ export default function TodayPage() {
             </section>
 
             {/* Judges */}
-            {data && Object.keys(data.judges).length > 0 && (
+            {Object.keys(judges).length > 0 && (
               <section aria-labelledby="h-judges">
                 <SectionTitle id="h-judges">Before the bench today</SectionTitle>
                 <div className="flex flex-col gap-2">
-                  {Object.entries(data.judges).map(([id, j]) => (
+                  {Object.entries(judges).map(([id, j]) => (
                     <details key={id} className="group border-border rounded-xl border px-3 py-2.5 open:pb-3">
                       <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
                         <Gavel className="text-muted-foreground size-4" aria-hidden />
                         {j.name}
                         <ChevronRight className="text-muted-foreground ml-auto size-4 transition-transform duration-200 group-open:rotate-90" aria-hidden />
                       </summary>
-                      <p className="text-foreground/80 mt-2 text-[13.5px] leading-relaxed whitespace-pre-line">
-                        {j.profile ?? "Still learning how this judge runs a court. Ask in a chat meanwhile."}
-                      </p>
+                      {j.profile ? (
+                        <Prose className="mt-2 text-[13.5px]">{j.profile}</Prose>
+                      ) : (
+                        <p className="text-muted-foreground mt-2 text-[13.5px] leading-relaxed">
+                          {insightsLoading ? "Checking memory…" : "Still learning how this court runs. Ask in a chat meanwhile."}
+                        </p>
+                      )}
                     </details>
                   ))}
                 </div>
@@ -229,6 +258,32 @@ export default function TodayPage() {
           </aside>
         </div>
       </main>
+    </div>
+  );
+}
+
+function greeting(name?: string) {
+  const h = new Date().getHours();
+  const part = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+  const first = name?.replace(/^adv\.?\s+/i, "").split(" ")[0];
+  return first ? `${part}, ${first}` : part;
+}
+
+/** Commitments from memory can run long: show the top, let the rest open in place. */
+function Commitments({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  const long = text.length > 900;
+  return (
+    <div className="border-border bg-card relative rounded-2xl border px-5 py-4 shadow-[var(--shadow-soft)]">
+      <div className={cn("relative", long && !open && "max-h-72 overflow-hidden")}>
+        <Prose>{text}</Prose>
+        {long && !open && <div className="from-card pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t" aria-hidden />}
+      </div>
+      {long && (
+        <button onClick={() => setOpen(!open)} aria-expanded={open} className="press text-primary mt-2 rounded-md text-sm font-medium hover:underline">
+          {open ? "Show less" : "Show all"}
+        </button>
+      )}
     </div>
   );
 }
@@ -259,8 +314,9 @@ function HearingSkeleton() {
 // ---------------------------------------------------------------- calendar
 function MonthCalendar({ today }: { today?: string }) {
   const [month, setMonth] = useState<string | null>(null);
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [picked, setPicked] = useState<string | null>(null);
+  const { data: cal } = useCalendar(month);
+  const events = useMemo<CalendarEvent[]>(() => cal?.events ?? [], [cal]);
 
   useEffect(() => {
     if (today && !month) {
@@ -268,10 +324,6 @@ function MonthCalendar({ today }: { today?: string }) {
       setPicked(today);
     }
   }, [today, month]);
-
-  useEffect(() => {
-    if (month) api.calendar(month).then((r) => setEvents(r.events)).catch(() => setEvents([]));
-  }, [month]);
 
   const cells = useMemo(() => {
     if (!month) return [];

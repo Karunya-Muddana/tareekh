@@ -1,5 +1,7 @@
 // Typed calls to the FastAPI backend (proxied at /backend by next.config.ts).
 
+import { invalidate, load, prefetch, useCached } from "@/lib/cache";
+
 export type Practice = { lawyer: string; lawyer_short: string; assistant: string; assistant_short: string; city: string };
 export type CaseRow = { id: string; case_number: string; short_name: string; title: string; judge_id: string };
 export type ChatRow = { id: string; title: string; case_id: string | null; updated_at: string; last: string | null };
@@ -35,6 +37,7 @@ export type Today = {
   commitments: string | null;
   recent: { case_id: string; hearing_date: string; author: string; doc_type: string; text: string }[];
 };
+export type Insights = { commitments: string | null; judges: Today["judges"] };
 export type CalendarEvent = { date: string; case_id: string; short_name: string; kind: "hearing" | "listed" };
 export type ChatMemory = { id: string; chat_id: string; case_id: string | null; text: string; kind: string; created_at: string; chat_title: string | null };
 export type MemoryStatus = { pending_operations: number; pending_consolidation: number; total_documents: number; total_observations: number };
@@ -57,6 +60,7 @@ export const api = {
   status: () => call<MemoryStatus>("/memory/status"),
   cases: () => call<CaseRow[]>("/cases"),
   today: () => call<Today>("/today"),
+  todayInsights: () => call<Insights>("/today/insights"),
   calendar: (month: string) => call<{ month: string; today: string; events: CalendarEvent[] }>(`/calendar?month=${month}`),
   chats: () => call<ChatRow[]>("/chats"),
   chat: (id: string) => call<ChatRow & { messages: StoredMessage[] }>(`/chats/${id}`),
@@ -83,9 +87,30 @@ export type UploadEntry = {
 };
 export type Upload = { id: string; status: string; error: string | null; files: string[]; entries: UploadEntry[] };
 
-// Anything that changes the chat list tells the sidebar to refresh.
+// Anything that changes the chat list tells the sidebar (and Today's chat memories) to refresh.
 export const CHATS_CHANGED = "tareekh:chats-changed";
-export const chatsChanged = () => window.dispatchEvent(new Event(CHATS_CHANGED));
+export const chatsChanged = () => {
+  invalidate("chats");
+  invalidate("chat-memories");
+  window.dispatchEvent(new Event(CHATS_CHANGED));
+};
+
+// ---- cached reads (stale-while-revalidate, see lib/cache.ts)
+const MIN = 60_000;
+export const useHealth = () => useCached("health", api.health, { maxAge: 10 * MIN, persist: true });
+export const useToday = () => useCached("today", api.today, { maxAge: MIN, persist: true });
+export const useInsights = () => useCached("today-insights", api.todayInsights, { maxAge: 2 * MIN, persist: true });
+export const useChats = () => useCached("chats", api.chats, { maxAge: 30_000, persist: true });
+export const useCases = () => useCached("cases", api.cases, { maxAge: 10 * MIN, persist: true });
+export const useChatMemories = () => useCached("chat-memories", api.chatMemories, { maxAge: 30_000, persist: true });
+export const useMemoryStatus = () => useCached("status", api.status, { maxAge: 15_000, refreshInterval: 15_000 });
+export const useCalendar = (month: string | null) =>
+  useCached(month ? `calendar:${month}` : null, () => api.calendar(month!), { maxAge: 5 * MIN });
+
+// Chats are cached only briefly (their messages change as you talk), mostly so hover-prefetch makes opening instant.
+export const chatKey = (id: string) => `chat:${id}`;
+export const prefetchChat = (id: string) => prefetch(chatKey(id), () => api.chat(id), { maxAge: 15_000 });
+export const loadChat = (id: string) => load(chatKey(id), () => api.chat(id), { maxAge: 15_000 });
 
 export const fmtDate = (iso?: string | null, opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" }) => {
   if (!iso) return "";

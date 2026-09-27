@@ -4,6 +4,7 @@ import json
 import threading
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -47,14 +48,47 @@ def today():
     todays = [_hearing_card(c, t) for c in cases if c["next_date"] == t]
     upcoming = [_hearing_card(c, t) for c in cases if c["next_date"] != t]
     judges = {}
-    for h in todays:                      # what memory has learned about today's judges (empty until Hindsight has)
-        if h["judge_id"] not in judges:
-            judges[h["judge_id"]] = {"name": h["judge"], "profile": memory.get_mental_model_text(memory.mental_model_id("judge", h["judge_id"]))}
+    for h in todays:
+        judges.setdefault(h["judge_id"], {"name": h["judge"], "profile": None})
     recent = db.rows("""SELECT e.case_id, e.hearing_date, e.author, e.doc_type, substr(e.text, 1, 200) AS text
                         FROM entries e WHERE e.status='retained' AND e.doc_type!='document'
                         ORDER BY e.hearing_date DESC LIMIT 5""")
+    # Only local data here, so the screen draws at once. What memory has learned (judge profiles,
+    # open commitments) is a network round-trip per model and comes from /today/insights.
     return {"today": t, "practice": registry.practice(), "hearings": todays, "upcoming": upcoming, "judges": judges,
-            "commitments": memory.get_mental_model_text("open-commitments"), "recent": recent}
+            "commitments": None, "recent": recent}
+
+
+_INSIGHTS_TTL = 120.0
+_insights_cache: dict[str, tuple[float, str | None]] = {}
+_insights_lock = threading.Lock()
+
+
+def _mental_model_cached(mm_id: str) -> str | None:
+    """Mental models change only when Hindsight re-consolidates, so a couple of minutes of staleness is fine."""
+    now = time.monotonic()
+    with _insights_lock:
+        hit = _insights_cache.get(mm_id)
+    if hit and now - hit[0] < _INSIGHTS_TTL:
+        return hit[1]
+    text = memory.get_mental_model_text(mm_id)
+    with _insights_lock:
+        _insights_cache[mm_id] = (time.monotonic(), text)
+    return text
+
+
+@router.get("/today/insights")
+def today_insights():
+    t = today_iso()
+    rows = db.rows(CASE_SQL + " WHERE c.next_date=?", t)
+    names = {}
+    for c in rows:
+        names.setdefault(c["judge_id"], c["judge_short"] or c["judge_name"])
+    ids = ["open-commitments"] + [memory.mental_model_id("judge", j) for j in names]
+    with ThreadPoolExecutor(max_workers=min(8, len(ids))) as pool:   # one Hindsight call per model, in parallel
+        texts = dict(zip(ids, pool.map(_mental_model_cached, ids)))
+    return {"commitments": texts["open-commitments"],
+            "judges": {j: {"name": n, "profile": texts[memory.mental_model_id("judge", j)]} for j, n in names.items()}}
 
 
 @router.get("/calendar")
