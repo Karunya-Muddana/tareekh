@@ -1,0 +1,214 @@
+{
+  "C23_reply_undertaking": {
+    "undertaking_given": "2026-08-12",
+    "undertaking_text": "file reply affidavit within three weeks",
+    "due": "2026-09-02",
+    "filed_on": "2026-09-03",
+    "filing_reference": "diary no. 4471",
+    "late_by_days": 1,
+    "receipt_acknowledged": "2026-09-04 in court by GHMC Standing Counsel Smt. Hemalatha Ravuri",
+    "sources": [
+      "C23-H06 order sheet (certified copy) + handwritten note",
+      "C23-H07 typed note"
+    ]
+  },
+  "C07_third_adjournment_risk": {
+    "opposing_adjournments_in_C07": 2,
+    "dates": [
+      "2026-06-19",
+      "2026-08-18"
+    ],
+    "last_order_said": "last opportunity (18.08.2026)",
+    "meera_side_adjournments_in_C07": 1,
+    "J2_cost_precedents": [
+      {
+        "case_id": "C12",
+        "judge_id": "J2",
+        "date": "2026-02-11",
+        "amount": 3000,
+        "opposing_counsel_id": "OC3",
+        "hearing_id": "C12-H07"
+      },
+      {
+        "case_id": "C19",
+        "judge_id": "J2",
+        "date": "2026-04-22",
+        "amount": 5000,
+        "opposing_counsel_id": "OC5",
+        "hearing_id": "C19-H07"
+      }
+    ],
+    "expectation": "OC3 likely to seek a third adjournment on 05.10.2026; J2 has imposed costs on third requests in C12 (Rs. 3,000) and C19 (Rs. 5,000).",
+    "client_wants": "client CL1 asked on 18.08.2026 whether costs can be claimed",
+    "corroboration": "Sai Kiran saw OC3 arguing in HC Court Hall 12 at 2.35 pm on 18.08.2026, the day his junior filed an 'indisposed' memo in C07 (note only)."
+  },
+  "C31_possession_contradiction": {
+    "chief": {
+      "date": "2025-11-19",
+      "statement": "put in possession in March 2016, on the day of the sale deed (Ex.A1 dated 03.03.2016)"
+    },
+    "cross": {
+      "date": "2026-07-15",
+      "statement": "possession handed over after Sankranti, January 2017, when old tenant Mallesh vacated"
+    },
+    "only_in": "Meera's handwritten notes; order sheets only say 'examined in chief' / 'cross-examined'",
+    "supporting": "Ex.A6 tax receipts start only in 2018; Ex.B2 electricity bills in defendant's name 2015-2017"
+  },
+  "C35_appeal_deadline": {
+    "order": "I.A. No. 402 of 2025 in O.S. No. 145 of 2025 dismissed on 2026-09-08 (III Junior Civil Judge)",
+    "appeal": "C.M.A. before the Chief Judge, City Civil Court (appeal to a court other than the High Court)",
+    "certified_copy_applied": "2026-09-10 (CA no. 3907/2026)",
+    "certified_copy_received": "2026-09-24",
+    "limitation_rule_assumed": "Limitation Act Art. 116(b): 30 days; Sec. 12(1) excludes day of order; Sec. 12(2) excludes copy time",
+    "last_date_conservative": "2026-10-22",
+    "computation": "2026-09-08 + 30 days = 2026-10-08; + 14 days copy time (10.09 to 24.09) = 2026-10-22",
+    "status_on_demo_day": "NOT FILED. Action item 'compute limitation and draft C.M.A.' (Sai Kiran) pending since 2026-09-08, due 2026-09-25, overdue.",
+    "promise_to_client": "Meera told the client on 2026-09-08 'we will file the appeal (C.M.A.) well in time'.",
+    "caution": "Synthetic computation for demo only. The app should show dates and flag urgency, and a lawyer must verify limitation."
+  },
+  "OC3_illness_adjournments_all_cases": [
+    {
+      "case_id": "C07",
+      "case_number": "O.S. No. 318 of 2022",
+      "date": "2026-06-19",
+      "judge_id": "J2",
+      "reason": "counsel Sri Ch. Venugopal Achary unwell (viral fever), memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C07",
+      "case_number": "O.S. No. 318 of 2022",
+      "date": "2026-08-18",
+      "judge_id": "J2",
+      "reason": "counsel Sri Ch. Venugopal Achary indisposed, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C12",
+      "case_number": "O.S. No. 1043 of 2021",
+      "date": "2025-07-16",
+      "judge_id": "J2",
+      "reason": "counsel Sri Ch. Venugopal Achary unwell, memo filed",
+      "costs": null
+    },
+    {
+      "case_id": "C12",
+      "case_number": "O.S. No. 1043 of 2021",
+      "date": "2026-02-11",
+      "judge_id": "J2",
+      "reason": "counsel Sri Ch. Venugopal Achary unwell, memo filed",
+      "costs": {
+        "amount": 3000,
+        "on": "opposing side"
+      }
+    },
+    {
+      "case_id": "C14",
+      "case_number": "C.M.A. No. 640 of 2025",
+      "date": "2025-10-21",
+      "judge_id": "J1",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C27",
+      "case_number": "O.S. No. 733 of 2023",
+      "date": "2025-04-15",
+      "judge_id": "J4",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C27",
+      "case_number": "O.S. No. 733 of 2023",
+      "date": "2025-10-27",
+      "judge_id": "J4",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C27",
+      "case_number": "O.S. No. 733 of 2023",
+      "date": "2026-02-05",
+      "judge_id": "J4",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C27",
+      "case_number": "O.S. No. 733 of 2023",
+      "date": "2026-09-23",
+      "judge_id": "J4",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C30",
+      "case_number": "O.S. No. 95 of 2024",
+      "date": "2025-10-06",
+      "judge_id": "J5",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C30",
+      "case_number": "O.S. No. 95 of 2024",
+      "date": "2026-03-05",
+      "judge_id": "J5",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    },
+    {
+      "case_id": "C37",
+      "case_number": "O.S. No. 288 of 2025",
+      "date": "2025-10-24",
+      "judge_id": "J4",
+      "reason": "counsel unwell, memo filed by junior",
+      "costs": null
+    }
+  ],
+  "costs_orders_all_cases": [
+    {
+      "case_id": "C12",
+      "judge_id": "J2",
+      "date": "2026-02-11",
+      "amount": 3000,
+      "opposing_counsel_id": "OC3",
+      "hearing_id": "C12-H07"
+    },
+    {
+      "case_id": "C19",
+      "judge_id": "J2",
+      "date": "2026-04-22",
+      "amount": 5000,
+      "opposing_counsel_id": "OC5",
+      "hearing_id": "C19-H07"
+    }
+  ],
+  "J2_adjournment_counts": {
+    "C03": {
+      "opposing side": 2,
+      "Meera": 0
+    },
+    "C07": {
+      "opposing side": 2,
+      "Meera": 1
+    },
+    "C12": {
+      "opposing side": 3,
+      "Meera": 0
+    },
+    "C19": {
+      "opposing side": 3,
+      "Meera": 0
+    },
+    "C28": {
+      "opposing side": 2,
+      "Meera": 1
+    },
+    "C36": {
+      "opposing side": 1,
+      "Meera": 0
+    }
+  }
+}

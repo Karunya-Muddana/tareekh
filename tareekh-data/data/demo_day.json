@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-05",
+  "cause_list": [
+    {
+      "item_no": 7,
+      "court": "Court of the IV Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J2",
+      "case_id": "C12",
+      "case_number": "O.S. No. 1043 of 2021",
+      "listed_for": "arguments"
+    },
+    {
+      "item_no": 14,
+      "court": "Court of the IV Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J2",
+      "case_id": "C07",
+      "case_number": "O.S. No. 318 of 2022",
+      "listed_for": "cross-examination of DW1"
+    },
+    {
+      "item_no": 22,
+      "court": "Court of the IV Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J2",
+      "case_id": "C19",
+      "case_number": "O.S. No. 227 of 2024",
+      "listed_for": "cross-examination of PW1"
+    },
+    {
+      "item_no": 31,
+      "court": "Court of the IV Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J2",
+      "case_id": "C03",
+      "case_number": "O.S. No. 655 of 2023",
+      "listed_for": "arguments"
+    },
+    {
+      "item_no": 18,
+      "court": "Court of the XI Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J5",
+      "case_id": "C09",
+      "case_number": "O.S. No. 842 of 2021",
+      "listed_for": "cross-examination of DW1"
+    },
+    {
+      "item_no": 26,
+      "court": "Court of the XI Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J5",
+      "case_id": "C31",
+      "case_number": "O.S. No. 764 of 2020",
+      "listed_for": "arguments"
+    },
+    {
+      "item_no": 40,
+      "court": "Court of the XI Additional Chief Judge, City Civil Court, Hyderabad",
+      "judge_id": "J5",
+      "case_id": "C26",
+      "case_number": "O.S. No. 1650 of 2022",
+      "listed_for": "evidence of PW2"
+    },
+    {
+      "item_no": 9,
+      "court": "Court Hall 12, High Court for the State of Telangana",
+      "judge_id": "J3",
+      "case_id": "C38",
+      "case_number": "C.M.A. No. 1181 of 2025",
+      "listed_for": "hearing"
+    },
+    {
+      "item_no": 17,
+      "court": "Court Hall 12, High Court for the State of Telangana",
+      "judge_id": "J3",
+      "case_id": "C23",
+      "case_number": "W.P. No. 14872 of 2025",
+      "listed_for": "hearing"
+    },
+    {
+      "item_no": 33,
+      "court": "Court Hall 12, High Court for the State of Telangana",
+      "judge_id": "J3",
+      "case_id": "C15",
+      "case_number": "W.P. No. 3310 of 2025",
+      "listed_for": "hearing"
+    },
+    {
+      "item_no": 4,
+      "court": "Court Hall 7, High Court for the State of Telangana",
+      "judge_id": "J1",
+      "case_id": "C11",
+      "case_number": "W.P. No. 9921 of 2025",
+      "listed_for": "hearing"
+    },
+    {
+      "item_no": 12,
+      "court": "Court Hall 7, High Court for the State of Telangana",
+      "judge_id": "J1",
+      "case_id": "C29",
+      "case_number": "W.P. No. 12577 of 2025",
+      "listed_for": "hearing"
+    },
+    {
+      "item_no": 21,
+      "court": "Court Hall 7, High Court for the State of Telangana",
+      "judge_id": "J1",
+      "case_id": "C40",
+      "case_number": "C.R.P. No. 3065 of 2025",
+      "listed_for": "hearing"
+    }
+  ],
+  "client_messages": [
+    {
+      "time": "07:41",
+      "client_id": "CL1",
+      "case_id": "C07",
+      "from": "Gopal Krishna Tadepalli",
+      "text": "Good morning madam. Today is 5th. I have taken leave again. Hope they don't take adjournment this time also. Can we ask costs like you said?"
+    },
+    {
+      "time": "08:12",
+      "client_id": "CL5",
+      "case_id": "C35",
+      "from": "Sunitha Raghunath",
+      "text": "Madam good morning. Builder started slab work on 4th floor today, lorries coming since 6am. Did we file the appeal? You said well in time. Please tell me, I am very tensed."
+    },
+    {
+      "time": "09:05",
+      "client_id": "CL4",
+      "case_id": "C23",
+      "from": "Ravi Shankar Mallela (Sai Balaji Residency)",
+      "text": "Madam, committee meeting tonight. Members asking whether stay will continue after today's hearing. Kindly send written update after court."
+    }
+  ],
+  "live_uploads": [
+    {
+      "files": [
+        "demo_live/IMG_20261005_114702.jpg"
+      ],
+      "type": "handwritten_note_photo",
+      "author": "Meera",
+      "date": "2026-10-05",
+      "source_text": "OS 318/22 Tadepalli - 5/10. Achary junior came with illness memo AGAIN (3rd time). I pressed for costs, showed IV ACJ his own orders in Lakshmi Ganapathi (3000) and Kamala Devi (5000). Judge granted time but imposed Rs 4000 costs payable to plaintiff before next date + 'no further adjournment'. DW1 cross on 2 Nov. Call Gopal garu.",
+      "purpose": "upload live during demo after the hearing"
+    },
+    {
+      "files": [
+        "demo_live/IMG_20261005_163015.jpg"
+      ],
+      "type": "handwritten_note_photo",
+      "author": "Meera",
+      "date": "2026-10-05",
+      "source_text": "Gudivada v Kasoju - 5/10. Argued the possession contradiction, Quadri sir noted both dates and asked for Ex.A6 and B2 - gave exact numbers. Jadhav reply on 19 Oct. Judgment after that.",
+      "purpose": "upload live during demo after the hearing"
+    }
+  ]
+}

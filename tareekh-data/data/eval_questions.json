@@ -1,0 +1,94 @@
+[
+  {
+    "question": "Did I undertake to file the rejoinder in the Sai Balaji WP? Was it filed?",
+    "expected": "Yes. Undertaken on 12.08.2026 (within three weeks, recorded in the order). Filed 03.09.2026, diary no. 4471, one day after the 02.09 due date. GHMC standing counsel acknowledged receipt in court on 04.09.2026.",
+    "cases": [
+      "C23"
+    ]
+  },
+  {
+    "question": "rejoinder?  (asked on 05.10.2026 while in Court Hall 12)",
+    "expected": "Same as above; the app should resolve 'rejoinder' to C23 because it is the matter being called in Court Hall 12.",
+    "cases": [
+      "C23"
+    ]
+  },
+  {
+    "question": "How many adjournments has the other side taken in Tadepalli and what did the judge say last time?",
+    "expected": "Two, both citing counsel's illness (19.06.2026, 18.08.2026). On 18.08.2026 the order said 'last opportunity'.",
+    "cases": [
+      "C07"
+    ]
+  },
+  {
+    "question": "Has IV ACJ imposed costs for a third adjournment before?",
+    "expected": "Yes: C12 on 11.02.2026 (Rs. 3,000 on defendant, OC3) and C19 on 22.04.2026 (Rs. 5,000 on plaintiff, OC5, with the oral remark 'Third time is not a request, it is a strategy').",
+    "cases": [
+      "C12",
+      "C19"
+    ]
+  },
+  {
+    "question": "How many times has Venugopal Achary sought time citing illness, across all my matters?",
+    "expected": "See ground_truth.OC3_illness_adjournments_all_cases (count and dates).",
+    "cases": [
+      "C07",
+      "C12",
+      "C14",
+      "C27",
+      "C30",
+      "C37"
+    ]
+  },
+  {
+    "question": "What did PW1 say about possession in Gudivada v Kasoju?",
+    "expected": "In chief (19.11.2025): March 2016, on the sale deed day. In cross (15.07.2026): after Sankranti, January 2017, when tenant Mallesh vacated.",
+    "cases": [
+      "C31"
+    ]
+  },
+  {
+    "question": "Did we file the appeal for Sunitha?",
+    "expected": "No. I.A. 402/2025 dismissed 08.09.2026; certified copy applied 10.09, received 24.09; limitation computation and C.M.A. draft pending with Sai Kiran (overdue since 25.09). Conservative last date 22.10.2026, verify.",
+    "cases": [
+      "C35"
+    ]
+  },
+  {
+    "question": "What does Pinnamaneni J usually want?",
+    "expected": "Synopsis when paper book exceeds 200 pages; records undertakings verbatim and checks compliance; interim orders only for fixed periods; short written submissions.",
+    "cases": [
+      "C23",
+      "C10",
+      "C15"
+    ]
+  },
+  {
+    "question": "What should I carry for Somayajulu J matters?",
+    "expected": "A one-page list of dates and an answer on limitation/delay; he asks about delay first.",
+    "cases": [
+      "C11",
+      "C29",
+      "C40"
+    ]
+  },
+  {
+    "question": "What is pending from my side before 5 Oct?",
+    "expected": "Pending action items across cases, e.g. C07 press for costs, C19 PW1 cross prep, C31 arguments note on contradiction, C35 C.M.A. (overdue).",
+    "cases": []
+  },
+  {
+    "question": "What did I tell Gopal garu last time?",
+    "expected": "On 18.08.2026: that we will press for costs if a third adjournment is sought.",
+    "cases": [
+      "C07"
+    ]
+  },
+  {
+    "question": "Where is the setback point in the Sai Balaji WP?",
+    "expected": "R3 alleges 1.2 m setback violation on the east side; approved plan shows 1.5 m left; approved plan flagged at page 64.",
+    "cases": [
+      "C23"
+    ]
+  }
+]
