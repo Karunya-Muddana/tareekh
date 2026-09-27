@@ -20,6 +20,9 @@ How to work:
 - Filter by case_id for case questions; by judge_id or counsel_id for behaviour across cases.
 - Every fact you state must carry a citation marker like [3] that refers to the numbered facts returned by tools.
 - Say plainly when memory has nothing. Distinguish what the court's order recorded from what only {lawyer_short}'s or {assistant_short}'s notes say.
+- Facts labelled CHAT MEMORY are things the lawyer told you in an earlier chat, not court records or hearing notes.
+  Rank them BELOW records and notes: if they conflict, the record wins and you say so. When you rely on one, say
+  so in the sentence ("from a chat memory, ...") and cite it like any other fact.
 - Be brief. He may be standing in court. Lead with the answer, then 1-4 supporting lines. Dates as '12 Aug 2026'.
 """
 
@@ -65,12 +68,15 @@ class FactBook:
 
     def render(self, facts: list[dict]) -> str:
         lines = []
+        is_chat = lambda f: (f.get("metadata") or {}).get("doc_type") == "chat_memory"
+        facts = sorted(facts, key=is_chat)            # records and notes first, chat memories last
         for f in facts:
             n = self.add(f)
             md = f.get("metadata") or {}
             when = md.get("hearing_date") or (f.get("occurred") or "")[:10]
             src = md.get("source_file") or f.get("type") or "memory"
-            lines.append(f"[{n}] ({when}; {md.get('case_id', '')}; {src}) {f.get('text')}")
+            label = "CHAT MEMORY; " if is_chat(f) else ""
+            lines.append(f"[{n}] ({label}{when}; {md.get('case_id', '')}; {src}) {f.get('text')}")
         return "\n".join(lines) or "(no matching memories)"
 
     def citations(self, answer: str) -> list[dict]:
@@ -104,13 +110,22 @@ def _run_tool(name: str, args: dict, book: FactBook) -> str:
     return f"unknown tool {name}"
 
 
-def ask(question: str, active_case_id: str | None = None, quick: bool = False) -> dict:
-    ctx = ctxmod.build(question, active_case_id)
+def _history_turns(history: list[dict] | None) -> list[dict]:
+    """Earlier turns of this chat (plain text only), so follow-ups like 'and Ramesh?' make sense."""
+    return [{"role": h["role"], "content": h["content"][:2000]} for h in (history or [])[-6:]
+            if h.get("role") in ("user", "assistant") and h.get("content")]
+
+
+def ask(question: str, active_case_id: str | None = None, quick: bool = False, history: list[dict] | None = None) -> dict:
+    turns = _history_turns(history)
+    prev_q = next((t["content"] for t in reversed(turns) if t["role"] == "user"), "")
+    search_text = f"{prev_q}\n{question}" if prev_q else question     # a follow-up inherits the case it's about
+    ctx = ctxmod.build(search_text, active_case_id)
     if quick:
-        return _fixed_path(question, ctx, mode="quick")
+        return _fixed_path(question, ctx, mode="quick", turns=turns, search_text=search_text)
     book, trace = FactBook(), []
     messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)},
-                {"role": "user", "content": question}]
+                *turns, {"role": "user", "content": question}]
     try:
         for _ in range(MAX_STEPS):
             msg = llm.chat(messages, tools=TOOLS)
@@ -131,15 +146,16 @@ def ask(question: str, active_case_id: str | None = None, quick: bool = False) -
         return {"answer": answer, "citations": book.citations(answer), "mode": "agent", "cases": ctx["case_ids"], "trace": trace}
     except Exception as e:  # noqa: BLE001 - function calling can be flaky; never fail the user
         log.warning("agent loop failed (%s); using fixed path", e)
-        return _fixed_path(question, ctx, mode="fallback", error=str(e))
+        return _fixed_path(question, ctx, mode="fallback", error=str(e), turns=turns, search_text=search_text)
 
 
-def _fixed_path(question: str, ctx: dict, mode: str, error: str | None = None) -> dict:
+def _fixed_path(question: str, ctx: dict, mode: str, error: str | None = None,
+                turns: list[dict] | None = None, search_text: str | None = None) -> dict:
     """Resolve case → recall with its tags → one completion. Used for quick in-court questions and as fallback."""
     book = FactBook()
     cid = ctx["case_ids"][0] if ctx["case_ids"] else None
-    facts_txt = book.render(memory.recall(question, case_id=cid, max_tokens=2000, budget="low" if mode == "quick" else "mid"))
-    messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)},
+    facts_txt = book.render(memory.recall(search_text or question, case_id=cid, max_tokens=2000, budget="low" if mode == "quick" else "mid"))
+    messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)}, *(turns or []),
                 {"role": "user", "content": f"QUESTION: {question}\n\nFACTS FROM MEMORY:\n{facts_txt}\n\n"
                                             "Answer using only these facts, with [n] citations."}]
     answer = llm.chat(messages).content or ""

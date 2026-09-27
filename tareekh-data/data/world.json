@@ -89,6 +89,7 @@
   "cases": [
     {
       "id": "C1",
+      "final_listed_for": "evidence of DW2 (receipt witness Pothina Venkat)",
       "case_number": "O.S. No. 214 of 2024",
       "judge_id": "J2",
       "opposing_counsel_id": "OC1",
@@ -104,6 +105,7 @@
     },
     {
       "id": "C2",
+      "final_listed_for": "objections and hearing on I.A. 1187/2026 (amendment of plaint)",
       "case_number": "O.S. No. 57 of 2025",
       "judge_id": "J1",
       "opposing_counsel_id": "OC2",
@@ -119,6 +121,7 @@
     },
     {
       "id": "C3",
+      "final_listed_for": "further cross-examination of DW1 (site manager Kiran Kumar)",
       "case_number": "O.S. No. 131 of 2025",
       "judge_id": "J1",
       "opposing_counsel_id": "OC2",
@@ -134,6 +137,7 @@
     },
     {
       "id": "C4",
+      "final_listed_for": "disposed of by compromise (vacate by 30.11.2026)",
       "case_number": "O.S. No. 302 of 2025",
       "judge_id": "J2",
       "opposing_counsel_id": "OC3",
@@ -149,6 +153,7 @@
     },
     {
       "id": "C5",
+      "final_listed_for": "arguments",
       "case_number": "O.S. No. 88 of 2025",
       "judge_id": "J1",
       "opposing_counsel_id": "OC4",

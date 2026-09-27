@@ -1,11 +1,13 @@
 """Build the demo data from story.py.
 
-    python build.py        # writes ../data (ground truth) and ../uploads (what the lawyer would upload)
+    python build.py               # writes ../data (ground truth) and ../uploads (what the lawyer would upload)
+    python build.py --world-only  # only data/world.json (the case list), no image rendering
 """
 import datetime as dt
 import json
 import os
 import random
+import sys
 from collections import defaultdict
 
 import render
@@ -139,6 +141,9 @@ def main():
     world = {"advocate": ADVOCATE, "judges": JUDGES, "opposing_counsel": COUNSEL, "clients": CLIENTS,
              "cases": [{k: v for k, v in c.items() if k != "hearings"} for c in cases.values()], "demo_day": DEMO_DAY}
     json.dump(world, open(os.path.join(DATA, "world.json"), "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+    if "--world-only" in sys.argv:        # case list only; leaves the rendered uploads alone
+        print("world.json written")
+        return
     manifest = build_uploads(cases, rng)
     for c in cases.values():
         for h in c["hearings"]:

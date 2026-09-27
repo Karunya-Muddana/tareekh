@@ -26,6 +26,14 @@ CREATE TABLE IF NOT EXISTS uploads (
     files TEXT,            -- JSON list of {name, path, kind}
     raw_text TEXT
 );
+CREATE TABLE IF NOT EXISTS chat_memories (id TEXT PRIMARY KEY, chat_id TEXT, case_id TEXT, text TEXT, kind TEXT, document_id TEXT, created_at TEXT);
+CREATE TABLE IF NOT EXISTS chats (id TEXT PRIMARY KEY, title TEXT, case_id TEXT, created_at TEXT, updated_at TEXT);
+CREATE TABLE IF NOT EXISTS messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, chat_id TEXT, role TEXT, content TEXT,
+    citations TEXT,        -- JSON list, assistant turns only
+    meta TEXT,             -- JSON: {mode, seconds}
+    created_at TEXT
+);
 CREATE TABLE IF NOT EXISTS entries (
     id TEXT PRIMARY KEY, upload_id TEXT, source_file TEXT, case_id TEXT, hearing_date TEXT,
     author TEXT, doc_type TEXT, text TEXT, confidence REAL, reason TEXT,
