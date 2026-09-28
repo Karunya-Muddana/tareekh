@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { CalendarDays, FileUp, MoreHorizontal, PenSquare, Search, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { CalendarDays, FileUp, LogOut, Waypoints, MoreHorizontal, PenSquare, Search, Trash2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -16,10 +16,16 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSkeleton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { api, CHATS_CHANGED, chatsChanged, type ChatRow, type MemoryStatus, type Practice } from "@/lib/api";
+import { Wordmark } from "@/components/brand";
+import { Skeleton } from "@/components/ui/skeleton";
+import CountUp from "@/components/bits/CountUp";
+import ShinyText from "@/components/bits/ShinyText";
+import { ThemeSwitch } from "@/components/theme-switch";
+import { api, chatsChanged, prefetchChat, useChats, useMemoryStatus, type ChatRow } from "@/lib/api";
+import { mutate } from "@/lib/cache";
+import { initials, signOut, useSession } from "@/lib/session";
 import { cn } from "@/lib/utils";
 
 function groupByAge(chats: ChatRow[]) {
@@ -43,26 +49,11 @@ export function AppSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { isMobile, setOpenMobile } = useSidebar();
-  const [chats, setChats] = useState<ChatRow[] | null>(null);
+  const { data: chats, loading: chatsLoading } = useChats();
+  const { data: status, error: statusError } = useMemoryStatus();
+  const user = useSession();
   const [query, setQuery] = useState("");
-  const [practice, setPractice] = useState<Practice | null>(null);
-  const [status, setStatus] = useState<MemoryStatus | null | "offline">(null);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
-
-  const loadChats = useCallback(() => api.chats().then(setChats).catch(() => setChats([])), []);
-
-  useEffect(() => {
-    loadChats();
-    api.health().then((h) => setPractice(h.practice)).catch(() => {});
-    const poll = () => api.status().then(setStatus).catch(() => setStatus("offline"));
-    poll();
-    const t = setInterval(poll, 15_000);
-    window.addEventListener(CHATS_CHANGED, loadChats);
-    return () => {
-      clearInterval(t);
-      window.removeEventListener(CHATS_CHANGED, loadChats);
-    };
-  }, [loadChats]);
 
   // Close the drawer after navigating on a phone.
   useEffect(() => {
@@ -77,6 +68,7 @@ export function AppSidebar() {
 
   const newChat = async () => {
     const c = await api.newChat();
+    mutate<ChatRow[]>("chats", (xs) => [c, ...(xs ?? [])], true);
     chatsChanged();
     router.push(`/chat/${c.id}`);
   };
@@ -87,9 +79,10 @@ export function AppSidebar() {
     setPendingDelete(id);
     if (pathname === `/chat/${id}`) router.push("/");
     const timer = setTimeout(() => {
+      mutate<ChatRow[]>("chats", (xs) => (xs ?? []).filter((c) => c.id !== id), true);
       api.deleteChat(id).finally(() => {
         setPendingDelete(null);
-        loadChats();
+        chatsChanged();
       });
     }, 5000);
     window.dispatchEvent(
@@ -99,14 +92,19 @@ export function AppSidebar() {
     );
   };
 
-  const busy = status && status !== "offline" ? status.pending_operations + status.pending_consolidation : 0;
+  const offline = !status && !!statusError;
+  const busy = status ? status.pending_operations + status.pending_consolidation : 0;
+  const leave = () => {
+    signOut();
+    window.location.replace("/login"); // full load: nothing from this session survives in memory
+  };
 
   return (
     <Sidebar variant="sidebar" collapsible="offcanvas">
       <SidebarHeader className="gap-3 px-3 pt-4">
         <div className="flex items-center justify-between px-1">
-          <Link href="/" className="flex items-baseline gap-2" aria-label="Tareekh, go to Today">
-            <span className="title-xl text-[26px] text-foreground">Tareekh</span>
+          <Link href="/" className="press -ml-1 flex items-center rounded-lg p-1" aria-label="Tareekh, go to Today">
+            <Wordmark markClassName="logo-animate size-7" />
           </Link>
           <button
             onClick={newChat}
@@ -125,6 +123,12 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
+            <SidebarMenuButton isActive={pathname === "/graph"} render={<Link href="/graph" />} className="press h-10">
+              <Waypoints />
+              <span>Knowledge graph</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
             <SidebarMenuButton isActive={pathname === "/upload"} render={<Link href="/upload" />} className="press h-10">
               <FileUp />
               <span>Add notes</span>
@@ -136,28 +140,29 @@ export function AppSidebar() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search chats…"
+            placeholder="Search chats"
             aria-label="Search chats"
-            className="placeholder:text-muted-foreground/80 w-full bg-transparent text-[16px] outline-none md:text-sm"
+            className="w-full bg-transparent text-[16px] outline-none md:text-sm"
             spellCheck={false}
           />
         </label>
       </SidebarHeader>
 
       <SidebarContent className="fade-y px-1">
-        {chats === null ? (
+        {chatsLoading ? (
           <SidebarGroup>
             <SidebarMenu>
-              {Array.from({ length: 6 }, (_, i) => (
-                <SidebarMenuItem key={i}>
-                  <SidebarMenuSkeleton />
+              {/* fixed widths: random ones differ between the server render and the browser */}
+              {[72, 58, 84, 64, 76, 52].map((w, i) => (
+                <SidebarMenuItem key={i} className="flex h-8 items-center px-2" role="status" aria-label={i === 0 ? "Loading chats" : undefined}>
+                  <Skeleton className="h-4" style={{ width: `${w}%` }} />
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroup>
         ) : visible.length === 0 ? (
           <p className="text-muted-foreground px-4 py-6 text-sm leading-relaxed">
-            {query ? "No chat matches that." : "Your conversations will show up here. Ask about a case, or tap “Brief me” on a hearing."}
+            {query ? "No chat matches that." : "Your chats will show up here. Ask about a case, or tap “Brief me” on today’s cause list."}
           </p>
         ) : (
           groupByAge(visible).map((g) => (
@@ -168,10 +173,10 @@ export function AppSidebar() {
               <SidebarGroupContent>
                 <SidebarMenu>
                   {g.items.map((c) => (
-                    <SidebarMenuItem key={c.id}>
+                    <SidebarMenuItem key={c.id} className="animate-in fade-in slide-in-from-left-1 duration-300 motion-reduce:animate-none">
                       <SidebarMenuButton
                         isActive={pathname === `/chat/${c.id}`}
-                        render={<Link href={`/chat/${c.id}`} />}
+                        render={<Link href={`/chat/${c.id}`} onMouseEnter={() => prefetchChat(c.id)} onFocus={() => prefetchChat(c.id)} onTouchStart={() => prefetchChat(c.id)} />}
                         className="press h-9"
                         title={c.title}
                       >
@@ -194,33 +199,43 @@ export function AppSidebar() {
         )}
       </SidebarContent>
 
-      <SidebarFooter className="border-sidebar-border border-t px-4 py-3">
-        <div className="flex items-center gap-3">
-          <div className="bg-primary text-primary-foreground title-xl grid size-9 shrink-0 place-items-center rounded-full text-lg">
-            {practice?.lawyer?.[0] ?? "T"}
+      <SidebarFooter className="border-sidebar-border gap-3 border-t px-3 py-3">
+        <div className="flex items-center gap-3 px-1">
+          <div className="bg-primary text-primary-foreground grid size-9 shrink-0 place-items-center rounded-full text-[13px] font-semibold tracking-wide">
+            {user ? initials(user.name) : "·"}
           </div>
-          <div className="min-w-0 leading-tight">
-            <div className="truncate text-sm font-medium">{practice ? `Adv. ${practice.lawyer}` : "Loading…"}</div>
+          <div className="min-w-0 flex-1 leading-tight">
+            <div className="truncate text-sm font-medium">{user?.name ?? "Signed out"}</div>
             <div className="text-muted-foreground flex items-center gap-1.5 text-xs" aria-live="polite">
               <span
                 className={cn(
-                  "size-1.5 rounded-full",
-                  status === "offline" ? "bg-destructive" : busy ? "bg-memo animate-pulse motion-reduce:animate-none" : "bg-emerald-600 dark:bg-emerald-400",
+                  "size-1.5 shrink-0 rounded-full",
+                  offline ? "bg-destructive" : busy ? "bg-memo animate-pulse motion-reduce:animate-none" : "bg-emerald-600 dark:bg-emerald-400",
                 )}
                 aria-hidden
               />
               <span className="tnum truncate">
-                {status === "offline"
+                {offline
                   ? "Memory offline"
                   : status
-                    ? busy
-                      ? `${status.total_documents} memories · learning`
-                      : `${status.total_documents} memories`
+                    ? <>
+                        <CountUp to={status.total_documents} duration={0.9} separator="," /> memories
+                        {busy ? <> · <ShinyText text="learning" color="var(--muted-foreground)" shineColor="var(--foreground)" speed={1.8} /></> : null}
+                      </>
                     : "Connecting…"}
               </span>
             </div>
           </div>
+          <button
+            onClick={leave}
+            className="press text-muted-foreground hover:text-foreground hover:bg-sidebar-accent grid size-9 place-items-center rounded-lg"
+            aria-label="Sign out"
+            title="Sign out"
+          >
+            <LogOut className="size-4" />
+          </button>
         </div>
+        <ThemeSwitch />
       </SidebarFooter>
     </Sidebar>
   );

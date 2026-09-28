@@ -5,7 +5,7 @@ import logging
 import uuid
 from pathlib import Path
 
-from .. import db, memory
+from .. import db, graph, memory
 from ..config import settings
 from . import extract, segment
 
@@ -99,6 +99,7 @@ def confirm(upload_id: str, edits: list[dict]) -> dict:
         raise
     for x in ready:
         db.execute("UPDATE entries SET status='retained' WHERE id=?", x["id"])
+    graph.invalidate()
     left = len(todo) - len(ready)
     _status(upload_id, "done" if not left else "review", None if not left else f"{left} entries still need a case or date")
     return {"retained": len(ready), "skipped": left}

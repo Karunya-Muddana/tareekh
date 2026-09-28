@@ -1,25 +1,46 @@
-This is the [assistant-ui](https://github.com/assistant-ui/assistant-ui) starter project.
+# Tareekh web app
 
-## Getting Started
-
-First, add your OpenAI API key to `.env.local` file:
-
-```
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-Then, run the development server:
+Next.js front end for Tareekh (assistant-ui + AI SDK). All the real work (OCR, memory, answers) happens in the FastAPI
+backend; this app reaches it through `/backend/*` (see `next.config.ts`, `TAREEKH_BACKEND_URL`, default `http://127.0.0.1:8000`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## What's where
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `app/(app)/`: signed-in screens: Today, chats, Add notes.
+- `app/login/`: **simulated sign-in**. Nothing is checked; the chosen profile goes in a `tareekh_session` cookie and
+  `proxy.ts` sends anyone without it to `/login`. Replace with real auth before other people use the app.
+- `app/(app)/graph/`: the **knowledge graph**. Notes, order sheets, documents and chat memories linked to cases, courts,
+  each other in time, and by shared meaning (`backend/app/graph.py`). Rendered with Sigma.js (WebGL) over graphology,
+  laid out by ForceAtlas2 in a web worker; search relevance and hover are applied through Sigma's reducers. Search matches words with typos allowed and by
+  meaning (Hindsight recall; a local similarity match when memory is offline). Non-matches fade out; click to read the
+  original photo or PDF.
+- `app/brand/`: the brand guide (logo, colours, type, voice). Open `/brand`.
+- `lib/cache.ts`: stale-while-revalidate cache. Screens draw from the last known data at once, then refresh; the same
+  request is never sent twice at the same time; sidebar links prefetch a chat on hover.
+- `lib/theme.ts`: Light / Dark / Match device, stored per browser, applied before first paint.
+
+## Design system
+
+- **Colour: "black coat & red tape".** Record-room paper, the advocate's black as primary, one red-tape accent
+  (`--tape`) for today / listed / where you are, manila (`--memo`) for anything remembered from chats. Tokens in
+  `app/globals.css`; the brand guide is at `/brand`.
+- **Type from Indian foundries.** Anek Latin (Ek Type) for the interface, Eczar (Rosetta) for headings, Martian Mono
+  for small data labels, Samarkan for the wordmark only.
+- **React Bits** (`components/bits/`, copied from reactbits.dev, MIT + Commons Clause): RubberSegment (segmented
+  controls), HoldButton (hold to forget), SwipeToast (toasts), StatusMark (upload steps), CountUp, ShinyText
+  (loading text), SpotlightCard (matter cards). Adapted to the theme tokens; everything else stays shadcn.
+
+## Display font
+
+The wordmark, Today's weekday and the sign-in screen use Samarkan (`app/fonts/samarkan.woff2`, © Titivillus Foundry).
+It is shareware: buy a license before a public or commercial launch.
+
+## Without API keys
+
+`python backend/scripts/seed_local.py` loads the demo backlog's ground-truth text and original files into a local
+database, with no OCR, model or Hindsight calls. Run the backend with `HINDSIGHT_URL` pointing nowhere and every
+screen, including the knowledge graph, works on real notes.

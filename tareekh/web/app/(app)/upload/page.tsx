@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Camera, Check, FileUp, Loader2, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { Camera, FileUp, Loader2, X } from "lucide-react";
 import { TopBar, toast } from "@/components/app-shell";
-import { api, type CaseRow, type Upload } from "@/lib/api";
+import { api, useCases, type Upload } from "@/lib/api";
+import { invalidate } from "@/lib/cache";
+import StatusMark from "@/components/bits/StatusMark";
+import ShinyText from "@/components/bits/ShinyText";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
@@ -16,7 +19,6 @@ const STEPS = [
 export default function UploadPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [text, setText] = useState("");
-  const [cases, setCases] = useState<CaseRow[]>([]);
   const [caseHint, setCaseHint] = useState("");
   const [over, setOver] = useState(false);
   const [up, setUp] = useState<Upload | null>(null);
@@ -25,9 +27,7 @@ export default function UploadPage() {
   const input = useRef<HTMLInputElement>(null);
   const camera = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    api.cases().then(setCases).catch(() => {});
-  }, []);
+  const cases = useCases().data ?? [];
 
   const start = async () => {
     if (!files.length && !text.trim()) return toast("Add a photo, a file or a note first");
@@ -56,6 +56,10 @@ export default function UploadPage() {
     setRunning(true);
     try {
       await api.confirm(up.id, Object.entries(edits).map(([id, e]) => ({ id, ...e })));
+      // new notes change Today's "previous hearing" lines and the calendar
+      invalidate("today");
+      invalidate("calendar:");
+      invalidate("graph");
       const u = await api.getUpload(up.id);
       setUp(u);
       if (u.status === "done") {
@@ -69,7 +73,12 @@ export default function UploadPage() {
     setRunning(false);
   };
 
-  const stepIndex = up ? (up.status === "queued" ? 0 : up.status === "retaining" ? 3 : STEPS.findIndex(([s]) => s === up.status)) : -1;
+  // An errored upload has no step of its own: it failed on the last step we saw it reach.
+  const liveStep = up ? (up.status === "queued" ? 0 : up.status === "retaining" ? 3 : STEPS.findIndex(([s]) => s === up.status)) : -1;
+  const lastStep = useRef(0);
+  if (liveStep >= 0) lastStep.current = liveStep;
+  const failed = up?.status === "error";
+  const stepIndex = failed ? lastStep.current : liveStep;
   const pending = up?.entries.filter((e) => !["retained", "rejected"].includes(e.status)) ?? [];
 
   return (
@@ -98,7 +107,7 @@ export default function UploadPage() {
           }}
           className={cn(
             "rounded-2xl border border-dashed p-6 text-center transition-colors duration-200",
-            over ? "border-primary bg-primary/[0.05]" : "border-foreground/15",
+            over ? "border-tape bg-tape-soft/50" : "border-foreground/15",
           )}
         >
           <FileUp className="text-muted-foreground mx-auto size-6" aria-hidden />
@@ -140,14 +149,14 @@ export default function UploadPage() {
           />
         </label>
 
-        <div className="mt-4 flex flex-wrap items-center gap-3">
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
           <select
             value={caseHint}
             onChange={(e) => setCaseHint(e.target.value)}
             aria-label="Case"
-            className="bg-background text-foreground border-input h-10 min-w-0 flex-1 rounded-xl border px-3 text-[15px]"
+            className="bg-background text-foreground border-input h-11 min-w-0 flex-1 rounded-xl border px-3 text-[16px] sm:h-10 sm:text-[15px]"
           >
-            <option value="">Case: work it out from the note</option>
+            <option value="">Case: detect from the note</option>
             {cases.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.short_name} ({c.case_number})
@@ -157,7 +166,7 @@ export default function UploadPage() {
           <button
             onClick={start}
             disabled={running}
-            className="press bg-primary text-primary-foreground inline-flex h-10 items-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60"
+            className="press bg-primary text-primary-foreground inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60 sm:h-10"
           >
             {running && !up?.entries.length ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
             Read it
@@ -166,21 +175,31 @@ export default function UploadPage() {
 
         {up && (
           <section className="mt-10" aria-live="polite">
-            <ol className="flex flex-wrap gap-2 text-xs">
-              {STEPS.map(([key, label], i) => (
-                <li
-                  key={key}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-full px-3 py-1",
-                    i < stepIndex || up.status === "done" ? "bg-emerald-600/10 text-emerald-700 dark:text-emerald-300" : i === stepIndex ? "bg-primary/10 text-primary" : "text-muted-foreground",
-                  )}
-                >
-                  {i < stepIndex || up.status === "done" ? <Check className="size-3" /> : i === stepIndex && running ? <Loader2 className="size-3 animate-spin" /> : null}
-                  {label}
-                </li>
-              ))}
+            <ol className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              {STEPS.map(([key, label], i) => {
+                const done = i < stepIndex || up.status === "done";
+                const now = i === stepIndex && up.status !== "done";
+                const stepFailed = now && failed;
+                return (
+                  <li key={key} className={cn("flex items-center gap-2", done || now ? "text-foreground" : "text-muted-foreground")}>
+                    <StatusMark
+                      size={18}
+                      strokeWidth={1.8}
+                      status={stepFailed ? "failed" : done ? "done" : now && running ? "running" : "pending"}
+                      color="var(--muted-foreground)"
+                      doneColor="var(--chart-3)"
+                      errorColor="var(--destructive)"
+                    />
+                    {label}
+                  </li>
+                );
+              })}
             </ol>
-            {up.status === "extracting" && <p className="text-muted-foreground mt-3 text-sm">Reading the handwriting. Photos take 10 to 30 seconds a page.</p>}
+            {up.status === "extracting" && (
+              <p className="mt-3 text-sm">
+                <ShinyText text="Reading the handwriting. Photos take 10 to 30 seconds a page." color="var(--muted-foreground)" shineColor="var(--foreground)" speed={2.4} />
+              </p>
+            )}
             {up.status === "error" && <p className="text-destructive mt-3 text-sm">{up.error}</p>}
 
             <ul className="mt-5 flex flex-col gap-3">

@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response
 
 from . import db, registry
@@ -23,6 +24,7 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(title="Tareekh API", version="0.1.0", lifespan=lifespan)
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 app.include_router(router)
 app.include_router(app_router)
@@ -33,9 +35,11 @@ def home():
     return FileResponse(Path(__file__).parent / "static" / "index.html")
 
 
-ICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#8e2a20"/>'
-        '<text x="256" y="340" font-family="Georgia,serif" font-size="300" font-weight="700" fill="#fff6f0" '
-        'text-anchor="middle">T</text></svg>')
+# The Tareekh mark (same as web/app/icon.svg): a diary leaf, turned brass corner, red ribbon making the T.
+ICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#141414"/>'
+        '<path d="M15 12h34a4 4 0 0 1 4 4v23L39 53H19a4 4 0 0 1-4-4z" fill="#f7f7f3"/>'
+        '<path d="M53 39H43a4 4 0 0 0-4 4v10z" fill="#c9a15a"/><path d="M28.5 19h7v40l-3.5-4-3.5 4z" fill="#c8321e"/>'
+        '<rect x="20" y="19" width="24" height="6.5" rx="2" fill="#141414"/></svg>')
 
 
 @app.get("/icon.svg", include_in_schema=False)
@@ -46,8 +50,8 @@ def icon():
 @app.get("/manifest.webmanifest", include_in_schema=False)
 def manifest():
     return JSONResponse({"name": "Tareekh", "short_name": "Tareekh", "start_url": "/", "display": "standalone",
-                         "background_color": "#f5f3ef", "theme_color": "#f5f3ef",
-                         "icons": [{"src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]},
+                         "background_color": "#f3f4f1", "theme_color": "#141414",
+                         "icons": [{"src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]},
                         media_type="application/manifest+json")
 
 

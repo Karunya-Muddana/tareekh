@@ -1,17 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { PanelLeft } from "lucide-react";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { LogoMark } from "@/components/brand";
+import { TabBar } from "@/components/tab-bar";
+import SwipeToast from "@/components/bits/SwipeToast";
 import { cn } from "@/lib/utils";
 
 export function AppShell({ children }: { children: ReactNode }) {
+  // In a chat the composer owns the bottom of the screen, so the tab bar steps aside.
+  const tabs = !usePathname().startsWith("/chat/");
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="min-h-dvh">{children}</SidebarInset>
-      <Toaster />
+      <SidebarInset className={cn("min-h-dvh", tabs && "pb-[calc(env(safe-area-inset-bottom)+64px)] md:pb-0")}>{children}</SidebarInset>
+      {tabs && <TabBar />}
+      <Toaster tabs={tabs} />
     </SidebarProvider>
   );
 }
@@ -19,6 +26,8 @@ export function AppShell({ children }: { children: ReactNode }) {
 /** Translucent top bar: content scrolls under it; a soft edge replaces a hard divider once scrolled. */
 export function TopBar({ title, right, className }: { title?: ReactNode; right?: ReactNode; className?: string }) {
   const { toggleSidebar, isMobile, state } = useSidebar();
+  // On phones the tab bar has "Chats", so outside a chat the corner holds the mark instead of a menu button.
+  const inChat = usePathname().startsWith("/chat/");
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -43,7 +52,11 @@ export function TopBar({ title, right, className }: { title?: ReactNode; right?:
         className,
       )}
     >
-      {(isMobile || state === "collapsed") && (
+      {isMobile && !inChat ? (
+        <span className="grid size-10 place-items-center" aria-hidden>
+          <LogoMark className="logo-animate size-7" />
+        </span>
+      ) : (isMobile || state === "collapsed") && (
         <button
           onClick={toggleSidebar}
           className="press text-muted-foreground hover:text-foreground hover:bg-accent grid size-10 place-items-center rounded-lg"
@@ -60,41 +73,39 @@ export function TopBar({ title, right, className }: { title?: ReactNode; right?:
 
 type Toast = { id: number; text: string; action?: string; onAction?: () => void };
 
-/** Status/completion toasts with an optional Undo. Listens for `tareekh:toast` window events. */
-function Toaster() {
+/** Status/completion toasts with an optional Undo: React Bits SwipeToast, swipe down to dismiss, fuse shows time left. */
+function Toaster({ tabs }: { tabs: boolean }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   useEffect(() => {
-    const on = (e: Event) => {
-      const t = { id: Date.now() + Math.random(), ...(e as CustomEvent).detail } as Toast;
-      setToasts((xs) => [...xs, t]);
-      setTimeout(() => setToasts((xs) => xs.filter((x) => x.id !== t.id)), 5000);
-    };
+    const on = (e: Event) => setToasts((xs) => [...xs.slice(-2), { id: Date.now() + Math.random(), ...(e as CustomEvent).detail } as Toast]);
     window.addEventListener("tareekh:toast", on);
     return () => window.removeEventListener("tareekh:toast", on);
   }, []);
+  const drop = (id: number) => setToasts((xs) => xs.filter((x) => x.id !== id));
   return (
     <div
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-0 bottom-[calc(env(safe-area-inset-bottom)+16px)] z-50 flex flex-col items-center gap-2 px-4"
+      className={cn(
+        "pointer-events-none fixed inset-x-0 z-50 flex flex-col items-center px-4 md:bottom-[calc(env(safe-area-inset-bottom)+16px)] [&>*]:pointer-events-auto",
+        tabs ? "bottom-[calc(env(safe-area-inset-bottom)+76px)]" : "bottom-[calc(env(safe-area-inset-bottom)+92px)]",
+      )}
     >
       {toasts.map((t) => (
-        <div
+        <SwipeToast
           key={t.id}
-          className="bg-foreground text-background animate-in fade-in slide-in-from-bottom-2 pointer-events-auto flex items-center gap-4 rounded-xl py-2.5 pr-2.5 pl-4 text-sm shadow-lg duration-200 motion-reduce:animate-none"
-        >
-          <span>{t.text}</span>
-          {t.action && (
-            <button
-              className="press rounded-lg px-2.5 py-1 font-medium hover:bg-white/10"
-              onClick={() => {
-                t.onAction?.();
-                setToasts((xs) => xs.filter((x) => x.id !== t.id));
-              }}
-            >
-              {t.action}
-            </button>
-          )}
-        </div>
+          inline
+          title={t.text}
+          actionLabel={t.action ?? ""}
+          onAction={t.onAction}
+          onClose={() => drop(t.id)}
+          duration={5000}
+          width={380}
+          radius={12}
+          background="var(--foreground)"
+          color="var(--background)"
+          fuseColor="var(--tape)"
+          closeButton={false}
+        />
       ))}
     </div>
   );
