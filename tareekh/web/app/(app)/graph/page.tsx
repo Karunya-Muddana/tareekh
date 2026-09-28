@@ -8,7 +8,7 @@ import { GraphCanvas, TYPE_LABEL, type GraphCanvasHandle } from "@/components/gr
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { api, chatsChanged, fmtDate, useEntry, useGraph, type GraphNode, type GraphSearch, type SearchHit, type SearchMode } from "@/lib/api";
+import { api, chatsChanged, fmtDate, useEntry, useGraph, type GraphLinkType, type GraphNode, type GraphSearch, type SearchHit, type SearchMode } from "@/lib/api";
 import RubberSegment from "@/components/bits/RubberSegment";
 import CountUp from "@/components/bits/CountUp";
 import { cn } from "@/lib/utils";
@@ -38,6 +38,24 @@ function KnowledgeGraph() {
   const [selected, setSelected] = useState<string | null>(params.get("node"));
   const [caseFilter, setCaseFilter] = useState<string | null>(null);
   const canvas = useRef<GraphCanvasHandle>(null);
+  const [linkTypes, setLinkTypes] = useState<Set<GraphLinkType>>(() => new Set(DEFAULT_LINKS));
+  // remember the chosen link types in this browser
+  useEffect(() => {
+    try {
+      const v = JSON.parse(localStorage.getItem(LINKS_KEY) ?? "null");
+      if (Array.isArray(v)) setLinkTypes(new Set(v.filter((t) => LINK_TYPES.some(([k]) => k === t))));
+    } catch {}
+  }, []);
+  const toggleLink = (t: GraphLinkType) =>
+    setLinkTypes((cur) => {
+      const next = new Set(cur);
+      if (next.has(t)) next.delete(t);
+      else next.add(t);
+      try {
+        localStorage.setItem(LINKS_KEY, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
   const isMobile = useIsMobile();
 
   // Search as you type (debounced); stale requests are cancelled.
@@ -203,8 +221,9 @@ function KnowledgeGraph() {
           <div className="border-border bg-card relative h-[58dvh] min-h-[360px] overflow-hidden rounded-2xl border lg:h-full lg:min-h-0">
             {graph ? (
               <>
-                <GraphCanvas ref={canvas} graph={graph} focus={focus} selected={selected} onSelect={select} className="absolute inset-0" />
+                <GraphCanvas ref={canvas} graph={graph} focus={focus} selected={selected} onSelect={select} linkTypes={linkTypes} className="absolute inset-0" />
                 <Legend />
+                <LinkFilter graph={graph} value={linkTypes} onToggle={toggleLink} />
                 {result && hits.length === 0 && !searching && (
                   <div className="fade bg-card/90 absolute inset-x-0 top-1/2 mx-auto w-fit -translate-y-1/2 rounded-xl px-4 py-3 text-center text-sm shadow-[var(--shadow-soft)]">
                     Nothing matches “{result.query}”.
@@ -248,6 +267,55 @@ function KnowledgeGraph() {
           {reader}
         </SheetContent>
       </Sheet>
+    </div>
+  );
+}
+
+const LINKS_KEY = "tareekh:graph-links";
+/** [type, label, what it means, swatch class]. Colours match the edges drawn in graph-canvas. */
+const LINK_TYPES: [GraphLinkType, string, string, string][] = [
+  ["case", "Case", "Each note to its case", "bg-muted-foreground/60"],
+  ["temporal", "Timeline", "Each hearing to the one before it", "bg-chart-3"],
+  ["entity", "People", "A case to its judge, opposing counsel and client", "bg-memo"],
+  ["semantic", "Same topic", "Notes about the same things, across cases", "bg-foreground"],
+  ["memory", "Memory", "Things remembered from chats, to their case", "bg-tape"],
+];
+// "Same topic" crosses between cases and is what makes the whole view busy; it starts off.
+const DEFAULT_LINKS: GraphLinkType[] = ["case", "temporal", "entity", "memory"];
+
+/** Which kinds of link to draw. Counts come from the graph itself. */
+function LinkFilter({ graph, value, onToggle }: { graph: { links: { type: GraphLinkType }[] }; value: Set<GraphLinkType>; onToggle: (t: GraphLinkType) => void }) {
+  const counts = useMemo(() => {
+    const c = new Map<GraphLinkType, number>();
+    for (const l of graph.links) c.set(l.type, (c.get(l.type) ?? 0) + 1);
+    return c;
+  }, [graph]);
+  return (
+    <div
+      role="group"
+      aria-label="Show links"
+      className="bg-card/90 border-border absolute bottom-3 left-3 flex max-w-[calc(100%-4.5rem)] items-center gap-1 overflow-x-auto rounded-xl border p-1 shadow-[var(--shadow-soft)] backdrop-blur-sm [scrollbar-width:none]"
+    >
+      <span className="text-muted-foreground hidden px-2 font-mono text-[10.5px] tracking-wide uppercase sm:inline">Links</span>
+      {LINK_TYPES.filter(([t]) => counts.get(t)).map(([t, label, hint, swatch]) => {
+        const on = value.has(t);
+        return (
+          <button
+            key={t}
+            onClick={() => onToggle(t)}
+            aria-pressed={on}
+            title={hint}
+            className={cn(
+              "press inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-[12.5px] whitespace-nowrap transition-colors",
+              on ? "bg-foreground text-background" : "text-muted-foreground hover:bg-accent hover:text-foreground",
+            )}
+          >
+            <span className={cn("h-0.5 w-3 rounded-full", on ? "bg-background" : swatch)} aria-hidden />
+            {label}
+            <span className={cn("tnum text-[11px]", on ? "text-background/60" : "text-muted-foreground/70")}>{counts.get(t)}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
