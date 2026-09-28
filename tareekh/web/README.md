@@ -14,7 +14,8 @@ npm run dev        # http://localhost:3000
 - `app/login/`: **simulated sign-in**. Nothing is checked; the chosen profile goes in a `tareekh_session` cookie and
   `proxy.ts` sends anyone without it to `/login`. Replace with real auth before other people use the app.
 - `app/(app)/graph/`: the **knowledge graph**. Notes, order sheets, documents and chat memories linked to cases, courts,
-  each other in time, and by shared meaning (`backend/app/graph.py`). Search matches words with typos allowed and by
+  each other in time, and by shared meaning (`backend/app/graph.py`). Rendered with Sigma.js (WebGL) over graphology,
+  laid out by ForceAtlas2 in a web worker; search relevance and hover are applied through Sigma's reducers. Search matches words with typos allowed and by
   meaning (Hindsight recall; a local similarity match when memory is offline). Non-matches fade out; click to read the
   original photo or PDF.
 - `app/brand/`: the brand guide (logo, colours, type, voice). Open `/brand`.
