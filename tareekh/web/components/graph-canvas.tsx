@@ -21,8 +21,6 @@ type Props = {
   focus: Map<string, number> | null;
   selected: string | null;
   onSelect: (n: GraphNode | null) => void;
-  /** which kinds of links to draw */
-  linkTypes: Set<GraphLinkType>;
   className?: string;
 };
 
@@ -74,7 +72,7 @@ function edgeColor(type: GraphLinkType, p: Palette) {
   return mix(base, p.bg, type === "semantic" ? 0.62 : type === "case" ? 0.72 : 0.55);
 }
 
-export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCanvas({ graph, focus, selected, onSelect, linkTypes, className }, ref) {
+export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCanvas({ graph, focus, selected, onSelect, className }, ref) {
   const container = useRef<HTMLDivElement>(null);
   const sigmaRef = useRef<Sigma | null>(null);
   const gRef = useRef<GraphologyGraph | null>(null);
@@ -87,7 +85,6 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
     hovered: null as string | null,
     hoverNeighbours: new Set<string>(),
     fade: 1, // 0 → 1 while a new focus eases in
-    linkTypes: linkTypes,
   });
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
@@ -133,20 +130,14 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
       const cases = graph.nodes.filter((n) => n.type === "case");
       const caseAngle = new Map(cases.map((c, i) => [c.id.slice(2), (i / Math.max(cases.length, 1)) * Math.PI * 2]));
       let jitter = 0;
-      // Each case starts on a wide ring, with its own notes in a small cloud around it, so clusters begin apart.
-      const entityCase = new Map<string, string>();
-      for (const l of graph.links) if (l.type === "entity") entityCase.set(l.target, l.source.slice(2));
       for (const n of graph.nodes) {
-        const home = n.type === "case" ? n.id.slice(2) : n.case_id ?? entityCase.get(n.id);
-        const a = home ? caseAngle.get(home) : undefined;
-        const cx = a === undefined ? 0 : Math.cos(a) * 260;
-        const cy = a === undefined ? 0 : Math.sin(a) * 260;
-        const spread = n.type === "case" ? 0 : 30 + 45 * Math.random();
-        const t = Math.random() * Math.PI * 2;
+        const a = n.case_id ? caseAngle.get(n.case_id) : n.type === "case" ? caseAngle.get(n.id.slice(2)) : undefined;
+        const r = n.type === "case" ? 60 : n.case_id ? 60 + 18 * Math.random() : 100;
+        const ang = (a ?? Math.random() * Math.PI * 2) + (n.type === "case" ? 0 : (Math.random() - 0.5) * 1.1);
         jitter++;
         g.addNode(n.id, {
-          x: cx + Math.cos(t) * spread + (jitter % 7),
-          y: cy + Math.sin(t) * spread + (jitter % 5),
+          x: Math.cos(ang) * r + (jitter % 7),
+          y: Math.sin(ang) * r + (jitter % 5),
           size: SIZE[n.type],
           label: n.type === "case" ? n.label : n.label.length > 42 ? `${n.label.slice(0, 41)}…` : n.label,
           color: nodeColor(n.type, p),
@@ -163,9 +154,8 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
           linkType: l.type,
           size: l.type === "semantic" ? 0.5 + (l.weight ?? 0) * 1.4 : l.type === "case" ? 0.6 : 0.9,
           color: edgeColor(l.type, p),
-          // Layout is driven by case, timeline and people; "same topic" links barely pull, so cases don't knot together.
-          weight: l.type === "semantic" ? 0.03 : l.type === "temporal" ? 1.2 : l.type === "case" ? 2 : 1,
-          type: l.type === "semantic" ? "curve" : "line",
+          weight: l.type === "semantic" ? 0.15 + (l.weight ?? 0) * 0.5 : l.type === "temporal" ? 1.5 : l.type === "case" ? 2 : 1,
+          type: "curve",
         });
       }
       g.forEachNode((id) => g.mergeNodeAttributes(id, { size: g.getNodeAttribute(id, "size") + Math.min(g.degree(id), 14) * (g.getNodeAttribute(id, "nodeType") === "case" ? 0.35 : 0.14) }));
@@ -214,7 +204,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
 
       const s = new SigmaCtor(g, container.current, {
         renderEdgeLabels: false,
-        defaultEdgeType: "line",
+        defaultEdgeType: "curve",
         edgeProgramClasses: { curve: EdgeCurveProgram },
         nodeProgramClasses: {
           border: createNodeBorderProgram({
@@ -234,7 +224,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
         labelGridCellSize: 110,
         labelRenderedSizeThreshold: 9,
         zIndex: true,
-        stagePadding: container.current.clientWidth < 600 ? 28 : 70,
+        stagePadding: 40,
         minCameraRatio: 0.08,
         maxCameraRatio: 4,
         defaultDrawNodeHover: drawHover as never,
@@ -284,7 +274,6 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
         const pal = paletteRef.current!;
         const res: Record<string, unknown> = { ...attrs };
         const [a, b] = g.extremities(id);
-        if (!st.linkTypes.has(attrs.linkType as GraphLinkType)) return { ...res, hidden: true };
         if (st.focus) {
           const inA = st.focus.has(a) || st.keep.has(a);
           const inB = st.focus.has(b) || st.keep.has(b);
@@ -319,7 +308,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
       s.on("clickStage", () => onSelectRef.current(null));
 
       // ForceAtlas2: settle live in a worker (a short, visible "breathing" into place), or at once for reduced motion.
-      const settings = { ...fa2.default.inferSettings(g), gravity: 0.35, scalingRatio: 9, slowDown: 5, linLogMode: true, outboundAttractionDistribution: true, adjustSizes: true, barnesHutOptimize: g.order > 400, edgeWeightInfluence: 1 };
+      const settings = { ...fa2.default.inferSettings(g), gravity: 1, scalingRatio: 4, slowDown: 4, linLogMode: true, outboundAttractionDistribution: true, barnesHutOptimize: g.order > 400, edgeWeightInfluence: 1 };
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
         fa2.default.assign(g, { iterations: 400, settings });
         s.getCamera().setState({ x: 0.5, y: 0.5, ratio: 1 });
@@ -378,11 +367,6 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
   }, [focus, ready]);
 
   useEffect(() => {
-    state.current.linkTypes = linkTypes;
-    sigmaRef.current?.refresh({ skipIndexation: true });
-  }, [linkTypes, ready]);
-
-  useEffect(() => {
     state.current.selected = selected;
     sigmaRef.current?.refresh({ skipIndexation: true });
   }, [selected, ready]);
@@ -414,7 +398,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
         style={{ cursor: "grab" }}
       />
       {settling && (
-        <div className="fade text-muted-foreground pointer-events-none absolute top-4 right-4 font-mono text-[11px]" aria-hidden>
+        <div className="fade text-muted-foreground pointer-events-none absolute bottom-4 left-4 font-mono text-[11px]" aria-hidden>
           <ShinyText text="Arranging…" color="var(--muted-foreground)" shineColor="var(--foreground)" speed={1.6} />
         </div>
       )}
