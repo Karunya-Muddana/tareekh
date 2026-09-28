@@ -12,6 +12,7 @@ Links
   semantic  entries that talk about the same things (local TF-IDF, top neighbours)
   memory    chat memory -> its case
 """
+import heapq
 import json
 import logging
 import math
@@ -20,6 +21,8 @@ import threading
 import time
 from collections import Counter
 from pathlib import Path
+
+from urllib.parse import quote
 
 from rapidfuzz import fuzz, process
 
@@ -42,6 +45,14 @@ def _tokens(text: str) -> list[str]:
 # ------------------------------------------------------------------ building the graph
 _cache: dict = {"key": None, "at": 0.0, "graph": None, "index": None}
 _lock = threading.Lock()
+_version = 0  # bumped by invalidate(): edits that don't change counts (a case fixed in review, a text edit)
+
+
+def invalidate() -> None:
+    """Call after anything that changes entries or chat memories; the next build() starts fresh."""
+    global _version
+    with _lock:
+        _version += 1
 
 
 def _entries() -> list[dict]:
@@ -63,6 +74,23 @@ def _tfidf(docs: dict[str, list[str]]) -> tuple[dict[str, dict[str, float]], dic
     return vecs, idf
 
 
+def _nearest_pairs(vecs: dict[str, dict[str, float]], k: int = 2):
+    """Each document's k most similar others, via an inverted index: only documents that share a term are ever
+    compared, and nlargest avoids sorting every candidate. Yields (a, b, cosine)."""
+    postings: dict[str, list[tuple[str, float]]] = {}
+    for doc, v in vecs.items():
+        for t, w in v.items():
+            postings.setdefault(t, []).append((doc, w))
+    for a, va in vecs.items():
+        scores: dict[str, float] = {}
+        for t, w in va.items():
+            for b, wb in postings[t]:
+                if b != a:
+                    scores[b] = scores.get(b, 0.0) + w * wb
+        for b, s in heapq.nlargest(k, scores.items(), key=lambda kv: kv[1]):
+            yield a, b, s
+
+
 def _cos(a: dict[str, float], b: dict[str, float]) -> float:
     if len(a) > len(b):
         a, b = b, a
@@ -74,7 +102,7 @@ def build() -> dict:
     key = db.row("""SELECT (SELECT count(*) FROM entries WHERE status IN ('retained','confirmed')) AS e,
                            (SELECT count(*) FROM chat_memories) AS m,
                            (SELECT max(id) FROM entries) AS last""")
-    key = (key["e"], key["m"], key["last"]) if key else None
+    key = (key["e"], key["m"], key["last"], _version) if key else None
     with _lock:
         if _cache["graph"] is not None and _cache["key"] == key:
             return _cache["graph"]
@@ -121,15 +149,12 @@ def build() -> dict:
     docs = {f"e:{e['id']}": _tokens(e["text"]) for e in entries}
     docs.update({f"m:{m['id']}": _tokens(m["text"]) for m in mems})
     vecs, idf = _tfidf(docs)
-    ids = list(vecs)
     seen = set()
-    for a in ids:
-        sims = sorted(((_cos(vecs[a], vecs[b]), b) for b in ids if b != a), reverse=True)[:2]
-        for s, b in sims:
-            pair = tuple(sorted((a, b)))
-            if s >= 0.18 and pair not in seen:
-                seen.add(pair)
-                links.append({"source": a, "target": b, "type": "semantic", "weight": round(s, 3)})
+    for a, b, s in _nearest_pairs(vecs, k=2):
+        pair = tuple(sorted((a, b)))
+        if s >= 0.18 and pair not in seen:
+            seen.add(pair)
+            links.append({"source": a, "target": b, "type": "semantic", "weight": round(s, 3)})
 
     graph = {"nodes": nodes, "links": links, "counts": {"notes": len(entries), "memories": len(mems), "cases": len(cases)}}
     with _lock:
@@ -267,7 +292,7 @@ def entry(entry_id: str) -> dict | None:
         return None
     up = db.row("SELECT files FROM uploads WHERE id=?", e["upload_id"])
     files = json.loads(up["files"]) if up and up["files"] else []
-    e["files"] = [{"name": f["name"], "kind": f.get("kind"), "url": f"/entries/{entry_id}/file?name={f['name']}"} for f in files]
+    e["files"] = [{"name": f["name"], "kind": f.get("kind"), "url": f"/entries/{entry_id}/file?name={quote(f['name'])}"} for f in files]
     return e
 
 

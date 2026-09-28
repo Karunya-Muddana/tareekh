@@ -10,7 +10,7 @@ from urllib.parse import quote
 
 import httpx
 
-from . import db, llm, memory, registry
+from . import db, graph, llm, memory, registry
 from .config import settings, today_iso
 
 log = logging.getLogger("tareekh.chatmem")
@@ -68,6 +68,8 @@ def extract_and_store(chat_id: str, message: str, recent: list[dict]) -> list[di
         db.execute("INSERT INTO chat_memories VALUES (?,?,?,?,?,?,?)", mid, chat_id, cid, text,
                    m.get("kind") or "fact", doc_id, dt.datetime.now().isoformat(timespec="seconds"))
         stored.append({"id": mid, "case_id": cid, "text": text, "kind": m.get("kind")})
+    if stored:
+        graph.invalidate()
     return stored
 
 
@@ -81,4 +83,5 @@ def forget(mem_id: str) -> bool:
     except Exception as e:  # noqa: BLE001
         log.warning("could not delete chat memory %s from Hindsight: %s", mem_id, e)
     db.execute("DELETE FROM chat_memories WHERE id=?", mem_id)
+    graph.invalidate()
     return True

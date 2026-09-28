@@ -16,10 +16,10 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSkeleton,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Wordmark } from "@/components/brand";
+import { Skeleton } from "@/components/ui/skeleton";
 import CountUp from "@/components/bits/CountUp";
 import ShinyText from "@/components/bits/ShinyText";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -49,7 +49,7 @@ export function AppSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { isMobile, setOpenMobile } = useSidebar();
-  const { data: chats } = useChats();
+  const { data: chats, loading: chatsLoading } = useChats();
   const { data: status, error: statusError } = useMemoryStatus();
   const user = useSession();
   const [query, setQuery] = useState("");
@@ -96,7 +96,7 @@ export function AppSidebar() {
   const busy = status ? status.pending_operations + status.pending_consolidation : 0;
   const leave = () => {
     signOut();
-    router.replace("/login");
+    window.location.replace("/login"); // full load: nothing from this session survives in memory
   };
 
   return (
@@ -149,12 +149,13 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent className="fade-y px-1">
-        {chats === null ? (
+        {chatsLoading ? (
           <SidebarGroup>
             <SidebarMenu>
-              {Array.from({ length: 6 }, (_, i) => (
-                <SidebarMenuItem key={i}>
-                  <SidebarMenuSkeleton />
+              {/* fixed widths: random ones differ between the server render and the browser */}
+              {[72, 58, 84, 64, 76, 52].map((w, i) => (
+                <SidebarMenuItem key={i} className="flex h-8 items-center px-2" role="status" aria-label={i === 0 ? "Loading chats" : undefined}>
+                  <Skeleton className="h-4" style={{ width: `${w}%` }} />
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

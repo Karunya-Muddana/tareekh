@@ -59,6 +59,7 @@ export default function UploadPage() {
       // new notes change Today's "previous hearing" lines and the calendar
       invalidate("today");
       invalidate("calendar:");
+      invalidate("graph");
       const u = await api.getUpload(up.id);
       setUp(u);
       if (u.status === "done") {
@@ -72,7 +73,12 @@ export default function UploadPage() {
     setRunning(false);
   };
 
-  const stepIndex = up ? (up.status === "queued" ? 0 : up.status === "retaining" ? 3 : STEPS.findIndex(([s]) => s === up.status)) : -1;
+  // An errored upload has no step of its own: it failed on the last step we saw it reach.
+  const liveStep = up ? (up.status === "queued" ? 0 : up.status === "retaining" ? 3 : STEPS.findIndex(([s]) => s === up.status)) : -1;
+  const lastStep = useRef(0);
+  if (liveStep >= 0) lastStep.current = liveStep;
+  const failed = up?.status === "error";
+  const stepIndex = failed ? lastStep.current : liveStep;
   const pending = up?.entries.filter((e) => !["retained", "rejected"].includes(e.status)) ?? [];
 
   return (
@@ -173,13 +179,13 @@ export default function UploadPage() {
               {STEPS.map(([key, label], i) => {
                 const done = i < stepIndex || up.status === "done";
                 const now = i === stepIndex && up.status !== "done";
-                const failed = now && up.status === "error";
+                const stepFailed = now && failed;
                 return (
                   <li key={key} className={cn("flex items-center gap-2", done || now ? "text-foreground" : "text-muted-foreground")}>
                     <StatusMark
                       size={18}
                       strokeWidth={1.8}
-                      status={failed ? "failed" : done ? "done" : now && running ? "running" : "pending"}
+                      status={stepFailed ? "failed" : done ? "done" : now && running ? "running" : "pending"}
                       color="var(--muted-foreground)"
                       doneColor="var(--chart-3)"
                       errorColor="var(--destructive)"

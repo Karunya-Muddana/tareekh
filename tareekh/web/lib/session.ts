@@ -4,6 +4,7 @@
 // proxy can send signed-out visitors to /login. Swap this for real auth before anyone else uses the app.
 
 import { useSyncExternalStore } from "react";
+import { clearCache } from "@/lib/cache";
 
 export const SESSION_COOKIE = "tareekh_session";
 const EVENT = "tareekh:session";
@@ -28,6 +29,7 @@ function snapshot() {
 }
 
 export function signIn(user: SessionUser) {
+  clearCache();
   const secure = location.protocol === "https:" ? "; Secure" : "";
   document.cookie = `${SESSION_COOKIE}=${encodeURIComponent(JSON.stringify(user))}; Path=/; Max-Age=${60 * 60 * 24 * 30}; SameSite=Lax${secure}`;
   window.dispatchEvent(new Event(EVENT));
@@ -35,10 +37,9 @@ export function signIn(user: SessionUser) {
 
 export function signOut() {
   document.cookie = `${SESSION_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax`;
-  try {
-    for (const k of Object.keys(localStorage)) if (k.startsWith("tareekh:c1:")) localStorage.removeItem(k);
-  } catch {}
-  window.dispatchEvent(new Event(EVENT));
+  clearCache();
+  // No session event here: re-rendering the open screens would refetch the previous user's data. The caller
+  // leaves with a full page load instead (see the sidebar), which also drops everything held in memory.
 }
 
 function subscribe(cb: () => void) {

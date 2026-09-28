@@ -13,6 +13,8 @@ type Entry = { data?: unknown; error?: Error; at: number; promise?: Promise<unkn
 const store = new Map<string, Entry>();
 const listeners = new Map<string, Set<() => void>>();
 const STORAGE_PREFIX = "tareekh:c1:";
+// Bumped by clearCache(): a response that was already in flight must not write the previous user's data back.
+let generation = 0;
 
 const emit = (key: string) => listeners.get(key)?.forEach((l) => l());
 
@@ -46,18 +48,21 @@ export function load<T>(key: string, fetcher: () => Promise<T>, { maxAge = 30_00
   const e = read(key, persist);
   if (e?.promise) return e.promise as Promise<T>;
   if (e && "data" in e && e.data !== undefined && Date.now() - e.at < maxAge) return Promise.resolve(e.data as T);
+  const gen = generation;
   const promise = fetcher()
     .then((data) => {
-      write(key, data, persist);
+      if (gen === generation) write(key, data, persist);
       return data;
     })
     .catch((error: Error) => {
+      if (gen !== generation) throw error;
       const cur = store.get(key);
       store.set(key, { ...cur, error, at: cur?.at ?? 0, promise: undefined });
       emit(key);
       throw error;
     })
     .finally(() => {
+      if (gen !== generation) return;
       const cur = store.get(key);
       if (cur?.promise === promise) store.set(key, { ...cur, promise: undefined });
     });
@@ -86,6 +91,19 @@ export function invalidate(prefix: string) {
 
 export function forget(key: string) {
   store.delete(key);
+}
+
+/**
+ * Drop every cached read, in memory and in localStorage. Used on sign-in/out so no one sees the last user's data.
+ * Screens that are still open are deliberately not told: they are about to be navigated away, and waking them
+ * would just refetch and store the old user's data again. The next screen to mount finds nothing and fetches.
+ */
+export function clearCache() {
+  generation++;
+  store.clear();
+  try {
+    for (const k of Object.keys(localStorage)) if (k.startsWith(STORAGE_PREFIX)) localStorage.removeItem(k);
+  } catch {}
 }
 
 export function useCached<T>(

@@ -146,3 +146,41 @@ def test_entry_file_never_serves_unregistered_paths(loaded):
     ids = _seed_entries()
     assert graph.entry_file_path(ids[0], "../../etc/passwd") is None
     assert graph.entry_file_path(ids[0], None) is None   # registered but missing on disk
+
+
+def test_nearest_pairs_matches_brute_force(loaded):
+    from app import graph
+    docs = {f"d{i}": graph._tokens(t) for i, t in enumerate([
+        "survey pegs and poles on the land", "fencing poles not survey pegs", "costs for third adjournment",
+        "adjournment rejected costs imposed", "rent instalment not paid", "tenant deposit of rent"])}
+    vecs, _ = graph._tfidf(docs)
+    fast = {(a, b) for a, b, _ in graph._nearest_pairs(vecs, k=2)}
+    for a in vecs:
+        brute = sorted(((graph._cos(vecs[a], vecs[b]), b) for b in vecs if b != a), reverse=True)[:2]
+        for s, b in brute:
+            if s > 0:
+                assert (a, b) in fast
+
+
+def test_graph_cache_invalidates_without_count_change(loaded):
+    from app import graph
+    ids = _seed_entries()
+    before = graph.build()
+    db.execute("UPDATE entries SET case_id='C5' WHERE id=?", ids[0])   # a fix in review: same counts
+    assert graph.build() is before                                     # counts alone can't see it...
+    graph.invalidate()
+    after = graph.build()
+    assert after is not before
+    assert any(l["source"] == f"e:{ids[0]}" and l["target"] == "c:C5" for l in after["links"])
+
+
+def test_entry_file_urls_are_encoded(loaded):
+    from app import graph
+    import uuid
+    up = uuid.uuid4().hex[:8]
+    db.execute("INSERT INTO uploads (id, created_at, status, hints, files) VALUES (?,?,?,?,?)", up, "2026-01-01", "done", "{}",
+               json.dumps([{"name": "IMG 1&2 #a.jpg", "path": "/x/IMG 1&2 #a.jpg", "kind": "image"}]))
+    eid = uuid.uuid4().hex[:8]
+    db.execute("INSERT INTO entries (id, upload_id, source_file, case_id, hearing_date, author, doc_type, text, status) "
+               "VALUES (?,?,?,?,?,?,?,?,?)", eid, up, "IMG 1&2 #a.jpg", "C1", "2026-01-02", "Aditya", "handwritten_note", "x", "retained")
+    assert graph.entry(eid)["files"][0]["url"].endswith("?name=IMG%201%262%20%23a.jpg")

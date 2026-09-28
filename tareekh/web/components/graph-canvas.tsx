@@ -313,14 +313,14 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
         fa2.default.assign(g, { iterations: 400, settings });
         s.getCamera().setState({ x: 0.5, y: 0.5, ratio: 1 });
       } else {
-        fa2.default.assign(g, { iterations: 120, settings });
+        // All layout work happens in the worker; nothing blocks the main thread before it starts.
         layout = new FA2Layout(g, { settings });
         layout.start();
         setSettling(true);
         stopTimer = setTimeout(() => {
           layout?.stop();
           setSettling(false);
-        }, 2200);
+        }, 3000);
       }
       setReady(true);
     })();
