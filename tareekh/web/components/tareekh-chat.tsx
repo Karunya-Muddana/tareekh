@@ -323,12 +323,16 @@ export function ChatView({
   });
   const runtime = useAISDKRuntime(chat);
 
+  // Deferred a tick and cancelled on cleanup: useChat stops the chat when it unmounts, and StrictMode's
+  // mount-unmount-mount would otherwise kill the send and leave `sent` set, so the question never goes out.
   const sent = useRef(false);
   useEffect(() => {
-    if (firstMessage && !sent.current && initial.length === 0) {
+    if (!firstMessage || sent.current || initial.length > 0) return;
+    const t = setTimeout(() => {
       sent.current = true;
       chat.sendMessage({ text: firstMessage });
-    }
+    }, 0);
+    return () => clearTimeout(t);
   }, [firstMessage, initial.length, chat]);
 
   return (
