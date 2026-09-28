@@ -43,7 +43,7 @@ export function TabBar() {
   return (
     <nav
       aria-label="Main"
-      className="bg-background/92 supports-[backdrop-filter]:bg-background/80 fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border)] pb-[env(safe-area-inset-bottom)] backdrop-blur-xl backdrop-saturate-150 md:hidden"
+      className="bg-background fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border)] pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <div className="relative mx-auto grid h-16 max-w-md grid-cols-4 px-2">
         {activeIndex >= 0 && (
