@@ -277,12 +277,6 @@ function Welcome({ name, suggestions }: { name?: string; suggestions: string[] }
   );
 }
 
-const DEFAULT_SUGGESTIONS = [
-  "How much of the land does Srinivas say he owns?",
-  "Did Seabreeze do any work on the land before the injunction?",
-  "What does Murthy sir do when the other side keeps asking for time?",
-  "What is pending from our side this week?",
-];
 
 // ---------------------------------------------------------------- the chat
 export function ChatView({
@@ -292,6 +286,7 @@ export function ChatView({
   quick,
   firstMessage,
   lawyerName,
+  suggestions,
 }: {
   chatId: string;
   initial: UIMessage[];
@@ -299,6 +294,7 @@ export function ChatView({
   quick: boolean;
   firstMessage?: string | null;
   lawyerName?: string;
+  suggestions: string[];
 }) {
   const settings = useRef({ quick, caseId });
   settings.current = { quick, caseId };
@@ -340,7 +336,7 @@ export function ChatView({
       <SourcesUI />
       <Thread
         components={{
-          Welcome: () => <Welcome name={lawyerName} suggestions={DEFAULT_SUGGESTIONS} />,
+          Welcome: () => <Welcome name={lawyerName} suggestions={suggestions} />,
         }}
       />
     </AssistantRuntimeProvider>

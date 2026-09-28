@@ -140,9 +140,13 @@ def get_chat(chat_id: str):
     if not chat:
         raise HTTPException(404, "unknown chat")
     msgs = db.rows("SELECT id, role, content, citations, meta, created_at FROM messages WHERE chat_id=? ORDER BY id", chat_id)
+    # A message keeps a copy of what it learned; drop the ones that have since been forgotten.
+    alive = {r["id"] for r in db.rows("SELECT id FROM chat_memories WHERE chat_id=?", chat_id)}
     for m in msgs:
         m["citations"] = json.loads(m["citations"] or "[]")
         m["meta"] = json.loads(m["meta"] or "{}")
+        if m["meta"].get("learned"):
+            m["meta"]["learned"] = [l for l in m["meta"]["learned"] if l.get("id") in alive]
     return {**chat, "messages": msgs}
 
 

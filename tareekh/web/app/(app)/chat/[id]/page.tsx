@@ -6,7 +6,8 @@ import type { UIMessage } from "ai";
 import { TopBar } from "@/components/app-shell";
 import { ChatView, toUIMessages } from "@/components/tareekh-chat";
 import { Skeleton } from "@/components/ui/skeleton";
-import { chatKey, loadChat, useCases } from "@/lib/api";
+import { chatKey, loadChat, useCases, useToday } from "@/lib/api";
+import { chatSuggestions } from "@/lib/suggestions";
 import { forget } from "@/lib/cache";
 import { useSession } from "@/lib/session";
 import RubberSegment from "@/components/bits/RubberSegment";
@@ -19,6 +20,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   const [chat, setChat] = useState<{ title: string; case_id: string | null; initial: UIMessage[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { data: caseList } = useCases();
+  const { data: today } = useToday();
   const user = useSession();
   const lawyer = user?.name.replace(/^adv\.?\s+/i, "").split(" ")[0];
   const [quick, setQuick] = useState(true);
@@ -108,6 +110,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
             quick={quick}
             firstMessage={q}
             lawyerName={lawyer}
+            suggestions={chatSuggestions(today, caseList, chat.case_id)}
           />
         )}
       </div>

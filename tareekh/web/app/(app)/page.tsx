@@ -38,21 +38,27 @@ export default function TodayPage() {
   const memories = (memoryList ?? []).filter((m) => !hidden.includes(m.id));
   const judges = insights?.judges ?? data?.judges ?? {};
 
-  const brief = async (h: Hearing, question?: string) => {
-    setBusy(h.case_id);
+  // Opens a new chat. With a question it is sent straight away; without one the chat waits for you to type.
+  const openChat = async (key: string, title: string, caseId?: string, q?: string) => {
+    setBusy(key);
     try {
-      const c = await api.newChat(`${question ? "" : "Brief · "}${h.short_name}`, h.case_id);
+      const c = await api.newChat(title, caseId);
       chatsChanged();
-      const q =
-        question ??
-        `Brief me for today's hearing in ${h.short_name} (${h.case_number}), listed for ${h.listed_for ?? "hearing"}. ` +
-          `What happened last time, what is pending from our side, and what should I expect from ${h.judge}?`;
-      router.push(`/chat/${c.id}?q=${encodeURIComponent(q)}`);
+      router.push(q ? `/chat/${c.id}?q=${encodeURIComponent(q)}` : `/chat/${c.id}`);
     } catch (e) {
       toast(e instanceof Error ? e.message : "Couldn’t start the chat");
       setBusy(null);
     }
   };
+
+  const brief = (h: Hearing) =>
+    openChat(
+      h.case_id,
+      `Brief · ${h.short_name}`,
+      h.case_id,
+      `Brief me for today's hearing in ${h.short_name} (${h.case_number}), listed for ${h.listed_for ?? "hearing"}. ` +
+        `What happened last time, what is pending from our side, and what should I expect from ${h.judge}?`,
+    );
 
   const briefAll = async () => {
     if (!data?.hearings.length) return;
@@ -172,7 +178,7 @@ export default function TodayPage() {
                         memories={memories.filter((m) => m.case_id === h.case_id)}
                         busy={busy === h.case_id}
                         onBrief={() => brief(h)}
-                        onAsk={() => brief(h, `${h.short_name}: `)}
+                        onAsk={() => openChat(h.case_id, h.short_name, h.case_id)}
                       />
                     </li>
                   ))}
@@ -196,7 +202,7 @@ export default function TodayPage() {
                   <span>Tareekh is still learning these from the notes.</span>
                   {data?.hearings[0] && (
                     <button
-                      onClick={() => brief(data.hearings[0], "What is pending from our side this week, and what is overdue?")}
+                      onClick={() => openChat("__pending", "What’s pending", undefined, "What is pending from our side this week, and what is overdue?")}
                       className="press text-foreground rounded-md font-medium underline decoration-foreground/30 hover:decoration-foreground"
                     >
                       Ask what’s pending
