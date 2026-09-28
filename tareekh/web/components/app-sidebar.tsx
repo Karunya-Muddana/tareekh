@@ -134,7 +134,7 @@ export function AppSidebar() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search chats"
             aria-label="Search chats"
-            className="placeholder:text-muted-foreground/80 w-full bg-transparent text-[16px] outline-none md:text-sm"
+            className="w-full bg-transparent text-[16px] outline-none md:text-sm"
             spellCheck={false}
           />
         </label>

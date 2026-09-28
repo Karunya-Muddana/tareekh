@@ -269,7 +269,6 @@ function Welcome({ name, suggestions }: { name?: string; suggestions: string[] }
             className="press text-muted-foreground hover:text-foreground hover:bg-accent animate-in fade-in slide-in-from-bottom-1 fill-mode-both -mx-2 flex items-baseline gap-3 rounded-lg px-2 py-2.5 text-left text-[15px] duration-300 motion-reduce:animate-none"
             style={{ animationDelay: `${80 + i * 40}ms` }}
           >
-            <span className="text-muted-foreground/50 tnum font-mono text-xs">{String(i + 1).padStart(2, "0")}</span>
             <span>{s}</span>
           </ThreadPrimitive.Suggestion>
         ))}

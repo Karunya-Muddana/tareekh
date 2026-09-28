@@ -181,6 +181,13 @@
   body { font-feature-settings: "ss01", "cv11"; text-rendering: optimizeLegibility; }
   button, a, [role="button"] { touch-action: manipulation; }
   .tnum { font-variant-numeric: tabular-nums; }
+  /* Browser surfaces carry the palette too */
+  ::selection { background: color-mix(in oklch, var(--primary) 22%, transparent); color: inherit; }
+  input, textarea, [contenteditable] { caret-color: var(--primary); }
+  ::placeholder { color: var(--muted-foreground); opacity: 1; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  html { scrollbar-color: color-mix(in oklch, var(--foreground) 22%, transparent) transparent; scrollbar-width: thin; }
+  a { text-underline-offset: 3px; }
   /* Large titles: tight leading and negative tracking; small text stays near zero */
   .title-xl { font-family: var(--font-instrument-serif); font-weight: 400; letter-spacing: -0.02em; line-height: 1.02; }
   /* Samarkan, the Indic-style display face. Only three places: wordmark, Today's weekday, sign-in hero. */
@@ -230,12 +237,17 @@
 :root {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  /* a gentle spring: slight overshoot, settles fast */
-  --ease-spring: linear(0, 0.013 0.6%, 0.05 1.2%, 0.2 2.6%, 0.506 5.1%, 0.803 8.1%, 0.958 10.6%, 1.039 13.3%, 1.071 16%, 1.074 18.5%, 1.049 22.6%, 1.012 28.3%, 0.997 34.8%, 0.998 44.9%, 1);
+  /* exponential ease-out: fast start, long soft landing, no overshoot */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+/* screens start visible and settle; nothing waits on an animation to be readable */
+@keyframes settle {
+  from { opacity: 0.55; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
 }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
@@ -264,16 +276,16 @@
   /* staggered entrance: set --i on each item */
   .rise { animation: rise 560ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + var(--d, 0ms)); }
   .fade { animation: fade 400ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
-  .page-enter { animation: rise 420ms var(--ease-out) both; }
+  .page-enter { animation: settle 380ms var(--ease-expo) both; }
   /* the wordmark/weekday writes itself in, left to right like a pen */
   .ink-in { animation: ink-wipe 1100ms var(--ease-in-out) both; animation-delay: var(--d, 0ms); }
-  .logo-animate .logo-ribbon { animation: ribbon-drop 900ms var(--ease-spring) 250ms both; }
-  .logo-animate .logo-corner { transform-origin: 53px 53px; transform-box: view-box; animation: corner-turn 700ms var(--ease-spring) 650ms both; }
+  .logo-animate .logo-ribbon { animation: ribbon-drop 900ms var(--ease-expo) 250ms both; }
+  .logo-animate .logo-corner { transform-origin: 53px 53px; transform-box: view-box; animation: corner-turn 700ms var(--ease-expo) 650ms both; }
   .lift { transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), background-color 150ms ease; }
   @media (hover: hover) {
     .lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
   }
-  .spring { transition: transform 450ms var(--ease-spring), background-color 200ms ease, color 200ms ease, opacity 200ms ease; }
+  .spring { transition: transform 420ms var(--ease-expo), background-color 200ms ease, color 200ms ease, opacity 200ms ease; }
   .skeleton-sheen {
     background-image: linear-gradient(100deg, transparent 30%, color-mix(in oklch, var(--foreground) 6%, transparent) 50%, transparent 70%);
     background-size: 200% 100%;

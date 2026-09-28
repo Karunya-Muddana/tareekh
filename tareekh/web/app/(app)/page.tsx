@@ -78,7 +78,7 @@ export default function TodayPage() {
                 {greeting(user?.name)} · {day.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
               </p>
               <h1 className="indic ink-in mt-3 text-[56px] md:text-[80px]" style={{ "--d": "120ms" } as React.CSSProperties}>{day.toLocaleDateString("en-IN", { weekday: "long" }).toLowerCase()}</h1>
-              <p className="rise text-muted-foreground mt-3 text-[15px]" style={{ "--d": "500ms" } as React.CSSProperties}>
+              <p className="text-muted-foreground mt-3 text-[15px]">
                 {data!.hearings.length === 0
                   ? "Nothing on today’s cause list."
                   : `${data!.hearings.length} ${data!.hearings.length === 1 ? "matter" : "matters"} listed${
@@ -116,7 +116,6 @@ export default function TodayPage() {
                   {data.hearings.map((h, i) => (
                     <li key={h.case_id} className="rise py-5" style={{ "--i": i, "--d": "200ms" } as React.CSSProperties}>
                       <div className="text-muted-foreground flex items-center gap-2 text-xs">
-                        <span className="tnum font-mono">{String(i + 1).padStart(2, "0")}</span>
                         <span>{h.court_hall?.split(",")[0]}</span>
                         <span aria-hidden>·</span>
                         <span>{h.judge}</span>
@@ -156,7 +155,7 @@ export default function TodayPage() {
             </section>
 
             {/* Commitments */}
-            <section className="rise" style={{ "--i": 3, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-commit">
+            <section aria-labelledby="h-commit">
               <SectionTitle id="h-commit">Pending from our side</SectionTitle>
               {insights?.commitments ? (
                 <Commitments text={insights.commitments} />
@@ -183,14 +182,14 @@ export default function TodayPage() {
 
             {/* Up next */}
             {data && data.upcoming.length > 0 && (
-              <section className="rise" style={{ "--i": 4, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-next">
+              <section aria-labelledby="h-next">
                 <SectionTitle id="h-next">Next dates</SectionTitle>
                 <ul className="divide-border divide-y">
                   {data.upcoming.map((h) => (
                     <li key={h.case_id} className="flex items-baseline justify-between gap-4 py-3">
                       <div className="min-w-0">
                         <div className="truncate font-medium">{h.short_name}</div>
-                        <div className="text-muted-foreground truncate text-sm">{h.listed_for}</div>
+                        <div className="text-muted-foreground line-clamp-2 text-sm">{h.listed_for}</div>
                       </div>
                       <div className="text-muted-foreground shrink-0 text-sm tnum">{fmtDate(h.date, { weekday: "short", day: "numeric", month: "short" })}</div>
                     </li>
@@ -201,12 +200,12 @@ export default function TodayPage() {
           </div>
 
           <aside className="flex min-w-0 flex-col gap-12">
-            <div className="rise hidden lg:block" style={{ "--i": 1, "--d": "150ms" } as React.CSSProperties}>
+            <div className="hidden lg:block">
               <MonthCalendar today={data?.today} />
             </div>
 
             {/* Remembered from chats */}
-            <section className="rise" style={{ "--i": 2, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-mem">
+            <section aria-labelledby="h-mem">
               <SectionTitle id="h-mem">Remembered from chats</SectionTitle>
               {memories.length === 0 ? (
                 <p className="text-muted-foreground text-sm leading-relaxed">
@@ -237,7 +236,7 @@ export default function TodayPage() {
 
             {/* Judges */}
             {Object.keys(judges).length > 0 && (
-              <section className="rise" style={{ "--i": 3, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-judges">
+              <section aria-labelledby="h-judges">
                 <SectionTitle id="h-judges">Before the bench today</SectionTitle>
                 <div className="flex flex-col gap-2">
                   {Object.entries(judges).map(([id, j]) => (
@@ -351,9 +350,9 @@ function Commitments({ text }: { text: string }) {
   const long = text.length > 900;
   return (
     <div className="border-border bg-card relative rounded-2xl border px-5 py-4 shadow-[var(--shadow-soft)]">
-      <div className={cn("relative overflow-hidden transition-[max-height] duration-700 ease-[var(--ease-in-out)] motion-reduce:transition-none", long && !open ? "max-h-72" : "max-h-[400rem]")}>
-        <Prose>{text}</Prose>
-        {long && <div className={cn("from-card pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t transition-opacity duration-500", open && "opacity-0")} aria-hidden />}
+      <div className={cn("relative overflow-hidden", long && !open && "max-h-72")}>
+        <Prose key={String(open)} className={open ? "fade" : undefined}>{text}</Prose>
+        {long && !open && <div className="from-card pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t" aria-hidden />}
       </div>
       {long && (
         <button onClick={() => setOpen(!open)} aria-expanded={open} className="press text-primary mt-2 rounded-md text-sm font-medium hover:underline">

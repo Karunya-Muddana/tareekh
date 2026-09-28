@@ -95,7 +95,7 @@ function Toaster({ tabs }: { tabs: boolean }) {
       {toasts.map((t) => (
         <div
           key={t.id}
-          className="bg-foreground text-background animate-in fade-in zoom-in-95 slide-in-from-bottom-3 pointer-events-auto ease-[var(--ease-spring)] flex items-center gap-4 rounded-xl py-2.5 pr-2.5 pl-4 text-sm shadow-lg duration-500 motion-reduce:animate-none"
+          className="bg-foreground text-background animate-in fade-in zoom-in-95 slide-in-from-bottom-3 pointer-events-auto ease-[var(--ease-expo)] flex items-center gap-4 rounded-xl py-2.5 pr-2.5 pl-4 text-sm shadow-lg duration-500 motion-reduce:animate-none"
         >
           <span>{t.text}</span>
           {t.action && (

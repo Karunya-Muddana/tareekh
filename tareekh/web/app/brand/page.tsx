@@ -47,8 +47,7 @@ export default function BrandPage() {
 
       <main className="mx-auto flex max-w-5xl flex-col gap-24 px-6 pt-16 pb-24 md:px-10">
         <section>
-          <p className="text-muted-foreground text-sm">Brand guide</p>
-          <h1 className="title-xl mt-2 max-w-3xl text-5xl md:text-7xl">A diary that remembers every date.</h1>
+          <h1 className="title-xl max-w-3xl text-5xl md:text-7xl">A diary that remembers every date.</h1>
           <p className="text-foreground/80 mt-6 max-w-2xl text-lg leading-relaxed">
             Tareekh is practice memory for Indian litigators. It should feel like the sharpest junior in the chamber: it
             knows the cause list, the last order, what the other side will ask for, and what sir said three dates ago. Calm,
@@ -62,8 +61,7 @@ export default function BrandPage() {
             <LogoMark className="size-1/2" title="The Tareekh mark" />
           </div>
           <div>
-            <SectionLabel>The mark</SectionLabel>
-            <h2 className="title-xl mt-2 text-4xl">One leaf of the diary.</h2>
+            <h2 className="title-xl text-4xl">One leaf of the diary.</h2>
             <dl className="mt-6 flex flex-col gap-5 text-[15px] leading-relaxed">
               <Part color={BRAND.paper} term="The leaf">
                 A page from the lawyer’s diary, where every next date has always been written.
@@ -82,14 +80,14 @@ export default function BrandPage() {
         </section>
 
         <section>
-          <SectionLabel>Sizes</SectionLabel>
+          <h2 className="title-xl text-4xl">Every size, same mark.</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
               ["#fbfbf9", "On paper"],
               ["#0f1612", "On night green"],
             ].map(([bg, label]) => (
               <div key={bg} className="border-border flex flex-col gap-4 rounded-2xl border p-6" style={{ background: bg }}>
-                <div className="flex items-end gap-5">
+                <div className="flex flex-wrap items-end gap-5">
                   {[16, 24, 32, 48, 72].map((px) => (
                     <LogoMark key={px} className="shrink-0" style={{ width: px, height: px }} />
                   ))}
@@ -103,18 +101,17 @@ export default function BrandPage() {
         </section>
 
         {/* Wordmark */}
-        <section className="grid gap-10 md:grid-cols-2 md:items-center">
-          <div>
-            <SectionLabel>The wordmark</SectionLabel>
-            <h2 className="title-xl mt-2 text-4xl">English letters, an Indian hand.</h2>
+        <section className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
+          <div className="min-w-0">
+            <h2 className="title-xl text-4xl">English letters, an Indian hand.</h2>
             <p className="text-foreground/80 mt-4 text-[15px] leading-relaxed">
               The wordmark is set in Samarkan: Roman letters drawn with the headline bar and strokes of Devanagari. It
               appears in three places only: the wordmark, the weekday on Today, and the sign-in screen. Everything else is
               Geist and Instrument Serif, so the interface stays quiet.
             </p>
           </div>
-          <div className="bg-card border-border flex flex-col items-center justify-center gap-8 rounded-3xl border p-10 shadow-[var(--shadow-soft)]">
-            <span className="indic text-[84px]">tareekh</span>
+          <div className="bg-card border-border flex min-w-0 flex-col items-center justify-center gap-8 overflow-hidden rounded-3xl border p-6 sm:p-10 shadow-[var(--shadow-soft)]">
+            <span className="indic text-[60px] sm:text-[84px]">tareekh</span>
             <span className="flex items-center gap-3">
               <LogoMark className="size-10" />
               <span className="indic text-[34px]">tareekh</span>
@@ -124,8 +121,7 @@ export default function BrandPage() {
 
         {/* Colour */}
         <section>
-          <SectionLabel>Colour</SectionLabel>
-          <h2 className="title-xl mt-2 text-4xl">Four fixed colours, two rooms.</h2>
+          <h2 className="title-xl text-4xl">Four fixed colours, two rooms.</h2>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {FIXED.map(([name, hex, note]) => (
               <li key={name} className="border-border overflow-hidden rounded-2xl border">
@@ -143,7 +139,7 @@ export default function BrandPage() {
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {THEMES.map((t) => (
               <div key={t.name} className="border-border rounded-2xl border p-5">
-                <div className="flex items-baseline justify-between">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                   <span className="title-xl text-2xl">{t.name}</span>
                   <span className="text-muted-foreground text-sm">{t.note}</span>
                 </div>
@@ -163,7 +159,7 @@ export default function BrandPage() {
 
         {/* Type */}
         <section>
-          <SectionLabel>Type</SectionLabel>
+          <h2 className="title-xl text-4xl">Three faces, three jobs.</h2>
           <div className="mt-6 grid gap-3 md:grid-cols-3">
             <TypeCard name="Instrument Serif" use="Large titles and dates" sample={<span className="title-xl text-5xl">Monday, 5 Oct</span>} />
             <TypeCard name="Geist" use="Everything you read and tap" sample={<span className="text-2xl font-semibold tracking-tight">Seabreeze SP suit</span>} />
@@ -174,8 +170,7 @@ export default function BrandPage() {
         {/* Voice */}
         <section className="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
           <div>
-            <SectionLabel>Voice</SectionLabel>
-            <h2 className="title-xl mt-2 text-4xl">The chamber’s own words.</h2>
+            <h2 className="title-xl text-4xl">The chamber’s own words.</h2>
             <p className="text-foreground/80 mt-4 text-[15px] leading-relaxed">
               Write the English of an Indian court: cause lists, next dates, listed for, undertakings, “sir” for the bench.
               Short, specific, unhurried. Always say which note or order an answer came from. No slang, no exclamation
@@ -200,9 +195,6 @@ export default function BrandPage() {
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-muted-foreground text-[12px] font-medium tracking-[0.08em] uppercase">{children}</p>;
-}
 
 function Part({ color, term, children }: { color: string; term: string; children: React.ReactNode }) {
   return (
