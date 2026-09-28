@@ -13,6 +13,7 @@ import {
   useCalendar,
   useChatMemories,
   useInsights,
+  useCases,
   useToday,
   type CalendarEvent,
   type ChatMemory,
@@ -50,6 +51,23 @@ export default function TodayPage() {
     }
   };
 
+  const briefAll = async () => {
+    if (!data?.hearings.length) return;
+    setBusy("__all");
+    try {
+      const c = await api.newChat("Brief · today’s cause list");
+      chatsChanged();
+      const list = data.hearings.map((h) => `${h.short_name} (${h.case_number}), listed for ${h.listed_for ?? "hearing"}`).join("; ");
+      const q =
+        `Brief me on today's cause list: ${list}. For each matter, in order: what happened last time, what is pending from our side, ` +
+        `and what to have ready. Then anything the bench (${data.hearings[0].judge}) is likely to ask.`;
+      router.push(`/chat/${c.id}?q=${encodeURIComponent(q)}`);
+    } catch (e) {
+      toast(e instanceof Error ? e.message : "Couldn’t start the chat");
+      setBusy(null);
+    }
+  };
+
   const forget = (m: ChatMemory) => {
     setHidden((xs) => [...xs, m.id]);
     const timer = setTimeout(() => {
@@ -63,28 +81,52 @@ export default function TodayPage() {
   };
 
   const day = data ? new Date(`${data.today}T00:00:00`) : null;
+  // The backend decides "today" (TODAY in backend/.env pins the demo day). Say so when it isn't the device's date.
+  const pinned = data && data.today !== localISO(new Date());
+  const { data: caseList } = useCases();
+  const caseName = (id: string | null) => (id ? caseList?.find((c) => c.id === id)?.short_name : undefined);
 
   return (
     <div className="min-h-dvh">
       <title>Today · Tareekh</title>
       <TopBar title={<span className="text-muted-foreground font-normal">{user?.name ?? ""}</span>} />
 
-      <main className="mx-auto w-full max-w-6xl px-5 pt-2 pb-[calc(env(safe-area-inset-bottom)+48px)] md:px-8">
+      <main className="mx-auto w-full max-w-[68rem] px-5 pt-2 pb-[calc(env(safe-area-inset-bottom)+48px)] md:px-8">
         {/* Large title */}
         <header className="pt-4 pb-8 md:pt-8">
           {day ? (
             <>
               <p className="fade text-muted-foreground text-sm tnum">
                 {greeting(user?.name)} · {day.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
+                {pinned && (
+                  <span
+                    className="bg-accent text-muted-foreground ml-2 rounded-md px-1.5 py-0.5 text-[11px] font-medium"
+                    title="The backend pins this date (TODAY in backend/.env) so the demo data lines up."
+                  >
+                    Demo day
+                  </span>
+                )}
               </p>
               <h1 className="indic ink-in mt-3 text-[56px] md:text-[80px]" style={{ "--d": "120ms" } as React.CSSProperties}>{day.toLocaleDateString("en-IN", { weekday: "long" }).toLowerCase()}</h1>
-              <p className="text-muted-foreground mt-3 text-[15px]">
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <p className="text-muted-foreground text-[15px]">
                 {data!.hearings.length === 0
                   ? "Nothing on today’s cause list."
                   : `${data!.hearings.length} ${data!.hearings.length === 1 ? "matter" : "matters"} listed${
                       data!.hearings[0].court_hall ? `, starting in ${data!.hearings[0].court_hall.split(",")[0]}` : ""
                     }.`}
               </p>
+              {data!.hearings.length > 1 && (
+                <button
+                  onClick={briefAll}
+                  disabled={busy === "__all"}
+                  className="press border-primary/25 text-primary hover:bg-primary/5 inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium disabled:opacity-60"
+                >
+                  <Sparkles className={cn("size-4", busy === "__all" && "animate-spin [animation-duration:1.4s]")} aria-hidden />
+                  {busy === "__all" ? "Opening…" : "Brief me on today’s cause list"}
+                </button>
+              )}
+              </div>
             </>
           ) : error ? (
             <div>
@@ -102,7 +144,7 @@ export default function TodayPage() {
 
         {data && <WeekStrip today={data.today} />}
 
-        <div className="grid gap-x-12 gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="grid gap-x-10 gap-y-12 lg:grid-cols-[minmax(0,1fr)_300px] xl:gap-x-14">
           <div className="flex min-w-0 flex-col gap-12">
             {/* Today's hearings */}
             <section aria-labelledby="h-today">
@@ -112,42 +154,16 @@ export default function TodayPage() {
               ) : data.hearings.length === 0 ? (
                 <p className="text-muted-foreground py-4 text-sm">Nothing listed. A good day to clear pending drafts.</p>
               ) : (
-                <ol className="divide-border divide-y">
+                <ol className="-mt-2">
                   {data.hearings.map((h, i) => (
-                    <li key={h.case_id} className="rise py-5" style={{ "--i": i, "--d": "200ms" } as React.CSSProperties}>
-                      <div className="text-muted-foreground flex items-center gap-2 text-xs">
-                        <span>{h.court_hall?.split(",")[0]}</span>
-                        <span aria-hidden>·</span>
-                        <span>{h.judge}</span>
-                      </div>
-                      <h3 className="mt-1.5 text-xl font-semibold tracking-tight">{h.short_name}</h3>
-                      <p className="text-muted-foreground mt-0.5 text-sm">
-                        {h.case_number} · for {h.represents} · <span className="text-foreground/80">{h.listed_for}</span>
-                      </p>
-                      {h.last && (
-                        <blockquote className="border-border text-foreground/80 mt-3 border-l-2 pl-3 text-[14px] leading-relaxed">
-                          <span className="line-clamp-3">{h.last.text}</span>
-                          <footer className="text-muted-foreground mt-1 text-xs tnum">
-                            Previous hearing, {fmtDate(h.last.date)} · {h.last.by}’s note
-                          </footer>
-                        </blockquote>
-                      )}
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        <button
-                          onClick={() => brief(h)}
-                          disabled={busy === h.case_id}
-                          className="press bg-primary text-primary-foreground inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60 md:h-10 md:px-4"
-                        >
-                          <Sparkles className={cn("size-4", busy === h.case_id && "animate-spin [animation-duration:1.4s]")} aria-hidden />
-                          {busy === h.case_id ? "Opening…" : "Brief me"}
-                        </button>
-                        <button
-                          onClick={() => brief(h, `${h.short_name}: `)}
-                          className="press hover:bg-accent text-foreground/80 inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-sm md:h-10"
-                        >
-                          Ask about it <ArrowUpRight className="size-3.5" aria-hidden />
-                        </button>
-                      </div>
+                    <li key={h.case_id} className="rise" style={{ "--i": i, "--d": "200ms" } as React.CSSProperties}>
+                      <HearingCard
+                        h={h}
+                        memories={memories.filter((m) => m.case_id === h.case_id)}
+                        busy={busy === h.case_id}
+                        onBrief={() => brief(h)}
+                        onAsk={() => brief(h, `${h.short_name}: `)}
+                      />
                     </li>
                   ))}
                 </ol>
@@ -204,33 +220,44 @@ export default function TodayPage() {
               <MonthCalendar today={data?.today} />
             </div>
 
-            {/* Remembered from chats */}
-            <section aria-labelledby="h-mem">
-              <SectionTitle id="h-mem">Remembered from chats</SectionTitle>
+            {/* Remembered from chats: decisions and instructions can change what happens in court today */}
+            <section aria-labelledby="h-mem" className="bg-memo-soft/45 border-memo/15 -mx-1 rounded-2xl border px-4 pt-3.5 pb-2">
+              <h2 id="h-mem" className="text-memo flex items-center gap-2 text-[13px] font-semibold">
+                <MessageSquareQuote className="size-4" aria-hidden />
+                Remembered from chats
+              </h2>
               {memories.length === 0 ? (
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  When you tell Tareekh a plan or a decision in a chat, it keeps it here. These rank below court records and are
-                  always marked in answers.
+                <p className="text-muted-foreground py-2 text-sm leading-relaxed">
+                  Tell Tareekh a decision, a client’s instruction or a deadline in any chat and it keeps it here. These rank below
+                  court records and are always marked in answers.
                 </p>
               ) : (
-                <ul className="flex flex-col gap-2">
-                  {memories.map((m) => (
-                    <li key={m.id} className="lift bg-memo-soft/50 border-memo/20 group animate-in fade-in rounded-xl border px-3 py-2.5 duration-300">
-                      <div className="flex items-start gap-2">
-                        <MessageSquareQuote className="text-memo mt-0.5 size-4 shrink-0" aria-hidden />
-                        <p className="min-w-0 flex-1 text-[13.5px] leading-snug">{m.text}</p>
-                      </div>
-                      <div className="text-muted-foreground mt-1.5 flex items-center justify-between pl-6 text-xs">
-                        <span className="truncate tnum">
-                          {m.kind} · {fmtDate(m.created_at)}
-                        </span>
-                        <button onClick={() => forget(m)} className="press hover:text-foreground rounded px-1 font-medium">
-                          Forget
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                MEMORY_GROUPS.map(([label, kinds]) => {
+                  const items = memories.filter((m) => kinds.includes(m.kind) || (label === "Case facts" && !KNOWN_KINDS.includes(m.kind)));
+                  if (!items.length) return null;
+                  return (
+                    <div key={label} className="border-memo/15 border-t py-2.5 first-of-type:border-t-0">
+                      <h3 className="text-muted-foreground mb-1.5 text-[11px] font-medium tracking-[0.06em] uppercase">
+                        {label} <span className="tnum">· {items.length}</span>
+                      </h3>
+                      <ul className="flex flex-col gap-2.5">
+                        {items.map((m) => (
+                          <li key={m.id} className="animate-in fade-in duration-300">
+                            <p className="text-[13.5px] leading-snug">{m.text}</p>
+                            <div className="text-muted-foreground mt-1 flex items-center justify-between gap-2 text-xs">
+                              <span className="truncate tnum">
+                                {caseName(m.case_id) ?? "All matters"} · {fmtDate(m.created_at, { day: "numeric", month: "short" })}
+                              </span>
+                              <button onClick={() => forget(m)} className="press hover:text-foreground -mr-1 rounded px-1 py-0.5 font-medium">
+                                Forget
+                              </button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })
               )}
             </section>
 
@@ -262,6 +289,115 @@ export default function TodayPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+const MEMORY_GROUPS: [string, string[]][] = [
+  ["Decisions", ["decision", "plan"]],
+  ["Client instructions", ["instruction"]],
+  ["Pending tasks", ["deadline", "task"]],
+  ["Case facts", ["fact", "preference"]],
+];
+const KNOWN_KINDS = MEMORY_GROUPS.flatMap(([, k]) => k);
+
+const localISO = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+/** The note's opening sentence, as the at-a-glance line. The full note stays one tap away. */
+function firstSentence(text: string) {
+  const t = text.replace(/\s+/g, " ").trim();
+  const m = t.match(/^(.{40,220}?[.!?])(\s|$)/);
+  return m ? m[1] : t.length > 180 ? `${t.slice(0, 180).replace(/\s\S*$/, "")}…` : t;
+}
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+function HearingCard({
+  h,
+  memories,
+  busy,
+  onBrief,
+  onAsk,
+}: {
+  h: Hearing;
+  memories: ChatMemory[];
+  busy: boolean;
+  onBrief: () => void;
+  onAsk: () => void;
+}) {
+  const summary = h.last ? firstSentence(h.last.text) : null;
+  const more = h.last && summary && summary.length < h.last.text.trim().length;
+  return (
+    <article className="border-border border-b py-6">
+      <div className="text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+        <span>{h.court_hall?.split(",")[0]}</span>
+        <span aria-hidden>·</span>
+        <span>{h.judge}</span>
+        <span aria-hidden>·</span>
+        <span className="tnum">{h.case_number}</span>
+      </div>
+      <h3 className="mt-1.5 text-xl font-semibold tracking-tight">{h.short_name}</h3>
+
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-[13px]">
+        {h.listed_for && (
+          <span className="bg-primary/6 text-primary rounded-md px-2 py-0.5">{cap(h.listed_for)}</span>
+        )}
+        <span className="text-muted-foreground">For {h.represents}</span>
+      </div>
+
+      {h.last && (
+        <div className="mt-4">
+          <div className="text-muted-foreground text-xs tnum">
+            Previous hearing, {fmtDate(h.last.date, { day: "numeric", month: "short" })} · {h.last.by}’s note
+          </div>
+          <p className="text-foreground/90 mt-1 text-[14.5px] leading-relaxed">{summary}</p>
+          {more && (
+            <details className="group mt-1">
+              <summary className="text-muted-foreground hover:text-foreground inline-flex cursor-pointer list-none items-center gap-1 text-[13px] font-medium">
+                <ChevronRight className="size-3.5 transition-transform duration-200 group-open:rotate-90" aria-hidden />
+                <span className="group-open:hidden">Full note</span>
+                <span className="hidden group-open:inline">Hide note</span>
+              </summary>
+              <p className="fade text-foreground/80 mt-2 text-[14px] leading-relaxed whitespace-pre-line">{h.last.text}</p>
+            </details>
+          )}
+        </div>
+      )}
+
+      {memories.length > 0 && (
+        <ul className="mt-3 flex flex-col gap-1.5">
+          {memories.map((m) => (
+            <li key={m.id} className="bg-memo-soft/60 flex items-start gap-2 rounded-lg px-2.5 py-2 text-[13px] leading-snug">
+              <MessageSquareQuote className="text-memo mt-0.5 size-3.5 shrink-0" aria-hidden />
+              <span>
+                <span className="text-memo font-semibold">{cap(m.kind)}:</span> {m.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        <button
+          onClick={onBrief}
+          disabled={busy}
+          className="press bg-primary text-primary-foreground inline-flex h-11 max-w-full items-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60 md:h-10 md:px-4"
+        >
+          <Sparkles className={cn("size-4 shrink-0", busy && "animate-spin [animation-duration:1.4s]")} aria-hidden />
+          <span className="truncate">
+            {busy ? (
+              "Opening…"
+            ) : (
+              <>
+                Brief me<span className="hidden sm:inline"> on {h.short_name}</span>
+              </>
+            )}
+          </span>
+        </button>
+        <button onClick={onAsk} className="press hover:bg-accent text-foreground/80 inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-sm md:h-10">
+          Ask about it <ArrowUpRight className="size-3.5" aria-hidden />
+        </button>
+      </div>
+    </article>
   );
 }
 
@@ -429,7 +565,7 @@ function MonthCalendar({ today }: { today?: string }) {
   return (
     <section aria-labelledby="h-cal">
       <div className="mb-3 flex items-center justify-between">
-        <h2 id="h-cal" className="title-xl text-2xl">
+        <h2 id="h-cal" className="title-xl text-xl">
           {title}
         </h2>
         <div className="flex gap-1">
@@ -455,7 +591,7 @@ function MonthCalendar({ today }: { today?: string }) {
               aria-label={`${fmtDate(d)}${byDay[d] ? `, ${byDay[d].length} hearing${byDay[d].length > 1 ? "s" : ""}` : ""}`}
               aria-pressed={picked === d}
               className={cn(
-                "press spring relative mx-auto flex h-10 w-10 flex-col items-center justify-center rounded-full text-sm tnum",
+                "press spring relative mx-auto flex h-9 w-9 flex-col items-center justify-center rounded-full text-sm tnum",
                 picked === d ? "bg-foreground text-background scale-105" : "hover:bg-accent",
                 d === today && picked !== d && "text-primary font-semibold",
               )}
