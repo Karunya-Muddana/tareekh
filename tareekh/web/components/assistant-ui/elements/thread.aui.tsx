@@ -10,6 +10,7 @@ import { ThreadFollowupSuggestions } from "@/components/assistant-ui/elements/fo
 import { Image } from "@/components/image";
 import { MarkdownText } from "@/components/markdown-text";
 import { citeMarkdownComponents } from "@/components/tareekh-chat";
+import { ThinkingWords } from "@/components/thinking-words";
 import {
   Reasoning,
   ReasoningContent,
@@ -548,12 +549,8 @@ const AssistantMessage: FC = () => {
                 );
               case "indicator":
                 return (
-                  <span
-                    data-slot="aui_assistant-message-indicator"
-                    className="animate-pulse font-sans"
-                    aria-label="Assistant is working"
-                  >
-                    {"●"}
+                  <span data-slot="aui_assistant-message-indicator">
+                    <ThinkingWords />
                   </span>
                 );
               default:
