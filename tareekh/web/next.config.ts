@@ -5,6 +5,8 @@ import type { NextConfig } from "next";
 const BACKEND = process.env.TAREEKH_BACKEND_URL ?? "http://127.0.0.1:8000";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
+  poweredByHeader: false,
   async rewrites() {
     return [{ source: "/backend/:path*", destination: `${BACKEND}/:path*` }];
   },

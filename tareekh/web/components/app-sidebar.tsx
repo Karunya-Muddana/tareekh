@@ -102,7 +102,7 @@ export function AppSidebar() {
       <SidebarHeader className="gap-3 px-3 pt-4">
         <div className="flex items-center justify-between px-1">
           <Link href="/" className="press -ml-1 flex items-center rounded-lg p-1" aria-label="Tareekh, go to Today">
-            <Wordmark markClassName="size-7" />
+            <Wordmark markClassName="logo-animate size-7" />
           </Link>
           <button
             onClick={newChat}
@@ -164,7 +164,7 @@ export function AppSidebar() {
               <SidebarGroupContent>
                 <SidebarMenu>
                   {g.items.map((c) => (
-                    <SidebarMenuItem key={c.id}>
+                    <SidebarMenuItem key={c.id} className="animate-in fade-in slide-in-from-left-1 duration-300 motion-reduce:animate-none">
                       <SidebarMenuButton
                         isActive={pathname === `/chat/${c.id}`}
                         render={<Link href={`/chat/${c.id}`} onMouseEnter={() => prefetchChat(c.id)} onFocus={() => prefetchChat(c.id)} onTouchStart={() => prefetchChat(c.id)} />}

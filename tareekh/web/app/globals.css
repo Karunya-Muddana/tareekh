@@ -222,3 +222,73 @@
   .prose-t tr:last-child td { border-bottom: 0; }
   .prose-t code { font-family: var(--font-geist-mono); font-size: 0.9em; }
 }
+
+/* ------------------------------------------------------------------ motion
+   One vocabulary everywhere: things rise into place, ink wipes in, the ribbon drops.
+   Durations stay short (≤ 600 ms), only opacity/transform/clip-path animate, and
+   everything is switched off for reduced motion. */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  /* a gentle spring: slight overshoot, settles fast */
+  --ease-spring: linear(0, 0.013 0.6%, 0.05 1.2%, 0.2 2.6%, 0.506 5.1%, 0.803 8.1%, 0.958 10.6%, 1.039 13.3%, 1.071 16%, 1.074 18.5%, 1.049 22.6%, 1.012 28.3%, 0.997 34.8%, 0.998 44.9%, 1);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ink-wipe {
+  from { clip-path: inset(-20% 100% -20% 0); }
+  to { clip-path: inset(-20% -2% -20% 0); }
+}
+@keyframes ribbon-drop {
+  0% { transform: translateY(-110%); }
+  100% { transform: none; }
+}
+@keyframes corner-turn {
+  from { transform: scale(0.2); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes sheen {
+  from { background-position: 150% 0; }
+  to { background-position: -50% 0; }
+}
+@keyframes vt-reveal {
+  from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 50%)); }
+  to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%)); }
+}
+
+@layer utilities {
+  /* staggered entrance: set --i on each item */
+  .rise { animation: rise 560ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + var(--d, 0ms)); }
+  .fade { animation: fade 400ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
+  .page-enter { animation: rise 420ms var(--ease-out) both; }
+  /* the wordmark/weekday writes itself in, left to right like a pen */
+  .ink-in { animation: ink-wipe 1100ms var(--ease-in-out) both; animation-delay: var(--d, 0ms); }
+  .logo-animate .logo-ribbon { animation: ribbon-drop 900ms var(--ease-spring) 250ms both; }
+  .logo-animate .logo-corner { transform-origin: 53px 53px; transform-box: view-box; animation: corner-turn 700ms var(--ease-spring) 650ms both; }
+  .lift { transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), background-color 150ms ease; }
+  @media (hover: hover) {
+    .lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+  }
+  .spring { transition: transform 450ms var(--ease-spring), background-color 200ms ease, color 200ms ease, opacity 200ms ease; }
+  .skeleton-sheen {
+    background-image: linear-gradient(100deg, transparent 30%, color-mix(in oklch, var(--foreground) 6%, transparent) 50%, transparent 70%);
+    background-size: 200% 100%;
+    animation: sheen 1.6s linear infinite;
+  }
+}
+
+/* Theme change: the new theme spreads in a circle from the button you pressed */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: vt-reveal 620ms var(--ease-in-out); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .fade, .page-enter, .ink-in, .logo-animate .logo-ribbon, .logo-animate .logo-corner, .skeleton-sheen { animation: none !important; }
+  .lift, .spring { transition: none !important; }
+  .lift:hover { transform: none; }
+  ::view-transition-new(root) { animation: none; }
+}

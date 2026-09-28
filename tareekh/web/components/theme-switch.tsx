@@ -13,7 +13,12 @@ const OPTIONS: [ThemePref, string, typeof Sun][] = [
 export function ThemeSwitch({ className }: { className?: string }) {
   const { pref, setTheme } = useTheme();
   return (
-    <div role="radiogroup" aria-label="Appearance" className={cn("bg-sidebar-accent flex rounded-lg p-0.5", className)}>
+    <div role="radiogroup" aria-label="Appearance" className={cn("bg-sidebar-accent relative flex rounded-lg p-0.5", className)}>
+      <span
+        aria-hidden
+        className="spring bg-background absolute inset-y-0.5 left-0.5 rounded-md shadow-[var(--shadow-soft)]"
+        style={{ width: "calc((100% - 4px) / 3)", transform: `translateX(${OPTIONS.findIndex(([v]) => v === pref) * 100}%)` }}
+      />
       {OPTIONS.map(([value, label, Icon]) => (
         <button
           key={value}
@@ -21,10 +26,13 @@ export function ThemeSwitch({ className }: { className?: string }) {
           aria-checked={pref === value}
           aria-label={label}
           title={label}
-          onClick={() => setTheme(value)}
+          onClick={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            setTheme(value, { x: r.left + r.width / 2, y: r.top + r.height / 2 });
+          }}
           className={cn(
-            "press grid h-7 flex-1 place-items-center rounded-md px-2",
-            pref === value ? "bg-background text-foreground shadow-[var(--shadow-soft)]" : "text-muted-foreground hover:text-foreground",
+            "press relative grid h-8 flex-1 place-items-center rounded-md px-2 transition-colors",
+            pref === value ? "text-foreground" : "text-muted-foreground hover:text-foreground",
           )}
         >
           <Icon className="size-3.5" aria-hidden />

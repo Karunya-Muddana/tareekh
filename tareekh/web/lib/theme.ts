@@ -24,7 +24,8 @@ function syncMeta() {
   document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", color));
 }
 
-export function setTheme(pref: ThemePref) {
+/** `from` is where the change was triggered; the new theme spreads out from there. */
+export function setTheme(pref: ThemePref, from?: { x: number; y: number }) {
   try {
     if (pref === "system") localStorage.removeItem(KEY);
     else localStorage.setItem(KEY, pref);
@@ -39,6 +40,12 @@ export function setTheme(pref: ThemePref) {
     requestAnimationFrame(() => requestAnimationFrame(() => s.remove()));
   };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement.style;
+  const x = from?.x ?? innerWidth / 2;
+  const y = from?.y ?? innerHeight / 2;
+  root.setProperty("--vt-x", `${x}px`);
+  root.setProperty("--vt-y", `${y}px`);
+  root.setProperty("--vt-r", `${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px`);
   const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
   if (doc.startViewTransition && !reduce) doc.startViewTransition(swap);
   else swap();

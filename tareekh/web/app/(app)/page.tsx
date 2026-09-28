@@ -74,11 +74,11 @@ export default function TodayPage() {
         <header className="pt-4 pb-8 md:pt-8">
           {day ? (
             <>
-              <p className="text-muted-foreground text-sm tnum">
+              <p className="fade text-muted-foreground text-sm tnum">
                 {greeting(user?.name)} · {day.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
               </p>
-              <h1 className="indic mt-3 text-[56px] md:text-[80px]">{day.toLocaleDateString("en-IN", { weekday: "long" }).toLowerCase()}</h1>
-              <p className="text-muted-foreground mt-3 text-[15px]">
+              <h1 className="indic ink-in mt-3 text-[56px] md:text-[80px]" style={{ "--d": "120ms" } as React.CSSProperties}>{day.toLocaleDateString("en-IN", { weekday: "long" }).toLowerCase()}</h1>
+              <p className="rise text-muted-foreground mt-3 text-[15px]" style={{ "--d": "500ms" } as React.CSSProperties}>
                 {data!.hearings.length === 0
                   ? "Nothing on today’s cause list."
                   : `${data!.hearings.length} ${data!.hearings.length === 1 ? "matter" : "matters"} listed${
@@ -100,6 +100,8 @@ export default function TodayPage() {
           )}
         </header>
 
+        {data && <WeekStrip today={data.today} />}
+
         <div className="grid gap-x-12 gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="flex min-w-0 flex-col gap-12">
             {/* Today's hearings */}
@@ -112,7 +114,7 @@ export default function TodayPage() {
               ) : (
                 <ol className="divide-border divide-y">
                   {data.hearings.map((h, i) => (
-                    <li key={h.case_id} className="animate-in fade-in slide-in-from-bottom-1 fill-mode-both py-5 duration-300 motion-reduce:animate-none" style={{ animationDelay: `${i * 50}ms` }}>
+                    <li key={h.case_id} className="rise py-5" style={{ "--i": i, "--d": "200ms" } as React.CSSProperties}>
                       <div className="text-muted-foreground flex items-center gap-2 text-xs">
                         <span className="tnum font-mono">{String(i + 1).padStart(2, "0")}</span>
                         <span>{h.court_hall?.split(",")[0]}</span>
@@ -135,14 +137,14 @@ export default function TodayPage() {
                         <button
                           onClick={() => brief(h)}
                           disabled={busy === h.case_id}
-                          className="press bg-primary text-primary-foreground inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60"
+                          className="press bg-primary text-primary-foreground inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60 md:h-10 md:px-4"
                         >
-                          <Sparkles className="size-4" aria-hidden />
+                          <Sparkles className={cn("size-4", busy === h.case_id && "animate-spin [animation-duration:1.4s]")} aria-hidden />
                           {busy === h.case_id ? "Opening…" : "Brief me"}
                         </button>
                         <button
                           onClick={() => brief(h, `${h.short_name}: `)}
-                          className="press hover:bg-accent text-foreground/80 inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-sm"
+                          className="press hover:bg-accent text-foreground/80 inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-sm md:h-10"
                         >
                           Ask about it <ArrowUpRight className="size-3.5" aria-hidden />
                         </button>
@@ -154,7 +156,7 @@ export default function TodayPage() {
             </section>
 
             {/* Commitments */}
-            <section aria-labelledby="h-commit">
+            <section className="rise" style={{ "--i": 3, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-commit">
               <SectionTitle id="h-commit">Pending from our side</SectionTitle>
               {insights?.commitments ? (
                 <Commitments text={insights.commitments} />
@@ -181,7 +183,7 @@ export default function TodayPage() {
 
             {/* Up next */}
             {data && data.upcoming.length > 0 && (
-              <section aria-labelledby="h-next">
+              <section className="rise" style={{ "--i": 4, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-next">
                 <SectionTitle id="h-next">Next dates</SectionTitle>
                 <ul className="divide-border divide-y">
                   {data.upcoming.map((h) => (
@@ -199,10 +201,12 @@ export default function TodayPage() {
           </div>
 
           <aside className="flex min-w-0 flex-col gap-12">
-            <MonthCalendar today={data?.today} />
+            <div className="rise hidden lg:block" style={{ "--i": 1, "--d": "150ms" } as React.CSSProperties}>
+              <MonthCalendar today={data?.today} />
+            </div>
 
             {/* Remembered from chats */}
-            <section aria-labelledby="h-mem">
+            <section className="rise" style={{ "--i": 2, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-mem">
               <SectionTitle id="h-mem">Remembered from chats</SectionTitle>
               {memories.length === 0 ? (
                 <p className="text-muted-foreground text-sm leading-relaxed">
@@ -212,7 +216,7 @@ export default function TodayPage() {
               ) : (
                 <ul className="flex flex-col gap-2">
                   {memories.map((m) => (
-                    <li key={m.id} className="bg-memo-soft/50 border-memo/20 group rounded-xl border px-3 py-2.5">
+                    <li key={m.id} className="lift bg-memo-soft/50 border-memo/20 group animate-in fade-in rounded-xl border px-3 py-2.5 duration-300">
                       <div className="flex items-start gap-2">
                         <MessageSquareQuote className="text-memo mt-0.5 size-4 shrink-0" aria-hidden />
                         <p className="min-w-0 flex-1 text-[13.5px] leading-snug">{m.text}</p>
@@ -233,11 +237,11 @@ export default function TodayPage() {
 
             {/* Judges */}
             {Object.keys(judges).length > 0 && (
-              <section aria-labelledby="h-judges">
+              <section className="rise" style={{ "--i": 3, "--d": "150ms" } as React.CSSProperties} aria-labelledby="h-judges">
                 <SectionTitle id="h-judges">Before the bench today</SectionTitle>
                 <div className="flex flex-col gap-2">
                   {Object.entries(judges).map(([id, j]) => (
-                    <details key={id} className="group border-border rounded-xl border px-3 py-2.5 open:pb-3">
+                    <details key={id} className="lift group border-border rounded-xl border px-3 py-2.5 open:pb-3">
                       <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium">
                         <Gavel className="text-muted-foreground size-4" aria-hidden />
                         {j.name}
@@ -269,15 +273,87 @@ function greeting(name?: string) {
   return first ? `${part}, ${first}` : part;
 }
 
+/** Phones: this week at a glance, right under the date. The month calendar stays on larger screens. */
+function WeekStrip({ today }: { today: string }) {
+  const days = useMemo(() => {
+    const t = new Date(`${today}T00:00:00`);
+    const monday = new Date(t);
+    monday.setDate(t.getDate() - ((t.getDay() + 6) % 7));
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    });
+  }, [today]);
+  const months = [...new Set(days.map((d) => d.slice(0, 7)))];
+  const a = useCalendar(months[0]);
+  const b = useCalendar(months[1] ?? null);
+  const [picked, setPicked] = useState(today);
+  const byDay = useMemo(() => {
+    const map: Record<string, CalendarEvent[]> = {};
+    for (const e of [...(a.data?.events ?? []), ...(b.data?.events ?? [])]) (map[e.date] ??= []).push(e);
+    return map;
+  }, [a.data, b.data]);
+  const events = byDay[picked] ?? [];
+
+  return (
+    <section aria-label="This week" className="rise -mx-5 mb-10 lg:hidden" style={{ "--d": "300ms" } as React.CSSProperties}>
+      <div className="grid grid-cols-7 gap-1 px-4">
+        {days.map((d) => {
+          const on = d === picked;
+          const n = byDay[d]?.filter((e) => e.kind === "listed").length ?? 0;
+          return (
+            <button
+              key={d}
+              onClick={() => setPicked(d)}
+              aria-pressed={on}
+              aria-label={`${fmtDate(d, { weekday: "long", day: "numeric", month: "long" })}${n ? `, ${n} listed` : ""}`}
+              className={cn(
+                "press spring flex flex-col items-center gap-1 rounded-2xl py-2",
+                on ? "bg-foreground text-background scale-105" : d === today ? "text-primary" : "text-foreground",
+              )}
+            >
+              <span className={cn("text-[11px] font-medium", on ? "text-background/70" : "text-muted-foreground")}>
+                {fmtDate(d, { weekday: "narrow" })}
+              </span>
+              <span className="tnum text-[17px] font-semibold">{Number(d.slice(8))}</span>
+              <span className="flex h-1 gap-0.5" aria-hidden>
+                {Array.from({ length: Math.min(n, 3) }, (_, k) => (
+                  <span key={k} className={cn("size-1 rounded-full", on ? "bg-background" : "bg-primary")} />
+                ))}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      {picked !== today && (
+        <ul key={picked} className="fade mt-3 flex flex-col gap-1.5 px-5" aria-live="polite">
+          {events.length === 0 ? (
+            <li className="text-muted-foreground text-sm">{fmtDate(picked, { weekday: "long", day: "numeric", month: "long" })}: nothing listed.</li>
+          ) : (
+            events.map((e) => (
+              <li key={e.case_id + e.date} className="flex items-center gap-2 text-sm">
+                <span className={cn("size-1.5 rounded-full", e.kind === "listed" ? "bg-primary" : "bg-muted-foreground/50")} aria-hidden />
+                <span className="font-medium">{e.short_name}</span>
+                <span className="text-muted-foreground">{e.kind === "listed" ? "listed" : "heard"}</span>
+              </li>
+            ))
+          )}
+        </ul>
+      )}
+    </section>
+  );
+}
+
 /** Commitments from memory can run long: show the top, let the rest open in place. */
 function Commitments({ text }: { text: string }) {
   const [open, setOpen] = useState(false);
   const long = text.length > 900;
   return (
     <div className="border-border bg-card relative rounded-2xl border px-5 py-4 shadow-[var(--shadow-soft)]">
-      <div className={cn("relative", long && !open && "max-h-72 overflow-hidden")}>
+      <div className={cn("relative overflow-hidden transition-[max-height] duration-700 ease-[var(--ease-in-out)] motion-reduce:transition-none", long && !open ? "max-h-72" : "max-h-[400rem]")}>
         <Prose>{text}</Prose>
-        {long && !open && <div className="from-card pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t" aria-hidden />}
+        {long && <div className={cn("from-card pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t transition-opacity duration-500", open && "opacity-0")} aria-hidden />}
       </div>
       {long && (
         <button onClick={() => setOpen(!open)} aria-expanded={open} className="press text-primary mt-2 rounded-md text-sm font-medium hover:underline">
@@ -380,8 +456,8 @@ function MonthCalendar({ today }: { today?: string }) {
               aria-label={`${fmtDate(d)}${byDay[d] ? `, ${byDay[d].length} hearing${byDay[d].length > 1 ? "s" : ""}` : ""}`}
               aria-pressed={picked === d}
               className={cn(
-                "press relative mx-auto flex h-10 w-10 flex-col items-center justify-center rounded-full text-sm tnum",
-                picked === d ? "bg-foreground text-background" : "hover:bg-accent",
+                "press spring relative mx-auto flex h-10 w-10 flex-col items-center justify-center rounded-full text-sm tnum",
+                picked === d ? "bg-foreground text-background scale-105" : "hover:bg-accent",
                 d === today && picked !== d && "text-primary font-semibold",
               )}
             >

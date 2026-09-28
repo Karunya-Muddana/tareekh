@@ -58,7 +58,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           <span className="flex min-w-0 items-center gap-2">
             <span className="truncate">{chat?.title ?? ""}</span>
             {scoped && (
-              <span className="bg-accent text-muted-foreground shrink-0 rounded-md px-1.5 py-0.5 text-xs font-normal">
+              <span className="bg-accent text-muted-foreground fade hidden shrink-0 rounded-md px-1.5 py-0.5 text-xs font-normal sm:inline">
                 {scoped.short_name}
               </span>
             )}
@@ -68,9 +68,14 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           <div
             role="radiogroup"
             aria-label="Answer depth"
-            className="bg-muted flex shrink-0 rounded-lg p-0.5 text-[13px]"
+            className="bg-muted relative flex shrink-0 rounded-lg p-0.5 text-[13px]"
             title="Quick: one search, a few seconds. Deep: searches across cases, about 25 s."
           >
+            <span
+              aria-hidden
+              className="spring bg-background absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-md shadow-[var(--shadow-soft)]"
+              style={{ transform: `translateX(${quick ? 0 : 100}%)` }}
+            />
             {[
               ["Quick", true],
               ["Deep", false],
@@ -81,8 +86,8 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
                 aria-checked={quick === v}
                 onClick={() => setMode(v as boolean)}
                 className={cn(
-                  "press rounded-md px-2.5 py-1 font-medium",
-                  quick === v ? "bg-background text-foreground shadow-[var(--shadow-soft)]" : "text-muted-foreground hover:text-foreground",
+                  "press relative min-w-14 rounded-md px-2.5 py-1.5 font-medium transition-colors md:py-1",
+                  quick === v ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {label as string}

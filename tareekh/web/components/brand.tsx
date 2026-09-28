@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { cn } from "@/lib/utils";
 
 /** Fixed brand colours. The mark looks the same in light and dark mode on purpose. */
@@ -13,11 +14,17 @@ export const BRAND = {
  * The ribbon and the ruled header make the T. The turned corner is the next date.
  */
 export function LogoMark({ className, title, style }: { className?: string; title?: string; style?: React.CSSProperties }) {
+  const clip = useId();
   return (
     <svg viewBox="0 0 64 64" className={cn("shrink-0", className)} style={style} role={title ? "img" : undefined} aria-hidden={title ? undefined : true}>
       {title && <title>{title}</title>}
       <rect width="64" height="64" rx="14" fill={BRAND.ink} />
-      <LogoGlyph />
+      <clipPath id={clip}>
+        <rect width="64" height="64" rx="14" />
+      </clipPath>
+      <g clipPath={`url(#${clip})`}>
+        <LogoGlyph />
+      </g>
     </svg>
   );
 }
@@ -26,8 +33,8 @@ export function LogoGlyph() {
   return (
     <>
       <path d="M15 12h34a4 4 0 0 1 4 4v23L39 53H19a4 4 0 0 1-4-4z" fill={BRAND.paper} />
-      <path d="M53 39H43a4 4 0 0 0-4 4v10z" fill={BRAND.brass} />
-      <path d="M28.5 19h7v40l-3.5-4-3.5 4z" fill={BRAND.seal} />
+      <path className="logo-corner" d="M53 39H43a4 4 0 0 0-4 4v10z" fill={BRAND.brass} />
+      <path className="logo-ribbon" d="M28.5 19h7v40l-3.5-4-3.5 4z" fill={BRAND.seal} />
       <rect x="20" y="19" width="24" height="6.5" rx="2" fill={BRAND.ink} />
     </>
   );

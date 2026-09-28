@@ -58,40 +58,48 @@ function Login() {
         aria-hidden
       >
         <div className="flex items-center gap-3">
-          <LogoMark className="size-9 rounded-[10px] ring-1 ring-white/15" />
+          <LogoMark className="logo-animate size-11 rounded-[12px] ring-1 ring-white/15" />
         </div>
         <div>
-          <div className="indic text-[88px] xl:text-[112px]">tareekh</div>
-          <p className="mt-6 max-w-sm text-[17px] leading-relaxed opacity-80">
+          <div className="indic ink-in text-[88px] xl:text-[112px]" style={{ "--d": "300ms" } as React.CSSProperties}>
+            tareekh
+          </div>
+          <p className="rise mt-6 max-w-sm text-[17px] leading-relaxed opacity-80" style={{ "--d": "900ms" } as React.CSSProperties}>
             Every date, every hearing, every order sheet. Remembered, and ready before you reach the court hall.
           </p>
         </div>
         <p className="text-sm opacity-60">Practice memory for litigators{practice?.city ? ` · ${practice.city}` : ""}</p>
         {/* the red ribbon from the mark, running off the panel */}
-        <div className="absolute top-0 right-16 h-40 w-5" style={{ background: BRAND.seal, clipPath: "polygon(0 0,100% 0,100% 100%,50% 88%,0 100%)" }} />
+        <div className="logo-animate absolute top-0 right-16 h-40 w-5 overflow-hidden">
+          <div className="logo-ribbon h-full w-full" style={{ background: BRAND.seal, clipPath: "polygon(0 0,100% 0,100% 100%,50% 88%,0 100%)" }} />
+        </div>
       </section>
 
       {/* Form */}
       <section className="flex flex-col px-6 pt-[calc(env(safe-area-inset-top)+24px)] pb-[calc(env(safe-area-inset-bottom)+24px)] sm:px-10">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2.5 lg:invisible">
-            <LogoMark className="size-8" />
-            <span className="indic text-[27px]">tareekh</span>
+            <LogoMark className="logo-animate size-9" />
+            <span className="indic ink-in text-[28px]" style={{ "--d": "200ms" } as React.CSSProperties}>
+              tareekh
+            </span>
           </span>
           <ThemeSwitch className="w-32" />
         </div>
 
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-12">
-          <h1 className="title-xl text-[44px]">Good to see you</h1>
-          <p className="text-muted-foreground mt-2 text-[15px]">Sign in to your chamber.</p>
+          <h1 className="rise title-xl text-[44px]">Good to see you</h1>
+          <p className="rise text-muted-foreground mt-2 text-[15px]" style={{ "--i": 1 } as React.CSSProperties}>
+            Sign in to your chamber.
+          </p>
 
           <ul className="mt-8 flex flex-col gap-2" aria-label="Chamber accounts">
             {people.map((p, i) => (
-              <li key={p.email}>
+              <li key={p.email} className="rise" style={{ "--i": i + 2 } as React.CSSProperties}>
                 <button
                   onClick={() => go(p)}
                   disabled={!!busy}
-                  className="press group border-border hover:bg-accent focus-visible:ring-ring flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left outline-none focus-visible:ring-2 disabled:opacity-60"
+                  className="press lift group border-border hover:bg-accent focus-visible:ring-ring flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left outline-none focus-visible:ring-2 disabled:opacity-60"
                 >
                   <span
                     className={cn(
@@ -117,13 +125,13 @@ function Login() {
             ))}
           </ul>
 
-          <div className="text-muted-foreground my-6 flex items-center gap-3 text-xs">
+          <div className="rise text-muted-foreground my-6 flex items-center gap-3 text-xs" style={{ "--i": 4 } as React.CSSProperties}>
             <span className="bg-border h-px flex-1" />
             or use your email
             <span className="bg-border h-px flex-1" />
           </div>
 
-          <form onSubmit={submit} className="flex flex-col gap-3">
+          <form onSubmit={submit} className="rise flex flex-col gap-3" style={{ "--i": 5 } as React.CSSProperties}>
             <label className="flex flex-col gap-1.5 text-sm font-medium">
               Email
               <input

@@ -141,14 +141,14 @@ export default function UploadPage() {
           />
         </label>
 
-        <div className="mt-4 flex flex-wrap items-center gap-3">
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
           <select
             value={caseHint}
             onChange={(e) => setCaseHint(e.target.value)}
             aria-label="Case"
-            className="bg-background text-foreground border-input h-10 min-w-0 flex-1 rounded-xl border px-3 text-[15px]"
+            className="bg-background text-foreground border-input h-11 min-w-0 flex-1 rounded-xl border px-3 text-[16px] sm:h-10 sm:text-[15px]"
           >
-            <option value="">Case: work it out from the note</option>
+            <option value="">Case: detect from the note</option>
             {cases.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.short_name} ({c.case_number})
@@ -158,7 +158,7 @@ export default function UploadPage() {
           <button
             onClick={start}
             disabled={running}
-            className="press bg-primary text-primary-foreground inline-flex h-10 items-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60"
+            className="press bg-primary text-primary-foreground inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium shadow-[var(--shadow-soft)] disabled:opacity-60 sm:h-10"
           >
             {running && !up?.entries.length ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
             Read it
