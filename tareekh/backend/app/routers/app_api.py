@@ -7,9 +7,10 @@ import uuid
 from concurrent.futures import ThreadPoolExecutor
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-from .. import chatmem, db, memory, registry
+from .. import chatmem, db, graph, memory, registry
 from ..agent import agent
 from ..config import today_iso
 
@@ -196,3 +197,32 @@ def forget_chat_memory(mem_id: str):
     if not chatmem.forget(mem_id):
         raise HTTPException(404, "unknown memory")
     return {"forgotten": mem_id}
+
+
+# ------------------------------------------------------------------ knowledge graph
+@router.get("/graph")
+def knowledge_graph():
+    return graph.build()
+
+
+@router.get("/graph/search")
+def graph_search(q: str, mode: str = "both"):
+    if mode not in ("both", "keyword", "semantic"):
+        raise HTTPException(400, "mode must be both, keyword or semantic")
+    return graph.search(q, mode)
+
+
+@router.get("/entries/{entry_id}")
+def get_entry(entry_id: str):
+    e = graph.entry(entry_id)
+    if not e:
+        raise HTTPException(404, "No such note")
+    return e
+
+
+@router.get("/entries/{entry_id}/file")
+def get_entry_file(entry_id: str, name: str | None = None):
+    p = graph.entry_file_path(entry_id, name)
+    if not p:
+        raise HTTPException(404, "The original file for this note isn't on this machine")
+    return FileResponse(p, headers={"Cache-Control": "private, max-age=86400"})

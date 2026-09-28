@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { CalendarDays, FileUp, LogOut, MoreHorizontal, PenSquare, Search, Trash2 } from "lucide-react";
+import { CalendarDays, FileUp, LogOut, Waypoints, MoreHorizontal, PenSquare, Search, Trash2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -118,6 +118,12 @@ export function AppSidebar() {
             <SidebarMenuButton isActive={pathname === "/"} render={<Link href="/" />} className="press h-10">
               <CalendarDays />
               <span>Today</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton isActive={pathname === "/graph"} render={<Link href="/graph" />} className="press h-10">
+              <Waypoints />
+              <span>Knowledge graph</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>

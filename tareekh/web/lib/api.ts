@@ -37,6 +37,19 @@ export type Today = {
   commitments: string | null;
   recent: { case_id: string; hearing_date: string; author: string; doc_type: string; text: string }[];
 };
+export type GraphNodeType = "note" | "order_sheet" | "document" | "memory" | "case" | "judge" | "counsel" | "client";
+export type GraphNode = { id: string; type: GraphNodeType; label: string; sub?: string; case_id?: string | null; date?: string; author?: string | null; kind?: string; file?: string };
+export type GraphLinkType = "case" | "entity" | "temporal" | "semantic" | "memory";
+export type GraphLink = { source: string; target: string; type: GraphLinkType; weight?: number };
+export type Graph = { nodes: GraphNode[]; links: GraphLink[]; counts: { notes: number; memories: number; cases: number } };
+export type SearchMode = "both" | "keyword" | "semantic";
+export type SearchHit = { id: string; score: number; keyword: number; semantic: number; terms: string[]; snippet: string };
+export type GraphSearch = { query: string; mode: SearchMode; results: SearchHit[]; semantic_source: "memory" | "local" | null };
+export type EntryDetail = {
+  id: string; case_id: string | null; short_name: string | null; case_number: string | null; hearing_date: string | null;
+  author: string | null; doc_type: string; text: string; source_file: string;
+  files: { name: string; kind: string | null; url: string }[];
+};
 export type Insights = { commitments: string | null; judges: Today["judges"] };
 export type CalendarEvent = { date: string; case_id: string; short_name: string; kind: "hearing" | "listed" };
 export type ChatMemory = { id: string; chat_id: string; case_id: string | null; text: string; kind: string; created_at: string; chat_title: string | null };
@@ -68,6 +81,10 @@ export const api = {
   deleteChat: (id: string) => call<{ deleted: string }>(`/chats/${id}`, { method: "DELETE" }),
   chatMemories: () => call<ChatMemory[]>("/chat-memories"),
   forgetMemory: (id: string) => call<{ forgotten: string }>(`/chat-memories/${id}`, { method: "DELETE" }),
+  graph: () => call<Graph>("/graph"),
+  graphSearch: (q: string, mode: SearchMode, signal?: AbortSignal) =>
+    call<GraphSearch>(`/graph/search?q=${encodeURIComponent(q)}&mode=${mode}`, { signal }),
+  entry: (id: string) => call<EntryDetail>(`/entries/${id}`),
   upload: (fd: FormData) => call<{ upload_id: string }>("/uploads", { method: "POST", body: fd }),
   getUpload: (id: string) => call<Upload>(`/uploads/${id}`),
   confirm: (id: string, edits: unknown[]) => call<unknown>(`/uploads/${id}/confirm`, json("POST", { edits })),
@@ -104,6 +121,8 @@ export const useChats = () => useCached("chats", api.chats, { maxAge: 30_000, pe
 export const useCases = () => useCached("cases", api.cases, { maxAge: 10 * MIN, persist: true });
 export const useChatMemories = () => useCached("chat-memories", api.chatMemories, { maxAge: 30_000, persist: true });
 export const useMemoryStatus = () => useCached("status", api.status, { maxAge: 15_000, refreshInterval: 15_000 });
+export const useGraph = () => useCached("graph", api.graph, { maxAge: MIN });
+export const useEntry = (id: string | null) => useCached(id ? `entry:${id}` : null, () => api.entry(id!), { maxAge: 10 * MIN });
 export const useCalendar = (month: string | null) =>
   useCached(month ? `calendar:${month}` : null, () => api.calendar(month!), { maxAge: 5 * MIN });
 

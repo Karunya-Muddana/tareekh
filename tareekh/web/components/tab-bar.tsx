@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { CalendarDays, FileUp, MessagesSquare, PenSquare } from "lucide-react";
+import { CalendarDays, FileUp, MessagesSquare, PenSquare, Waypoints } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { toast } from "@/components/app-shell";
 import { api, chatsChanged, type ChatRow } from "@/lib/api";
@@ -21,6 +21,7 @@ export function TabBar() {
     { key: "today", label: "Today", icon: CalendarDays, href: "/", active: pathname === "/" },
     { key: "chats", label: "Chats", icon: MessagesSquare, active: openMobile },
     { key: "new", label: "Ask", icon: PenSquare, active: false },
+    { key: "graph", label: "Graph", icon: Waypoints, href: "/graph", active: pathname === "/graph" },
     { key: "notes", label: "Add notes", icon: FileUp, href: "/upload", active: pathname === "/upload" },
   ] as const;
   const activeIndex = tabs.findIndex((t) => t.active);
@@ -45,12 +46,12 @@ export function TabBar() {
       aria-label="Main"
       className="bg-background fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border)] pb-[env(safe-area-inset-bottom)] md:hidden"
     >
-      <div className="relative mx-auto grid h-16 max-w-md grid-cols-4 px-2">
+      <div className="relative mx-auto grid h-16 max-w-lg grid-cols-5 px-1">
         {activeIndex >= 0 && (
           <span
             aria-hidden
-            className="spring bg-primary absolute top-0 left-2 h-0.5 rounded-full"
-            style={{ width: "calc((100% - 16px) / 4)", transform: `translateX(${activeIndex * 100}%) scaleX(0.4)` }}
+            className="spring bg-primary absolute top-0 left-1 h-0.5 rounded-full"
+            style={{ width: "calc((100% - 8px) / 5)", transform: `translateX(${activeIndex * 100}%) scaleX(0.4)` }}
           />
         )}
         {tabs.map((t) => {
@@ -60,7 +61,7 @@ export function TabBar() {
               <span className={cn("spring grid size-7 place-items-center", t.active && "-translate-y-0.5")}>
                 <Icon className={cn("size-[22px]", t.key === "new" && starting && "animate-pulse")} strokeWidth={t.active ? 2.2 : 1.8} aria-hidden />
               </span>
-              <span className="text-[11px] font-medium">{t.label}</span>
+              <span className="text-[10.5px] font-medium">{t.label}</span>
             </>
           );
           const cls = cn(

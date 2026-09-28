@@ -103,3 +103,46 @@ def test_grouped_citations():
     for i in range(20):
         b.add({"id": str(i), "text": f"f{i}", "metadata": {}})
     assert [c["n"] for c in b.citations("a [1, 17] b [3] c [99]")] == [1, 3, 17]
+
+
+# ------------------------------------------------------------------ knowledge graph
+def _seed_entries():
+    import uuid
+    up = uuid.uuid4().hex[:8]
+    db.execute("INSERT INTO uploads (id, created_at, status, hints, files) VALUES (?,?,?,?,?)", up, "2026-01-01", "done", "{}",
+               json.dumps([{"name": "note.txt", "path": "/nonexistent/note.txt", "kind": "text"}]))
+    rows = [("C3", "2026-08-19", "DW1 admitted survey pegs and some poles were put in April 2025. Confront with plaint para 3."),
+            ("C3", "2026-09-02", "Photos dated 14.04.2025 show fencing poles, not survey pegs."),
+            ("C5", "2026-09-14", "Greenfield: third adjournment request rejected by Murthy sir, costs imposed.")]
+    ids = []
+    for cid, date, text in rows:
+        eid = uuid.uuid4().hex[:8]
+        ids.append(eid)
+        db.execute("INSERT INTO entries (id, upload_id, source_file, case_id, hearing_date, author, doc_type, text, status) "
+                   "VALUES (?,?,?,?,?,?,?,?,?)", eid, up, "note.txt", cid, date, "Aditya", "handwritten_note", text, "retained")
+    return ids
+
+
+def test_graph_links_entries_to_cases_and_each_other(loaded):
+    from app import graph
+    ids = _seed_entries()
+    g = graph.build()
+    kinds = {l["type"] for l in g["links"]}
+    assert {"case", "entity", "temporal"} <= kinds
+    assert any(l["source"] == f"e:{ids[0]}" and l["target"] == "c:C3" for l in g["links"])
+
+
+def test_graph_search_is_fuzzy_and_drops_irrelevant(loaded, monkeypatch):
+    from app import graph
+    monkeypatch.setattr(graph.memory, "recall", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("offline")))
+    r = graph.search("survey pgs", mode="keyword")      # typo still matches
+    texts = [graph._node_text(x["id"], graph._index()) for x in r["results"]]
+    assert texts and all("survey" in t.lower() for t in texts)
+    assert not any("Greenfield" in t for t in texts)
+
+
+def test_entry_file_never_serves_unregistered_paths(loaded):
+    from app import graph
+    ids = _seed_entries()
+    assert graph.entry_file_path(ids[0], "../../etc/passwd") is None
+    assert graph.entry_file_path(ids[0], None) is None   # registered but missing on disk
