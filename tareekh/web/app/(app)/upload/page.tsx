@@ -1,10 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Camera, Check, FileUp, Loader2, X } from "lucide-react";
+import { Camera, FileUp, Loader2, X } from "lucide-react";
 import { TopBar, toast } from "@/components/app-shell";
 import { api, useCases, type Upload } from "@/lib/api";
 import { invalidate } from "@/lib/cache";
+import StatusMark from "@/components/bits/StatusMark";
+import ShinyText from "@/components/bits/ShinyText";
 import { cn } from "@/lib/utils";
 
 const STEPS = [
@@ -99,7 +101,7 @@ export default function UploadPage() {
           }}
           className={cn(
             "rounded-2xl border border-dashed p-6 text-center transition-colors duration-200",
-            over ? "border-primary bg-primary/[0.05]" : "border-foreground/15",
+            over ? "border-tape bg-tape-soft/50" : "border-foreground/15",
           )}
         >
           <FileUp className="text-muted-foreground mx-auto size-6" aria-hidden />
@@ -167,21 +169,31 @@ export default function UploadPage() {
 
         {up && (
           <section className="mt-10" aria-live="polite">
-            <ol className="flex flex-wrap gap-2 text-xs">
-              {STEPS.map(([key, label], i) => (
-                <li
-                  key={key}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-full px-3 py-1",
-                    i < stepIndex || up.status === "done" ? "bg-emerald-600/10 text-emerald-700 dark:text-emerald-300" : i === stepIndex ? "bg-primary/10 text-primary" : "text-muted-foreground",
-                  )}
-                >
-                  {i < stepIndex || up.status === "done" ? <Check className="size-3" /> : i === stepIndex && running ? <Loader2 className="size-3 animate-spin" /> : null}
-                  {label}
-                </li>
-              ))}
+            <ol className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              {STEPS.map(([key, label], i) => {
+                const done = i < stepIndex || up.status === "done";
+                const now = i === stepIndex && up.status !== "done";
+                const failed = now && up.status === "error";
+                return (
+                  <li key={key} className={cn("flex items-center gap-2", done || now ? "text-foreground" : "text-muted-foreground")}>
+                    <StatusMark
+                      size={18}
+                      strokeWidth={1.8}
+                      status={failed ? "failed" : done ? "done" : now && running ? "running" : "pending"}
+                      color="var(--muted-foreground)"
+                      doneColor="var(--chart-3)"
+                      errorColor="var(--destructive)"
+                    />
+                    {label}
+                  </li>
+                );
+              })}
             </ol>
-            {up.status === "extracting" && <p className="text-muted-foreground mt-3 text-sm">Reading the handwriting. Photos take 10 to 30 seconds a page.</p>}
+            {up.status === "extracting" && (
+              <p className="mt-3 text-sm">
+                <ShinyText text="Reading the handwriting. Photos take 10 to 30 seconds a page." color="var(--muted-foreground)" shineColor="var(--foreground)" speed={2.4} />
+              </p>
+            )}
             {up.status === "error" && <p className="text-destructive mt-3 text-sm">{up.error}</p>}
 
             <ul className="mt-5 flex flex-col gap-3">

@@ -10,6 +10,7 @@ import type { default as GraphologyGraph } from "graphology";
 import { Maximize2, Minus, Plus } from "lucide-react";
 import type { Graph, GraphLinkType, GraphNode, GraphNodeType } from "@/lib/api";
 import { useTheme } from "@/lib/theme";
+import ShinyText from "@/components/bits/ShinyText";
 import { cn } from "@/lib/utils";
 
 export type GraphCanvasHandle = { fit: (ids?: string[]) => void };
@@ -50,8 +51,8 @@ function readPalette(): Palette {
     primary: c("--primary"),
     memo: c("--memo"),
     green: c("--chart-3"),
-    seal: "rgb(194, 65, 45)",
-    sans: css.getPropertyValue("--font-geist").trim() || "system-ui, sans-serif",
+    seal: c("--tape"),
+    sans: css.getPropertyValue("--font-anek").trim() || "system-ui, sans-serif",
   };
 }
 
@@ -398,7 +399,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
       />
       {settling && (
         <div className="fade text-muted-foreground pointer-events-none absolute bottom-4 left-4 font-mono text-[11px]" aria-hidden>
-          Arranging…
+          <ShinyText text="Arranging…" color="var(--muted-foreground)" shineColor="var(--foreground)" speed={1.6} />
         </div>
       )}
       <div className="absolute right-3 bottom-3 flex flex-col overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow-soft)]">

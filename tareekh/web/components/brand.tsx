@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 
 /** Fixed brand colours. The mark looks the same in light and dark mode on purpose. */
 export const BRAND = {
-  ink: "#1f3c86", // Court ink
-  paper: "#f9f5ec", // Order-sheet paper
-  brass: "#dbb46d", // Brass (the turned corner)
-  seal: "#c2412d", // Seal red: the red tape tied round every case file
+  ink: "#141414", // Coat black: the advocate's gown
+  paper: "#f7f7f3", // Record paper
+  brass: "#c9a15a", // Manila: the case-file folder (the turned corner)
+  seal: "#c8321e", // Red tape: tied round every case file
 } as const;
 
 /**
@@ -25,6 +25,7 @@ export function LogoMark({ className, title, style }: { className?: string; titl
       <g clipPath={`url(#${clip})`}>
         <LogoGlyph />
       </g>
+      <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#fff" strokeOpacity="0.16" className="hidden dark:block" />
     </svg>
   );
 }

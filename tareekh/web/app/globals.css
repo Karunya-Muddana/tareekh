@@ -29,9 +29,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist);
-  --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-instrument-serif);
+  --font-sans: var(--font-anek);
+  --font-mono: var(--font-martian);
+  --font-serif: var(--font-eczar);
+  --color-tape: var(--tape);
+  --color-tape-soft: var(--tape-soft);
   --color-memo: var(--memo);
   --color-memo-soft: var(--memo-soft);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -81,80 +83,86 @@
   }
 }
 
-/* Light = "Vast Quiet": paper-white air, one ink blue. Dark = "Night Chamber": bottle green and brass. */
+/* "Black coat & red tape".
+   Light = Court day: record-room paper, the advocate's black, one red-tape accent, manila for memory.
+   Dark  = Late chamber: lamp-black, chalk text, the same red tape, warmer manila. */
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.988 0.003 100);
-  --foreground: oklch(0.21 0.012 262);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.012 262);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.012 262);
-  --primary: oklch(0.38 0.13 265);
-  --primary-foreground: oklch(0.985 0.004 265);
-  --secondary: oklch(0.96 0.004 100);
-  --secondary-foreground: oklch(0.21 0.012 262);
-  --muted: oklch(0.955 0.004 100);
-  --muted-foreground: oklch(0.53 0.012 262);
-  --accent: oklch(0.945 0.006 100);
-  --accent-foreground: oklch(0.21 0.012 262);
-  --destructive: oklch(0.55 0.19 27);
-  --border: oklch(0.21 0.012 262 / 10%);
-  --input: oklch(0.21 0.012 262 / 14%);
-  --ring: oklch(0.38 0.13 265 / 45%);
-  --memo: oklch(0.52 0.09 65);
-  --memo-soft: oklch(0.955 0.03 80);
-  --chart-1: oklch(0.38 0.13 265);
-  --chart-2: oklch(0.52 0.09 65);
-  --chart-3: oklch(0.6 0.1 160);
-  --chart-4: oklch(0.7 0.02 262);
-  --chart-5: oklch(0.55 0.19 27);
-  --sidebar: oklch(0.972 0.004 100);
-  --sidebar-foreground: oklch(0.21 0.012 262);
-  --sidebar-primary: oklch(0.38 0.13 265);
-  --sidebar-primary-foreground: oklch(0.985 0.004 265);
-  --sidebar-accent: oklch(0.21 0.012 262 / 6%);
-  --sidebar-accent-foreground: oklch(0.21 0.012 262);
-  --sidebar-border: oklch(0.21 0.012 262 / 8%);
-  --sidebar-ring: oklch(0.38 0.13 265 / 45%);
-  --shadow-soft: 0 1px 1px oklch(0.21 0.012 262 / 4%), 0 4px 14px -6px oklch(0.21 0.012 262 / 12%);
+  --radius: 0.625rem;
+  --background: #f3f4f1;
+  --foreground: #141414;
+  --card: #ffffff;
+  --card-foreground: #141414;
+  --popover: #ffffff;
+  --popover-foreground: #141414;
+  --primary: #141414;
+  --primary-foreground: #ffffff;
+  --secondary: #e9eae6;
+  --secondary-foreground: #141414;
+  --muted: #e9eae6;
+  --muted-foreground: #585a56;
+  --accent: #e6e7e3;
+  --accent-foreground: #141414;
+  --destructive: #b3261e;
+  --border: rgb(20 20 20 / 12%);
+  --input: rgb(20 20 20 / 18%);
+  --ring: rgb(200 50 30 / 55%);
+  --tape: #c8321e;
+  --tape-soft: #f7e3de;
+  --memo: #7a5a1e;
+  --memo-soft: #efe6d1;
+  --chart-1: #141414;
+  --chart-2: #7a5a1e;
+  --chart-3: #2f6b4f;
+  --chart-4: #8a8c86;
+  --chart-5: #c8321e;
+  --sidebar: #eaebe7;
+  --sidebar-foreground: #141414;
+  --sidebar-primary: #141414;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgb(20 20 20 / 7%);
+  --sidebar-accent-foreground: #141414;
+  --sidebar-border: rgb(20 20 20 / 10%);
+  --sidebar-ring: rgb(200 50 30 / 55%);
+  --shadow-soft: 0 1px 0 rgb(20 20 20 / 5%), 0 6px 16px -8px rgb(20 20 20 / 18%);
 }
 
 .dark {
-  --background: oklch(0.19 0.013 162);
-  --foreground: oklch(0.925 0.018 90);
-  --card: oklch(0.225 0.015 162);
-  --card-foreground: oklch(0.925 0.018 90);
-  --popover: oklch(0.235 0.015 162);
-  --popover-foreground: oklch(0.925 0.018 90);
-  --primary: oklch(0.79 0.1 82);
-  --primary-foreground: oklch(0.2 0.013 162);
-  --secondary: oklch(0.26 0.015 162);
-  --secondary-foreground: oklch(0.925 0.018 90);
-  --muted: oklch(0.25 0.014 162);
-  --muted-foreground: oklch(0.7 0.022 140);
-  --accent: oklch(0.27 0.016 162);
-  --accent-foreground: oklch(0.925 0.018 90);
-  --destructive: oklch(0.7 0.16 25);
-  --border: oklch(0.925 0.018 90 / 9%);
-  --input: oklch(0.925 0.018 90 / 13%);
-  --ring: oklch(0.79 0.1 82 / 45%);
-  --memo: oklch(0.8 0.06 245);
-  --memo-soft: oklch(0.27 0.03 245);
-  --chart-1: oklch(0.79 0.1 82);
-  --chart-2: oklch(0.8 0.06 245);
-  --chart-3: oklch(0.7 0.1 160);
-  --chart-4: oklch(0.6 0.02 140);
-  --chart-5: oklch(0.7 0.16 25);
-  --sidebar: oklch(0.165 0.012 162);
-  --sidebar-foreground: oklch(0.925 0.018 90);
-  --sidebar-primary: oklch(0.79 0.1 82);
-  --sidebar-primary-foreground: oklch(0.2 0.013 162);
-  --sidebar-accent: oklch(0.925 0.018 90 / 6%);
-  --sidebar-accent-foreground: oklch(0.925 0.018 90);
-  --sidebar-border: oklch(0.925 0.018 90 / 7%);
-  --sidebar-ring: oklch(0.79 0.1 82 / 45%);
-  --shadow-soft: 0 1px 1px oklch(0 0 0 / 25%), 0 6px 18px -8px oklch(0 0 0 / 45%);
+  --background: #0f0f0e;
+  --foreground: #ecece7;
+  --card: #181817;
+  --card-foreground: #ecece7;
+  --popover: #1d1d1b;
+  --popover-foreground: #ecece7;
+  --primary: #ecece7;
+  --primary-foreground: #121212;
+  --secondary: #222220;
+  --secondary-foreground: #ecece7;
+  --muted: #222220;
+  --muted-foreground: #a3a39d;
+  --accent: #262624;
+  --accent-foreground: #ecece7;
+  --destructive: #ff6b5b;
+  --border: rgb(236 236 231 / 11%);
+  --input: rgb(236 236 231 / 16%);
+  --ring: rgb(255 107 78 / 55%);
+  --tape: #ff6b4e;
+  --tape-soft: #3a1c16;
+  --memo: #d9b877;
+  --memo-soft: #2a2418;
+  --chart-1: #ecece7;
+  --chart-2: #d9b877;
+  --chart-3: #74b894;
+  --chart-4: #6f6f6a;
+  --chart-5: #ff6b4e;
+  --sidebar: #0a0a09;
+  --sidebar-foreground: #ecece7;
+  --sidebar-primary: #ecece7;
+  --sidebar-primary-foreground: #121212;
+  --sidebar-accent: rgb(236 236 231 / 7%);
+  --sidebar-accent-foreground: #ecece7;
+  --sidebar-border: rgb(236 236 231 / 8%);
+  --sidebar-ring: rgb(255 107 78 / 55%);
+  --shadow-soft: 0 1px 0 rgb(0 0 0 / 40%), 0 8px 20px -10px rgb(0 0 0 / 60%);
 }
 
 @layer base {
@@ -178,7 +186,7 @@
 /* Craft details (Vercel Web Interface Guidelines + Apple fluid-interface notes) */
 @layer base {
   html { -webkit-tap-highlight-color: transparent; }
-  body { font-feature-settings: "ss01", "cv11"; text-rendering: optimizeLegibility; }
+  body { text-rendering: optimizeLegibility; }
   button, a, [role="button"] { touch-action: manipulation; }
   .tnum { font-variant-numeric: tabular-nums; }
   /* Browser surfaces carry the palette too */
@@ -189,11 +197,11 @@
   html { scrollbar-color: color-mix(in oklch, var(--foreground) 22%, transparent) transparent; scrollbar-width: thin; }
   a { text-underline-offset: 3px; }
   /* Large titles: tight leading and negative tracking; small text stays near zero */
-  .title-xl { font-family: var(--font-instrument-serif); font-weight: 400; letter-spacing: -0.02em; line-height: 1.02; }
+  .title-xl { font-family: var(--font-eczar); font-weight: 600; letter-spacing: -0.022em; line-height: 1.02; }
   /* Samarkan, the Indic-style display face. Only three places: wordmark, Today's weekday, sign-in hero. */
   .indic {
     display: inline-block;
-    font-family: var(--font-samarkan), var(--font-instrument-serif), serif;
+    font-family: var(--font-samarkan), var(--font-eczar), serif;
     font-weight: 400;
     line-height: 1.15;
     white-space: nowrap;
@@ -227,7 +235,7 @@
   .prose-t th { text-align: left; font-weight: 500; color: var(--muted-foreground); padding: 0 12px 8px 0; border-bottom: 1px solid var(--border); white-space: nowrap; }
   .prose-t td { vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--border); }
   .prose-t tr:last-child td { border-bottom: 0; }
-  .prose-t code { font-family: var(--font-geist-mono); font-size: 0.9em; }
+  .prose-t code { font-family: var(--font-martian); font-size: 0.9em; }
 }
 
 /* ------------------------------------------------------------------ motion

@@ -6,22 +6,22 @@ import { ThemeSwitch } from "@/components/theme-switch";
 export const metadata: Metadata = { title: "Brand · Tareekh" };
 
 const FIXED = [
-  ["Court ink", BRAND.ink, "The tile. Primary colour in light mode."],
-  ["Paper", BRAND.paper, "The diary leaf. Order-sheet cream, never pure white."],
-  ["Brass", BRAND.brass, "The turned corner: the next date. Primary in dark mode."],
-  ["Seal red", BRAND.seal, "The ribbon, from the red tape on every case file. Only in the mark."],
+  ["Coat black", BRAND.ink, "The advocate’s gown. The tile, the text, the primary buttons."],
+  ["Record paper", BRAND.paper, "The diary leaf. Neutral and crisp, never cream."],
+  ["Manila", BRAND.brass, "The case-file folder: the turned corner, and everything remembered from chats."],
+  ["Red tape", BRAND.seal, "Tied round every file. The one accent: today, what’s listed, where you are."],
 ] as const;
 
 const THEMES = [
   {
-    name: "Vast Quiet",
-    note: "Light. Paper-white air, one ink blue.",
-    swatches: [["Background", "#fbfbf9"], ["Text", "#15181e"], ["Primary", "#1f3c86"], ["Memory", "#8c5d2b"]],
+    name: "Court day",
+    note: "Light. Record-room paper, black, one red.",
+    swatches: [["Background", "#f3f4f1"], ["Text", "#141414"], ["Accent", "#c8321e"], ["Memory", "#efe6d1"]],
   },
   {
-    name: "Night Chamber",
-    note: "Dark. Bottle green panelling and brass fittings.",
-    swatches: [["Background", "#0f1612"], ["Text", "#ebe6d9"], ["Primary", "#dbb46d"], ["Sidebar", "#0a100d"]],
+    name: "Late chamber",
+    note: "Dark. Lamp-black and chalk, the same red tape.",
+    swatches: [["Background", "#0f0f0e"], ["Text", "#ecece7"], ["Accent", "#ff6b4e"], ["Memory", "#2a2418"]],
   },
 ] as const;
 
@@ -83,8 +83,8 @@ export default function BrandPage() {
           <h2 className="title-xl text-4xl">Every size, same mark.</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {[
-              ["#fbfbf9", "On paper"],
-              ["#0f1612", "On night green"],
+              ["#f3f4f1", "On paper"],
+              ["#0f0f0e", "On lamp-black"],
             ].map(([bg, label]) => (
               <div key={bg} className="border-border flex flex-col gap-4 rounded-2xl border p-6" style={{ background: bg }}>
                 <div className="flex flex-wrap items-end gap-5">
@@ -92,7 +92,7 @@ export default function BrandPage() {
                     <LogoMark key={px} className="shrink-0" style={{ width: px, height: px }} />
                   ))}
                 </div>
-                <span className="text-xs" style={{ color: bg === "#0f1612" ? "#a9b3ab" : "#5f6570" }}>
+                <span className="text-xs" style={{ color: bg === "#0f0f0e" ? "#a3a39d" : "#585a56" }}>
                   {label}. The mark keeps its colours in both themes. Minimum size 16 px.
                 </span>
               </div>
@@ -107,7 +107,7 @@ export default function BrandPage() {
             <p className="text-foreground/80 mt-4 text-[15px] leading-relaxed">
               The wordmark is set in Samarkan: Roman letters drawn with the headline bar and strokes of Devanagari. It
               appears in three places only: the wordmark, the weekday on Today, and the sign-in screen. Everything else is
-              Geist and Instrument Serif, so the interface stays quiet.
+              Anek Latin and Eczar, so the interface stays quiet.
             </p>
           </div>
           <div className="bg-card border-border flex min-w-0 flex-col items-center justify-center gap-8 overflow-hidden rounded-3xl border p-6 sm:p-10 shadow-[var(--shadow-soft)]">
@@ -121,7 +121,7 @@ export default function BrandPage() {
 
         {/* Colour */}
         <section>
-          <h2 className="title-xl text-4xl">Four fixed colours, two rooms.</h2>
+          <h2 className="title-xl text-4xl">Black coat, red tape.</h2>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {FIXED.map(([name, hex, note]) => (
               <li key={name} className="border-border overflow-hidden rounded-2xl border">
@@ -159,11 +159,11 @@ export default function BrandPage() {
 
         {/* Type */}
         <section>
-          <h2 className="title-xl text-4xl">Three faces, three jobs.</h2>
+          <h2 className="title-xl text-4xl">Type from Indian foundries.</h2>
           <div className="mt-6 grid gap-3 md:grid-cols-3">
-            <TypeCard name="Instrument Serif" use="Large titles and dates" sample={<span className="title-xl text-5xl">Monday, 5 Oct</span>} />
-            <TypeCard name="Geist" use="Everything you read and tap" sample={<span className="text-2xl font-semibold tracking-tight">Seabreeze SP suit</span>} />
-            <TypeCard name="Geist Mono" use="Case numbers, counts, times" sample={<span className="tnum font-mono text-2xl">O.S. 57/2025</span>} />
+            <TypeCard name="Eczar · Rosetta" use="Headings and dates" sample={<span className="title-xl text-5xl">Monday, 5 Oct</span>} />
+            <TypeCard name="Anek Latin · Ek Type, Mumbai" use="Everything you read and tap" sample={<span className="text-2xl font-semibold tracking-tight">Seabreeze SP suit</span>} />
+            <TypeCard name="Martian Mono" use="Small data labels" sample={<span className="tnum font-mono text-2xl">O.S. 57/2025</span>} />
           </div>
         </section>
 

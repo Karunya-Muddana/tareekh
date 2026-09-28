@@ -5,7 +5,7 @@ import { THEME_EVENT as EVENT, THEME_KEY as KEY } from "@/lib/theme-script";
 
 export type ThemePref = "light" | "dark" | "system";
 
-const THEME_COLOR = { light: "#fbfbf9", dark: "#0f1612" };
+const THEME_COLOR = { light: "#f3f4f1", dark: "#0f0f0e" };
 
 function read(): ThemePref {
   try {

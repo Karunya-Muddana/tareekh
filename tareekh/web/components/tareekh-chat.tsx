@@ -47,7 +47,7 @@ function CiteMark({ n }: { n: number }) {
     <button
       type="button"
       onClick={() => window.dispatchEvent(new CustomEvent(CITE_EVENT, { detail: { messageId, n } }))}
-      className="press bg-primary/10 text-primary hover:bg-primary/20 mx-px inline-grid h-[18px] min-w-[18px] translate-y-[-1px] place-items-center rounded-[5px] px-1 align-middle text-[11px] leading-none font-semibold tabular-nums"
+      className="press bg-tape-soft text-tape hover:bg-tape/20 mx-px inline-grid h-[18px] min-w-[18px] translate-y-[-1px] place-items-center rounded-[5px] px-1 align-middle text-[11px] leading-none font-semibold tabular-nums"
       aria-label={`Source ${n}`}
     >
       {n}
@@ -222,11 +222,11 @@ function SourcesPart({ data }: { data: SourcesData }) {
                   data-n={g.ns.join(" ")}
                   className={cn(
                     "rounded-xl px-3 py-3 transition-colors duration-500",
-                    g.ns.includes(focus ?? -1) && "bg-primary/[0.07]",
+                    g.ns.includes(focus ?? -1) && "bg-tape-soft/60",
                   )}
                 >
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[13px]">
-                    <span className="text-primary tnum font-semibold">{g.ns.join(", ")}</span>
+                    <span className="text-tape tnum font-semibold">{g.ns.join(", ")}</span>
                     {memo ? (
                       <span className="bg-memo-soft text-memo rounded-md px-1.5 py-px text-[11px] font-semibold">Chat memory</span>
                     ) : (

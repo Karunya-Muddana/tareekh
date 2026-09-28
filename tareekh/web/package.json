@@ -27,6 +27,7 @@
     "graphology-layout-forceatlas2": "^0.10.1",
     "graphology-types": "^0.24.8",
     "lucide-react": "^1.46.0",
+    "motion": "^13.4.4",
     "next": "^16.3.5",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",

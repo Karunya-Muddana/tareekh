@@ -23,6 +23,17 @@ npm run dev        # http://localhost:3000
   request is never sent twice at the same time; sidebar links prefetch a chat on hover.
 - `lib/theme.ts`: Light / Dark / Match device, stored per browser, applied before first paint.
 
+## Design system
+
+- **Colour: "black coat & red tape".** Record-room paper, the advocate's black as primary, one red-tape accent
+  (`--tape`) for today / listed / where you are, manila (`--memo`) for anything remembered from chats. Tokens in
+  `app/globals.css`; the brand guide is at `/brand`.
+- **Type from Indian foundries.** Anek Latin (Ek Type) for the interface, Eczar (Rosetta) for headings, Martian Mono
+  for small data labels, Samarkan for the wordmark only.
+- **React Bits** (`components/bits/`, copied from reactbits.dev, MIT + Commons Clause): RubberSegment (segmented
+  controls), HoldButton (hold to forget), SwipeToast (toasts), StatusMark (upload steps), CountUp, ShinyText
+  (loading text), SpotlightCard (matter cards). Adapted to the theme tokens; everything else stays shadcn.
+
 ## Display font
 
 The wordmark, Today's weekday and the sign-in screen use Samarkan (`app/fonts/samarkan.woff2`, © Titivillus Foundry).

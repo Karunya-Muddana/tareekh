@@ -7,6 +7,7 @@ import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sideb
 import { AppSidebar } from "@/components/app-sidebar";
 import { LogoMark } from "@/components/brand";
 import { TabBar } from "@/components/tab-bar";
+import SwipeToast from "@/components/bits/SwipeToast";
 import { cn } from "@/lib/utils";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -72,44 +73,39 @@ export function TopBar({ title, right, className }: { title?: ReactNode; right?:
 
 type Toast = { id: number; text: string; action?: string; onAction?: () => void };
 
-/** Status/completion toasts with an optional Undo. Listens for `tareekh:toast` window events. */
+/** Status/completion toasts with an optional Undo: React Bits SwipeToast, swipe down to dismiss, fuse shows time left. */
 function Toaster({ tabs }: { tabs: boolean }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   useEffect(() => {
-    const on = (e: Event) => {
-      const t = { id: Date.now() + Math.random(), ...(e as CustomEvent).detail } as Toast;
-      setToasts((xs) => [...xs, t]);
-      setTimeout(() => setToasts((xs) => xs.filter((x) => x.id !== t.id)), 5000);
-    };
+    const on = (e: Event) => setToasts((xs) => [...xs.slice(-2), { id: Date.now() + Math.random(), ...(e as CustomEvent).detail } as Toast]);
     window.addEventListener("tareekh:toast", on);
     return () => window.removeEventListener("tareekh:toast", on);
   }, []);
+  const drop = (id: number) => setToasts((xs) => xs.filter((x) => x.id !== id));
   return (
     <div
       aria-live="polite"
       className={cn(
-        "pointer-events-none fixed inset-x-0 z-50 flex flex-col items-center gap-2 px-4 md:bottom-[calc(env(safe-area-inset-bottom)+16px)]",
-        tabs ? "bottom-[calc(env(safe-area-inset-bottom)+80px)]" : "bottom-[calc(env(safe-area-inset-bottom)+96px)]",
+        "pointer-events-none fixed inset-x-0 z-50 flex flex-col items-center px-4 md:bottom-[calc(env(safe-area-inset-bottom)+16px)] [&>*]:pointer-events-auto",
+        tabs ? "bottom-[calc(env(safe-area-inset-bottom)+76px)]" : "bottom-[calc(env(safe-area-inset-bottom)+92px)]",
       )}
     >
       {toasts.map((t) => (
-        <div
+        <SwipeToast
           key={t.id}
-          className="bg-foreground text-background animate-in fade-in zoom-in-95 slide-in-from-bottom-3 pointer-events-auto ease-[var(--ease-expo)] flex items-center gap-4 rounded-xl py-2.5 pr-2.5 pl-4 text-sm shadow-lg duration-500 motion-reduce:animate-none"
-        >
-          <span>{t.text}</span>
-          {t.action && (
-            <button
-              className="press rounded-lg px-2.5 py-1 font-medium hover:bg-white/10"
-              onClick={() => {
-                t.onAction?.();
-                setToasts((xs) => xs.filter((x) => x.id !== t.id));
-              }}
-            >
-              {t.action}
-            </button>
-          )}
-        </div>
+          inline
+          title={t.text}
+          actionLabel={t.action ?? ""}
+          onAction={t.onAction}
+          onClose={() => drop(t.id)}
+          duration={5000}
+          width={380}
+          radius={12}
+          background="var(--foreground)"
+          color="var(--background)"
+          fuseColor="var(--tape)"
+          closeButton={false}
+        />
       ))}
     </div>
   );

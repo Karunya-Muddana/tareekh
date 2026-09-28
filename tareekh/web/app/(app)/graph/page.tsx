@@ -9,6 +9,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { api, chatsChanged, fmtDate, useEntry, useGraph, type GraphNode, type GraphSearch, type SearchHit, type SearchMode } from "@/lib/api";
+import RubberSegment from "@/components/bits/RubberSegment";
+import CountUp from "@/components/bits/CountUp";
 import { cn } from "@/lib/utils";
 
 const MODES: [SearchMode, string, string][] = [
@@ -155,25 +157,20 @@ function KnowledgeGraph() {
               </button>
             )}
           </label>
-          <div role="radiogroup" aria-label="Match by" className="bg-muted relative flex h-12 shrink-0 rounded-xl p-1 text-sm md:w-72">
-            <span
-              aria-hidden
-              className="spring bg-background absolute inset-y-1 left-1 w-[calc((100%-8px)/3)] rounded-lg shadow-[var(--shadow-soft)]"
-              style={{ transform: `translateX(${MODES.findIndex(([m]) => m === mode) * 100}%)` }}
-            />
-            {MODES.map(([m, label, hint]) => (
-              <button
-                key={m}
-                role="radio"
-                aria-checked={mode === m}
-                title={hint}
-                onClick={() => setMode(m)}
-                className={cn("press relative flex-1 rounded-lg font-medium transition-colors", mode === m ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          <RubberSegment
+            aria-label="Match by"
+            size="lg"
+            className="h-12 w-full shrink-0 md:w-72"
+            value={mode}
+            onChange={(v) => setMode(v as SearchMode)}
+            items={MODES.map(([m, label, hint]) => ({ value: m, label: <span title={hint}>{label}</span> }))}
+            trackColor="var(--muted)"
+            thumbColor="var(--foreground)"
+            textColor="var(--muted-foreground)"
+            activeTextColor="var(--background)"
+            radius={12}
+            inset={4}
+          />
         </div>
 
         {/* Case filter */}
@@ -260,7 +257,7 @@ function Legend() {
     ["Note", "bg-primary"],
     ["Order sheet", "bg-memo"],
     ["Document", "bg-chart-3"],
-    ["Chat memory", "bg-[#c2412d]"],
+    ["Chat memory", "bg-tape"],
   ];
   return (
     <div className="bg-card/85 pointer-events-none absolute top-3 left-3 rounded-lg px-2.5 py-2 font-mono text-[11px] leading-5 backdrop-blur-sm">
@@ -387,7 +384,7 @@ function Overview({
   return (
     <section className="text-muted-foreground px-1 text-sm leading-relaxed">
       <p className="text-foreground">
-        <span className="tnum font-semibold">{graph.counts.notes}</span> notes, orders and documents across{" "}
+        <span className="tnum font-semibold"><CountUp to={graph.counts.notes} duration={0.9} /></span> notes, orders and documents across{" "}
         <span className="tnum font-semibold">{graph.counts.cases}</span> cases
         {graph.counts.memories ? (
           <>
@@ -519,7 +516,7 @@ function Original({ name, kind, url }: { name: string; kind: string | null; url:
     return (
       <div className="mb-3">
         <iframe src={url} title={name} className="border-border h-[60dvh] w-full rounded-xl border bg-white" />
-        <a href={url} target="_blank" rel="noreferrer" className="text-primary mt-1.5 inline-flex items-center gap-1 text-sm font-medium hover:underline">
+        <a href={url} target="_blank" rel="noreferrer" className="text-foreground mt-1.5 inline-flex items-center gap-1 text-sm font-medium hover:underline">
           <ExternalLink className="size-3.5" aria-hidden /> Open PDF
         </a>
       </div>
@@ -556,7 +553,7 @@ function Highlight({ text, terms }: { text: string; terms: string[] }) {
 
 function TypeDot({ type }: { type: GraphNode["type"] }) {
   const cls =
-    type === "note" ? "bg-primary" : type === "order_sheet" ? "bg-memo" : type === "document" ? "bg-chart-3" : type === "memory" ? "bg-[#c2412d]" : "bg-muted-foreground";
+    type === "note" ? "bg-primary" : type === "order_sheet" ? "bg-memo" : type === "document" ? "bg-chart-3" : type === "memory" ? "bg-tape" : "bg-muted-foreground";
   return <span className={cn("size-2 shrink-0 rounded-full", cls)} aria-hidden />;
 }
 

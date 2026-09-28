@@ -50,7 +50,7 @@ export function TabBar() {
         {activeIndex >= 0 && (
           <span
             aria-hidden
-            className="spring bg-primary absolute top-0 left-1 h-0.5 rounded-full"
+            className="spring bg-tape absolute top-0 left-1 h-0.5 rounded-full"
             style={{ width: "calc((100% - 8px) / 5)", transform: `translateX(${activeIndex * 100}%) scaleX(0.4)` }}
           />
         )}
@@ -66,7 +66,7 @@ export function TabBar() {
           );
           const cls = cn(
             "press flex flex-col items-center justify-center gap-0.5 rounded-xl transition-colors",
-            t.active ? "text-primary" : "text-muted-foreground",
+            t.active ? "text-foreground" : "text-muted-foreground",
           );
           return "href" in t ? (
             <Link key={t.key} href={t.href} className={cls} aria-current={t.active ? "page" : undefined}>

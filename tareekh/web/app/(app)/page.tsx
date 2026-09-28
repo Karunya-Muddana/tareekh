@@ -6,6 +6,9 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, Gavel, MessageSquareQuote, Spa
 import { TopBar, toast } from "@/components/app-shell";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Prose } from "@/components/prose";
+import CountUp from "@/components/bits/CountUp";
+import HoldButton from "@/components/bits/HoldButton";
+import SpotlightCard from "@/components/bits/SpotlightCard";
 import {
   api,
   chatsChanged,
@@ -68,16 +71,17 @@ export default function TodayPage() {
     }
   };
 
+  // Forgetting is confirmed by holding the button (React Bits HoldButton), so it happens at once.
   const forget = (m: ChatMemory) => {
     setHidden((xs) => [...xs, m.id]);
-    const timer = setTimeout(() => {
-      api.forgetMemory(m.id).catch(() => {});
-      mutate<ChatMemory[]>("chat-memories", (xs) => (xs ?? []).filter((x) => x.id !== m.id), true);
-    }, 5000);
-    toast("Forgotten", "Undo", () => {
-      clearTimeout(timer);
-      setHidden((xs) => xs.filter((x) => x !== m.id));
-    });
+    api
+      .forgetMemory(m.id)
+      .then(() => mutate<ChatMemory[]>("chat-memories", (xs) => (xs ?? []).filter((x) => x.id !== m.id), true))
+      .catch(() => {
+        setHidden((xs) => xs.filter((x) => x !== m.id));
+        toast("Couldn’t forget that. Try again.");
+      });
+    toast("Forgotten");
   };
 
   const day = data ? new Date(`${data.today}T00:00:00`) : null;
@@ -112,15 +116,21 @@ export default function TodayPage() {
               <p className="text-muted-foreground text-[15px]">
                 {data!.hearings.length === 0
                   ? "Nothing on today’s cause list."
-                  : `${data!.hearings.length} ${data!.hearings.length === 1 ? "matter" : "matters"} listed${
-                      data!.hearings[0].court_hall ? `, starting in ${data!.hearings[0].court_hall.split(",")[0]}` : ""
-                    }.`}
+                  : (
+                    <>
+                      <span className="text-foreground tnum font-semibold">
+                        <CountUp to={data!.hearings.length} duration={0.8} />
+                      </span>{" "}
+                      {data!.hearings.length === 1 ? "matter" : "matters"} listed
+                      {data!.hearings[0].court_hall ? `, starting in ${data!.hearings[0].court_hall.split(",")[0]}` : ""}.
+                    </>
+                  )}
               </p>
               {data!.hearings.length > 1 && (
                 <button
                   onClick={briefAll}
                   disabled={busy === "__all"}
-                  className="press border-primary/25 text-primary hover:bg-primary/5 inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium disabled:opacity-60"
+                  className="press border-foreground/20 text-foreground hover:bg-accent inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium disabled:opacity-60"
                 >
                   <Sparkles className={cn("size-4", busy === "__all" && "animate-spin [animation-duration:1.4s]")} aria-hidden />
                   {busy === "__all" ? "Opening…" : "Brief me on today’s cause list"}
@@ -156,7 +166,7 @@ export default function TodayPage() {
               ) : (
                 <ol className="-mt-2">
                   {data.hearings.map((h, i) => (
-                    <li key={h.case_id} className="rise" style={{ "--i": i, "--d": "200ms" } as React.CSSProperties}>
+                    <li key={h.case_id} className="rise border-border border-b last:border-b-0" style={{ "--i": i, "--d": "200ms" } as React.CSSProperties}>
                       <HearingCard
                         h={h}
                         memories={memories.filter((m) => m.case_id === h.case_id)}
@@ -187,7 +197,7 @@ export default function TodayPage() {
                   {data?.hearings[0] && (
                     <button
                       onClick={() => brief(data.hearings[0], "What is pending from our side this week, and what is overdue?")}
-                      className="press text-primary rounded-md font-medium hover:underline"
+                      className="press text-foreground rounded-md font-medium underline decoration-foreground/30 hover:decoration-foreground"
                     >
                       Ask what’s pending
                     </button>
@@ -248,9 +258,22 @@ export default function TodayPage() {
                               <span className="truncate tnum">
                                 {caseName(m.case_id) ?? "All matters"} · {fmtDate(m.created_at, { day: "numeric", month: "short" })}
                               </span>
-                              <button onClick={() => forget(m)} className="press hover:text-foreground -mr-1 rounded px-1 py-0.5 font-medium">
-                                Forget
-                              </button>
+                              <HoldButton
+                                size="sm"
+                                holdTime={900}
+                                radius={8}
+                                wave={false}
+                                glow={false}
+                                backgroundColor="transparent"
+                                fillColor="var(--tape)"
+                                textColor="var(--muted-foreground)"
+                                fillTextColor="#fff"
+                                doneLabel="Forgotten"
+                                onHold={() => forget(m)}
+                                className="-mr-1 h-7! px-2! text-xs!"
+                              >
+                                Hold to forget
+                              </HoldButton>
                             </div>
                           </li>
                         ))}
@@ -327,7 +350,7 @@ function HearingCard({
   const summary = h.last ? firstSentence(h.last.text) : null;
   const more = h.last && summary && summary.length < h.last.text.trim().length;
   return (
-    <article className="border-border border-b py-6">
+    <SpotlightCard className="-mx-3 rounded-xl px-3 py-6" spotlightColor="rgba(200, 50, 30, 0.05)">
       <div className="text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
         <span>{h.court_hall?.split(",")[0]}</span>
         <span aria-hidden>·</span>
@@ -339,7 +362,7 @@ function HearingCard({
 
       <div className="mt-2 flex flex-wrap items-center gap-2 text-[13px]">
         {h.listed_for && (
-          <span className="bg-primary/6 text-primary rounded-md px-2 py-0.5">{cap(h.listed_for)}</span>
+          <span className="bg-tape-soft text-tape rounded-md px-2 py-0.5">{cap(h.listed_for)}</span>
         )}
         <span className="text-muted-foreground">For {h.represents}</span>
       </div>
@@ -397,7 +420,7 @@ function HearingCard({
           Ask about it <ArrowUpRight className="size-3.5" aria-hidden />
         </button>
       </div>
-    </article>
+    </SpotlightCard>
   );
 }
 
@@ -445,7 +468,7 @@ function WeekStrip({ today }: { today: string }) {
               aria-label={`${fmtDate(d, { weekday: "long", day: "numeric", month: "long" })}${n ? `, ${n} listed` : ""}`}
               className={cn(
                 "press spring flex flex-col items-center gap-1 rounded-2xl py-2",
-                on ? "bg-foreground text-background scale-105" : d === today ? "text-primary" : "text-foreground",
+                on ? "bg-foreground text-background scale-105" : d === today ? "text-tape" : "text-foreground",
               )}
             >
               <span className={cn("text-[11px] font-medium", on ? "text-background/70" : "text-muted-foreground")}>
@@ -454,7 +477,7 @@ function WeekStrip({ today }: { today: string }) {
               <span className="tnum text-[17px] font-semibold">{Number(d.slice(8))}</span>
               <span className="flex h-1 gap-0.5" aria-hidden>
                 {Array.from({ length: Math.min(n, 3) }, (_, k) => (
-                  <span key={k} className={cn("size-1 rounded-full", on ? "bg-background" : "bg-primary")} />
+                  <span key={k} className={cn("size-1 rounded-full", on ? "bg-background" : "bg-tape")} />
                 ))}
               </span>
             </button>
@@ -468,7 +491,7 @@ function WeekStrip({ today }: { today: string }) {
           ) : (
             events.map((e) => (
               <li key={e.case_id + e.date} className="flex items-center gap-2 text-sm">
-                <span className={cn("size-1.5 rounded-full", e.kind === "listed" ? "bg-primary" : "bg-muted-foreground/50")} aria-hidden />
+                <span className={cn("size-1.5 rounded-full", e.kind === "listed" ? "bg-tape" : "bg-muted-foreground/50")} aria-hidden />
                 <span className="font-medium">{e.short_name}</span>
                 <span className="text-muted-foreground">{e.kind === "listed" ? "listed" : "heard"}</span>
               </li>
@@ -491,7 +514,7 @@ function Commitments({ text }: { text: string }) {
         {long && !open && <div className="from-card pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t" aria-hidden />}
       </div>
       {long && (
-        <button onClick={() => setOpen(!open)} aria-expanded={open} className="press text-primary mt-2 rounded-md text-sm font-medium hover:underline">
+        <button onClick={() => setOpen(!open)} aria-expanded={open} className="press text-foreground mt-2 rounded-md text-sm font-medium underline decoration-foreground/30 hover:decoration-foreground">
           {open ? "Show less" : "Show all"}
         </button>
       )}
@@ -593,7 +616,7 @@ function MonthCalendar({ today }: { today?: string }) {
               className={cn(
                 "press spring relative mx-auto flex h-9 w-9 flex-col items-center justify-center rounded-full text-sm tnum",
                 picked === d ? "bg-foreground text-background scale-105" : "hover:bg-accent",
-                d === today && picked !== d && "text-primary font-semibold",
+                d === today && picked !== d && "text-tape font-semibold",
               )}
             >
               {Number(d.slice(8))}
@@ -604,7 +627,7 @@ function MonthCalendar({ today }: { today?: string }) {
                       key={k}
                       className={cn(
                         "size-1 rounded-full",
-                        e.kind === "listed" ? (picked === d ? "bg-background" : "bg-primary") : picked === d ? "bg-background/60" : "bg-muted-foreground/50",
+                        e.kind === "listed" ? (picked === d ? "bg-background" : "bg-tape") : picked === d ? "bg-background/60" : "bg-muted-foreground/50",
                       )}
                     />
                   ))}
@@ -624,7 +647,7 @@ function MonthCalendar({ today }: { today?: string }) {
             ) : (
               pickedEvents.map((e) => (
                 <li key={e.case_id + e.date} className="flex items-center gap-2 text-sm">
-                  <span className={cn("size-1.5 rounded-full", e.kind === "listed" ? "bg-primary" : "bg-muted-foreground/50")} aria-hidden />
+                  <span className={cn("size-1.5 rounded-full", e.kind === "listed" ? "bg-tape" : "bg-muted-foreground/50")} aria-hidden />
                   <span className="font-medium">{e.short_name}</span>
                   <span className="text-muted-foreground">{e.kind === "listed" ? "listed" : "heard"}</span>
                 </li>

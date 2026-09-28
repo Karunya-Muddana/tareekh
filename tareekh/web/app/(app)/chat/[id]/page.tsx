@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { chatKey, loadChat, useCases } from "@/lib/api";
 import { forget } from "@/lib/cache";
 import { useSession } from "@/lib/session";
-import { cn } from "@/lib/utils";
+import RubberSegment from "@/components/bits/RubberSegment";
 
 const MODE_KEY = "tareekh:quick";
 
@@ -65,34 +65,22 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           </span>
         }
         right={
-          <div
-            role="radiogroup"
-            aria-label="Answer depth"
-            className="bg-muted relative flex shrink-0 rounded-lg p-0.5 text-[13px]"
-            title="Quick: one search, a few seconds. Deep: searches across cases, about 25 s."
-          >
-            <span
-              aria-hidden
-              className="spring bg-background absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] rounded-md shadow-[var(--shadow-soft)]"
-              style={{ transform: `translateX(${quick ? 0 : 100}%)` }}
+          <div title="Quick: one search, a few seconds. Deep: searches across cases, about 25 s." className="shrink-0">
+            <RubberSegment
+              aria-label="Answer depth"
+              size="sm"
+              value={quick ? "quick" : "deep"}
+              onChange={(v) => setMode(v === "quick")}
+              items={[
+                { value: "quick", label: "Quick" },
+                { value: "deep", label: "Deep" },
+              ]}
+              trackColor="var(--muted)"
+              thumbColor="var(--foreground)"
+              textColor="var(--muted-foreground)"
+              activeTextColor="var(--background)"
+              radius={9}
             />
-            {[
-              ["Quick", true],
-              ["Deep", false],
-            ].map(([label, v]) => (
-              <button
-                key={label as string}
-                role="radio"
-                aria-checked={quick === v}
-                onClick={() => setMode(v as boolean)}
-                className={cn(
-                  "press relative min-w-14 rounded-md px-2.5 py-1.5 font-medium transition-colors md:py-1",
-                  quick === v ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {label as string}
-              </button>
-            ))}
           </div>
         }
       />

@@ -20,6 +20,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Wordmark } from "@/components/brand";
+import CountUp from "@/components/bits/CountUp";
+import ShinyText from "@/components/bits/ShinyText";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { api, chatsChanged, prefetchChat, useChats, useMemoryStatus, type ChatRow } from "@/lib/api";
 import { mutate } from "@/lib/cache";
@@ -215,7 +217,10 @@ export function AppSidebar() {
                 {offline
                   ? "Memory offline"
                   : status
-                    ? `${status.total_documents} memories${busy ? " · learning" : ""}`
+                    ? <>
+                        <CountUp to={status.total_documents} duration={0.9} separator="," /> memories
+                        {busy ? <> · <ShinyText text="learning" color="var(--muted-foreground)" shineColor="var(--foreground)" speed={1.8} /></> : null}
+                      </>
                     : "Connecting…"}
               </span>
             </div>
