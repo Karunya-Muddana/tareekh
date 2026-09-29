@@ -1,0 +1,9 @@
+flowchart LR
+    Q["Query"] --> K["Words<br/>rapidfuzz match per term<br/>(typos allowed, case names count)"]
+    Q --> S["Meaning<br/>Hindsight recall → mapped back to notes"]
+    S -.->|memory offline| T["Local TF-IDF similarity"]
+    K --> M["Combine: best score<br/>+ bonus if found both ways"]
+    S --> M
+    T --> M
+    M --> R["Drop weak hits<br/>(relative to the best one)"]
+    R --> UI["Graph fades the rest,<br/>list shows highlighted snippets"]

@@ -1,0 +1,12 @@
+flowchart TD
+    A["Upload<br/>photo · PDF · .docx · .txt · typed note"] --> B{"What is it?"}
+    B -->|image / scanned PDF| C["Vision OCR<br/>'transcribe exactly'"]
+    B -->|text / docx / PDF text| D["Read text directly"]
+    C --> E["Segment + resolve (1 LLM call)<br/>raw text + compact case registry"]
+    D --> E
+    E --> F["Entries: case, hearing date,<br/>author, doc type, text, confidence"]
+    F --> G["Repair: check case ids against the registry,<br/>date from filename if missing"]
+    G --> H{"Confident?"}
+    H -->|yes| J["Retain in Hindsight<br/>one item per hearing"]
+    H -->|no| I["Show for review<br/>fix case / date / reject"]
+    I --> J

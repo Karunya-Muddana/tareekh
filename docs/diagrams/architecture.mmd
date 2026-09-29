@@ -1,0 +1,33 @@
+flowchart LR
+    subgraph Browser
+        UI["Next.js app<br/>Today · Chats · Knowledge graph · Add notes"]
+    end
+
+    subgraph Web["Next.js server (tareekh/web)"]
+        Proxy["/backend/* rewrite"]
+        ChatRoute["/api/chat/[id]<br/>AI SDK stream"]
+    end
+
+    subgraph API["FastAPI (tareekh/backend)"]
+        Ingest["Ingest<br/>extract → segment → review → retain"]
+        Agent["Agent<br/>tool loop + citations"]
+        Graph["Knowledge graph<br/>build + fuzzy/semantic search"]
+        ChatMem["Chat memories"]
+    end
+
+    DB[("SQLite<br/>cases · uploads · entries<br/>chats · chat memories")]
+    HS[("Hindsight<br/>memories · observations<br/>mental models")]
+    LLM["Gemini on Vertex AI<br/>OCR · segmenting · answers"]
+
+    UI --> Proxy --> API
+    UI --> ChatRoute --> Agent
+    Ingest --> DB
+    Ingest --> HS
+    Ingest --> LLM
+    Agent --> HS
+    Agent --> LLM
+    Agent --> DB
+    Graph --> DB
+    Graph -.->|meaning search| HS
+    ChatMem --> HS
+    ChatMem --> DB

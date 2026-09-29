@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor L as Lawyer
+    participant W as Next.js /api/chat
+    participant A as FastAPI agent
+    participant H as Hindsight
+    participant G as Gemini
+
+    L->>W: "What did Srinivas say about his share?"
+    W->>A: POST /chats/{id}/messages (quick or deep)
+    A->>A: build context: today's date, matched cases,<br/>judge + counsel mental models, open commitments
+    loop up to 5 tool steps
+        A->>G: question + context + tools
+        G-->>A: call recall_memories(case:C1, …)
+        A->>H: recall (tag filters)
+        H-->>A: facts + metadata
+    end
+    G-->>A: answer with [n] markers
+    A->>A: resolve [n] → source notes
+    Note over A,H: in parallel, any decision or instruction in the message<br/>is saved as a chat memory (SQLite + Hindsight)
+    A-->>W: answer + citations
+    W-->>L: streamed text, then sources
