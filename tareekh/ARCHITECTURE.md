@@ -1,15 +1,16 @@
 # Tareekh architecture
 
-Tareekh is a practice-memory assistant for a litigator. She uploads what she already produces (diary photos, typed notes,
-certified copies, pasted text). Tareekh extracts it, files each hearing under the right case, and stores it in
-[Hindsight](https://hindsight.vectorize.io). When she asks something, an agent answers from memory and cites the source.
+Tareekh is a practice-memory assistant for a litigator. The lawyer uploads what the chamber already produces (diary
+photos, typed notes, certified copies, pasted text). Tareekh extracts it, files each hearing under the right case, and
+stores it in [Hindsight](https://hindsight.vectorize.io). When the lawyer asks something, an agent answers from memory
+and cites the source. The top-level [README](../README.md) walks through the agent and retrieval in more depth.
 It remembers. It does not give legal advice.
 
 ```
-            ┌──────────── FRONTEND (later) ─────────────────────┐
-            │  Upload  ·  Ask  ·  Morning brief  ·  Memory feed  │
+            ┌──────────── FRONTEND (web/, Next.js) ─────────────┐
+            │  Today · Chats · Knowledge graph · Add notes       │
             └───────────────────┬───────────────────────────────┘
-                                │ REST (SSE later)
+                                │ REST via /backend rewrite; chat streams via /api/chat
 ┌───────────────────────────────▼──────────────────────────────────┐
 │ FastAPI backend  (backend/app)                                   │
 │                                                                  │
@@ -22,8 +23,8 @@ It remembers. It does not give legal advice.
 └──────────────┬────────────────────────────────┬──────────────────┘
                │                                │
    Gemini on Vertex AI (OpenAI-compat)   Hindsight (local Docker): ONE bank
-   3-flash: segmenter + agent            per lawyer · memories · observations
-   3.1-pro: OCR                          · mental models · directives
+   Gemini Flash: OCR, segmenter, agent   per lawyer · memories · observations
+                                         · mental models · directives
 ```
 
 ## 1. Ingest: anything in, one memory per hearing out
@@ -69,46 +70,39 @@ but it comes back with every recalled fact, and that's what the UI shows as a so
 Judge habits and counsel tactics are **not** seeded at onboarding. They have to show up in layer C from the notes;
 that's the "learns over time" claim. Onboarding deliberately drops those fields from `world.json`.
 
-## 3. Answering: `POST /ask`
+## 3. Answering a question
 
 ```
-question (+ active case / court from the UI)
+question (+ the chat's case, + the previous question for follow-ups)
   ├─ context builder (code, no LLM): today's date, active case, fuzzy-matched cases in the question,
-  │   their registry rows, mental models for their judge + counsel, "Open commitments"
-  ├─ tool loop (max 5 steps):
+  │   their registry rows, mental models for their judge + counsel, "Open commitments", working style
+  ├─ Quick: one tagged recall (budget low) → one completion
+  ├─ Deep: tool loop (max 5 steps):
   │     find_case(text) · recall_memories(query, case_id?, judge_id?, counsel_id?)
   │     reflect(query, ...same filters) · case_timeline(case_id)
   └─ answer with [n] markers → citations resolved from recalled metadata
 ```
 
 - **recall** is for "what/when" questions, and fast enough to use in court. **reflect** is for "what should I expect".
-- **Function-calling fallback** (Groq can be flaky): if the tool loop errors, fall back to a fixed path: resolve case →
-  recall with its tags → one completion. The response says which `mode` ran.
+- **Function-calling fallback**: if the tool loop errors, fall back to the Quick path (resolve case → recall with its
+  tags → one completion). The response says which `mode` ran.
+- **Chat memories**: in parallel with the answer, the lawyer's message is checked for durable decisions or instructions,
+  which are retained as `type:chat_memory` and ranked below records.
 
 ## 4. API
 
-| Endpoint | Status | Purpose |
-|---|---|---|
-| `POST /onboard` | built | load registry, configure bank, create mental models, retain case stubs |
-| `POST /uploads` | built | files and/or text → background extraction; returns `upload_id` |
-| `GET /uploads/{id}` | built | status + segmented entries for review |
-| `POST /uploads/{id}/confirm` | built | apply edits, retain |
-| `POST /ask` | built | answer + citations |
-| `GET /cases`, `GET /cases/{id}` | built | registry |
-| `GET /cases/{id}/timeline` | later | case page |
-| `POST /cause-list`, `GET /brief` | later | morning brief (cached per matter) |
-| `POST /teach` | later | retain `type:instruction` memory, optionally a directive |
-| `GET /events` (SSE), `GET /memory/feed` | later | live progress + memory panel |
+| Endpoint | Purpose |
+|---|---|
+| `POST /onboard` | load registry, configure bank + directives, create mental models, retain case stubs |
+| `POST /uploads`, `GET /uploads/{id}`, `POST /uploads/{id}/confirm` | ingest: background extraction, review, retain |
+| `POST /ask` | one-off answer + citations (no chat) |
+| `GET/POST /chats`, `GET/DELETE /chats/{id}`, `POST /chats/{id}/messages` | chats with stored history |
+| `GET /chat-memories`, `DELETE /chat-memories/{id}` | what was remembered from chats; forgetting removes it from Hindsight |
+| `GET /today`, `GET /today/insights`, `GET /calendar` | cause list, learned judge profiles + open commitments, month view |
+| `GET /graph`, `GET /graph/search`, `GET /entries/{id}`, `GET /entries/{id}/file` | knowledge graph, search, reading a note and its original |
+| `GET /cases`, `GET /cases/{id}`, `GET /cases/resolve/{text}`, `GET /memory/status` | registry and memory health |
 
-## 5. Build order
-
-1. **Registry + onboarding + bank config** ← working
-2. **Ingest for text/txt/docx/pdf/images → retain** ← working
-3. **`/ask` with recall + citations** ← working
-4. Mental models + reflect tuning for cross-case patterns (Murthy sir's costs rule, Srinivas's two stories)
-5. Cause list → morning brief, teach, SSE
-
-## 6. Decisions and why
+## 5. Decisions and why
 
 | Decision | Why |
 |---|---|

@@ -171,52 +171,265 @@ Each retained item uses the **hearing date** as its timestamp (not the upload da
 Tags like `case:C3`, `judge:J1` and `counsel:OC2` are what recall filters on; metadata like the source file is what the UI
 shows as the citation. The details are in [tareekh/ARCHITECTURE.md](tareekh/ARCHITECTURE.md).
 
-### Asking a question
+### How the agent answers a question
+
+This is the part that matters most, so here it is step by step. The code is in
+[`tareekh/backend/app/agent/`](tareekh/backend/app/agent/) (`context.py` and `agent.py`, about 220 lines together).
 
 ```mermaid
 sequenceDiagram
     actor L as Lawyer
-    participant W as Next.js /api/chat
-    participant A as FastAPI agent
+    participant W as Next.js /api/chat/[id]
+    participant A as FastAPI /chats/{id}/messages
+    participant C as Context builder
     participant H as Hindsight
     participant G as Gemini
 
-    L->>W: "What did Srinivas say about his share?"
-    W->>A: POST /chats/{id}/messages (quick or deep)
-    A->>A: build context: today's date, matched cases,<br/>judge + counsel mental models, open commitments
-    loop up to 5 tool steps
-        A->>G: question + context + tools
-        G-->>A: call recall_memories(case:C1, …)
-        A->>H: recall (tag filters)
-        H-->>A: facts + metadata
+    L->>W: "What did Murthy sir say about costs last time?"
+    W->>A: newest message only + quick/deep + case id
+    A->>A: store the user message, load this chat's history
+    par answer
+        A->>C: question (+ previous question) and the chat's case
+        C->>C: fuzzy-match cases in the registry (SQLite)
+        C->>H: fetch mental models: judge, opposing counsel,<br/>open commitments, working style
+        C-->>A: context block
+        alt Quick
+            A->>H: one recall, tagged case:C2, budget low
+            H-->>A: numbered facts
+            A->>G: context + facts + "answer only from these, cite [n]"
+        else Deep
+            loop up to 5 tool calls
+                A->>G: context + tools
+                G-->>A: tool call, e.g. case_timeline(C2)
+                A->>H: recall / reflect with tag filters
+                H-->>A: facts, numbered into the FactBook
+            end
+        end
+        G-->>A: answer with [n] markers
+    and remember
+        A->>G: "anything durable in this message?"
+        G-->>A: decisions / instructions (usually none)
+        A->>H: retain as CHAT MEMORY
     end
-    G-->>A: answer with [n] markers
-    A->>A: resolve [n] → source notes
-    Note over A,H: in parallel, any decision or instruction in the message<br/>is saved as a chat memory (SQLite + Hindsight)
-    A-->>W: answer + citations
-    W-->>L: streamed text, then sources
+    A->>A: resolve [n] to source file, date, case
+    A-->>W: answer + citations + what it remembered
+    W-->>L: text streamed in word runs, then the sources row
 ```
 
-If the model's tool calling fails, the agent falls back to a fixed path (resolve the case, one recall, one completion) and
-the response says which mode it used, so the chat never just errors out in court.
+**1. The browser sends only the newest message.** The chat UI (assistant-ui on top of the AI SDK's `useChat`) would
+normally post the whole thread. FastAPI already has the history in SQLite, so `prepareSendMessagesRequest` trims it to
+the last message and adds the Quick/Deep setting and the chat's case. The Next.js route calls FastAPI, then streams the
+finished answer back in three-word runs so it reads in, followed by a `data-sources` part with the citations.
 
-### Knowledge graph search
+**2. The context builder runs before any model call, and it's plain code.** It decides what the agent knows *before* it
+searches:
+
+- `TODAY` (2026-10-05 in the demo), so "last time", "overdue" and "next week" have something to anchor to.
+- **Which case the question is about.** The chat's own case comes first, then `rapidfuzz` matches against every case's
+  number, nickname and party names (`registry.find_cases`). "Seabreeze", "OS 57/25" and "Gorle" all resolve. A
+  follow-up like *"and what did he say about costs?"* is matched together with the previous question, so it inherits
+  the case. At most two cases go in.
+- **The registry row for each case**: number, title, which side we're on, court hall, judge and opposing counsel with
+  their ids, client and stage.
+- **What Hindsight has learned**, as mental models: the profile of that case's judge, the profile of the opposing
+  counsel, the open commitments list and how Aditya works. Nobody types these in. Hindsight writes them from the notes
+  and refreshes them after each consolidation (more on that below). Each is clipped to about 1,800 characters.
+
+**3. Quick or Deep.**
+
+| | Quick (the default) | Deep |
+|---|---|---|
+| Searches | one `recall`, filtered to the matched case, `budget="low"` | the model picks tools, up to 5 calls |
+| Model calls | 1 | 2 to 6 |
+| Time | about 5 to 15 s | about 15 to 30 s |
+| Good for | "when is the next date", "who is opposing counsel", standing in court | "what should I expect from Murthy sir", anything across cases |
+
+Quick is fast because it skips tool calling entirely: recall the facts, put them in the prompt, ask for one answer.
+The trade-off is that one low-budget search can miss things. In testing, Quick once called 15 Jul 2026 the "last
+hearing" where Deep, which pulled the whole timeline, correctly said 2 Sep 2026. It names the date it means, so you can
+tell.
+
+**4. The tools (Deep mode).**
+
+| Tool | What it does | Backed by |
+|---|---|---|
+| `find_case(text)` | nickname, party or number to case ids | rapidfuzz over the SQLite registry |
+| `recall_memories(query, case_id?, judge_id?, counsel_id?)` | fast fact lookup | Hindsight `recall`, filtered by tags |
+| `reflect_on_memories(query, …same filters)` | reasons across many memories to find a pattern | Hindsight `reflect` |
+| `case_timeline(case_id)` | everything on one case, oldest first | a large `recall` (5,000 tokens) on `case:<id>`, sorted by hearing date |
+
+Filters become tags: `case_id="C2"` is `case:C2`, `judge_id="J1"` is `judge:J1`. That's how "how does Murthy sir treat
+adjournments?" searches every case before him, not just one.
+
+**5. The FactBook: how `[3]` becomes a source.** Every fact any tool returns goes into one numbered list for the whole
+turn. A fact seen twice keeps its first number. Each line the model sees looks like
+
+```
+[3] (2025-07-09; C2; IMG_20250709_192051.jpg) Judge Murthy refused to receive 14 documents without a list...
+```
+
+Chat memories are sorted to the bottom and labelled `CHAT MEMORY;`. When the answer comes back, a regex pulls out every
+`[n]` and `[n, m]`, and each number is mapped back to the fact's metadata: source file, hearing date, case, document
+type. That's what the sources sheet shows, and the original photo or PDF opens from there. A number the model made up
+(higher than the list) is dropped.
+
+**6. The rules in the system prompt** (`SYSTEM` in `agent.py`), in short:
+
+- Answer from the memory bank only; never give legal advice.
+- Use the context to *aim* searches, but every fact in the answer must come from a tool result, with a `[n]`.
+- Keep the court's order sheet apart from what only Aditya's or Divya's notes say.
+- Chat memories rank below records. If they conflict, the record wins and the answer says so.
+- Lead with the closest thing memory *does* have. Say "no record" only when nothing bears on the question. "Last time"
+  means the most recent dated hearing, named by date.
+- Be brief: he may be standing in court.
+
+The same rules live in Hindsight as **directives** (cite sources, no legal advice, admit gaps, official vs personal), so
+`reflect` follows them too.
+
+**7. Remembering, in parallel.** While the answer is being written, a second thread asks Gemini whether the lawyer's
+message contains anything durable: a decision, plan, instruction, deadline or preference *he* stated. Most messages
+contain nothing. When something is found (*"we will not settle for Srinivas's half"*), it's stored in Hindsight as a
+`CHAT MEMORY (said by Aditya in a chat, not a court record)` with the case's tags, and in SQLite so it can be listed and
+forgotten. Forgetting deletes the Hindsight document too, so it can't come back in a later answer. It costs no extra
+wait because it overlaps the answer.
+
+**8. It never just errors in court.** Gemini 3's function calling needs its "thought signatures" sent back on every
+turn, so the assistant message is returned verbatim (`model_dump`). If anything in the tool loop still fails, the agent
+falls back to the Quick path and records `mode: "fallback"`. If Hindsight or the model is down entirely, the chat shows
+the error instead of an empty answer.
+
+#### A worked example, and a bug it exposed
+
+*"What did Murthy sir say about costs last time?"*, asked in the Seabreeze SP suit chat. The context builder resolves
+the chat's case (C2) and loads Murthy sir's learned profile. Recall on `case:C2` returns thirteen facts, including the
+order of **9 Jul 2025** (₹2,000 costs for producing 14 documents without a list), the note of **3 Sep 2025** (costs
+paid by DD), and a consolidated observation that he gives "last opportunity" warnings before closing evidence.
+
+An earlier version answered:
+
+> Memory has no record of Judge Murthy saying anything about costs last time. The only references to costs in the
+> record are: on 09 Jul 2025, he imposed ₹2,000 costs…
+
+It denied the fact and then cited it. Retrieval was fine; the wording rule was the problem. The model read "last time"
+as *the most recent hearing*, where nothing about costs was recorded. The prompt told it to "say plainly when memory
+has nothing", so it opened with a denial and then listed what it had actually found. The rule now says to lead with the
+closest fact, name the hearing "last time" refers to, and never deny something it goes on to cite. The same question
+now gets:
+
+> Nothing on costs was recorded at the last hearing (2 Sep 2026); he last imposed costs in this suit on 9 Jul 2025 […]
+
+A question with genuinely nothing behind it (*"Did Murthy sir ever send the parties to mediation?"*) still gets a plain
+"no record", followed by what did happen in the case.
+
+### Retrieval: how memories are stored and found
+
+All the searching happens in [Hindsight](https://hindsight.vectorize.io), running locally in Docker with one memory bank
+for the practice. Tareekh's job is to put things in so they can be found again, and to ask the right way.
+
+#### Storing: one item per hearing
+
+Ingest turns every upload into entries (one per case per hearing date), and each confirmed entry becomes one Hindsight
+item (`build_item` in [`memory.py`](tareekh/backend/app/memory.py)):
+
+```python
+{
+  "content":   "[2025-07-09] O.S. No. 57 of 2025 (Seabreeze SP suit; ...) before Sri P. Suryanarayana Murthy; "
+               "opposing counsel Sri V. Harsha Vardhan; client Ramesh Gorle. Source: order sheet by court.\n<text>",
+  "timestamp": "2025-07-09T10:30:00+05:30",     # the hearing date, never the upload time
+  "tags":      ["case:C2", "judge:J1", "counsel:OC2", "client:CL1", "type:order_sheet", "author:court"],
+  "metadata":  {"source_file": "...", "upload_id": "...", "case_id": "C2", "hearing_date": "2025-07-09", ...},
+  "document_id": "<upload_id>:C2:2025-07-09",   # uploading the same file again replaces, never duplicates
+  "observation_scopes": [["judge:J1"], ["counsel:OC2"], ["case:C2"]],
+}
+```
+
+Each field has one job:
+
+- The **header line** puts the case number, nickname, judge and counsel into the text itself, so a note that only says
+  "Seabreeze inj - DW1 cross" can still be found by searching for the judge.
+- The **timestamp** is the hearing date. Otherwise "last time" would mean "the last thing I uploaded", which is wrong
+  for a backlog.
+- **Tags filter, metadata cites.** Hindsight can filter recall by tags but not by metadata. Metadata comes back with
+  each fact, and that's what the UI shows as the source.
+- **`observation_scopes`** is what lets cross-case patterns form (see below).
+
+Hindsight then does its own work on each item. An LLM pass, guided by the bank's **retain mission** (keep dates,
+amounts, exhibit numbers and quotes verbatim; record adjournments, who sought them and why; costs; undertakings),
+splits it into individual facts, pulls out entities (people, companies, the land) and links them.
+
+#### Finding: what one `recall` call does
+
+A recall runs four searches in parallel over those facts and merges them:
+
+| Strategy | Finds | Example it helps with |
+|---|---|---|
+| Semantic (vector similarity) | the same idea in different words | "sale signed by only one owner" finds the agreement Ramesh never signed |
+| Keyword (BM25) | exact terms | "I.A. 1187", "Ex.B3", "₹2,000" |
+| Entity graph | facts linked through the same person, company or place | Srinivas's statements in two different suits |
+| Temporal | facts in a time window | "last hearing", "in July" |
+
+The lists are fused with reciprocal rank fusion, and the top candidates are re-scored by a cross-encoder that reads the
+question and each fact together. What comes back is facts, not documents, each with a type:
+
+- **world**: a fact taken from a note ("DW1 admitted survey pegs were placed in April 2025").
+- **observation**: a belief Hindsight consolidated from several facts, with its evidence ("Murthy sir gives a 'last
+  opportunity' warning on the second adjournment and costs on the third; seen in C2, C3 and C5").
+
+Tareekh sets three knobs: **tags** (`case:C2`, matched with `any`), **max_tokens** (how much comes back: 2,000 for
+Quick, 5,000 for a timeline) and **budget** (`low` for Quick and graph search, `mid` otherwise), which controls how many
+candidates each strategy gathers before reranking.
+
+#### Learning: observations, mental models and reflect
+
+This is the "learns over time" part, and it happens in the background after every retain.
+
+- **Consolidation** folds new facts into **observations**. By default Hindsight consolidates per *full tag set*, and
+  every note has a different one, so "Murthy sir puts costs on the third adjournment" never formed. Giving each item
+  explicit scopes (per judge, per counsel, per case) fixed that: all of Murthy sir's hearings, across his three cases,
+  now consolidate together. The bank's **observations mission** says which patterns to track (judges' habits,
+  counsel's adjournment reasons, the lawyer's routines) and asks it to count occurrences and name the cases.
+- **Mental models** are standing questions that Hindsight answers from those observations and re-answers after each
+  consolidation: one per judge, one per opposing counsel, *Open commitments* and *How Aditya works*
+  ([`bank_setup.py`](tareekh/backend/app/bank_setup.py)). Nobody typed in the judges' habits. Onboarding deliberately
+  leaves them out, so they have to be learned from the notes. The Today page and the context builder both read these.
+- **Reflect** is the slow, reasoning version of recall, used by the `reflect_on_memories` tool. Hindsight runs its own
+  small agent over mental models first, then observations, then raw facts, and writes an answer with the facts it used.
+  The bank's dispositions are set sceptical and literal (4 of 5) and not very empathetic (2 of 5), which is what you
+  want from a court record.
+
+One lesson from the commitments model: it was asked "what is still open, and is it overdue?" but never told what day it
+was, so it marked a 30 Sept filing deadline as "not overdue" on 5 Oct. The question now starts with today's date, and
+setup updates existing models and directives when their wording changes.
+
+#### Search on the knowledge graph
+
+The graph page has its own search ([`graph.py`](tareekh/backend/app/graph.py)), because there you want *notes* to read,
+not facts to cite. It runs two searches and combines them:
 
 ```mermaid
 flowchart LR
-    Q["Query"] --> K["Words<br/>rapidfuzz match per term<br/>(typos allowed, case names count)"]
-    Q --> S["Meaning<br/>Hindsight recall → mapped back to notes"]
+    Q["Query"] --> K["Words<br/>per-term match, typos allowed<br/>(case names count)"]
+    Q --> S["Meaning<br/>Hindsight recall, mapped back to notes"]
     S -.->|memory offline| T["Local TF-IDF similarity"]
-    K --> M["Combine: best score<br/>+ bonus if found both ways"]
+    K --> M["score = max(words, meaning)<br/>+ 0.35 × min(words, meaning)"]
     S --> M
     T --> M
-    M --> R["Drop weak hits<br/>(relative to the best one)"]
+    M --> R["Keep hits at 45% of the best or more<br/>(never below 0.3)"]
     R --> UI["Graph fades the rest,<br/>list shows highlighted snippets"]
 ```
 
-The graph itself is built from SQLite in about 30 ms and cached until notes change. "Same topic" links come from a local
-TF-IDF comparison (each note linked to its two closest notes). The frontend renders it with **Sigma.js** (WebGL) and lays
-it out with **ForceAtlas2** in a web worker, so it stays smooth even with a few thousand notes.
+- **Words**: each query word must match a word in the note. An exact match scores 1. Otherwise `rapidfuzz` looks for a
+  near spelling (80% similar for longer words, 90% for short ones) among words that *start with the same letter*, so
+  "seabreze" and "adjurnment" work but "beach" doesn't match "each". A word of four or more letters also matches as a
+  prefix. The whole phrase appearing verbatim adds a bonus, and a query that names a case pulls in that case's notes.
+- **Meaning**: one `recall` with `budget="low"`. Each fact carries the `document_id` of the entry it came from
+  (`upload:case:date`), which maps it back to a note, and earlier ranks score higher. If Hindsight isn't running, a
+  local TF-IDF cosine similarity takes over, which is how the screenshots above were made.
+- A note found **both** ways gets a bonus, so the top results are on topic *and* use your words.
+
+The graph's "same topic" links use the same TF-IDF: each note is linked to its two most similar notes. The graph is
+built from SQLite in about 30 ms and cached until notes change. The frontend draws it with Sigma.js (WebGL) and lays it
+out with ForceAtlas2 in a web worker.
 
 ---
 
@@ -277,7 +490,7 @@ Today, Add notes (the review screens), the knowledge graph and its search all wo
 ### Tests
 
 ```bash
-cd tareekh/backend && python -m pytest -q        # 19 tests, no API keys needed
+cd tareekh/backend && python -m pytest -q        # 22 tests, no API keys needed
 cd tareekh/web && npx tsc --noEmit && npx oxlint
 ```
 
