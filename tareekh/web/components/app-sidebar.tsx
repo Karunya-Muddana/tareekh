@@ -53,7 +53,7 @@ export function AppSidebar() {
   const { data: status, error: statusError } = useMemoryStatus();
   const user = useSession();
   const [query, setQuery] = useState("");
-  const [pendingDelete, setPendingDelete] = useState<string | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<ReadonlySet<string>>(new Set());
 
   // Close the drawer after navigating on a phone.
   useEffect(() => {
@@ -62,7 +62,7 @@ export function AppSidebar() {
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const list = (chats ?? []).filter((c) => c.id !== pendingDelete);
+    const list = (chats ?? []).filter((c) => !pendingDelete.has(c.id));
     return q ? list.filter((c) => `${c.title} ${c.last ?? ""}`.toLowerCase().includes(q)) : list;
   }, [chats, query, pendingDelete]);
 
@@ -75,19 +75,26 @@ export function AppSidebar() {
 
   // Delete with a grace period instead of a confirm dialog: it disappears now, and is only removed for real
   // if the lawyer doesn't press Undo within 5 s.
+  // A set, so deleting a second chat within the grace period doesn't bring the first one back.
+  const unhide = (id: string) =>
+    setPendingDelete((s) => {
+      const n = new Set(s);
+      n.delete(id);
+      return n;
+    });
   const remove = (id: string) => {
-    setPendingDelete(id);
+    setPendingDelete((s) => new Set(s).add(id));
     if (pathname === `/chat/${id}`) router.push("/");
     const timer = setTimeout(() => {
       mutate<ChatRow[]>("chats", (xs) => (xs ?? []).filter((c) => c.id !== id), true);
       api.deleteChat(id).finally(() => {
-        setPendingDelete(null);
+        unhide(id);
         chatsChanged();
       });
     }, 5000);
     window.dispatchEvent(
       new CustomEvent("tareekh:toast", {
-        detail: { text: "Chat deleted", action: "Undo", onAction: () => { clearTimeout(timer); setPendingDelete(null); } },
+        detail: { text: "Chat deleted", action: "Undo", onAction: () => { clearTimeout(timer); unhide(id); } },
       }),
     );
   };

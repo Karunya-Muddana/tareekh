@@ -2,7 +2,7 @@
 import logging
 
 from . import db, memory, registry
-from .config import settings
+from .config import settings, today_iso
 
 log = logging.getLogger("tareekh.bank")
 
@@ -32,7 +32,9 @@ DIRECTIVES = [
                      "reference number that is not in memory.", 100),
     ("No legal advice", "Do not give legal opinions or predict outcomes as certainties. Describe what happened and "
                         "what patterns the record shows; the lawyer decides.", 90),
-    ("Admit gaps", "If memory has nothing on the question, say so plainly instead of guessing.", 80),
+    ("Admit gaps", "If memory has nothing on the question, say so plainly instead of guessing. If the exact thing "
+                   "asked is missing but related facts exist, lead with those facts and their dates; never deny "
+                   "something and then cite it.", 80),
     ("Official vs personal", "Distinguish what the court's order sheet records from what exists only in the lawyer's "
                              "own notes (oral remarks, corridor conversations).", 70),
 ]
@@ -44,13 +46,15 @@ def configure_bank() -> dict:
     c.update_bank_config(settings.bank_id, retain_mission=RETAIN_MISSION, enable_observations=True,
                          observations_mission=OBSERVATIONS_MISSION, reflect_mission=mission(),
                          disposition_skepticism=4, disposition_literalism=4, disposition_empathy=2)
-    existing = {getattr(d, "name", None) or (d.get("name") if isinstance(d, dict) else None)
-                for d in (memory._get(c.list_directives(bank_id=settings.bank_id), "items") or [])}
+    existing = {memory._get(d, "name"): d for d in (memory._get(c.list_directives(bank_id=settings.bank_id), "items") or [])}
     made = 0
     for name, content, prio in DIRECTIVES:
-        if name not in existing:
+        d = existing.get(name)
+        if d is None:
             c.create_directive(bank_id=settings.bank_id, name=name, content=content, priority=prio)
             made += 1
+        elif memory._get(d, "content") != content:   # wording changed since onboarding: update in place
+            c.update_directive(bank_id=settings.bank_id, directive_id=memory._get(d, "id"), content=content, priority=prio)
     return {"bank": settings.bank_id, "directives_created": made}
 
 
@@ -70,8 +74,10 @@ def mental_model_specs() -> list[dict]:
                                       f"contradicts their stated reasons. Give counts, cases and dates.",
                       "trigger": trig, "max_tokens": 700})
     specs.append({"id": "open-commitments", "name": "Open commitments", "tags": None,
-                  "source_query": "What undertakings to the court, pending tasks, filing deadlines and promises to clients "
-                                  "are still open as of the latest notes? For each: case, what, owner, due date, and whether overdue.",
+                  "source_query": f"Today is {today_iso()}. What undertakings to the court, pending tasks, filing deadlines and "
+                                  f"promises to clients are still open as of the latest notes? For each: case, what, owner, "
+                                  f"due date, and whether it is overdue as of today (a due date before today with no note "
+                                  f"that it was done is overdue).",
                   "trigger": trig, "max_tokens": 900})
     who = registry.practice()["lawyer_short"]
     specs.append({"id": "working-style", "name": f"How {who} works", "tags": None,
@@ -86,7 +92,8 @@ def create_mental_models() -> dict:
     have = {memory._get(m, "id") for m in (memory._get(c.list_mental_models(bank_id=settings.bank_id), "items") or [])}
     made = 0
     for s in mental_model_specs():
-        if s["id"] in have:
+        if s["id"] in have:   # keep an existing model's question current (the date moves, wording gets fixed)
+            c.update_mental_model(bank_id=settings.bank_id, mental_model_id=s["id"], source_query=s["source_query"])
             continue
         c.create_mental_model(bank_id=settings.bank_id, name=s["name"], source_query=s["source_query"], tags=s["tags"],
                               max_tokens=s["max_tokens"], trigger=s["trigger"], id=s["id"])

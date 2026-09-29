@@ -6,7 +6,7 @@ import uuid
 from pathlib import Path
 
 from .. import db, graph, memory
-from ..config import settings
+from ..config import settings, today_iso
 from . import extract, segment
 
 log = logging.getLogger("tareekh.ingest")
@@ -27,7 +27,8 @@ def create_upload(files: list[tuple[str, bytes]], text: str | None, hints: dict)
         (folder / safe).write_bytes(data)
         saved.append({"name": safe, "path": str(folder / safe), "kind": extract.kind_of(safe)})
     if text and text.strip():
-        name = f"typed_{dt.datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        # The date in the name is the fallback hearing date, so it follows the app's "today", not the wall clock.
+        name = f"typed_{today_iso().replace('-', '')}_{dt.datetime.now():%H%M%S}.txt"
         (folder / name).write_text(text, encoding="utf-8")
         saved.append({"name": name, "path": str(folder / name), "kind": "text"})
     if not saved:

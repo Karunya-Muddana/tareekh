@@ -26,6 +26,7 @@ export default function UploadPage() {
   const [edits, setEdits] = useState<Record<string, { case_id?: string; hearing_date?: string; reject?: boolean }>>({});
   const input = useRef<HTMLInputElement>(null);
   const camera = useRef<HTMLInputElement>(null);
+  const results = useRef<HTMLElement>(null);
 
   const cases = useCases().data ?? [];
 
@@ -45,6 +46,8 @@ export default function UploadPage() {
         if (!["queued", "extracting", "segmenting", "retaining"].includes(u.status)) break;
         await new Promise((r) => setTimeout(r, 1500));
       }
+      // The review card lands below the note box; bring it (and Save) into view.
+      setTimeout(() => results.current?.scrollIntoView({ block: "nearest", behavior: "smooth" }), 50);
     } catch (e) {
       toast(e instanceof Error ? e.message : "Upload failed");
     }
@@ -174,7 +177,7 @@ export default function UploadPage() {
         </div>
 
         {up && (
-          <section className="mt-10" aria-live="polite">
+          <section ref={results} className="mt-10" aria-live="polite">
             <ol className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
               {STEPS.map(([key, label], i) => {
                 const done = i < stepIndex || up.status === "done";

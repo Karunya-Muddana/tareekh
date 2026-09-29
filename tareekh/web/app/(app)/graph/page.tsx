@@ -385,10 +385,10 @@ function Overview({
     <section className="text-muted-foreground px-1 text-sm leading-relaxed">
       <p className="text-foreground">
         <span className="tnum font-semibold"><CountUp to={graph.counts.notes} duration={0.9} /></span> notes, orders and documents across{" "}
-        <span className="tnum font-semibold">{graph.counts.cases}</span> cases
+        <span className="tnum font-semibold">{graph.counts.cases}</span> {graph.counts.cases === 1 ? "case" : "cases"}
         {graph.counts.memories ? (
           <>
-            , and <span className="tnum font-semibold">{graph.counts.memories}</span> things remembered from chats
+            , and <span className="tnum font-semibold">{graph.counts.memories}</span> {graph.counts.memories === 1 ? "thing" : "things"} remembered from chats
           </>
         ) : null}
         .

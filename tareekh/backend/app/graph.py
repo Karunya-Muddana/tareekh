@@ -188,7 +188,9 @@ def _keyword_scores(q: str, idx: dict) -> dict[str, tuple[float, list[str]]]:
                 score += 1.0
                 hits.append(qt)
                 continue
-            best = process.extractOne(qt, vocab, scorer=fuzz.ratio, score_cutoff=80 if len(qt) > 4 else 90)
+            # Typos rarely touch the first letter; without this "beach" matches "each" at 89.
+            same_start = [v for v in vocab if v[0] == qt[0]]
+            best = process.extractOne(qt, same_start, scorer=fuzz.ratio, score_cutoff=80 if len(qt) > 4 else 90)
             if best:
                 score += best[1] / 100 * 0.85
                 hits.append(best[0])

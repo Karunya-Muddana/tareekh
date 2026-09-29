@@ -3,6 +3,7 @@ import datetime as dt
 import re
 
 from .. import llm, registry
+from ..config import today_iso
 
 SYSTEM = """You file a litigator's court notes. You receive text extracted from ONE upload (a diary page, a typed
 note, a case note, or a certified copy of a court order sheet) plus the lawyer's case registry.
@@ -13,7 +14,8 @@ Split the text into entries: one entry per (case, hearing date).
 - Resolve every entry to a case_id from the registry. Lawyers use nicknames ("beach land"), party surnames
   ("Gorle"), or short numbers ("OS 214/24"). If you cannot tell, use null. Never invent a case_id.
 - hearing_date: the date the hearing happened (YYYY-MM-DD). Diary pages print it at the top; order sheets use
-  dd.mm.yyyy. Dates like "next date 5 Oct" are NOT the hearing date. If unknown, use null.
+  dd.mm.yyyy. Dates like "next date 5 Oct" are NOT the hearing date. If unknown, use null. A date written without
+  a year ("12/9", "6 Oct") is the latest such date on or before TODAY.
 - text: the entry's text, copied faithfully (fix obvious OCR noise only). Do not summarise.
 - author: "{lawyer_short}", "{assistant_short}", "court" (order sheets, court or government documents), "other" (letters, agreements, notices from parties) or null.
 - doc_type: one of handwritten_note, typed_note, order_sheet, document, other.
@@ -99,7 +101,7 @@ def repair(entries: list[dict], source_file: str, hints: dict, known_ids: set[st
 
 def segment(raw_text: str, source_file: str, hints: dict) -> list[dict]:
     known = {c["id"] for c in registry.db.rows("SELECT id FROM cases")}
-    user = (f"UPLOAD FILE NAME: {source_file}\nUSER HINTS: {hints}\n\nCASE REGISTRY (id | number | nickname | parties | judge):\n"
+    user = (f"TODAY: {today_iso()}\nUPLOAD FILE NAME: {source_file}\nUSER HINTS: {hints}\n\nCASE REGISTRY (id | number | nickname | parties | judge):\n"
             f"{registry.compact_listing()}\n\nEXTRACTED TEXT:\n{raw_text}")
     p = registry.practice()
     system = SYSTEM.replace("{lawyer_short}", p["lawyer_short"]).replace("{assistant_short}", p["assistant_short"])

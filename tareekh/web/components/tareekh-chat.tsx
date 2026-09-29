@@ -9,7 +9,7 @@ import { BookmarkCheck, FileText, MessageSquareQuote, Undo2 } from "lucide-react
 import { Thread } from "@/components/assistant-ui/elements/thread.aui";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { api, chatsChanged, fmtDate, type StoredMessage } from "@/lib/api";
+import { api, chatsChanged, fmtDate, useCases, type StoredMessage } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import type { SourcesData } from "@/app/api/chat/[id]/route";
 
@@ -104,6 +104,8 @@ function SourcesPart({ data }: { data: SourcesData }) {
   const [focus, setFocus] = useState<number | null>(null);
   const [forgotten, setForgotten] = useState<Set<string>>(new Set());
   const groups = useMemo(() => groupSources(data.citations ?? []), [data.citations]);
+  const { data: cases } = useCases();
+  const caseName = (id: string) => cases?.find((c) => c.id === id)?.short_name ?? id;
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -230,7 +232,7 @@ function SourcesPart({ data }: { data: SourcesData }) {
                     {memo ? (
                       <span className="bg-memo-soft text-memo rounded-md px-1.5 py-px text-[11px] font-semibold">Chat memory</span>
                     ) : (
-                      <span className="font-medium">{[...g.cases].join(" · ")}</span>
+                      <span className="font-medium">{[...g.cases].map(caseName).join(" · ")}</span>
                     )}
                     <span className="text-muted-foreground tnum">{fmtDate(g.hearing_date)}</span>
                   </div>
@@ -327,6 +329,8 @@ export function ChatView({
     const t = setTimeout(() => {
       sent.current = true;
       chat.sendMessage({ text: firstMessage });
+      // The question now lives in the chat; keep the address bar clean.
+      window.history.replaceState(window.history.state, "", window.location.pathname);
     }, 0);
     return () => clearTimeout(t);
   }, [firstMessage, initial.length, chat]);
