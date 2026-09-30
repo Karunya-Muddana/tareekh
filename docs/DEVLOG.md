@@ -23,6 +23,13 @@ then Today, chat, graph, Add notes, sign-out and dark mode in the browser). What
 - **Upload**: the review card appeared below the fold with no hint; it scrolls into view now. "1 things" in the graph
   caption.
 
+- **Blank answers.** *"Did the resort group make any construction attempts?"* came back empty twice in Deep mode. No
+  case was named, so the model passed "O.S. 131/2025" as a `case_id`; the tag filter matched nothing, it used all five
+  steps, and the forced final answer was empty, which was saved as-is. Tool case arguments now go through the
+  registry, a follow-up with no case in it borrows the case from the previous answer, an empty answer falls back to
+  the Quick path or returns an error, and a retry replaces the failed turn (it used to show the question twice after
+  a refresh).
+
 The README now has a proper section on how the agent works and how retrieval works, with the costs question as a worked
 example.
 

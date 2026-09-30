@@ -228,7 +228,9 @@ searches:
 - **Which case the question is about.** The chat's own case comes first, then `rapidfuzz` matches against every case's
   number, nickname and party names (`registry.find_cases`). "Seabreeze", "OS 57/25" and "Gorle" all resolve. A
   follow-up like *"and what did he say about costs?"* is matched together with the previous question, so it inherits
-  the case. At most two cases go in.
+  the case. If neither question names a case, the previous *answer* is matched instead ("was the samadhi ever
+  affected?"). A case found that way is only context, so Quick searches the whole bank rather than filtering on a
+  guess. At most two cases go in.
 - **The registry row for each case**: number, title, which side we're on, court hall, judge and opposing counsel with
   their ids, client and stage.
 - **What Hindsight has learned**, as mental models: the profile of that case's judge, the profile of the opposing
@@ -296,7 +298,9 @@ wait because it overlaps the answer.
 **8. It never just errors in court.** Gemini 3's function calling needs its "thought signatures" sent back on every
 turn, so the assistant message is returned verbatim (`model_dump`). If anything in the tool loop still fails, the agent
 falls back to the Quick path and records `mode: "fallback"`. If Hindsight or the model is down entirely, the chat shows
-the error instead of an empty answer.
+the error instead of an empty answer. A blank reply from the model is treated as a failure too (it happened when the
+model spent all five steps searching with a case *number* where a case *id* belonged; tool arguments are now resolved
+through the registry). Retrying a question replaces the failed turn instead of storing the question twice.
 
 #### A worked example, and a bug it exposed
 

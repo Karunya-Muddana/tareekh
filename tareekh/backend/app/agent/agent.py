@@ -97,14 +97,27 @@ class FactBook:
         return out
 
 
+def _case_id(value: str | None) -> str | None:
+    """The model sometimes passes a case number or nickname ("O.S. 131/2025") where an id ("C3") belongs. A tag
+    filter on that matches nothing, so resolve it, and drop the filter rather than search with a wrong one."""
+    if not value or registry.get_case(value):
+        return value or None
+    hits = registry.find_cases(value, limit=1)
+    return hits[0]["case_id"] if hits else None
+
+
 def _run_tool(name: str, args: dict, book: FactBook) -> str:
     if name == "find_case":
         hits = registry.find_cases(args.get("text", ""), limit=3)
         return json.dumps([{**h, "case_number": registry.get_case(h["case_id"])["case_number"]} for h in hits])
+    if "case_id" in args:
+        args = {**args, "case_id": _case_id(args["case_id"])}
     filters = {k: args.get(k) for k in ("case_id", "judge_id", "counsel_id") if args.get(k)}
     if name == "recall_memories":
         return book.render(memory.recall(args["query"], **filters))
     if name == "case_timeline":
+        if not args.get("case_id"):
+            return "Unknown case. Use find_case first and pass its case_id (like C3)."
         facts = memory.recall(f"hearings, orders, outcomes and next dates in case {args['case_id']}",
                               case_id=args["case_id"], max_tokens=5000)
         facts.sort(key=lambda f: (f.get("metadata") or {}).get("hearing_date") or f.get("occurred") or "")
@@ -126,6 +139,10 @@ def ask(question: str, active_case_id: str | None = None, quick: bool = False, h
     prev_q = next((t["content"] for t in reversed(turns) if t["role"] == "user"), "")
     search_text = f"{prev_q}\n{question}" if prev_q else question     # a follow-up inherits the case it's about
     ctx = ctxmod.build(search_text, active_case_id)
+    if not ctx["case_ids"]:   # "was the samadhi ever affected?": the case is only named in the last answer
+        prev_a = next((t["content"] for t in reversed(turns) if t["role"] == "assistant"), "")
+        if prev_a:
+            ctx = {**ctxmod.build(f"{search_text}\n{prev_a}", active_case_id), "guessed": True}
     if quick:
         return _fixed_path(question, ctx, mode="quick", turns=turns, search_text=search_text)
     book, trace = FactBook(), []
@@ -136,7 +153,9 @@ def ask(question: str, active_case_id: str | None = None, quick: bool = False, h
             msg = llm.chat(messages, tools=TOOLS)
             calls = msg.tool_calls or []
             if not calls:
-                answer = msg.content or ""
+                answer = (msg.content or "").strip()
+                if not answer:
+                    raise ValueError("model returned an empty answer")
                 return {"answer": answer, "citations": book.citations(answer), "mode": "agent",
                         "cases": ctx["case_ids"], "trace": trace}
             # Send the assistant turn back verbatim: Gemini 3 needs its thought signatures (extra fields) returned.
@@ -147,7 +166,9 @@ def ask(question: str, active_case_id: str | None = None, quick: bool = False, h
                 trace.append({"tool": c.function.name, "args": args})
                 messages.append({"role": "tool", "tool_call_id": c.id, "content": out[:12000]})
         messages.append({"role": "user", "content": "Answer now with what you have, with citations."})
-        answer = llm.chat(messages).content or ""
+        answer = (llm.chat(messages).content or "").strip()
+        if not answer:   # it still wanted a tool; out of steps, so take the fixed path below
+            raise ValueError("no answer after the tool budget")
         return {"answer": answer, "citations": book.citations(answer), "mode": "agent", "cases": ctx["case_ids"], "trace": trace}
     except Exception as e:  # noqa: BLE001 - function calling can be flaky; never fail the user
         log.warning("agent loop failed (%s); using fixed path", e)
@@ -158,7 +179,8 @@ def _fixed_path(question: str, ctx: dict, mode: str, error: str | None = None,
                 turns: list[dict] | None = None, search_text: str | None = None) -> dict:
     """Resolve case → recall with its tags → one completion. Used for quick in-court questions and as fallback."""
     book = FactBook()
-    cid = ctx["case_ids"][0] if ctx["case_ids"] else None
+    # A case guessed from the previous answer is context, not a filter: that answer may span several cases.
+    cid = ctx["case_ids"][0] if ctx["case_ids"] and not ctx.get("guessed") else None
     facts_txt = book.render(memory.recall(search_text or question, case_id=cid, max_tokens=2000, budget="low" if mode == "quick" else "mid"))
     messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)}, *(turns or []),
                 {"role": "user", "content": f"QUESTION: {question}\n\nFACTS FROM MEMORY:\n{facts_txt}\n\n"

@@ -168,7 +168,14 @@ def send_message(chat_id: str, body: MessageIn):
     chat = db.row("SELECT * FROM chats WHERE id=?", chat_id)
     if not chat:
         raise HTTPException(404, "unknown chat")
-    history = db.rows("SELECT role, content FROM messages WHERE chat_id=? ORDER BY id", chat_id)
+    history = db.rows("SELECT id, role, content FROM messages WHERE chat_id=? ORDER BY id", chat_id)
+    # Retry resends the last question: replace that turn instead of storing the question twice.
+    if len(history) >= 2 and history[-2]["role"] == "user" and history[-2]["content"] == body.question:
+        db.execute("DELETE FROM messages WHERE chat_id=? AND id>=?", chat_id, history[-2]["id"])
+        history = history[:-2]
+    elif history and history[-1]["role"] == "user" and history[-1]["content"] == body.question:
+        db.execute("DELETE FROM messages WHERE id=?", history[-1]["id"])   # an earlier try that failed outright
+        history = history[:-1]
     db.execute("INSERT INTO messages (chat_id, role, content, created_at) VALUES (?,?,?,?)", chat_id, "user", body.question, _now())
     t0 = time.time()
     learned: list[dict] = []
@@ -179,6 +186,8 @@ def send_message(chat_id: str, body: MessageIn):
         r = agent.ask(body.question, body.case_id or chat["case_id"], body.quick, history=history)
     except Exception as e:  # noqa: BLE001
         raise HTTPException(503, f"Memory or LLM unavailable: {type(e).__name__}: {e}")
+    if not (r.get("answer") or "").strip():   # never store (or show) a blank answer; the UI offers a retry
+        raise HTTPException(502, "Tareekh couldn't put an answer together this time. Try again, or switch to Quick.")
     finder.join(timeout=20)
     meta = {"mode": r.get("mode"), "seconds": round(time.time() - t0, 1), "learned": learned}
     db.execute("INSERT INTO messages (chat_id, role, content, citations, meta, created_at) VALUES (?,?,?,?,?,?)",
