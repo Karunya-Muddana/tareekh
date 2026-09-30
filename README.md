@@ -11,16 +11,16 @@ Built on [Hindsight](https://hindsight.vectorize.io) for the *AI Agents That Lea
 
 ---
 
-## Why I built this
+## Why we built this
 
-My starting point was simple: in Indian district courts, a civil case can run for years over dozens of short hearings,
+Our starting point was simple: in Indian district courts, a civil case can run for years over dozens of short hearings,
 and almost everything about what happened at each hearing lives in paper. The advocate writes two lines in a pocket
 diary, the junior types a longer note in the evening, and the court's own record is a certified copy of the order sheet
 that arrives weeks later. None of it is searchable, and the useful connections are almost never in one document.
 
 For example, in the demo data one party (Srinivas) claims **70%** of a piece of land in one suit, and a year later tells
 a *different judge* in a *different suit* that he and his friend are **equal owners**. A lawyer who remembers both can
-use it in cross-examination. That kind of cross-case recall is what I wanted a memory system to do.
+use it in cross-examination. That kind of cross-case recall is what we wanted a memory system to do.
 
 Tareekh does not give legal advice. It only remembers, and it always shows where an answer came from.
 
@@ -47,6 +47,10 @@ cases) and `case_timeline`. Every sentence that comes from a note gets a `[n]` m
 
 There's a **Quick / Deep** switch: Quick does one search and answers in a few seconds, Deep lets the agent use more
 tools and look across cases (about 25 s).
+
+The whole conversation goes with every question, so follow-ups work however long the chat gets. A small ring in the
+top bar shows how full the chat's context is; when it nears the limit, older messages are summarised automatically (or
+tap **Compress now**). How that works is [below](#how-the-agent-answers-a-question).
 
 If you tell it something in a chat, like *"we will not settle for Srinivas's half"*, it saves that as a separate kind of
 memory (a decision, instruction, deadline or fact). These show up on the Today screen and inside the matching case card,
@@ -75,12 +79,12 @@ entry per hearing, guesses the case and date, and shows you anything it's unsure
 
 ## It finds the answer (real examples)
 
-These are real searches on the demo data, run on my machine with memory offline. Nothing is staged. The "Meaning" part
+These are real searches on the demo data, run on one of our laptops with memory offline. Nothing is staged. The "Meaning" part
 falls back to a local similarity match when Hindsight isn't reachable, which is why the results say *offline match*.
 
 **"What share does Srinivas claim?"** The first result is his written statement in the partition suit (*claims 70%
 share*). The second is our cross-examination note where we put his deposition from the *other* suit to him (*"Ramesh and
-I are EQUAL owners, 50-50"*). That contradiction is exactly the cross-case link I wanted it to surface.
+I are EQUAL owners, 50-50"*). That contradiction is exactly the cross-case link we wanted it to surface.
 
 ![Search: Srinivas's share](docs/images/search-srinivas-share.png)
 
@@ -302,6 +306,40 @@ the error instead of an empty answer. A blank reply from the model is treated as
 model spent all five steps searching with a case *number* where a case *id* belonged; tool arguments are now resolved
 through the registry). Retrying a question replaces the failed turn instead of storing the question twice.
 
+**9. The whole thread goes with every question, and it's compressed when it gets long**
+([`threadctx.py`](tareekh/backend/app/threadctx.py)). Earlier versions sent only the last six messages, cut to 2,000
+characters each, so a long chat quietly forgot its beginning. Now every message in the thread is carried word for
+word, up to a budget (`CHAT_CONTEXT_TOKENS`, 24,000 tokens by default):
+
+```mermaid
+flowchart LR
+    A["Answer stored"] --> B{"Thread over 80%<br/>of its budget?"}
+    B -->|no| Z["Next question carries<br/>every message"]
+    B -->|yes| C["Background: Gemini folds all but the<br/>newest 4 messages into a summary"]
+    C --> D["chat_summaries: summary + the last<br/>message id it covers"]
+    D --> E["Next question carries<br/>summary (system prompt) + newest messages"]
+```
+
+- **Counting.** Tokens are counted with [tiktoken](https://github.com/openai/tiktoken) (`o200k_base`). It isn't
+  Gemini's tokenizer, but it tracks it closely enough for a budget, runs locally and costs nothing. After each answer
+  the meter also shows the *real* prompt size Gemini reported (`usage.prompt_tokens`, the largest call in the turn)
+  against the model's 1M window.
+- **Compressing.** Past 80%, a background thread asks Gemini for a briefing of everything except the newest four
+  messages: first the lawyer's questions in order, then case numbers, names, dates, amounts, decisions and open
+  questions, kept exactly. A later compression merges the previous summary in, so it rolls forward. The summary goes
+  into the system prompt as `<earlier_in_this_chat>`; the newest messages stay as real messages. The original messages
+  are never deleted, only no longer sent.
+- **Safety.** The next question waits for a running compression to finish (a per-chat lock), so it never reads a
+  half-written thread. If the summary comes back empty, the full thread is kept. Old answers' `[n]` markers are
+  stripped before they're sent again, because those numbers pointed at a different turn's facts.
+- **In the UI.** A ring in the chat's top bar shows how full the thread is and turns red past 80%. Tapping it opens the
+  breakdown (summary vs word-for-word messages, the last real request against the model's window), the summary itself,
+  and **Compress now**.
+
+We chose a summary written by the same model over a prompt-compression library such as LLMLingua. LLMLingua needs
+PyTorch and a local model, which is heavy for a laptop that already runs Hindsight. It also drops tokens by
+perplexity, which can cut exactly the dates and I.A. numbers a lawyer needs.
+
 #### A worked example, and a bug it exposed
 
 *"What did Murthy sir say about costs last time?"*, asked in the Seabreeze SP suit chat. The context builder resolves
@@ -439,16 +477,25 @@ out with ForceAtlas2 in a web worker.
 
 ## Tech stack
 
-| Part | What I used | Why |
+| Part | What we used | Why |
 |---|---|---|
 | Memory | Hindsight (local Docker) | recall + reflect + observations + mental models, one bank per lawyer |
 | Models | Gemini on Vertex AI (OpenAI-compatible client) | OCR, segmenting and answers; Groq's free tier was too rate-limited |
 | Backend | FastAPI, SQLite, rapidfuzz, pypdf, python-docx | Hindsight's client is Python, and so is the data generator |
 | Frontend | Next.js 16, React 19, Tailwind 4 | App Router, and the AI SDK for streaming chat |
-| Chat UI | assistant-ui + Vercel AI SDK | real thread, composer and message parts instead of building my own |
+| Chat UI | assistant-ui + Vercel AI SDK | real thread, composer and message parts instead of building our own |
 | Graph | Sigma.js, graphology, ForceAtlas2 | WebGL rendering and reducers for the fade-on-search effect |
 | UI bits | shadcn/ui, a few [React Bits](https://reactbits.dev) components, motion | segmented toggles, hold-to-forget, swipeable toasts, upload status marks |
 | Type | Anek Latin (Ek Type), Eczar (Rosetta), Martian Mono, Samarkan for the wordmark | Indian foundries; the wordmark is the only Samarkan text |
+| Context | tiktoken | counting a chat's tokens locally for the context meter and compression |
+
+**Translucency follows Apple's Human Interface Guidelines on materials.** Glass is used only on the layer that floats
+above content: the top bar, and small controls laid over the graph or an image. It's never used on content and never
+stacked. There are two utilities (`material`, `material-thin` in `globals.css`), one recipe each, with a solid fallback
+when blur isn't supported or the system asks for Reduce Transparency. Sheets and dialogs dim the page behind them
+instead of blurring it. The sidebar can be resized by dragging its edge (double-click resets it, dragging it nearly
+shut collapses it, and the arrow keys work when it's focused); the width is restored before first paint, so it
+never jumps.
 
 ---
 
@@ -494,9 +541,57 @@ Today, Add notes (the review screens), the knowledge graph and its search all wo
 ### Tests
 
 ```bash
-cd tareekh/backend && python -m pytest -q        # 22 tests, no API keys needed
+cd tareekh/backend && python -m pytest -q        # 25 tests, no API keys needed
 cd tareekh/web && npx tsc --noEmit && npx oxlint
 ```
+
+---
+
+## How we tested it
+
+We tested at four levels, because each one catches a different kind of bug. Almost every fix in
+[docs/DEVLOG.md](docs/DEVLOG.md) was found by one of these, not by luck.
+
+**1. Automated tests (no keys, no network).** `python -m pytest -q` runs 25 tests in about 3 seconds against a
+throwaway database built from the demo registry:
+
+| Area | What the tests pin down |
+|---|---|
+| Case resolution | nicknames, party surnames and short numbers ("OS 214/24", "Greenfield", "Seabreeze SP") resolve to the right case; the company name matches both Seabreeze suits |
+| Ingest | text and .docx extraction, dates from filenames, segment repair (unknown case ids rejected, missing dates filled), document type follows the file kind |
+| Memory items | the exact shape sent to Hindsight: hearing-date timestamp, tags, metadata, `document_id`, observation scopes |
+| Citations | `[n]` markers resolve to sources; one document filed under several cases shows once |
+| Knowledge graph | notes link to their cases and each other, fuzzy search tolerates typos and drops irrelevant hits, the cache refreshes on edits, the nearest-neighbour shortcut matches brute force |
+| Security | a note's original file is served only if it is registered on that note's upload, never from a path in the request; file URLs are encoded |
+| Thread context | the whole thread is carried without stale `[n]` markers; compression keeps the newest four messages and folds the rest; an empty summary leaves the thread intact |
+
+Model calls are replaced with stubs in these tests, so they check our code, not Gemini's mood that day.
+
+**2. Static checks and a production build.** `tsc --noEmit` (strict TypeScript), `oxlint`, `pyflakes`, and a full
+`next build` on every change. The build catches things the dev server forgives.
+
+**3. Every endpoint, then real questions against the live stack.** With Hindsight and Gemini running, we call every
+API endpoint and check status and shape, then replay real questions through the agent in both Quick and Deep mode,
+including follow-ups that depend on earlier turns. This is how we caught:
+
+- the answer that said "no record" and then cited the record (a prompt rule, not retrieval);
+- blank answers when a follow-up named no case (the model searched with a case *number* as an id);
+- "open commitments" calling a 30 Sept deadline "not overdue" on 5 Oct (the model was never told the date);
+- search matching "beach" to "each", and yearless dates like "12/9" getting a guessed year;
+- a question about the chat itself ("what did I ask first?") being refused as "not in memory".
+
+For each one we reproduced it with the same inputs, fixed it, and re-ran the same question to confirm the new answer.
+
+**4. Clicking through every screen in a real browser.** Today (cause list, briefings, calendar), chat
+(streaming, citations, the Sources sheet, retry, Quick/Deep, the context meter and Compress now), the knowledge graph
+(search in all three modes, opening a note and its original scan), Add notes (typed note through extraction and review),
+signing out, light and dark mode, and the sidebar (resize, reset, collapse, keyboard). We use Chrome for these
+passes and check the browser console for errors. Things we found this way: the chat not scrolling to a new message,
+internal case ids ("C2") in the Sources sheet, a deleted chat reappearing when a second one was deleted within the undo
+window, and the upload review appearing below the fold.
+
+**What we haven't tested yet.** Browsers other than Chrome on desktop, real handwriting from a real chamber (the demo
+data is synthetic, rendered to look like phone photos), and more than one person using the app at once.
 
 ---
 
@@ -531,6 +626,7 @@ tareekh/
     app/agent/          context builder + tool loop + citations
     app/graph.py        knowledge graph + fuzzy/semantic search
     app/chatmem.py      decisions/instructions remembered from chats
+    app/threadctx.py    carrying a chat's whole thread, token counting, compression
     scripts/            start_hindsight.sh, load_backlog.py, seed_local.py
     tests/
   web/                Next.js app
@@ -546,7 +642,7 @@ docs/                 DEVLOG.md, GLOSSARY.md, images/ (the screenshots in this R
 
 ---
 
-## Things that were harder than I expected
+## Things that were harder than we expected
 
 - **Cross-case patterns didn't form at first.** Hindsight consolidates observations per tag set by default, and every note
   has a different tag set, so "Murthy sir puts costs on the third adjournment" never showed up. Setting explicit
@@ -555,14 +651,14 @@ docs/                 DEVLOG.md, GLOSSARY.md, images/ (the screenshots in this R
   stamped with the hearing date instead, and `document_id` makes re-uploading the same file replace rather than duplicate.
 - **OCR mistakes become confident memories.** A wrongly read date turns into a wrong fact the agent will happily cite.
   That's why low-confidence entries go through a review screen before they're saved.
-- **Rate limits.** I started on Groq's free tier and Hindsight could only store about two memories a minute. Moving to
+- **Rate limits.** We started on Groq's free tier and Hindsight could only store about two memories a minute. Moving to
   Gemini on Vertex AI fixed it.
-- **The graph got tangled.** I tried a clustered layout with a link filter, but the round layout looked better with this
-  much data, so I went back to it. With a lot more notes the filter would be worth bringing back.
+- **The graph got tangled.** We tried a clustered layout with a link filter, but the round layout looked better with this
+  much data, so we went back to it. With a lot more notes the filter would be worth bringing back.
 
-## What I'd do next
+## What we'd do next
 
-- Real sign-in (it's simulated right now), and one memory bank per lawyer on a server instead of my laptop.
+- Real sign-in (it's simulated right now), and one memory bank per lawyer on a server instead of a laptop.
 - Generate a proper one-line summary for each note when it's saved, instead of using its first sentence.
 - Import the court's own cause list each morning instead of relying on "next date" from the notes.
 - Offline support on the phone, since court halls often have no signal.

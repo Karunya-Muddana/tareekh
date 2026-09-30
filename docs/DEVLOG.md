@@ -1,5 +1,31 @@
 # Dev log
 
+## 30 Sep 2026: whole-thread context, a context meter, and a resizable sidebar
+
+**Chats remember the whole conversation.** The agent used to get the last six messages, each cut to 2,000 characters,
+so long chats lost their start. `threadctx.py` now carries every message, counted with tiktoken against a 24k-token
+budget. Past 80%, a background call folds all but the newest four messages into a rolling summary
+(`chat_summaries`), which goes into the system prompt. The next question waits on a per-chat lock if a compression is
+running. We considered LLMLingua for compression and chose a model-written summary instead: no PyTorch on the laptop,
+and it doesn't drop the dates and I.A. numbers that token-pruning can cut.
+
+Testing it turned up two things. The agent refused "what did I ask first?" as "not in memory", because the prompt says
+to answer from the memory bank; questions about the conversation now answer from the chat. And the summary didn't
+keep the order of questions, so it now starts with "Asked, in order:".
+
+**Context meter.** A ring in the chat's top bar, with a popover: tokens used of the budget, summary vs word-for-word
+split, the real prompt size Gemini reported for the last request against its 1M window, the summary itself, and
+Compress now.
+
+**Resizable sidebar.** Drag the edge (200 to 440 px), double-click to reset, drag nearly shut to collapse, arrow keys
+when focused. The width is a CSS variable set before first paint by the theme script, so it doesn't jump on load.
+
+**Glass, cleaned up.** There were four different blur recipes, and modal backdrops blurred the page. Following
+Apple's HIG on materials, there are now two utilities (`material`, `material-thin`), used only on floating chrome,
+with solid fallbacks for Reduce Transparency; sheets and dialogs dim instead of blur.
+
+**README** now says "we", explains thread context, and has a section on how we test.
+
 ## 29 Sep 2026: a full walk-through, and what it turned up
 
 Went through every screen and endpoint on a clean build (types, lint, 22 tests, production build, every GET endpoint,
