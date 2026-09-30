@@ -137,8 +137,20 @@ def _history_turns(history: list[dict] | None) -> list[dict]:
             if h.get("role") in ("user", "assistant") and h.get("content")]
 
 
+VOICE = """
+<voice_mode>
+This answer will be read aloud to him (he may be walking into court). Answer in two or three short spoken sentences,
+at most about 60 words:
+no lists, headings, bold, tables or symbols. Lead with the answer. Say dates the way people say them ("the ninth of
+July"), and amounts in words where it reads better ("two thousand rupees"). Keep the [n] markers after facts; they are
+removed before speaking. If there is more than fits, give the essentials and offer to go on.
+</voice_mode>"""
+
+
 def _system(ctx: dict) -> str:
     out = system_prompt() + "\n\n" + ctxmod.render(ctx)
+    if ctx.get("voice"):
+        out += VOICE
     if ctx.get("summary"):
         out += ("\n<earlier_in_this_chat note=\"summary of older turns; the recent ones follow as messages\">\n"
                 f"{ctx['summary']}\n</earlier_in_this_chat>")
@@ -146,15 +158,17 @@ def _system(ctx: dict) -> str:
 
 
 def ask(question: str, active_case_id: str | None = None, quick: bool = False, history: list[dict] | None = None,
-        summary: str | None = None) -> dict:
-    """history: the thread's recent messages; summary: what older turns were compressed into (see threadctx)."""
+        summary: str | None = None, voice: bool = False) -> dict:
+    """history: the thread's recent messages; summary: what older turns were compressed into (see threadctx);
+    voice: the answer will be spoken, so keep it short and free of formatting."""
     llm.reset_usage()
-    out = _ask(question, active_case_id, quick, history, summary)
+    out = _ask(question, active_case_id, quick, history, summary, voice)
     out["prompt_tokens"] = llm.peak_prompt_tokens()
     return out
 
 
-def _ask(question: str, active_case_id: str | None, quick: bool, history: list[dict] | None, summary: str | None) -> dict:
+def _ask(question: str, active_case_id: str | None, quick: bool, history: list[dict] | None, summary: str | None,
+         voice: bool = False) -> dict:
     turns = _history_turns(history)
     prev_q = next((t["content"] for t in reversed(turns) if t["role"] == "user"), "")
     search_text = f"{prev_q}\n{question}" if prev_q else question     # a follow-up inherits the case it's about
@@ -164,6 +178,7 @@ def _ask(question: str, active_case_id: str | None, quick: bool, history: list[d
         if prev_a:
             ctx = {**ctxmod.build(f"{search_text}\n{prev_a}", active_case_id), "guessed": True}
     ctx["summary"] = summary
+    ctx["voice"] = voice
     if quick:
         return _fixed_path(question, ctx, mode="quick", turns=turns, search_text=search_text)
     book, trace = FactBook(), []
@@ -205,7 +220,8 @@ def _fixed_path(question: str, ctx: dict, mode: str, error: str | None = None,
     messages = [{"role": "system", "content": _system(ctx)}, *(turns or []),
                 {"role": "user", "content": f"QUESTION: {question}\n\nFACTS FROM MEMORY:\n{facts_txt}\n\n"
                                             "Answer using only these facts, with [n] citations."}]
-    answer = llm.chat(messages).content or ""
+    # Quick answers (and voice) think less: same facts and citations in our tests, a fraction of the wait.
+    answer = llm.chat(messages, effort="low" if mode == "quick" else None).content or ""
     out = {"answer": answer, "citations": book.citations(answer), "mode": mode, "cases": ctx["case_ids"], "trace": []}
     if error:
         out["error"] = error

@@ -17,27 +17,50 @@ _vision = None
 _vertex = {"creds": None, "client": None, "token": None}
 
 
-def _vertex_client() -> OpenAI:
-    """Vertex AI's OpenAI-compatible endpoint. ADC access tokens last ~1h, so refresh before they expire."""
+_vertex_lock = threading.Lock()
+
+
+def vertex_token() -> str:
+    """A current ADC access token for Vertex AI. Tokens last ~1h, so refresh a few minutes before they expire."""
     import datetime as dt
 
     import google.auth
     import google.auth.transport.requests
 
     v = _vertex
-    if v["creds"] is None:
-        v["creds"], _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
-    creds = v["creds"]
-    expiry = getattr(creds, "expiry", None)
-    if not creds.valid or (expiry and expiry - dt.datetime.utcnow() < dt.timedelta(minutes=5)):
-        creds.refresh(google.auth.transport.requests.Request())
-    if v["client"] is None or v["token"] != creds.token:
-        loc = settings.vertex_location
-        host = "aiplatform.googleapis.com" if loc == "global" else f"{loc}-aiplatform.googleapis.com"
-        v["client"] = OpenAI(api_key=creds.token,
-                             base_url=f"https://{host}/v1/projects/{settings.vertex_project}/locations/{loc}/endpoints/openapi")
-        v["token"] = creds.token
+    with _vertex_lock:
+        if v["creds"] is None:
+            v["creds"], _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        creds = v["creds"]
+        expiry = getattr(creds, "expiry", None)
+        if not creds.valid or (expiry and expiry - dt.datetime.utcnow() < dt.timedelta(minutes=5)):
+            creds.refresh(google.auth.transport.requests.Request())
+        return creds.token
+
+
+def vertex_url(path: str, version: str = "v1") -> str:
+    """https://…/projects/<project>/locations/<location>/<path> on Vertex AI."""
+    loc = settings.vertex_location
+    host = "aiplatform.googleapis.com" if loc == "global" else f"{loc}-aiplatform.googleapis.com"
+    return f"https://{host}/{version}/projects/{settings.vertex_project}/locations/{loc}/{path}"
+
+
+def _vertex_client() -> OpenAI:
+    """Vertex AI's OpenAI-compatible endpoint (text and vision). Speech uses the native API, see voice.py."""
+    token = vertex_token()
+    v = _vertex
+    if v["client"] is None or v["token"] != token:
+        v["client"] = OpenAI(api_key=token, base_url=vertex_url("endpoints/openapi"))
+        v["token"] = token
     return v["client"]
+
+
+def warm() -> None:
+    """Open the text model's connection ahead of the first question (a cold one cost several seconds)."""
+    try:
+        text_client().models.list()
+    except Exception as e:  # noqa: BLE001 - best effort
+        log.info("llm warm-up: %s", e)
 
 
 def text_client() -> OpenAI:
@@ -58,6 +81,14 @@ def vision_client() -> OpenAI:
     return _vision
 
 
+def _effort(effort: str | None) -> dict:
+    """Gemini 3 thinks before answering. "low" cut a Quick answer from 13-26 s to 2-5 s in our tests with the same
+    facts and citations, so the fast paths use it; Deep keeps the default."""
+    if not effort or "gemini-3" not in settings.llm_model:
+        return {}
+    return {"reasoning_effort": effort}
+
+
 def _temp(model: str, t: float) -> dict:
     # Google recommends leaving Gemini 3 at its default temperature (low values can cause looping).
     return {} if "gemini-3" in model else {"temperature": t}
@@ -72,14 +103,14 @@ def _parse_json(s: str) -> dict:
     return json.loads(s[start:end + 1])
 
 
-def chat_json(system: str, user: str, retries: int = 2, temperature: float = 0.1) -> dict:
+def chat_json(system: str, user: str, retries: int = 2, temperature: float = 0.1, effort: str | None = None) -> dict:
     """Ask for a JSON object. Retries with the parse error fed back."""
     messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
     last_err = None
     for _ in range(retries + 1):
         resp = text_client().chat.completions.create(
             model=settings.llm_model, messages=messages, response_format={"type": "json_object"},
-            **_temp(settings.llm_model, temperature),
+            **_temp(settings.llm_model, temperature), **_effort(effort),
         )
         content = resp.choices[0].message.content or ""
         try:
@@ -91,8 +122,8 @@ def chat_json(system: str, user: str, retries: int = 2, temperature: float = 0.1
     raise ValueError(f"LLM did not return JSON: {last_err}")
 
 
-def chat(messages: list[dict], tools: list[dict] | None = None, temperature: float = 0.2):
-    kwargs = {"model": settings.llm_model, "messages": messages, **_temp(settings.llm_model, temperature)}
+def chat(messages: list[dict], tools: list[dict] | None = None, temperature: float = 0.2, effort: str | None = None):
+    kwargs = {"model": settings.llm_model, "messages": messages, **_temp(settings.llm_model, temperature), **_effort(effort)}
     if tools:
         kwargs["tools"] = tools
         kwargs["tool_choice"] = "auto"

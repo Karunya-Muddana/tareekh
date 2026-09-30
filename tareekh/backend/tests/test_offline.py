@@ -236,3 +236,49 @@ def test_empty_summary_keeps_the_full_thread(loaded, monkeypatch):
     monkeypatch.setattr(llm, "chat", lambda *a, **k: SimpleNamespace(content=""))
     assert not threadctx.compress(cid, force=True)
     assert threadctx.carried(cid)[0] is None and len(threadctx.carried(cid)[1]) == 8
+
+
+def test_spoken_text_has_no_citations_or_markdown():
+    from app import voice
+    written = ("**Nothing on costs** at the last hearing [12]; he last imposed costs on 9 Jul 2025 [2, 4].\n\n"
+               "### Details\n* Paid by DD [7]\n1. Refiled with a list [3–5]\n| a | b |\n")
+    said = voice.spoken(written)
+    assert "[" not in said and "*" not in said and "#" not in said and "|" not in said
+    assert said == ("Nothing on costs at the last hearing; he last imposed costs on 9 Jul 2025. Details. "
+                    "Paid by DD. Refiled with a list.")
+
+
+def test_speak_endpoint_fails_cleanly_before_any_audio(monkeypatch):
+    from fastapi.testclient import TestClient
+    from app import voice
+    from app.main import app
+
+    def broken(_text):
+        raise RuntimeError("Text-to-speech is unavailable on Vertex AI right now")
+        yield b""  # noqa: unreachable - makes this a generator like the real one
+    monkeypatch.setattr(voice, "speak", broken)
+    with TestClient(app) as client:
+        r = client.post("/voice/speak", json={"text": "hello"})
+        assert r.status_code == 502 and "unavailable" in r.json()["detail"]
+        monkeypatch.setattr(voice, "speak", lambda _t: iter([b"\x01\x00" * 4, b"\x02\x00" * 4]))
+        r = client.post("/voice/speak", json={"text": "hello"})
+        assert r.status_code == 200 and r.content == b"\x01\x00" * 4 + b"\x02\x00" * 4
+        assert r.headers["content-type"].startswith("audio/L16")
+
+
+def test_invented_transcripts_are_rejected():
+    import io
+    import wave
+    from app import voice
+    b = io.BytesIO()
+    with wave.open(b, "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(16000); w.writeframes(b"\x00\x00" * 16000 * 6)  # 6 s
+    audio = b.getvalue()
+    assert abs(voice.wav_seconds(audio) - 6.0) < 0.01
+    asked = "When is the next date in the Gorle partition case, and what is it listed for?"
+    assert voice.check_transcript(asked, 6.0) == asked
+    # What the first prompt produced for that 6.4 s question: an answer, with a date nobody said.
+    invented = ("The next date for C1, O.S. No. 214 of 2024, Gorle partition, Ramesh Gorle vs Srinivas Bandaru, "
+                "is the 15th of July, 2024, and it's listed for arguments, as recorded in the registry today.")
+    with pytest.raises(voice.NotATranscript):
+        voice.check_transcript(invented, 6.0)

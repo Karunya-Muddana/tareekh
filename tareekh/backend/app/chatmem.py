@@ -36,7 +36,7 @@ def extract_and_store(chat_id: str, message: str, recent: list[dict]) -> list[di
     user = (f"CASE REGISTRY:\n{registry.compact_listing()}\n\nRECENT CHAT:\n{context}\n\n"
             f"LAWYER'S NEW MESSAGE:\n{message}")
     try:
-        out = llm.chat_json(SYSTEM.format(lawyer=p["lawyer_short"]), user).get("memories") or []
+        out = llm.chat_json(SYSTEM.format(lawyer=p["lawyer_short"]), user, effort="low").get("memories") or []
     except Exception as e:  # noqa: BLE001 - never break a chat over this
         log.warning("chat memory extraction failed: %s", e)
         return []

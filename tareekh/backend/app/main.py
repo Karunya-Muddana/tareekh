@@ -11,6 +11,7 @@ from . import db, registry, threadctx
 from .config import settings, today_iso
 from .routers.api import router
 from .routers.app_api import router as app_router
+from .routers.voice_api import router as voice_router
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 
@@ -29,6 +30,7 @@ app.add_middleware(GZipMiddleware, minimum_size=1024)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 app.include_router(router)
 app.include_router(app_router)
+app.include_router(voice_router)
 
 
 @app.get("/", include_in_schema=False)

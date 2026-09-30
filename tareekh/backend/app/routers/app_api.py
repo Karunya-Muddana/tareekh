@@ -179,6 +179,7 @@ class MessageIn(BaseModel):
     question: str
     case_id: str | None = None
     quick: bool = True
+    voice: bool = False     # asked in voice mode: answer in a few spoken sentences
 
 
 @router.post("/chats/{chat_id}/messages")
@@ -203,16 +204,24 @@ def send_message(chat_id: str, body: MessageIn):
                               daemon=True)
     finder.start()                        # runs while the answer is being written, so it costs no extra wait
     try:
-        r = agent.ask(body.question, body.case_id or chat["case_id"], body.quick, history=carried, summary=summary)
+        # Voice is always Quick: someone waiting for a spoken answer can't sit through 20 s of Deep.
+        r = agent.ask(body.question, body.case_id or chat["case_id"], body.quick or body.voice, history=carried, summary=summary,
+                      voice=body.voice)
     except Exception as e:  # noqa: BLE001
         raise HTTPException(503, f"Memory or LLM unavailable: {type(e).__name__}: {e}")
     if not (r.get("answer") or "").strip():   # never store (or show) a blank answer; the UI offers a retry
         raise HTTPException(502, "Tareekh couldn't put an answer together this time. Try again, or switch to Quick.")
-    finder.join(timeout=20)
-    meta = {"mode": r.get("mode"), "seconds": round(time.time() - t0, 1), "learned": learned,
-            "prompt_tokens": r.get("prompt_tokens")}
+    # The answer doesn't wait for the "anything to remember?" check (it used to, for up to 20 s). If the check is
+    # still running, it finishes in the background and attaches what it found to this message afterwards.
+    finder.join(timeout=1.5)
+    late = finder.is_alive()
+    meta = {"voice": body.voice or None, "mode": r.get("mode"), "seconds": round(time.time() - t0, 1),
+            "learned": [] if late else learned, "prompt_tokens": r.get("prompt_tokens")}
     db.execute("INSERT INTO messages (chat_id, role, content, citations, meta, created_at) VALUES (?,?,?,?,?,?)",
                chat_id, "assistant", r["answer"], db.dumps(r["citations"]), db.dumps(meta), _now())
+    if late:
+        msg_id = db.row("SELECT max(id) AS id FROM messages WHERE chat_id=? AND role='assistant'", chat_id)["id"]
+        threading.Thread(target=_attach_learned, args=(finder, learned, msg_id), daemon=True).start()
     title = chat["title"]
     if not history and (not title or title == "New chat"):
         title = body.question[:60] + ("…" if len(body.question) > 60 else "")
@@ -220,6 +229,17 @@ def send_message(chat_id: str, body: MessageIn):
     threadctx.compress_later(chat_id)     # near the budget: summarise older turns before the next question
     return {"answer": r["answer"], "citations": r["citations"], "meta": meta, "title": title,
             "context": threadctx.state(chat_id)}
+
+
+def _attach_learned(finder: threading.Thread, learned: list[dict], msg_id: int) -> None:
+    finder.join(timeout=60)
+    if not learned:
+        return
+    row = db.row("SELECT meta FROM messages WHERE id=?", msg_id)
+    if row:
+        meta = json.loads(row["meta"] or "{}")
+        meta["learned"] = learned
+        db.execute("UPDATE messages SET meta=? WHERE id=?", db.dumps(meta), msg_id)
 
 
 @router.get("/chat-memories")

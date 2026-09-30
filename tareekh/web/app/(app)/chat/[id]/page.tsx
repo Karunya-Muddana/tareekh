@@ -13,6 +13,8 @@ import { chatSuggestions } from "@/lib/suggestions";
 import { forget } from "@/lib/cache";
 import { useSession } from "@/lib/session";
 import RubberSegment from "@/components/bits/RubberSegment";
+import { AudioLines } from "lucide-react";
+import { VoiceMode } from "@/components/voice/voice-mode";
 
 const MODE_KEY = "tareekh:quick";
 
@@ -27,6 +29,21 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   const lawyer = user?.name.replace(/^adv\.?\s+/i, "").split(" ")[0];
   const [quick, setQuick] = useState(true);
   const [ctx, setCtx] = useState<ChatContext | null>(null);
+  const [voice, setVoice] = useState(false);
+  const [version, setVersion] = useState(0);
+
+  // Back from voice mode: the spoken turns are in the chat now, so show them.
+  const reload = useCallback(() => {
+    forget(chatKey(id));
+    api
+      .chat(id)
+      .then((c) => {
+        setChat({ title: c.title, case_id: c.case_id, initial: toUIMessages(c.messages) });
+        setCtx(c.context);
+        setVersion((v) => v + 1);
+      })
+      .catch(() => {});
+  }, [id]);
 
   const refreshContext = useCallback(() => {
     api.chatContext(id).then(setCtx).catch(() => {});
@@ -101,6 +118,16 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
         }
         right={
           <div className="flex shrink-0 items-center gap-1">
+          <button
+            type="button"
+            onClick={() => setVoice(true)}
+            disabled={!chat}
+            className="press text-muted-foreground hover:text-foreground hover:bg-accent grid size-9 place-items-center rounded-lg disabled:opacity-40"
+            aria-label="Voice mode"
+            title="Voice mode: ask out loud, hear the answer"
+          >
+            <AudioLines className="size-[18px]" aria-hidden />
+          </button>
           <ContextMeter ctx={ctx} onCompress={compress} />
           <div title="Quick: one search, a few seconds. Deep: searches across cases, about 25 s." className="shrink-0">
             <RubberSegment
@@ -139,7 +166,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           </div>
         ) : (
           <ChatView
-            key={id}
+            key={`${id}:${version}`}
             chatId={id}
             initial={chat.initial}
             caseId={chat.case_id}
@@ -151,6 +178,17 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           />
         )}
       </div>
+      <VoiceMode
+        open={voice}
+        onClose={(changed) => {
+          setVoice(false);
+          if (changed) reload();
+        }}
+        chatId={id}
+        caseId={chat?.case_id ?? null}
+        quick={quick}
+        scope={scoped?.short_name ?? chat?.title}
+      />
     </div>
   );
 }

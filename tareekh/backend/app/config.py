@@ -36,6 +36,15 @@ class Settings:
     # How much of a chat is carried into each answer before older turns are summarised, and the model's own window.
     chat_context_tokens: int = int(os.getenv("CHAT_CONTEXT_TOKENS", "24000"))
     llm_context_window: int = int(os.getenv("LLM_CONTEXT_WINDOW", "1048576"))
+    # Voice mode, all on Vertex AI: Gemini transcribes, Gemini TTS speaks. Gacrux is the "mature" female voice.
+    voice_tts_model: str = os.getenv("VOICE_TTS_MODEL", "gemini-3.1-flash-tts-preview")
+    voice_tts_fallback: str = os.getenv("VOICE_TTS_FALLBACK", "gemini-2.5-flash-tts")
+    voice_name: str = os.getenv("VOICE_NAME", "Gacrux")
+    voice_language: str = os.getenv("VOICE_LANGUAGE", "en-GB")
+    voice_style: str = os.getenv("VOICE_STYLE", "Say this as a calm, wise, older British woman with a warm, "
+                                                "educated English accent, unhurried and reassuring: ")
+    # Transcription: flash-lite with thinking off was the fastest (~2 s) and exact in our tests; 2.5-flash misheard a case
+    voice_stt_model: str = os.getenv("VOICE_STT_MODEL", "gemini-2.5-flash-lite")
 
     @property
     def db_path(self) -> Path:
