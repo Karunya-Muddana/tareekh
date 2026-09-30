@@ -75,8 +75,10 @@ entry per hearing, guesses the case and date, and shows you anything it's unsure
 
 ## It finds the answer (real examples)
 
-These are real searches on the demo data, run on my machine with memory offline. Nothing is staged. The "Meaning" part
-falls back to a local similarity match when Hindsight isn't reachable, which is why the results say *offline match*.
+The full pipeline runs for real: all 79 demo uploads went through Gemini OCR on Vertex AI, got split into hearings and
+were retained in Hindsight. The screenshots below are real searches on that same demo data, but they were taken on a
+copy running without API keys (see [Offline demo](#offline-demo-no-api-keys)), so the "Meaning" part used the local
+similarity fallback instead of Hindsight. That's why the results say *offline match*. Nothing is staged.
 
 **"What share does Srinivas claim?"** The first result is his written statement in the partition suit (*claims 70%
 share*). The second is our cross-examination note where we put his deposition from the *other* suit to him (*"Ramesh and
@@ -99,8 +101,8 @@ On a phone the note opens as a sheet over the graph:
 
 <img src="docs/images/phone-note-reader.png" alt="Reading a note on a phone" width="320">
 
-> The chat answers themselves come from Gemini + Hindsight, so they need API keys and aren't shown here as screenshots.
-> The search above uses the same stored notes and runs without any keys.
+> Chat answers come from Gemini + Hindsight, so they need the full setup. The search above works on the same notes
+> even without keys.
 
 ---
 
@@ -260,8 +262,8 @@ Sign in with one of the two demo accounts (it's a simulated sign-in; nothing is 
 
 ### Offline demo (no API keys)
 
-This is how the screenshots above were taken. It loads the demo backlog's ground-truth text and original files straight
-into SQLite, with no OCR, model or Hindsight calls:
+For trying the UI without a Google Cloud project; the README screenshots were taken this way. It skips OCR and
+Hindsight and loads the demo backlog's text and original files straight into SQLite:
 
 ```bash
 cd tareekh/backend
@@ -277,7 +279,7 @@ Today, Add notes (the review screens), the knowledge graph and its search all wo
 ### Tests
 
 ```bash
-cd tareekh/backend && python -m pytest -q        # 19 tests, no API keys needed
+cd tareekh/backend && python -m pytest -q        # 22 tests, no API keys needed
 cd tareekh/web && npx tsc --noEmit && npx oxlint
 ```
 
