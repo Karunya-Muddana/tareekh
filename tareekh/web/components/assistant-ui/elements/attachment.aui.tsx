@@ -184,7 +184,7 @@ const AttachmentUI: FC = () => {
               {isUploading && (
                 <div
                   aria-hidden="true"
-                  className="aui-attachment-tile-uploading bg-background/60 animate-in fade-in-0 absolute inset-0 flex items-center justify-center backdrop-blur-[2px] motion-reduce:animate-none"
+                  className="aui-attachment-tile-uploading bg-background/60 animate-in fade-in-0 absolute inset-0 flex items-center justify-center motion-reduce:animate-none"
                 >
                   <Loader2Icon className="text-muted-foreground size-4 animate-spin" />
                 </div>
@@ -192,7 +192,7 @@ const AttachmentUI: FC = () => {
               {isError && (
                 <div
                   aria-hidden="true"
-                  className="aui-attachment-tile-error bg-background/70 animate-in fade-in-0 absolute inset-0 flex items-center justify-center backdrop-blur-[2px] motion-reduce:animate-none"
+                  className="aui-attachment-tile-error bg-background/80 animate-in fade-in-0 absolute inset-0 flex items-center justify-center motion-reduce:animate-none"
                 >
                   <AlertCircleIcon className="text-destructive size-4" />
                 </div>

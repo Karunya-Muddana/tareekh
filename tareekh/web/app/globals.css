@@ -312,3 +312,39 @@
   .lift:hover { transform: none; }
   ::view-transition-new(root) { animation: none; }
 }
+
+/* Dragging the sidebar edge: follow the pointer exactly, and don't select text on the way. */
+html[data-resizing],
+html[data-resizing] * {
+  cursor: col-resize !important;
+  user-select: none !important;
+  transition: none !important;
+}
+
+/* Materials, following Apple's Human Interface Guidelines: translucency only on the layer that floats above
+   content (the top bar, controls laid over the graph or an image), never on content itself and never stacked.
+   Two weights, one recipe each. Solid when blur isn't supported or the OS asks for reduced transparency.
+   Modal sheets and dialogs don't use a material: they dim what's behind them (see ui/sheet.tsx, ui/dialog.tsx). */
+@utility material {
+  background-color: var(--background);
+  @supports (backdrop-filter: blur(1px)) {
+    background-color: color-mix(in oklab, var(--background) 78%, transparent);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--background);
+    backdrop-filter: none;
+  }
+}
+
+@utility material-thin {
+  background-color: var(--card);
+  @supports (backdrop-filter: blur(1px)) {
+    background-color: color-mix(in oklab, var(--card) 70%, transparent);
+    backdrop-filter: blur(12px) saturate(160%);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--card);
+    backdrop-filter: none;
+  }
+}

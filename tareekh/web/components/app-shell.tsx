@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { PanelLeft } from "lucide-react";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarResizer } from "@/components/sidebar-resizer";
 import { LogoMark } from "@/components/brand";
 import { TabBar } from "@/components/tab-bar";
 import SwipeToast from "@/components/bits/SwipeToast";
@@ -16,6 +17,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
+      <SidebarResizer />
       <SidebarInset className={cn("min-h-dvh", tabs && "pb-[calc(env(safe-area-inset-bottom)+64px)] md:pb-0")}>{children}</SidebarInset>
       {tabs && <TabBar />}
       <Toaster tabs={tabs} />
@@ -47,7 +49,7 @@ export function TopBar({ title, right, className }: { title?: ReactNode; right?:
     <div
       ref={ref}
       className={cn(
-        "bg-background/75 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-20 flex h-14 items-center gap-2 px-3 pt-[env(safe-area-inset-top)] backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-200",
+        "material sticky top-0 z-20 flex h-14 items-center gap-2 px-3 pt-[env(safe-area-inset-top)] transition-shadow duration-200",
         scrolled && "shadow-[0_1px_0_var(--border)]",
         className,
       )}

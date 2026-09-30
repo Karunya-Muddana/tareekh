@@ -206,7 +206,7 @@ function KnowledgeGraph() {
                 <GraphCanvas ref={canvas} graph={graph} focus={focus} selected={selected} onSelect={select} className="absolute inset-0" />
                 <Legend />
                 {result && hits.length === 0 && !searching && (
-                  <div className="fade bg-card/90 absolute inset-x-0 top-1/2 mx-auto w-fit -translate-y-1/2 rounded-xl px-4 py-3 text-center text-sm shadow-[var(--shadow-soft)]">
+                  <div className="fade material-thin absolute inset-x-0 top-1/2 mx-auto w-fit -translate-y-1/2 rounded-xl px-4 py-3 text-center text-sm shadow-[var(--shadow-soft)]">
                     Nothing matches “{result.query}”.
                     <div className="text-muted-foreground mt-0.5 text-xs">Try fewer words, or switch to Meaning.</div>
                   </div>
@@ -260,7 +260,7 @@ function Legend() {
     ["Chat memory", "bg-tape"],
   ];
   return (
-    <div className="bg-card/85 pointer-events-none absolute top-3 left-3 rounded-lg px-2.5 py-2 font-mono text-[11px] leading-5 backdrop-blur-sm">
+    <div className="material-thin pointer-events-none absolute top-3 left-3 rounded-lg px-2.5 py-2 font-mono text-[11px] leading-5">
       <div className="text-muted-foreground hidden md:block">Scroll to zoom · Drag to pan · Click to read</div>
       <div className="text-muted-foreground md:hidden">Pinch to zoom · Tap to read</div>
       <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
@@ -507,7 +507,7 @@ function Original({ name, kind, url }: { name: string; kind: string | null; url:
           onLoad={() => setLoaded(true)}
           className={cn("w-full object-contain transition-opacity duration-300", loaded ? "opacity-100" : "absolute inset-0 opacity-0")}
         />
-        <span className="bg-background/85 text-foreground absolute right-2 bottom-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+        <span className="material-thin text-foreground absolute right-2 bottom-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
           <ExternalLink className="size-3" aria-hidden /> Full size
         </span>
       </a>
