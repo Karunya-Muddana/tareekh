@@ -1,5 +1,27 @@
 # Dev log
 
+## 30 Sep 2026 (later): voice mode
+
+Turn-based voice in any chat: speak, pause, hear the answer, and it listens again. Exit button, no barge-in.
+Everything on Vertex AI: Gemini 2.5 Flash-Lite transcribes, Gemini TTS speaks as "Gacrux" in en-GB.
+
+**What we looked at for the visual.** Deepgram UI's canvas orb, ElevenLabs UI's three.js orb, LiveKit Agents UI's
+Aura shader, orb-ui and assistant-ui's own voice orb (built for realtime, interruptible sessions). We tried the
+Deepgram orb, then Aura, and dropped both: neither looked like Tareekh. The visual is now the logo mark itself, with
+the ruled lines, the turned corner and the red ribbon reacting to listening, thinking and speaking.
+
+**A fabrication, caught in testing.** The first transcription prompt included the case list as a spelling aid. Given
+a spoken "when is the next date in the Gorle partition case?", it answered with an invented date instead of writing the
+question down, and the chat-memory step then saved that invented date as something the lawyer said. We removed the
+memory, rewrote the prompt (names only, "write it down, never answer it"), and added a check in code that rejects a
+transcript with more words than the recording could hold.
+
+**Latency.** From the end of a question to her first word went from about 22 s to about 10 s on a cold server (less
+once warm). Quick answers now use `reasoning_effort=low` (13 to 26 s down to 2 to 5 s, same facts in our comparison),
+voice always uses Quick, the answer no longer waits for the chat-memory check (9 to 15 s, now on low effort too and
+in the background), transcription runs with thinking off (one default call had stalled for 46 s), speech calls share
+one kept-alive connection, and opening voice mode warms it.
+
 ## 30 Sep 2026: whole-thread context, a context meter, and a resizable sidebar
 
 **Chats remember the whole conversation.** The agent used to get the last six messages, each cut to 2,000 characters,

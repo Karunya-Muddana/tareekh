@@ -56,6 +56,13 @@ If you tell it something in a chat, like *"we will not settle for Srinivas's hal
 memory (a decision, instruction, deadline or fact). These show up on the Today screen and inside the matching case card,
 and they're always ranked below court records, because a chat is not evidence.
 
+### Voice mode
+
+Tap the voice button in any chat and just ask. Tareekh listens until you pause, then answers aloud in a calm British
+voice, and listens again: one turn at a time, with an **Exit** button (or Esc) to go back. The questions and answers
+land in the chat like typed ones, with their sources. How it works, and how we got it fast, is
+[below](#voice-mode-turn-by-turn).
+
 ### Knowledge graph: search everything and read the original
 
 This page shows every note, order sheet and document as one graph: each note is linked to its case, to the hearing before
@@ -246,8 +253,8 @@ searches:
 | | Quick (the default) | Deep |
 |---|---|---|
 | Searches | one `recall`, filtered to the matched case, `budget="low"` | the model picks tools, up to 5 calls |
-| Model calls | 1 | 2 to 6 |
-| Time | about 5 to 15 s | about 15 to 30 s |
+| Model calls | 1, with thinking set to low | 2 to 6, full thinking |
+| Time | about 3 to 7 s | about 15 to 30 s |
 | Good for | "when is the next date", "who is opposing counsel", standing in court | "what should I expect from Murthy sir", anything across cases |
 
 Quick is fast because it skips tool calling entirely: recall the facts, put them in the prompt, ask for one answer.
@@ -362,6 +369,63 @@ now gets:
 
 A question with genuinely nothing behind it (*"Did Murthy sir ever send the parties to mediation?"*) still gets a plain
 "no record", followed by what did happen in the case.
+
+### Voice mode, turn by turn
+
+Voice is turn-based on purpose: you speak, pause, and Tareekh answers aloud; then it listens again. Nobody interrupts
+anybody, and while she speaks the microphone isn't recording. Everything runs on Vertex AI.
+
+```mermaid
+sequenceDiagram
+    actor L as Lawyer
+    participant B as Browser (voice-mode.tsx)
+    participant V as FastAPI /voice
+    participant C as FastAPI /chats/{id}/messages
+    participant G as Gemini on Vertex AI
+
+    L->>B: speaks, then pauses
+    B->>B: silence detection ends the question (1.1 s pause)
+    B->>V: 16 kHz WAV
+    V->>G: gemini-2.5-flash-lite, thinking off: "write down, never answer"
+    G-->>V: transcript
+    V->>V: reject if more words than the audio could hold
+    V-->>B: the question, shown on screen
+    B->>C: question, voice: true (always the Quick path)
+    C-->>B: short spoken-style answer with [n] citations
+    B->>V: /voice/speak
+    V->>G: gemini-3.1-flash-tts-preview, voice Gacrux, en-GB
+    G-->>B: PCM streamed as it's made, played as it arrives
+    B->>B: her turn ends: listen again
+```
+
+- **The voice.** Gemini TTS's "Gacrux" voice (Google describes it as *mature*) in British English, with a style
+  prompt for a calm, wise, older British woman. We checked the style prompt isn't read aloud by having Gemini
+  transcribe the audio it produced. `gemini-2.5-flash-tts` is the fallback if the preview model refuses.
+- **Streaming.** The first audio arrives about 1.2 s after the request. The backend passes Gemini's PCM chunks straight
+  through, and the browser schedules them back to back with the Web Audio API.
+- **Transcription must never invent.** Our first prompt gave the transcriber the case list as a spelling aid. On an
+  answerable question it answered instead of transcribing, and made up a date. Now it gets names only, a system rule
+  to write the question down and never answer it, and a check in code: a "transcript" with more words than the
+  recording could hold (over 4.5 words a second) is rejected, and Tareekh asks you to repeat yourself. The fabricated
+  line from that test is now a regression test.
+- **The visual is the Tareekh mark.** The diary leaf, turned corner and red ribbon from the logo each have a job:
+  ruled lines appear and ripple with your voice while it listens, the corner lifts and settles while it thinks (the
+  diary being leafed through), and the red tape runs past the tile and moves with her voice while she speaks. Plain SVG
+  on one animation loop, with a calm version under Reduce Motion.
+
+Where the time goes (one turn, measured in the browser):
+
+| Step | Before tuning | Now |
+|---|---|---|
+| Noticing you've finished | 1.4 s pause | 1.1 s pause |
+| Transcription | 1.9 to 6.5 s (one call stalled at 46 s) | 1.5 to 2 s |
+| The answer | 13 to 26 s | 2.4 s warm, about 7 s on a cold server |
+| First sound of her voice | 1.4 to 1.7 s | 1.2 s |
+
+The biggest wins: the model's thinking set to `low` on the Quick path (same facts and citations in our comparison),
+voice always taking Quick, the answer no longer waiting for the "anything to remember?" check (that check took 9 to
+15 s), thinking switched off for transcription, one kept-alive connection to Vertex, and warming that connection while
+the microphone opens.
 
 ### Retrieval: how memories are stored and found
 
@@ -488,6 +552,7 @@ out with ForceAtlas2 in a web worker.
 | UI bits | shadcn/ui, a few [React Bits](https://reactbits.dev) components, motion | segmented toggles, hold-to-forget, swipeable toasts, upload status marks |
 | Type | Anek Latin (Ek Type), Eczar (Rosetta), Martian Mono, Samarkan for the wordmark | Indian foundries; the wordmark is the only Samarkan text |
 | Context | tiktoken | counting a chat's tokens locally for the context meter and compression |
+| Voice | Gemini TTS (voice Gacrux, en-GB) and Gemini 2.5 Flash-Lite transcription, both on Vertex AI | one provider for everything; streaming speech in about a second |
 
 **Translucency follows Apple's Human Interface Guidelines on materials.** Glass is used only on the layer that floats
 above content: the top bar, and small controls laid over the graph or an image. It's never used on content and never
@@ -541,7 +606,7 @@ Today, Add notes (the review screens), the knowledge graph and its search all wo
 ### Tests
 
 ```bash
-cd tareekh/backend && python -m pytest -q        # 25 tests, no API keys needed
+cd tareekh/backend && python -m pytest -q        # 28 tests, no API keys needed
 cd tareekh/web && npx tsc --noEmit && npx oxlint
 ```
 
@@ -552,7 +617,7 @@ cd tareekh/web && npx tsc --noEmit && npx oxlint
 We tested at four levels, because each one catches a different kind of bug. Almost every fix in
 [docs/DEVLOG.md](docs/DEVLOG.md) was found by one of these, not by luck.
 
-**1. Automated tests (no keys, no network).** `python -m pytest -q` runs 25 tests in about 3 seconds against a
+**1. Automated tests (no keys, no network).** `python -m pytest -q` runs 28 tests in about 3 seconds against a
 throwaway database built from the demo registry:
 
 | Area | What the tests pin down |
@@ -564,6 +629,7 @@ throwaway database built from the demo registry:
 | Knowledge graph | notes link to their cases and each other, fuzzy search tolerates typos and drops irrelevant hits, the cache refreshes on edits, the nearest-neighbour shortcut matches brute force |
 | Security | a note's original file is served only if it is registered on that note's upload, never from a path in the request; file URLs are encoded |
 | Thread context | the whole thread is carried without stale `[n]` markers; compression keeps the newest four messages and folds the rest; an empty summary leaves the thread intact |
+| Voice | answers are cleaned of citations and markdown before being spoken; the speech endpoint fails with a proper error before any audio; a transcript with more words than the recording could hold (the real fabricated line from testing) is rejected |
 
 Model calls are replaced with stubs in these tests, so they check our code, not Gemini's mood that day.
 
@@ -578,14 +644,19 @@ including follow-ups that depend on earlier turns. This is how we caught:
 - blank answers when a follow-up named no case (the model searched with a case *number* as an id);
 - "open commitments" calling a 30 Sept deadline "not overdue" on 5 Oct (the model was never told the date);
 - search matching "beach" to "each", and yearless dates like "12/9" getting a guessed year;
-- a question about the chat itself ("what did I ask first?") being refused as "not in memory".
+- a question about the chat itself ("what did I ask first?") being refused as "not in memory";
+- voice transcription *answering* the question with an invented date instead of writing it down (and that invented
+  date then being saved as a chat memory, which we found and removed). This one is now caught in code, not just in
+  the prompt.
 
 For each one we reproduced it with the same inputs, fixed it, and re-ran the same question to confirm the new answer.
 
 **4. Clicking through every screen in a real browser.** Today (cause list, briefings, calendar), chat
 (streaming, citations, the Sources sheet, retry, Quick/Deep, the context meter and Compress now), the knowledge graph
 (search in all three modes, opening a note and its original scan), Add notes (typed note through extraction and review),
-signing out, light and dark mode, and the sidebar (resize, reset, collapse, keyboard). We use Chrome for these
+signing out, light and dark mode, and the sidebar (resize, reset, collapse, keyboard). For voice mode, a script stands in for the microphone: it
+plays a question spoken by a different Gemini voice into the page, so the whole turn (pause detection, transcription,
+answer, streamed speech, exit) runs in the real browser and we can time each step. We use Chrome for these
 passes and check the browser console for errors. Things we found this way: the chat not scrolling to a new message,
 internal case ids ("C2") in the Sources sheet, a deleted chat reappearing when a second one was deleted within the undo
 window, and the upload review appearing below the fold.
