@@ -184,3 +184,55 @@ def test_entry_file_urls_are_encoded(loaded):
     db.execute("INSERT INTO entries (id, upload_id, source_file, case_id, hearing_date, author, doc_type, text, status) "
                "VALUES (?,?,?,?,?,?,?,?,?)", eid, up, "IMG 1&2 #a.jpg", "C1", "2026-01-02", "Aditya", "handwritten_note", "x", "retained")
     assert graph.entry(eid)["files"][0]["url"].endswith("?name=IMG%201%262%20%23a.jpg")
+
+
+def _chat_with(n_pairs: int, words: int = 40) -> str:
+    cid = f"t{n_pairs}{words}"
+    db.execute("INSERT INTO chats VALUES (?,?,?,?,?)", cid, "test", None, "2026-10-05", "2026-10-05")
+    for i in range(n_pairs):
+        db.execute("INSERT INTO messages (chat_id, role, content, created_at) VALUES (?,?,?,?)", cid, "user", f"question {i}", "x")
+        db.execute("INSERT INTO messages (chat_id, role, content, created_at) VALUES (?,?,?,?)", cid, "assistant",
+                   f"answer {i} [1, 2] " + "hearing " * words, "x")
+    return cid
+
+
+def test_thread_is_carried_whole_without_old_citation_numbers(loaded):
+    from app import threadctx
+    cid = _chat_with(5)
+    summary, msgs = threadctx.carried(cid)
+    assert summary is None and len(msgs) == 10
+    assert "[1, 2]" not in msgs[1]["content"]          # old [n] markers would point at the wrong facts
+    st = threadctx.state(cid)
+    assert st["used"] == st["recent_tokens"] > 0 and not st["compressing"]
+
+
+def test_compression_keeps_recent_turns_and_replaces_older_ones(loaded, monkeypatch):
+    from types import SimpleNamespace
+    from app import llm, threadctx
+    cid = _chat_with(6, words=300)
+    monkeypatch.setattr(threadctx, "budget", lambda: 1000)   # well over 80% of this
+    seen = {}
+
+    def fake_chat(messages, **_):
+        seen["prompt"] = messages[-1]["content"]
+        return SimpleNamespace(content="- Asked about questions 0-3; answers covered the hearings.")
+    monkeypatch.setattr(llm, "chat", fake_chat)
+
+    assert threadctx.compress_later(cid)
+    threadctx.wait(cid)                                 # returns once the background compression is done
+    summary, msgs = threadctx.carried(cid)
+    assert summary.startswith("- Asked about")
+    assert [m["content"] for m in msgs if m["role"] == "user"] == ["question 4", "question 5"]
+    assert "question 3" in seen["prompt"] and "question 4" not in seen["prompt"]
+    st = threadctx.state(cid)
+    assert st["summarized_messages"] == 8 and st["recent_messages"] == 4 and not st["compressing"]
+    assert not threadctx.compress(cid)                  # nothing older than the kept turns is left to fold in
+
+
+def test_empty_summary_keeps_the_full_thread(loaded, monkeypatch):
+    from types import SimpleNamespace
+    from app import llm, threadctx
+    cid = _chat_with(4, words=300)
+    monkeypatch.setattr(llm, "chat", lambda *a, **k: SimpleNamespace(content=""))
+    assert not threadctx.compress(cid, force=True)
+    assert threadctx.carried(cid)[0] is None and len(threadctx.carried(cid)[1]) == 8

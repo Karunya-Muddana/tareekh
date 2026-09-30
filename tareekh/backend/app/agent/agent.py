@@ -24,6 +24,8 @@ How to work:
   "Nothing on costs at the last hearing (2 Sep 2026); he last imposed costs on 9 Jul 2025: ...". Say memory has
   no record only when no fact bears on the question at all. Never deny something you go on to cite.
 - "Last time" / "last hearing" means the most recent dated hearing in the facts; name its date.
+- Questions about this conversation itself ("what did I ask first?", "sum up what we covered") are answered from
+  the chat: the earlier messages and <earlier_in_this_chat>, if present. No citation is needed for those.
 - Distinguish what the court's order recorded from what only {lawyer_short}'s or {assistant_short}'s notes say.
 - Facts labelled CHAT MEMORY are things the lawyer told you in an earlier chat, not court records or hearing notes.
   Rank them BELOW records and notes: if they conflict, the record wins and you say so. When you rely on one, say
@@ -129,25 +131,43 @@ def _run_tool(name: str, args: dict, book: FactBook) -> str:
 
 
 def _history_turns(history: list[dict] | None) -> list[dict]:
-    """Earlier turns of this chat (plain text only), so follow-ups like 'and Ramesh?' make sense."""
-    return [{"role": h["role"], "content": h["content"][:2000]} for h in (history or [])[-6:]
+    """The thread so far, word for word, so follow-ups like 'and Ramesh?' make sense. Its size is managed upstream
+    (threadctx): past the budget, older turns arrive as a summary instead."""
+    return [{"role": h["role"], "content": h["content"]} for h in (history or [])
             if h.get("role") in ("user", "assistant") and h.get("content")]
 
 
-def ask(question: str, active_case_id: str | None = None, quick: bool = False, history: list[dict] | None = None) -> dict:
+def _system(ctx: dict) -> str:
+    out = system_prompt() + "\n\n" + ctxmod.render(ctx)
+    if ctx.get("summary"):
+        out += ("\n<earlier_in_this_chat note=\"summary of older turns; the recent ones follow as messages\">\n"
+                f"{ctx['summary']}\n</earlier_in_this_chat>")
+    return out
+
+
+def ask(question: str, active_case_id: str | None = None, quick: bool = False, history: list[dict] | None = None,
+        summary: str | None = None) -> dict:
+    """history: the thread's recent messages; summary: what older turns were compressed into (see threadctx)."""
+    llm.reset_usage()
+    out = _ask(question, active_case_id, quick, history, summary)
+    out["prompt_tokens"] = llm.peak_prompt_tokens()
+    return out
+
+
+def _ask(question: str, active_case_id: str | None, quick: bool, history: list[dict] | None, summary: str | None) -> dict:
     turns = _history_turns(history)
     prev_q = next((t["content"] for t in reversed(turns) if t["role"] == "user"), "")
     search_text = f"{prev_q}\n{question}" if prev_q else question     # a follow-up inherits the case it's about
     ctx = ctxmod.build(search_text, active_case_id)
     if not ctx["case_ids"]:   # "was the samadhi ever affected?": the case is only named in the last answer
-        prev_a = next((t["content"] for t in reversed(turns) if t["role"] == "assistant"), "")
+        prev_a = next((t["content"] for t in reversed(turns) if t["role"] == "assistant"), "") or summary or ""
         if prev_a:
             ctx = {**ctxmod.build(f"{search_text}\n{prev_a}", active_case_id), "guessed": True}
+    ctx["summary"] = summary
     if quick:
         return _fixed_path(question, ctx, mode="quick", turns=turns, search_text=search_text)
     book, trace = FactBook(), []
-    messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)},
-                *turns, {"role": "user", "content": question}]
+    messages = [{"role": "system", "content": _system(ctx)}, *turns, {"role": "user", "content": question}]
     try:
         for _ in range(MAX_STEPS):
             msg = llm.chat(messages, tools=TOOLS)
@@ -182,7 +202,7 @@ def _fixed_path(question: str, ctx: dict, mode: str, error: str | None = None,
     # A case guessed from the previous answer is context, not a filter: that answer may span several cases.
     cid = ctx["case_ids"][0] if ctx["case_ids"] and not ctx.get("guessed") else None
     facts_txt = book.render(memory.recall(search_text or question, case_id=cid, max_tokens=2000, budget="low" if mode == "quick" else "mid"))
-    messages = [{"role": "system", "content": system_prompt() + "\n\n" + ctxmod.render(ctx)}, *(turns or []),
+    messages = [{"role": "system", "content": _system(ctx)}, *(turns or []),
                 {"role": "user", "content": f"QUESTION: {question}\n\nFACTS FROM MEMORY:\n{facts_txt}\n\n"
                                             "Answer using only these facts, with [n] citations."}]
     answer = llm.chat(messages).content or ""

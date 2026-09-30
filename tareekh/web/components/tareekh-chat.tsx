@@ -289,6 +289,7 @@ export function ChatView({
   firstMessage,
   lawyerName,
   suggestions,
+  onTurnDone,
 }: {
   chatId: string;
   initial: UIMessage[];
@@ -297,9 +298,13 @@ export function ChatView({
   firstMessage?: string | null;
   lawyerName?: string;
   suggestions: string[];
+  /** After each answer (or failed attempt): the page refreshes the context meter. */
+  onTurnDone?: () => void;
 }) {
   const settings = useRef({ quick, caseId });
   settings.current = { quick, caseId };
+  const turnDone = useRef(onTurnDone);
+  turnDone.current = onTurnDone;
 
   const transport = useMemo(
     () =>
@@ -317,7 +322,11 @@ export function ChatView({
     id: chatId,
     messages: initial,
     transport,
-    onFinish: () => chatsChanged(),
+    onFinish: () => {
+      chatsChanged();
+      turnDone.current?.();
+    },
+    onError: () => turnDone.current?.(),
   });
   const runtime = useAISDKRuntime(chat);
 

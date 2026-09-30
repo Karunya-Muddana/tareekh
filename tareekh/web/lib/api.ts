@@ -10,7 +10,7 @@ export type StoredMessage = {
   role: "user" | "assistant";
   content: string;
   citations: unknown[];
-  meta: { mode?: string; seconds?: number; learned?: unknown[] };
+  meta: { mode?: string; seconds?: number; learned?: unknown[]; prompt_tokens?: number | null };
   created_at: string;
 };
 export type Hearing = {
@@ -53,6 +53,20 @@ export type EntryDetail = {
 export type Insights = { commitments: string | null; judges: Today["judges"] };
 export type CalendarEvent = { date: string; case_id: string; short_name: string; kind: "hearing" | "listed" };
 export type ChatMemory = { id: string; chat_id: string; case_id: string | null; text: string; kind: string; created_at: string; chat_title: string | null };
+export type ChatContext = {
+  budget: number;
+  used: number;
+  compress_at: number;
+  summary_tokens: number;
+  recent_tokens: number;
+  recent_messages: number;
+  summarized_messages: number;
+  can_compress: boolean;
+  compressing: boolean;
+  summary: string | null;
+  last_prompt_tokens: number | null;
+  model_window: number;
+};
 export type MemoryStatus = { pending_operations: number; pending_consolidation: number; total_documents: number; total_observations: number };
 
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
@@ -76,7 +90,9 @@ export const api = {
   todayInsights: () => call<Insights>("/today/insights"),
   calendar: (month: string) => call<{ month: string; today: string; events: CalendarEvent[] }>(`/calendar?month=${month}`),
   chats: () => call<ChatRow[]>("/chats"),
-  chat: (id: string) => call<ChatRow & { messages: StoredMessage[] }>(`/chats/${id}`),
+  chat: (id: string) => call<ChatRow & { messages: StoredMessage[]; context: ChatContext }>(`/chats/${id}`),
+  chatContext: (id: string) => call<ChatContext>(`/chats/${id}/context`),
+  compressChat: (id: string) => call<ChatContext>(`/chats/${id}/compress`, { method: "POST" }),
   newChat: (title?: string, caseId?: string | null) => call<ChatRow>("/chats", json("POST", { title, case_id: caseId ?? null })),
   deleteChat: (id: string) => call<{ deleted: string }>(`/chats/${id}`, { method: "DELETE" }),
   chatMemories: () => call<ChatMemory[]>("/chat-memories"),

@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response
 
-from . import db, registry
+from . import db, registry, threadctx
 from .config import settings, today_iso
 from .routers.api import router
 from .routers.app_api import router as app_router
@@ -20,6 +20,7 @@ async def lifespan(_app: FastAPI):
     # uploads that were mid-processing when the server stopped will never finish; say so instead of hanging
     db.execute("UPDATE uploads SET status='error', error='interrupted by a server restart; upload again' "
                "WHERE status IN ('queued', 'extracting', 'segmenting', 'retaining')")
+    threadctx.warm()   # load the tokenizer now, not on the first chat message
     yield
 
 

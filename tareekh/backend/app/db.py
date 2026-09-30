@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS uploads (
 );
 CREATE TABLE IF NOT EXISTS chat_memories (id TEXT PRIMARY KEY, chat_id TEXT, case_id TEXT, text TEXT, kind TEXT, document_id TEXT, created_at TEXT);
 CREATE TABLE IF NOT EXISTS chats (id TEXT PRIMARY KEY, title TEXT, case_id TEXT, created_at TEXT, updated_at TEXT);
+-- rolling summary of a chat's older turns; messages with id <= upto are covered by it
+CREATE TABLE IF NOT EXISTS chat_summaries (chat_id TEXT PRIMARY KEY, summary TEXT, upto INTEGER, updated_at TEXT);
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT, chat_id TEXT, role TEXT, content TEXT,
     citations TEXT,        -- JSON list, assistant turns only

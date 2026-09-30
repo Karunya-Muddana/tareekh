@@ -4,6 +4,7 @@ import json
 import os
 import logging
 import re
+import threading
 
 from openai import OpenAI
 
@@ -95,7 +96,23 @@ def chat(messages: list[dict], tools: list[dict] | None = None, temperature: flo
     if tools:
         kwargs["tools"] = tools
         kwargs["tool_choice"] = "auto"
-    return text_client().chat.completions.create(**kwargs).choices[0].message
+    resp = text_client().chat.completions.create(**kwargs)
+    if resp.usage and resp.usage.prompt_tokens:
+        _usage.prompt_tokens = max(getattr(_usage, "prompt_tokens", 0), resp.usage.prompt_tokens)
+    return resp.choices[0].message
+
+
+# The largest prompt (in the model's own tokens) sent on this thread since the last reset: one chat turn can make
+# several calls, and the biggest one is what counts against the context window.
+_usage = threading.local()
+
+
+def reset_usage() -> None:
+    _usage.prompt_tokens = 0
+
+
+def peak_prompt_tokens() -> int | None:
+    return getattr(_usage, "prompt_tokens", 0) or None
 
 
 OCR_PROMPT = (

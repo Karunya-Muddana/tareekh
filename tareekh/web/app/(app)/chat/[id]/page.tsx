@@ -1,12 +1,14 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { UIMessage } from "ai";
 import { TopBar } from "@/components/app-shell";
 import { ChatView, toUIMessages } from "@/components/tareekh-chat";
 import { Skeleton } from "@/components/ui/skeleton";
-import { chatKey, loadChat, useCases, useToday } from "@/lib/api";
+import { api, chatKey, loadChat, useCases, useToday, type ChatContext } from "@/lib/api";
+import { ContextMeter } from "@/components/context-meter";
+import { toast } from "@/components/app-shell";
 import { chatSuggestions } from "@/lib/suggestions";
 import { forget } from "@/lib/cache";
 import { useSession } from "@/lib/session";
@@ -24,6 +26,32 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   const user = useSession();
   const lawyer = user?.name.replace(/^adv\.?\s+/i, "").split(" ")[0];
   const [quick, setQuick] = useState(true);
+  const [ctx, setCtx] = useState<ChatContext | null>(null);
+
+  const refreshContext = useCallback(() => {
+    api.chatContext(id).then(setCtx).catch(() => {});
+  }, [id]);
+
+  // While the backend is summarising older turns, keep the meter live until it's done.
+  useEffect(() => {
+    if (!ctx?.compressing) return;
+    const t = setTimeout(refreshContext, 1500);
+    return () => clearTimeout(t);
+  }, [ctx, refreshContext]);
+
+  const compress = () => {
+    setCtx((c) => (c ? { ...c, compressing: true } : c));
+    api
+      .compressChat(id)
+      .then((c) => {
+        setCtx(c);
+        toast(c.summarized_messages ? `Summarised ${c.summarized_messages} earlier messages` : "Nothing to compress yet");
+      })
+      .catch((e) => {
+        refreshContext();
+        toast(e instanceof Error ? e.message : "Couldn’t compress this chat");
+      });
+  };
 
   useEffect(() => {
     try {
@@ -35,13 +63,18 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
   useEffect(() => {
     setChat(null);
     setError(null);
+    setCtx(null);
     // Usually already in the cache from hovering the sidebar link, so this resolves at once.
     loadChat(id)
-      .then((c) => setChat({ title: c.title, case_id: c.case_id, initial: toUIMessages(c.messages) }))
+      .then((c) => {
+        setChat({ title: c.title, case_id: c.case_id, initial: toUIMessages(c.messages) });
+        if (c.context) setCtx(c.context);   // shown at once from the (possibly prefetched) copy, then made current
+        refreshContext();
+      })
       .catch((e) => setError(e.message));
     // Messages change while you talk here; don't reopen this chat from a stale copy.
     return () => forget(chatKey(id));
-  }, [id]);
+  }, [id, refreshContext]);
 
   const setMode = (v: boolean) => {
     setQuick(v);
@@ -67,6 +100,8 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
           </span>
         }
         right={
+          <div className="flex shrink-0 items-center gap-1">
+          <ContextMeter ctx={ctx} onCompress={compress} />
           <div title="Quick: one search, a few seconds. Deep: searches across cases, about 25 s." className="shrink-0">
             <RubberSegment
               aria-label="Answer depth"
@@ -83,6 +118,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
               activeTextColor="var(--background)"
               radius={9}
             />
+          </div>
           </div>
         }
       />
@@ -111,6 +147,7 @@ export default function ChatPage({ params }: { params: Promise<{ id: string }> }
             firstMessage={q}
             lawyerName={lawyer}
             suggestions={chatSuggestions(today, caseList, chat.case_id)}
+            onTurnDone={refreshContext}
           />
         )}
       </div>

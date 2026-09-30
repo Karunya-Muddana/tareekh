@@ -33,6 +33,9 @@ class Settings:
     # Pin "today" for the demo (the synthetic data's demo day is 2026-10-05). Empty = real date.
     today_override: str | None = os.getenv("TODAY") or None
     auto_confirm_threshold: float = float(os.getenv("AUTO_CONFIRM_THRESHOLD", "0.8"))
+    # How much of a chat is carried into each answer before older turns are summarised, and the model's own window.
+    chat_context_tokens: int = int(os.getenv("CHAT_CONTEXT_TOKENS", "24000"))
+    llm_context_window: int = int(os.getenv("LLM_CONTEXT_WINDOW", "1048576"))
 
     @property
     def db_path(self) -> Path:

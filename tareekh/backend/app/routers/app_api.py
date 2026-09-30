@@ -10,7 +10,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-from .. import chatmem, db, graph, memory, registry
+from .. import chatmem, db, graph, memory, registry, threadctx
 from ..agent import agent
 from ..config import today_iso
 
@@ -147,13 +147,31 @@ def get_chat(chat_id: str):
         m["meta"] = json.loads(m["meta"] or "{}")
         if m["meta"].get("learned"):
             m["meta"]["learned"] = [l for l in m["meta"]["learned"] if l.get("id") in alive]
-    return {**chat, "messages": msgs}
+    return {**chat, "messages": msgs, "context": threadctx.state(chat_id)}
+
+
+@router.get("/chats/{chat_id}/context")
+def chat_context(chat_id: str):
+    """The context meter: how much of the thread is carried into the next answer, and how much was summarised."""
+    if not db.row("SELECT id FROM chats WHERE id=?", chat_id):
+        raise HTTPException(404, "unknown chat")
+    return threadctx.state(chat_id)
+
+
+@router.post("/chats/{chat_id}/compress")
+def compress_chat(chat_id: str):
+    """Summarise the older turns now, whatever the meter says (the newest ones always stay word for word)."""
+    if not db.row("SELECT id FROM chats WHERE id=?", chat_id):
+        raise HTTPException(404, "unknown chat")
+    threadctx.compress(chat_id, force=True)
+    return threadctx.state(chat_id)
 
 
 @router.delete("/chats/{chat_id}")
 def delete_chat(chat_id: str):
     db.execute("DELETE FROM messages WHERE chat_id=?", chat_id)
     db.execute("DELETE FROM chats WHERE id=?", chat_id)
+    threadctx.forget(chat_id)
     return {"deleted": chat_id}
 
 
@@ -168,6 +186,7 @@ def send_message(chat_id: str, body: MessageIn):
     chat = db.row("SELECT * FROM chats WHERE id=?", chat_id)
     if not chat:
         raise HTTPException(404, "unknown chat")
+    threadctx.wait(chat_id)               # a compression finishing in the background must not race this turn
     history = db.rows("SELECT id, role, content FROM messages WHERE chat_id=? ORDER BY id", chat_id)
     # Retry resends the last question: replace that turn instead of storing the question twice.
     if len(history) >= 2 and history[-2]["role"] == "user" and history[-2]["content"] == body.question:
@@ -176,6 +195,7 @@ def send_message(chat_id: str, body: MessageIn):
     elif history and history[-1]["role"] == "user" and history[-1]["content"] == body.question:
         db.execute("DELETE FROM messages WHERE id=?", history[-1]["id"])   # an earlier try that failed outright
         history = history[:-1]
+    summary, carried = threadctx.carried(chat_id)   # the whole thread, older turns as a summary once it got long
     db.execute("INSERT INTO messages (chat_id, role, content, created_at) VALUES (?,?,?,?)", chat_id, "user", body.question, _now())
     t0 = time.time()
     learned: list[dict] = []
@@ -183,20 +203,23 @@ def send_message(chat_id: str, body: MessageIn):
                               daemon=True)
     finder.start()                        # runs while the answer is being written, so it costs no extra wait
     try:
-        r = agent.ask(body.question, body.case_id or chat["case_id"], body.quick, history=history)
+        r = agent.ask(body.question, body.case_id or chat["case_id"], body.quick, history=carried, summary=summary)
     except Exception as e:  # noqa: BLE001
         raise HTTPException(503, f"Memory or LLM unavailable: {type(e).__name__}: {e}")
     if not (r.get("answer") or "").strip():   # never store (or show) a blank answer; the UI offers a retry
         raise HTTPException(502, "Tareekh couldn't put an answer together this time. Try again, or switch to Quick.")
     finder.join(timeout=20)
-    meta = {"mode": r.get("mode"), "seconds": round(time.time() - t0, 1), "learned": learned}
+    meta = {"mode": r.get("mode"), "seconds": round(time.time() - t0, 1), "learned": learned,
+            "prompt_tokens": r.get("prompt_tokens")}
     db.execute("INSERT INTO messages (chat_id, role, content, citations, meta, created_at) VALUES (?,?,?,?,?,?)",
                chat_id, "assistant", r["answer"], db.dumps(r["citations"]), db.dumps(meta), _now())
     title = chat["title"]
     if not history and (not title or title == "New chat"):
         title = body.question[:60] + ("…" if len(body.question) > 60 else "")
     db.execute("UPDATE chats SET title=?, updated_at=? WHERE id=?", title, _now(), chat_id)
-    return {"answer": r["answer"], "citations": r["citations"], "meta": meta, "title": title}
+    threadctx.compress_later(chat_id)     # near the budget: summarise older turns before the next question
+    return {"answer": r["answer"], "citations": r["citations"], "meta": meta, "title": title,
+            "context": threadctx.state(chat_id)}
 
 
 @router.get("/chat-memories")
